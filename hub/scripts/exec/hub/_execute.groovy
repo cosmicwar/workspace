@@ -39,8 +39,8 @@ execute {
     loadPlugin("ViaRewind-2.0.4-SNAPSHOT")
     loadPlugin("ViaVersion")
 
-    loadPlugin("NoteBlockAPI")
-    loadPlugin("PlaceholderAPI")
+    loadPlugin("MVdWPlaceholderAPI-3.1.1")
+    loadPlugin("PlaceholderAPI-2.10.9")
 
     loadPlugin("VanishNoPacket")
 
