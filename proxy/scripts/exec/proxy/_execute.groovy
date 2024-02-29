@@ -6,7 +6,6 @@ import scripts.shared.utils.Temple
 import static scripts.execute.ArkExecute.*
 import static scripts.execute.ArkRepo.*
 
-setVersion("proxy")
 setWorkspaceName("proxy")
 setVersion("v1_20_R1")
 
@@ -20,7 +19,6 @@ else if (Temple.templeId == "proxy_mh") addArgs("-Xms2G", "-Xmx12G", "-XX:-OmitS
 else addArgs("-Xms2G", "-Xmx16G", "-XX:-OmitStackTraceInFastThrow")
 
 setJar("velocity-3.2.jar")
-
 
 execute {
     clear()
@@ -49,7 +47,6 @@ execute {
         loadFromConfig("configs/proxy/floodgate.yml", "plugins/floodgate/config.yml")
     }
 
-//    loadPlugin("arcim_proxy")
     loadPlugin("scproxy")
 
     loadFromConfig("configs/proxy/starcade.toml", "plugins/starcade.toml")
