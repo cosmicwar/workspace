@@ -29,27 +29,28 @@ execute {
 //    loadFromConfig("configs/tcpshield/config.toml", "plugins/tcpshield/config.toml")
 
     if (Temple.templeId == "proxy_mh") {
-        loadFromConfig("configs/proxy_mh.toml", "velocity.toml")
+        loadFromConfig("configs/proxy/proxy_mh.toml", "velocity.toml")
     } else {
-        loadFromConfig("configs/proxy.toml", "velocity.toml")
+        loadFromConfig("configs/proxy/proxy.toml", "velocity.toml")
+
         loadPlugin("BotSentry")
-        loadFromConfig("configs/botsentry", "plugins/botsentry")
+        loadFromConfig("configs/proxy/botsentry", "plugins/botsentry")
     }
 
     if (Temple.templeId.contains("bedrock")) {
         loadPlugin("Geyser-Velocity")
         loadPlugin("floodgate-velocity")
 
-        loadFromConfig("configs/Geyser-Velocity", "plugins/Geyser-Velocity")
+        loadFromConfig("configs/proxy/Geyser-Velocity", "plugins/Geyser-Velocity")
 
-        loadFromConfig("configs/proxy_bedrock-geyser.yml", "plugins/Geyser-Velocity/config.yml")
+        loadFromConfig("configs/proxy/proxy_bedrock-geyser.yml", "plugins/Geyser-Velocity/config.yml")
         loadFromConfig("configs/global/floodgate/key.pem", "plugins/floodgate/key.pem")
-        loadFromConfig("configs/floodgate.yml", "plugins/floodgate/config.yml")
+        loadFromConfig("configs/proxy/floodgate.yml", "plugins/floodgate/config.yml")
     }
 
 //    loadPlugin("arcim_proxy")
     loadPlugin("scproxy")
 
-    loadFromConfig("configs/starcade.toml", "plugins/starcade.toml")
-    loadFromConfig("configs/icons", "icons")
+    loadFromConfig("configs/proxy/starcade.toml", "plugins/starcade.toml")
+    loadFromConfig("configs/proxy/icons", "icons")
 }
