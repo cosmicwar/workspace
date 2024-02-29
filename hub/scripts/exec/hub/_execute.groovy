@@ -10,6 +10,9 @@ setWorkspaceName("hub")
 
 configureProduction()
 addArgs("-Xms2G", "-Xmx8G", "-DPaper.WorkerThreadCount=4", "-DPaper.ignoreWorldDataVersion=true")
+
+addProgramArgs("--nogui")
+
 setJar("entropy-bundler-1.20.1-R0.9-reobf.jar")
 
 if (Temple.templeEnv == "dev") addArgs("-DdevMode=true")
