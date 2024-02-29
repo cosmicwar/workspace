@@ -7,9 +7,8 @@ import static scripts.execute.ArkExecute.*
 import static scripts.execute.ArkRepo.*
 
 setVersion("proxy")
-setWorkspaceId("proxy")
+setWorkspaceName("proxy")
 
-configureJava17()
 configureProduction()
 
 if (Temple.templeEnv == "dev") addArgs("-DdevMode=true")
