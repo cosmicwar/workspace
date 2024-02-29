@@ -39,6 +39,9 @@ execute {
     loadPlugin("ViaRewind")
     loadPlugin("ViaVersion")
 
+    loadPlugin("LiteBans")
+    loadConfig("global/LiteBans", "LiteBans")
+
     loadPlugin("MVdWPlaceholderAPI-3.1.1")
     loadPlugin("PlaceholderAPI-2.10.9")
 
