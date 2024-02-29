@@ -35,8 +35,8 @@ execute {
     loadPlugin("ProtocolLib")
     loadPlugin("Spark-1.10.17-Bukkit")
     loadPlugin("Vault-1.7.3")
-    loadPlugin("ViaBackwards-4.7.1-SNAPSHOT")
-    loadPlugin("ViaRewind-2.0.4-SNAPSHOT")
+    loadPlugin("ViaBackwards")
+    loadPlugin("ViaRewind")
     loadPlugin("ViaVersion")
 
     loadPlugin("MVdWPlaceholderAPI-3.1.1")

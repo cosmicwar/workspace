@@ -45,8 +45,8 @@ execute {
     // -------------------------------------------- //
     // PROTOCOL PLUGINS
     // -------------------------------------------- //
-    loadPlugin("ViaBackwards-4.7.1-SNAPSHOT")
-    loadPlugin("ViaRewind-2.0.4-SNAPSHOT")
+    loadPlugin("ViaBackwards")
+    loadPlugin("ViaRewind")
     loadPlugin("ViaVersion")
     loadPlugin("psql-lib")
     loadPlugin("floodgate-spigot")
