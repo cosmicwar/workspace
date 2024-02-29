@@ -8,6 +8,7 @@ import static scripts.execute.ArkRepo.*
 
 setVersion("proxy")
 setWorkspaceName("proxy")
+setVersion("v1_20_R1")
 
 configureProduction()
 
