@@ -5,12 +5,12 @@ import scripts.shared.utils.Temple
 import static scripts.execute.ArkExecute.*
 import static scripts.execute.ArkRepo.*
 
-setVersion("v1_19_R1")
+setVersion("v1_20_R1")
 setWorkspaceName("hub")
 
 configureProduction()
 addArgs("-Xms2G", "-Xmx8G", "-DPaper.WorkerThreadCount=4", "-DPaper.ignoreWorldDataVersion=true")
-setJar("AsyncPaper-bundler-1.19.2-R0.1-SNAPSHOT-reobf.jar")
+setJar("entropy-bundler-1.20.1-R0.9-reobf.jar")
 
 if (Temple.templeEnv == "dev") addArgs("-DdevMode=true")
 
