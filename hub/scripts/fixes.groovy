@@ -37,13 +37,13 @@ Protocol.subscribe(PacketType.Play.Client.CHAT).handler({
 })
 
 for (final World world : Bukkit.getWorlds()) {
-    world.execute {
+//    world.execute {
         for (Entity entity : world.getEntities()) {
             if (entity.getType() != EntityType.PLAYER) {
                 entity.remove()
             }
         }
-    }
+//    }
 }
 
 Events.subscribe(EntityTeleportEvent.class, EventPriority.HIGH).filter(EventFilters.ignoreCancelled()).handler { event ->
@@ -54,7 +54,7 @@ Events.subscribe(EntityTeleportEvent.class, EventPriority.HIGH).filter(EventFilt
 
 Schedulers.sync().runLater({
     World w = Bukkit.getWorlds().get(0);
-    w.execute { w.setSpawnLocation(WorldConfig.getSpawn()) }
+    /*w.execute { */w.setSpawnLocation(WorldConfig.getSpawn()) /*}*/
 }, 1L)
 
 Exports.ptr("getSpawn", WorldConfig.getSpawn())

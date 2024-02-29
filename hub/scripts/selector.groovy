@@ -54,9 +54,9 @@ if (Temple.templebase == "hub") {
 
     Events.subscribe(PlayerInteractEvent.class, EventPriority.LOW).handler { e ->
         if (e.item && selectorItem.isSimilar(e.item)) {
-            e.player.world.execute {
+//            e.player.world.execute {
                 openGUI(e.player)
-            }
+//            }
             return
         }
     }
