@@ -23,10 +23,6 @@ setJar("velocity-3.2.jar")
 execute {
     clear()
 
-//    loadPlugin("TCPShield-2.6.1")
-//    loadFromConfig("configs/tcpshield", "plugins/tcpshield")
-//    loadFromConfig("configs/tcpshield/config.toml", "plugins/tcpshield/config.toml")
-
     if (Temple.templeId == "proxy_mh") {
         loadFromConfig("configs/proxy/proxy_mh.toml", "velocity.toml")
     } else {
