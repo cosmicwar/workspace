@@ -30,22 +30,21 @@ execute {
     loadPlugin("starlight8")
     loadPlugin("psql-lib")
     loadPlugin("floodgate-spigot")
-    loadPlugin("EssentialsX-2.19.5-dev+30-b135fcf")
-    loadPlugin("PlugMan")
+    loadPlugin("EssentialsX-2.21.0")
+    loadPlugin("PlugManX-2.3.3")
     loadPlugin("ProtocolLib")
-    loadPlugin("spark")
-    loadPlugin("Vault")
-    loadPlugin("ViaBackwards")
-    loadPlugin("ViaRewind")
+    loadPlugin("Spark-1.10.17-Bukkit")
+    loadPlugin("Vault-1.7.3")
+    loadPlugin("ViaBackwards-4.7.1-SNAPSHOT")
+    loadPlugin("ViaRewind-2.0.4-SNAPSHOT")
     loadPlugin("ViaVersion")
-    loadPlugin("LiteBans")
 
     loadPlugin("NoteBlockAPI")
     loadPlugin("PlaceholderAPI")
 
     loadPlugin("VanishNoPacket")
 
-    loadConfig("starlight", "starlight")
+    loadConfig("hub/starlight", "starlight")
     loadFromConfig("configs/proxy/floodgate.yml", "plugins/floodgate/config.yml")
     loadFromConfig("configs/global/floodgate/key.pem", "plugins/floodgate/key.pem")
 
@@ -53,8 +52,4 @@ execute {
     loadConfig("global/ViaRewind", "ViaRewind")
     loadConfig("global/ViaVersion", "ViaVersion")
     loadConfig("global/ViaBackwards", "ViaBackwards")
-
-    loadConfig("LiteBans${Temple.templeEnv == "dev" ? "-dev" : ""}", "LiteBans")
-//    loadConfig("AnimatedScoreboard", "AnimatedScoreboard")
-//    loadConfig("HolographicDisplays", "HolographicDisplays")
 }
