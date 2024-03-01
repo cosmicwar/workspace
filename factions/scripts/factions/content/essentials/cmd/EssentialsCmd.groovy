@@ -14,13 +14,13 @@ class EssentialsCmd {
                 def sender = ctx.sender()
 
                 sender.setAllowFlight(!sender.getAllowFlight())
-                ctx.reply("§] §> §aYou have toggled fly mode to ${sender.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
+                ctx.reply("§] §> §aYou have toggled flight to ${sender.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
             } else {
                 def target = ctx.arg(0).parseOrFail(Player)
 
                 target.setAllowFlight(!target.getAllowFlight())
-                ctx.reply("§] §> §aYou have toggled fly mode for §f${target.getDisplayName()} §ato ${target.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
-                Players.msg(target, "§] §> §aFly mode has been toggled to ${target.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
+                ctx.reply("§] §> §aYou have toggled flight for §f${target.getDisplayName()} §ato ${target.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
+                Players.msg(target, "§] §> §aFlight has been toggled to ${target.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
             }
         }.register("fly", "flight")
 
