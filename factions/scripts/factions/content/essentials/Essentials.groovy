@@ -7,12 +7,17 @@ class Essentials {
 
     Essentials() {
         GroovyScript.addUnloadHook {
+            Starlight.unload("~/cmd/GMCmd.groovy")
+
             Starlight.unload("~/warp/Warps.groovy")
             Starlight.unload("~/tp/TeleportHandler.groovy")
         }
 
         Starlight.watch("~/tp/TeleportHandler.groovy")
         Starlight.watch("~/warp/Warps.groovy")
+
+        // cmds
+        Starlight.watch("~/cmd/GMCmd.groovy")
     }
 
 }
