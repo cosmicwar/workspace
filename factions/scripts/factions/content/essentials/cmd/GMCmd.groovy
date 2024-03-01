@@ -8,7 +8,7 @@ import org.starcade.starlight.helper.utils.Players
 class GMCmd {
 
     GMCmd() {
-        Commands.create().assertPermission("essentials.gamemode").assertPlayer().assertUsage("/gmc <player>").handler {ctx ->
+        Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 def sender = ctx.sender()
 
@@ -26,7 +26,7 @@ class GMCmd {
 
         // survival, spectator, adventure
 
-        Commands.create().assertPermission("essentials.gamemode").assertPlayer().assertUsage("/gms <player>").handler {ctx ->
+        Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 def sender = ctx.sender()
 
@@ -42,7 +42,7 @@ class GMCmd {
             }
         }.register("survival", "gms")
 
-        Commands.create().assertPermission("essentials.gamemode").assertPlayer().assertUsage("/gma <player>").handler {ctx ->
+        Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 def sender = ctx.sender()
 
@@ -58,7 +58,7 @@ class GMCmd {
             }
         }.register("adventure", "gma")
 
-        Commands.create().assertPermission("essentials.gamemode").assertPlayer().assertUsage("/gmsp <player>").handler {ctx ->
+        Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 def sender = ctx.sender()
 
@@ -75,7 +75,7 @@ class GMCmd {
         }.register("spectator", "gmsp")
 
         // default gamemode cmd
-        Commands.create().assertPermission("essentials.gamemode").assertPlayer().assertUsage("/gamemode <player> <mode>").handler {ctx ->
+        Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 ctx.reply("§] §> §cUsage: /gamemode <mode> [player]")
                 return
