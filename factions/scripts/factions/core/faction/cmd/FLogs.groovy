@@ -71,7 +71,7 @@ class FLogs
 
             if (log.position.world != null) {
                 lore.add("")
-                lore.add("§3Position: §ex:${log.position.x1} y:${log.position.y1} z:${log.position.z1} world:${log.position.world}")
+                lore.add("§3Position: §ex:${log.position.x} y:${log.position.y} z:${log.position.z} world:${log.position.world}")
             }
 
             ItemStack item = FastItemUtils.createSkull(log.getInitiatorName(), "§e${log.getTitle()}", lore)

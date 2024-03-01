@@ -276,12 +276,12 @@ class DBConfig {
                 material = Material.GRASS_BLOCK
             } else if (entry.type == ConfigType.POSITION) {
                 def positionEntry = entry as PositionEntry
-                if (positionEntry.value.x1) { // check if it has data?
+                if (positionEntry.value.x) { // check if it has data?
                     lore.add("§3World: §a${positionEntry.value.world}")
                     lore.add("")
-                    lore.add("§3X: §a${positionEntry.value.x1}")
-                    lore.add("§3Y: §a${positionEntry.value.y1}")
-                    lore.add("§3Z: §a${positionEntry.value.z1}")
+                    lore.add("§3X: §a${positionEntry.value.x}")
+                    lore.add("§3Y: §a${positionEntry.value.y}")
+                    lore.add("§3Z: §a${positionEntry.value.z}")
 
                     if (positionEntry.value.yaw) {
                         lore.add("")

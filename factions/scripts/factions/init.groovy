@@ -42,6 +42,9 @@ Starlight.watch(
 
         "~/cfg/toggles.groovy",
 
+        // Essentials \\
+        "~/content/essentials/Essentials.groovy",
+
         // Currencies \\
         "scripts/exec/nova1/shop.groovy",
         "~/eco/currency/money.groovy",

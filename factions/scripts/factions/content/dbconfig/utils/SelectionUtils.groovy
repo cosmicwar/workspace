@@ -81,7 +81,7 @@ class SelectionUtils {
         for (int i = 0; i < 9; i++) {
             if (i < defaultValues.size()) {
                 def position = defaultValues[i]
-                builder.set(i, FastItemUtils.createItem(Material.PAPER, "§3${position.world} §7- §3${position.x1} §7- §3${position.y1} §7- §3${position.z1}", [], false), { p, t, s ->
+                builder.set(i, FastItemUtils.createItem(Material.PAPER, "§3${position.world} §7- §3${position.x} §7- §3${position.y} §7- §3${position.z}", [], false), { p, t, s ->
                     callback.exec(defaultValues)
                 })
             } else {
@@ -286,9 +286,9 @@ class SelectionUtils {
         })
 
         builder.set(1, 5, FastItemUtils.createItem(Material.PAPER, "§3World: §a${position.world}", [
-                "§3X: §a${position.x1}",
-                "§3Y: §a${position.y1}",
-                "§3Z: §a${position.z1}",
+                "§3X: §a${position.x}",
+                "§3Y: §a${position.y}",
+                "§3Z: §a${position.z}",
         ] as List<String>, false))
 
         builder.set(1, 6, FastItemUtils.createItem(Material.LIME_STAINED_GLASS_PANE, "§aConfirm", [], false), { p, t, s ->

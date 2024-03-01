@@ -601,11 +601,11 @@ class Stronghold {
 
         description.add("")
         description.add(ColorUtil.color("§<${getHexColor()}>Stronghold Coords§7:"))
-        if (getLocation().world && getLocation().x1 && getLocation().y1 && getLocation().z1) {
+        if (getLocation().world && getLocation().x && getLocation().y && getLocation().z) {
             if (player.world.name == getLocation().world) {
-                description.add(ColorUtil.color(" §f${getLocation().x1}§<${getHexColor()}>x §f${getLocation().y1}§<${getHexColor()}>y §f${getLocation().z1}§<${getHexColor()}>z [§o${distanceFormat.format(getLocation().getLocation(player.world).distance(player.getLocation()))}§<${getHexColor()}>m]"))
+                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z [§o${distanceFormat.format(getLocation().getLocation(player.world).distance(player.getLocation()))}§<${getHexColor()}>m]"))
             } else {
-                description.add(ColorUtil.color(" §f${getLocation().x1}§<${getHexColor()}>x §f${getLocation().y1}§<${getHexColor()}>y §f${getLocation().z1}§<${getHexColor()}>z"))
+                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z"))
             }
         } else {
             description.add("§fN/A")

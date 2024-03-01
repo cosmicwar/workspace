@@ -177,7 +177,7 @@ class Revives {
                     "§7Died: §b${dateFormatter.format(new Date(snapshot.timeStamp))}",
                     "§7Times Revived: §e${snapshot.timesRevived}",
                     "§7Last Revived: §e${snapshot.lastRevive == null ? "Never" : dateFormatter.format(new Date(snapshot.lastRevive))}",
-                    "§7Location: §a${snapshot.position.world} ${snapshot.position.x1} ${snapshot.position.y1} ${snapshot.position.z1}"
+                    "§7Location: §a${snapshot.position.world} ${snapshot.position.x} ${snapshot.position.y} ${snapshot.position.z}"
             ])
 
             DataUtils.setTag(skull, reviveKey, PersistentDataType.STRING, snapshot.snapshotId.toString())
@@ -277,7 +277,7 @@ class Revives {
                 "§7Died: §b${dateFormatter.format(new Date(snapshot.timeStamp))}",
                 "§7Times Revived: §e${snapshot.timesRevived}",
                 "§7Last Revived: §e${snapshot.lastRevive == null ? "Never" : dateFormatter.format(new Date(snapshot.lastRevive))}",
-                "§7Location: §a${snapshot.position.world} ${snapshot.position.x1} ${snapshot.position.y1} ${snapshot.position.z1}"
+                "§7Location: §a${snapshot.position.world} ${snapshot.position.x} ${snapshot.position.y} ${snapshot.position.z}"
         ], false))
 
         menu.set(6, 5, FastItemUtils.createItem(Material.GREEN_STAINED_GLASS_PANE, "§aRevive", [], false), { p, t, s ->

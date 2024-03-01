@@ -104,7 +104,7 @@ class FWarp {
                 }
                 faction.fHome =  Position.of(cmd.sender().location)
 
-                faction.msg("§3${cmd.sender().name} §r§3has set the faction home to ${faction.fHome.x1}, ${faction.fHome.z1}")
+                faction.msg("§3${cmd.sender().name} §r§3has set the faction home to ${faction.fHome.x}, ${faction.fHome.z}")
                 faction.queueSave()
                 //TODO send message to all fac members
             }
@@ -131,7 +131,7 @@ class FWarp {
         int count = 0
 
         for (WarpData warpData : faction.warps) {
-            builder.set(count, FastItemUtils.createItem(Material.GRASS_BLOCK, "§r§l" + warpData.name, ["§r§3" + warpData.position.x1.toString() + ", " + warpData.position.z1.toString()]), { p, t, s ->
+            builder.set(count, FastItemUtils.createItem(Material.GRASS_BLOCK, "§r§l" + warpData.name, ["§r§3" + warpData.position.x.toString() + ", " + warpData.position.z.toString()]), { p, t, s ->
                 def world = Bukkit.getWorld(warpData.position.world)
                 if (world == null) {
                     p.sendMessage("§cThe world §l" + warpData.position.world + "§c does not exist.")

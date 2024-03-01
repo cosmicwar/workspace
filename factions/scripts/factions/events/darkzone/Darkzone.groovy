@@ -32,7 +32,7 @@ import scripts.factions.content.scoreboard.sidebar.SidebarHandler
 import scripts.factions.data.obj.Position
 import scripts.factions.data.uuid.UUIDDataManager
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.eco.loottable.api.LootTableCategory
+import scripts.factions.eco.loottable.v2.api.LootTableCategory
 import scripts.factions.events.darkzone.user.DZMember
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastItemUtils
@@ -103,7 +103,7 @@ class Darkzone {
                     new PositionListEntry("${it.internalName}Spawners", [])
             ])
 
-            lootTableCategory.getOrCreateTable(it.internalName)
+            lootTableCategory.getOrCreateTable(UUID.randomUUID(), it.internalName)
         }
 
         config.queueSave()
@@ -403,9 +403,9 @@ class Darkzone {
     static def getSpawnerFromLoc(Location location) {
         return spawners.values().find {
             it.position.world == location.getWorld().getName() &&
-                    it.position.x1 == location.getBlockX() &&
-                    it.position.y1 == location.getBlockY() &&
-                    it.position.z1 == location.getBlockZ()
+                    it.position.x == location.getBlockX() &&
+                    it.position.y == location.getBlockY() &&
+                    it.position.z == location.getBlockZ()
         }
     }
 

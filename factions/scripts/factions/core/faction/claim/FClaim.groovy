@@ -10,12 +10,9 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.enviorment.GroovyScript
-import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.command.context.PlayerContext
@@ -41,7 +38,6 @@ import scripts.shared.legacy.utils.RandomUtils
 import scripts.shared.systems.MenuBuilder
 import scripts.shared.utils.MenuDecorator
 
-import javax.swing.plaf.MenuBarUI
 import java.util.concurrent.TimeUnit
 
 /*
@@ -131,10 +127,10 @@ class FClaim {
                 faction.queueSave()
 
                 Players.msg(player, "§3You have claimed this chunk as a core chunk.")
-                Players.msg(player, "${blockPos.x1} ${blockPos.y1} ${blockPos.z1} ${blockPos.world}")
+                Players.msg(player, "${blockPos.x} ${blockPos.y} ${blockPos.z} ${blockPos.world}")
 
                 def world = event.getBlockPlaced().world
-                def block = world.getBlockAt(blockPos.x1, blockPos.y1, blockPos.z1)
+                def block = world.getBlockAt(blockPos.x, blockPos.y, blockPos.z)
                 Schedulers.sync().runLater({
                     if (block.type != Material.ENDER_CHEST) block.setType(Material.ENDER_CHEST)
                     data.spawnHologram()
@@ -156,7 +152,7 @@ class FClaim {
             if (factionAt == null || factionAt.coreChunkData == null) return
 
             def coreChunk = factionAt.coreChunkData
-            if (coreChunk.blockPosition.x1 != block.getX() || coreChunk.blockPosition.y1 != block.getY() || coreChunk.blockPosition.z1 != block.getZ()) return
+            if (coreChunk.blockPosition.x != block.getX() || coreChunk.blockPosition.y != block.getY() || coreChunk.blockPosition.z != block.getZ()) return
 
             event.setCancelled(true)
 

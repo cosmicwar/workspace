@@ -231,7 +231,7 @@ class FShow {
                     cmd.reply(ColorUtil.color("§<$neutralHexColor>$symbol §<$primaryHexColor>TnT: §<$secondaryHexColor>${faction.getTntBalance()}"))
 
                     if (faction.coreChunkData != null) {
-                        cmd.reply(ColorUtil.color("§<$neutralHexColor>$symbol §<$primaryHexColor>Core: §<$secondaryHexColor>${faction.coreChunkData.blockPosition.x1},${faction.coreChunkData.blockPosition.y1},${faction.coreChunkData.blockPosition.z1}"))
+                        cmd.reply(ColorUtil.color("§<$neutralHexColor>$symbol §<$primaryHexColor>Core: §<$secondaryHexColor>${faction.coreChunkData.blockPosition.x},${faction.coreChunkData.blockPosition.y},${faction.coreChunkData.blockPosition.z}"))
                     }
 
                     cmd.reply("")

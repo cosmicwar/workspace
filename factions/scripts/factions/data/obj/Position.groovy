@@ -10,47 +10,52 @@ import org.bukkit.World
 class Position {
     public String world
 
-    public double x1, y1, z1
+    public double x, y, z
     public float yaw = 0F, pitch = 0F
 
     Position() {}
 
-    Position(double x1, double y1, double z1) {
-        this.x1 = x1
-        this.y1 = y1
-        this.z1 = z1
+    Position(double x, double y, double z) {
+        this.x = x
+        this.y = y
+        this.z = z
     }
 
-    Position(double x1, double y1, double z1, float yaw, float pitch) {
-        this.x1 = x1
-        this.y1 = y1
-        this.z1 = z1
+    Position(double x, double y, double z, float yaw, float pitch) {
+        this.x = x
+        this.y = y
+        this.z = z
         this.yaw = yaw
         this.pitch = pitch
     }
 
-    Position(String world, double x1, double y1, double z1) {
+    Position(String world, double x, double y, double z) {
         this.world = world
-        this.x1 = x1
-        this.y1 = y1
-        this.z1 = z1
+        this.x = x
+        this.y = y
+        this.z = z
     }
 
-    Position(String world, double x1, double y1, double z1, float yaw, float pitch) {
+    Position(String world, double x, double y, double z, float yaw, float pitch) {
         this.world = world
-        this.x1 = x1
-        this.y1 = y1
-        this.z1 = z1
+        this.x = x
+        this.y = y
+        this.z = z
         this.yaw = yaw
         this.pitch = pitch
     }
 
     @BsonIgnore
+    Position toInt() {
+        return new Position(world, (int) x, (int) y, (int) z, yaw, pitch)
+    }
+
+    @BsonIgnore
     Location getLocation(World givenWorld) {
         if (givenWorld != null) {
-            return new Location(givenWorld, x1, y1, z1, yaw, pitch)
+            return new Location(givenWorld, x, y, z, yaw, pitch)
         } else {
-            return new Location(Bukkit.getWorld(world), x1, y1, z1, yaw, pitch)
+            return new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch)
         }
     }
 
@@ -60,9 +65,9 @@ class Position {
         if (!(o instanceof Position)) return false
 
         Position position = (Position) o
-        if (Double.compare(position.x1, x1) != 0) return false
-        if (Double.compare(position.y1, y1) != 0) return false
-        if (Double.compare(position.z1, z1) != 0) return false
+        if (Double.compare(position.x, x) != 0) return false
+        if (Double.compare(position.y, y) != 0) return false
+        if (Double.compare(position.z, z) != 0) return false
         if (Double.compare(position.yaw, yaw) != 0) return false
         if (Double.compare(position.pitch, pitch) != 0) return false
         if (world != null ? world != position.world : position.world != null) return false
@@ -71,16 +76,16 @@ class Position {
     }
     @BsonIgnore
     static def of(Location location) {
-        return new Position(location.world.name, location.blockX, location.blockY, location.blockZ, location.yaw, location.pitch)
+        return new Position(location.world.name, location.getX(), location.getY(), location.getZ(), location.yaw, location.pitch)
     }
 
     @Override
     String toString() {
         return "Position{" +
                 "world='" + world + '\'' +
-                ", x=" + x1 +
-                ", y=" + y1 +
-                ", z=" + z1 +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
                 '}'
     }
 

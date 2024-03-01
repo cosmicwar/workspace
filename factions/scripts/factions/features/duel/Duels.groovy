@@ -357,7 +357,7 @@ class Duels {
                 config.queueSave()
             }
 
-            if (!lastPasteLocation.x1 || !lastPasteLocation.y1 || !lastPasteLocation.z1) {
+            if (!lastPasteLocation.x || !lastPasteLocation.y || !lastPasteLocation.z) {
                 arenaConf.getPositionEntry("lastPasteLocation").setValue(Position.of(origin))
                 config.queueSave()
 
@@ -379,16 +379,16 @@ class Duels {
         def spawnA = arenaConf.getPositionEntry("spawnA").getValue()
         if (spawnA.world == null) return []
 
-        def spawnAXOffset = spawnA.x1 - arenaRegion.x2
-        def spawnAYOffset = spawnA.y1 - arenaRegion.y2
-        def spawnAZOffset = spawnA.z1 - arenaRegion.z2
+        def spawnAXOffset = spawnA.x - arenaRegion.x2
+        def spawnAYOffset = spawnA.y - arenaRegion.y2
+        def spawnAZOffset = spawnA.z - arenaRegion.z2
 
         def spawnB = arenaConf.getPositionEntry("spawnB").getValue()
         if (spawnB.world == null) return []
 
-        def spawnBXOffset = spawnB.x1 - arenaRegion.x2
-        def spawnBYOffset = spawnB.y1 - arenaRegion.y2
-        def spawnBZOffset = spawnB.z1 - arenaRegion.z2
+        def spawnBXOffset = spawnB.x - arenaRegion.x2
+        def spawnBYOffset = spawnB.y - arenaRegion.y2
+        def spawnBZOffset = spawnB.z - arenaRegion.z2
 
         amount.times {
             def start = System.currentTimeMillis()
