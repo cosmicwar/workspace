@@ -11,7 +11,7 @@ import org.bukkit.persistence.PersistentDataType
 import org.starcade.starlight.helper.Schedulers
 import scripts.factions.content.mobs.TickableMob
 import scripts.factions.data.obj.Position
-import scripts.factions.eco.loottable.api.LootTable
+import scripts.factions.eco.loottable.v2.api.LootTable
 import scripts.shared.features.holograms.HologramRegistry
 import scripts.shared.features.holograms.HologramTracker
 import scripts.shared.legacy.utils.RandomUtils
