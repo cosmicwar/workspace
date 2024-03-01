@@ -27,7 +27,7 @@ execute {
     loadPlugin("Vault-1.7.3")
     loadPlugin("LiteBans")
     loadPlugin("EssentialsX-2.21.0")
-    loadPlugin("BuycraftX")
+    loadPlugin("tebex-bukkit")
     loadPlugin("nuvotifier")
     loadPlugin("VanishNoPacket")
 
