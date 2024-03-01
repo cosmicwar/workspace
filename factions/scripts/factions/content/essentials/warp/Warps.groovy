@@ -51,7 +51,7 @@ class Warps {
         MenuBuilder menu
 
         menu = MenuUtils.createPagedMenu("§3Warps", getWarps().toList(), { Warp warp, int index ->
-            def lore = warp.description
+            List<String> lore = warp.description.clone() as List<String>
 
             if (player.isOp()) {
                 lore.add("")
