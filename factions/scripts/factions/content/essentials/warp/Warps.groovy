@@ -39,7 +39,7 @@ class Warps {
     }
 
     def commands() {
-        Commands.create().assertUsage("<warp> [player]").handler {ctx ->
+        Commands.create().assertUsage("[warp] [player]").handler {ctx ->
             if (ctx.sender() instanceof Player) {
                 if (ctx.args().size() == 0) {
                     openWarpGui(ctx.sender() as Player)
