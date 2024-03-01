@@ -11,9 +11,9 @@ import java.time.LocalTime
  * Needs to be separate file to be loaded in before everything else so universal scripts are also able to use Globals.
  */
 
-@Field static String RESOURCE_PACK_HASH = "cb6e3ab390164a1968474fa92ffc40c81f7de472"
+@Field static String RESOURCE_PACK_HASH = "7c5f74c55c345691da95044b5a57cbfad767f4ff"
 Globals.RESOURCE_PACK_HASH = BaseEncoding.base16().lowerCase().decode(RESOURCE_PACK_HASH)
-Globals.RESOURCE_PACK_URL = "https://download.mc-packs.net/pack/cb6e3ab390164a1968474fa92ffc40c81f7de472.zip"
+Globals.RESOURCE_PACK_URL = "https://download.mc-packs.net/pack/7c5f74c55c345691da95044b5a57cbfad767f4ff.zip"
 
 Globals.scheduledRebootTime = LocalTime.of(13, 30)
 Globals.DONATOR_RANKS = new LinkedList<>(["emperor", "vader", "commander", "captain", "voyager", "sentinel", "nomad"])
