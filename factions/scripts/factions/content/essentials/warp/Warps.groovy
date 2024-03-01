@@ -146,7 +146,7 @@ class Warps {
         ])
 
         if (player.isOp()) {
-            menu.set(menu.get().size - 4, FastItemUtils.createItem(Material.RED_DYE, "§cCreate Warp", [
+            menu.set(menu.get().size - 4, FastItemUtils.createItem(Material.GREEN_DYE, "§cCreate Warp", [
                     "§7Click to create a new warp."
             ]), { p, t, s ->
                 SelectionUtils.selectString(p, "§3Enter the new warp name.") {
@@ -174,6 +174,12 @@ class Warps {
 
             openWarpGui(p)
         })
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.PAPER, "§bWarp ID", [
+                "§7Warp Internal ID",
+                "",
+                "§7Current: §b${warp.id}"
+        ]))
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.NAME_TAG, "§bEdit Name", [
                 "§7Click to edit the warp name.",
