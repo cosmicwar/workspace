@@ -5,9 +5,26 @@ import org.bukkit.entity.Player
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.utils.Players
 
-class GMCmd {
+class EssentialsCmd {
 
-    GMCmd() {
+    EssentialsCmd() {
+        // flight commands
+        Commands.create().assertPermission("essentials.fly").assertPlayer().handler { ctx ->
+            if (ctx.args().size() == 0) {
+                def sender = ctx.sender()
+
+                sender.setAllowFlight(!sender.getAllowFlight())
+                ctx.reply("§] §> §aYou have toggled fly mode to ${sender.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
+            } else {
+                def target = ctx.arg(0).parseOrFail(Player)
+
+                target.setAllowFlight(!target.getAllowFlight())
+                ctx.reply("§] §> §aYou have toggled fly mode for §f${target.getDisplayName()} §ato ${target.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
+                Players.msg(target, "§] §> §aFly mode has been toggled to ${target.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
+            }
+        }.register("fly", "flight")
+
+        // gamemode commands
         Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 def sender = ctx.sender()
@@ -23,8 +40,6 @@ class GMCmd {
                 Players.msg(target, "§] §> §aYou are now in creative mode.")
             }
         }.register("creative", "gmc", "gamemodec")
-
-        // survival, spectator, adventure
 
         Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
@@ -74,7 +89,6 @@ class GMCmd {
             }
         }.register("spectator", "gmsp")
 
-        // default gamemode cmd
         Commands.create().assertPermission("essentials.gamemode").assertPlayer().handler {ctx ->
             if (ctx.args().size() == 0) {
                 ctx.reply("§] §> §cUsage: /gamemode <mode> [player]")
@@ -151,4 +165,5 @@ class GMCmd {
             }
         }.register("gamemode", "gm")
     }
+
 }
