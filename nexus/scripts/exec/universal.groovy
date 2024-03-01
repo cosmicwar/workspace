@@ -1,9 +1,8 @@
 package scripts.exec
 
+import net.minecraft.server.MinecraftServer
 import org.starcade.starlight.Starlight
 import org.starcade.starlight.helper.Schedulers
-import net.minecraft.server.v1_16_R3.MinecraftServer
-import net.minecraft.server.v1_16_R3.PlayerList
 import scripts.shared.legacy.utils.ReflectionUtil
 
 Starlight.watch(
@@ -70,5 +69,5 @@ Starlight.watch(
 )
 
 Schedulers.sync().runLater({
-    ReflectionUtil.set(PlayerList, MinecraftServer.getServer().getPlayerList(), "maxPlayers", 2000)
+    MinecraftServer.getServer().playerList.maxPlayers = 2000
 }, 1)
