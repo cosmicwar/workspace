@@ -58,9 +58,6 @@ def board = new SidebarBuilder("main")
                 lines.add("")
                 lines.add("§<#FFA445>ꜰᴀᴄᴛɪᴏɴ: §<#09FB29>${faction.getName()}")
                 lines.add("§<#09FB29>${faction.getOnlineMembers().size()}§7/§<#FFA445>${faction.getMembers().size()}")
-            } else {
-
-                lines.add("")
             }
 
             lines.add("§8§m${StringUtils.repeat('-', 22)}") // spacer
