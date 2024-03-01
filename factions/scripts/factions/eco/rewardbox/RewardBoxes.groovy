@@ -4,7 +4,6 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryType
@@ -22,9 +21,6 @@ import scripts.factions.content.dbconfig.DBConfigUtil
 import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.data.DataManager
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.eco.loottable.impl.CommandReward
-import scripts.factions.eco.loottable.impl.ItemReward
-import scripts.factions.eco.loottable.api.Reward
 import scripts.factions.eco.rewardbox.data.RewardBox
 import scripts.factions.util.PromptUtils
 import scripts.shared.legacy.AntiDupeUtils
@@ -32,7 +28,6 @@ import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastInventoryUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
-import scripts.shared.legacy.utils.SignUtils
 import scripts.shared.systems.MenuBuilder
 import scripts.shared.utils.DataUtils
 
@@ -320,17 +315,15 @@ class RewardBoxes {
                 if (t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
                     LootTableHandler.openCategories(p, 1, {
                         if (it == null) {
-                            p.sendMessage("null table?")
                             openBoxEditor(p, box)
                         } else {
-                            p.sendMessage("${it.getInternalId()}")
-                            box.lootTableId = it.getInternalId()
+                            box.lootTableId = it.getId()
                             box.queueSave()
                             openBoxEditor(p, box)
                         }
                     })
                 } else {
-                    LootTableHandler.openTableGui(p, box.getLootTable(), 1, {
+                    LootTableHandler.openTableGui(p, box.getLootTable().getParentCategory(), box.getLootTable(), 1, {
                         openBoxEditor(p, box)
                     }, {
                         box.queueSave()
@@ -339,11 +332,9 @@ class RewardBoxes {
             } else {
                 LootTableHandler.openCategories(p, 1, {
                     if (it == null) {
-                        p.sendMessage("null table?")
                         openBoxEditor(p, box)
                     } else {
-                        p.sendMessage("${it.getInternalId()}")
-                        box.lootTableId = it.getInternalId()
+                        box.lootTableId = it.getId()
                         box.queueSave()
                         openBoxEditor(p, box)
                     }

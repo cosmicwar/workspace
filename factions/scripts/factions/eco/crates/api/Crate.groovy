@@ -13,7 +13,7 @@ import scripts.factions.data.obj.Position
 import scripts.factions.data.uuid.UUIDDataObject
 import scripts.factions.eco.crates.Crates
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.eco.loottable.api.LootTable
+import scripts.factions.eco.loottable.v2.api.LootTable
 import scripts.shared.utils.DataUtils
 
 @CompileStatic(TypeCheckingMode.SKIP)

@@ -4,6 +4,7 @@ import groovy.transform.CompileStatic
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
 import org.starcade.starlight.helper.random.RandomSelector
+import scripts.factions.data.uuid.UUIDDataManager
 import scripts.factions.data.uuid.UUIDDataObject
 import scripts.factions.eco.loottable.v2.impl.CommandReward
 import scripts.factions.eco.loottable.v2.impl.ItemReward
@@ -20,7 +21,7 @@ class LootTable extends UUIDDataObject {
 
 //    Set<LootTableImage> images = new HashSet<>()
 
-    String parentCategory = "default"
+    UUID parentCategoryId = null
 
     LootTable() {
     }
@@ -70,6 +71,11 @@ class LootTable extends UUIDDataObject {
         } else if (reward instanceof CommandReward) {
             this.commandRewards.remove(reward)
         }
+    }
+
+    @BsonIgnore
+    LootTableCategory getParentCategory() {
+        return UUIDDataManager.getData(parentCategoryId, LootTableCategory.class, false)
     }
 
     @BsonIgnore

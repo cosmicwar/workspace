@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import scripts.factions.data.DataObject
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.eco.loottable.api.LootTable
+import scripts.factions.eco.loottable.v2.api.LootTable
 import scripts.factions.eco.rewardbox.RewardBoxes
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.utils.DataUtils

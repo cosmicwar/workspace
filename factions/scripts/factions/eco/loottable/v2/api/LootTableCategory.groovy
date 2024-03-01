@@ -5,20 +5,22 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
+import scripts.factions.data.uuid.UUIDDataManager
 import scripts.factions.data.uuid.UUIDDataObject
 
 @CompileStatic(TypeCheckingMode.SKIP)
-class LootTableCategory extends UUIDDataObject
-{
+class LootTableCategory extends UUIDDataObject {
 
     String name
     Material icon
 
     Set<UUID> tables
 
-    @BsonIgnore transient LinkedHashMap<UUID, LootTable> tableCache = Maps.<UUID, LootTable> newLinkedHashMap()
+    @BsonIgnore
+    transient LinkedHashMap<UUID, LootTable> tableCache = Maps.<UUID, LootTable> newLinkedHashMap()
 
     LootTableCategory() {}
+
     LootTableCategory(UUID id) {
         super(id)
     }
@@ -38,7 +40,19 @@ class LootTableCategory extends UUIDDataObject
         return tableCache.values().any { it.name == name }
     }
 
-    @BsonIgnore @Override
+    @BsonIgnore
+    LootTable getOrCreateTable(UUID uuid, String defaultName = "") {
+        if (!tables.contains(uuid)) tables.add(uuid)
+        if (tableCache.containsKey(uuid)) return tableCache.get(uuid)
+
+        def table = UUIDDataManager.getData(uuid, LootTable.class)
+
+        tableCache.put(uuid, table)
+        return table
+    }
+
+    @BsonIgnore
+    @Override
     boolean isEmpty() {
         return false
     }

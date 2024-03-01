@@ -251,7 +251,7 @@ class Crates {
             lore.add("§aclick to view")
             lore.add("§aright-click to assign")
             lore.add("")
-            lore.add("§aCurrent: §b${crate.getLootTable().getName()}")
+            lore.add("§aCurrent: §b${crate.getLootTable().name}")
         } else {
             lore.add("")
             lore.add("§7click to assign")
@@ -264,13 +264,13 @@ class Crates {
                         if (it == null) {
                             openCrateEditor(p, crate)
                         } else {
-                            crate.lootTableId = it.getInternalId()
+                            crate.lootTableId = it.id
                             crate.queueSave()
                             openCrateEditor(p, crate)
                         }
                     })
                 } else {
-                    LootTableHandler.openTableGui(p, crate.getLootTable(), 1, {
+                    LootTableHandler.openTableGui(p, crate.getLootTable().getParentCategory(), crate.getLootTable(), 1, {
                         openCrateEditor(p, crate)
                     }, {
                         crate.queueSave()
@@ -281,7 +281,7 @@ class Crates {
                     if (it == null) {
                         openCrateEditor(p, crate)
                     } else {
-                        crate.lootTableId = it.getInternalId()
+                        crate.lootTableId = it.getId()
                         crate.queueSave()
                         openCrateEditor(p, crate)
                     }

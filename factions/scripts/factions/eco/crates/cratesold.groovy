@@ -31,9 +31,9 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.tags.ItemTagType
 import org.bukkit.util.EulerAngle
 import scripts.factions.cfg.WorldConfig
-import scripts.factions.eco.loottable.api.LootTable
+import scripts.factions.eco.loottable.v2.api.LootTable
+import scripts.factions.eco.loottable.v2.api.Reward
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.eco.loottable.api.Reward
 import scripts.shared.features.EntityGlow
 import scripts.shared.features.holograms.HologramRegistry
 import scripts.shared.legacy.database.mysql.MySQL

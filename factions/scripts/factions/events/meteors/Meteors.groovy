@@ -31,10 +31,10 @@ import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.random.RandomSelector
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.eco.loottable.api.LootTable
+import scripts.factions.eco.loottable.v2.api.LootTable
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.eco.loottable.api.LootTableCategory
-import scripts.factions.eco.loottable.api.Reward
+import scripts.factions.eco.loottable.v2.api.LootTableCategory
+import scripts.factions.eco.loottable.v2.api.Reward
 import scripts.shared.features.holograms.HologramRegistry
 import scripts.shared.features.holograms.HologramTracker
 import scripts.shared.legacy.ToggleUtils

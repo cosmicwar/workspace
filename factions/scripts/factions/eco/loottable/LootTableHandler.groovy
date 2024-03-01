@@ -364,7 +364,7 @@ class LootTableHandler {
                     ],
                     false)
 
-            FastItemUtils.setCustomTag(item, CATEGORY_KEY, ItemTagType.STRING, category.name)
+            FastItemUtils.setCustomTag(item, CATEGORY_KEY, ItemTagType.STRING, category.id.toString())
             return item
         }, page, false, [
                 { Player p, ClickType t, int slot ->
@@ -374,25 +374,29 @@ class LootTableHandler {
 
                     if (!FastItemUtils.hasCustomTag(item, CATEGORY_KEY, ItemTagType.STRING)) return
 
-                    def categoryName = FastItemUtils.getCustomTag(item, CATEGORY_KEY, ItemTagType.STRING)
-                    def category = getTableCategoryByName(categoryName)
+                    def categoryId = UUID.fromString(FastItemUtils.getCustomTag(item, CATEGORY_KEY, ItemTagType.STRING))
+                    def category = getLootTableCategory(categoryId)
                     if (category == null) return
 
                     if (t == ClickType.LEFT || t == ClickType.SHIFT_LEFT || t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
                         openCategory(p as Player, 1, category, selectTableCallback)
                     } else if (t == ClickType.MIDDLE) {
-//                        MenuUtils.createConfirmMenu(player, "§8Confirm Delete", item, () -> {
-//                            Players.msg(player, "§] §> §cDeleted this table.")
-//
-//
-//
-//                            Schedulers.sync().runLater({
-//                                openCategories(player, page)
-//                            }, 1)
-//                        }, () -> {
-//                            Players.msg(player, "§] §> §cSuccessfully stopped deleting this table")
-//                            openCategories(player, page)
-//                        })
+                        MenuUtils.createConfirmMenu(player, "§8Confirm Delete", item, () -> {
+                            category.tables.each {
+                                UUIDDataManager.getByClass(LootTable.class).delete(it)
+                            }
+
+                            UUIDDataManager.getByClass(LootTableCategory.class).delete(categoryId)
+
+                            Players.msg(player, "§] §> §cDeleted this table.")
+
+                            Schedulers.sync().runLater({
+                                openCategories(player, page)
+                            }, 1)
+                        }, () -> {
+                            Players.msg(player, "§] §> §cSuccessfully stopped deleting this table")
+                            openCategories(player, page)
+                        })
                     }
                 },
                 { Player p, ClickType t, int slot ->
@@ -446,7 +450,7 @@ class LootTableHandler {
                     ],
                     false)
 
-            FastItemUtils.setCustomTag(item, TABLE_KEY, ItemTagType.STRING, table.name)
+            FastItemUtils.setCustomTag(item, TABLE_KEY, ItemTagType.STRING, table.id.toString())
             return item
         }, page, true, [
                 { Player p, ClickType t, int s ->
@@ -456,18 +460,18 @@ class LootTableHandler {
 
                     if (!FastItemUtils.hasCustomTag(item, TABLE_KEY, ItemTagType.STRING)) return
 
+                    def tableId = UUID.fromString(FastItemUtils.getCustomTag(item, TABLE_KEY, ItemTagType.STRING))
+
                     if (selectTableCallback != null) {
-                        selectTableCallback.exec(category.getOrCreateTable(FastItemUtils.getCustomTag(item, TABLE_KEY, ItemTagType.STRING)))
+                        selectTableCallback.exec(category.getOrCreateTable(tableId))
                     } else {
                         if (t == ClickType.LEFT || t == ClickType.SHIFT_LEFT) {
-                            openTableGui(p as Player, category.getOrCreateTable(FastItemUtils.getCustomTag(item, TABLE_KEY, ItemTagType.STRING)))
+                            openTableGui(p as Player, category, category.getOrCreateTable(tableId))
                         } else if (t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
-                            giveReward(p as Player, category.getOrCreateTable(FastItemUtils.getCustomTag(item, TABLE_KEY, ItemTagType.STRING)))
+                            giveReward(p as Player, category.getOrCreateTable(tableId))
                         } else if (t == ClickType.MIDDLE) {
                             MenuUtils.createConfirmMenu(player, "§8Confirm Delete", item, () -> {
                                 Players.msg(player, "§] §> §cDeleted this table.")
-
-                                def tableId = UUID.fromString(FastItemUtils.getCustomTag(item, TABLE_KEY, ItemTagType.STRING))
 
                                 category.tables.removeIf { it == tableId }
                                 category.queueSave()
@@ -504,7 +508,7 @@ class LootTableHandler {
                     return
                 }
 
-                category.getOrCreateTable(name)
+                category.getOrCreateTable(UUID.randomUUID())
                 category.queueSave()
 
                 openCategory(p1, page, category)
@@ -525,7 +529,7 @@ class LootTableHandler {
         builder.openSync(player)
     }
 
-    static def openTableGui(Player player, LootTable table, int page = 1, Callback<Player> backCallback = null, Closure closeCallback = null) {
+    static def openTableGui(Player player, LootTableCategory category, LootTable table, int page = 1, Callback<Player> backCallback = null, Closure closeCallback = null) {
         MenuBuilder builder
 
         builder = MenuUtils.createLargePagedMenu("§3Loot Editor §7(§6${table.name}§7)", table.getSortedRewards(), { Reward reward, Integer i ->
@@ -591,13 +595,13 @@ class LootTableHandler {
                     Reward reward = table.rewards.find { it.id == rewardUuid }
                     if (reward == null) return
 
-                    openReward(p, table, reward, backCallback, closeCallback)
+                    openReward(p, category, table, reward, backCallback, closeCallback)
                 },
-                { Player p, ClickType t, int s -> openTableGui(p, table, page + 1, backCallback, closeCallback) },
-                { Player p, ClickType t, int s -> openTableGui(p, table, page - 1, backCallback, closeCallback) },
+                { Player p, ClickType t, int s -> openTableGui(p, category, table, page + 1, backCallback, closeCallback) },
+                { Player p, ClickType t, int s -> openTableGui(p, category, table, page - 1, backCallback, closeCallback) },
                 { Player p, ClickType t, int s ->
                     if (backCallback != null) backCallback.exec(p)
-                    else openCategory(p, getLootTableCategory(table.parentCategory))
+                    else openCategory(p, category)
                 }
         ])
 
@@ -620,8 +624,10 @@ class LootTableHandler {
                 }
 
                 table.commandRewards.add(new CommandReward(command, 1.0D))
-                getLootTableCategory(table.parentCategory).queueSave()
-                openTableGui(player, table, page, backCallback, closeCallback)
+                table.queueSave()
+                category.queueSave()
+
+                openTableGui(player, category, table, page, backCallback, closeCallback)
             })
         })
 
@@ -632,14 +638,19 @@ class LootTableHandler {
         ]), { p, t, s ->
             SelectionUtils.selectMaterial(p, { Material material ->
                 table.icon = material
-                getLootTableCategory(table.parentCategory).queueSave()
-                openTableGui(p, table, page, backCallback, closeCallback)
+
+                table.queueSave()
+                category.queueSave()
+
+                openTableGui(p, category, table, page, backCallback, closeCallback)
             })
         })
 
         builder.setCloseCallback { p ->
+            table.queueSave()
+            category.queueSave()
+
             if (closeCallback != null) closeCallback.call()
-            getLootTableCategory(table.parentCategory).queueSave()
         }
 
         builder.setExternal { p, t, s ->
@@ -654,21 +665,22 @@ class LootTableHandler {
                 Players.msg(player, "§] §> §cAdded this reward to table ${table.name}.")
 
                 table.itemRewards.add(new ItemReward(stack, 1.0D))
-                getLootTableCategory(table.parentCategory).queueSave()
+                table.queueSave()
+                category.queueSave()
 
                 Schedulers.sync().runLater({
-                    openTableGui(player, table, page, backCallback, closeCallback)
+                    openTableGui(player, category, table, page, backCallback, closeCallback)
                 }, 1)
             }, () -> {
                 Players.msg(player, "§] §> §cSuccessfully stopped adding this reward")
-                openTableGui(player, table, page, backCallback, closeCallback)
+                openTableGui(player, category, table, page, backCallback, closeCallback)
             })
         }
 
         builder.openSync(player)
     }
 
-    static def openReward(Player player, LootTable table, Reward reward, Callback<Player> backCallback = null, Closure closeCallback = null) {
+    static def openReward(Player player, LootTableCategory category, LootTable table, Reward reward, Callback<Player> backCallback = null, Closure closeCallback = null) {
         MenuBuilder menu
 
         menu = new MenuBuilder(18, "§3Reward Editor")
@@ -680,8 +692,11 @@ class LootTableHandler {
             Players.playSound(p, reward.enabled ? Sound.UI_BUTTON_CLICK : Sound.ENTITY_PLAYER_LEVELUP)
 
             reward.enabled = !reward.enabled
-            getLootTableCategory(table.parentCategory).queueSave()
-            openReward(p, table, reward, backCallback, closeCallback)
+
+            table.queueSave()
+            category.queueSave()
+
+            openReward(p, category, table, reward, backCallback, closeCallback)
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(reward.isTracking() ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE, "§aToggle Tracking", [
@@ -692,8 +707,11 @@ class LootTableHandler {
             Players.playSound(p, reward.isTracking() ? Sound.UI_BUTTON_CLICK : Sound.ENTITY_PLAYER_LEVELUP)
 
             reward.tracking = !reward.tracking
-            getLootTableCategory(table.parentCategory).queueSave()
-            openReward(p, table, reward, backCallback, closeCallback)
+
+            table.queueSave()
+            category.queueSave()
+
+            openReward(p, category, table, reward, backCallback, closeCallback)
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.MAGENTA_STAINED_GLASS_PANE, "§aChange Weight", [
@@ -706,8 +724,11 @@ class LootTableHandler {
             SelectionUtils.selectDouble(p, "Enter Weight", [1D, 2D, 3D, 4D, 5D, 6D, 7D, 8D],{ int weight ->
                 Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
                 reward.weight = weight
-                getLootTableCategory(table.parentCategory).queueSave()
-                openReward(p, table, reward, backCallback, closeCallback)
+
+                table.queueSave()
+                category.queueSave()
+
+                openReward(p, category, table, reward, backCallback, closeCallback)
             })
         })
 
@@ -724,8 +745,11 @@ class LootTableHandler {
                 SelectionUtils.selectInteger(p, "Enter Max Pulls", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],{ int maxPulls ->
                     Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
                     reward.maxPulls = maxPulls
-                    getLootTableCategory(table.parentCategory).queueSave()
-                    openReward(p, table, reward, backCallback, closeCallback)
+
+                    table.queueSave()
+                    category.queueSave()
+
+                    openReward(p, category, table, reward, backCallback, closeCallback)
                 })
             })
 
@@ -740,12 +764,15 @@ class LootTableHandler {
                 MenuUtils.createConfirmMenu(player, "§8Confirm Reset", FastItemUtils.createItem(Material.BARRIER, "§l", []), () -> {
                     Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
                     reward.timesPulled = 0
-                    getLootTableCategory(table.parentCategory).queueSave()
-                    openReward(p, table, reward, backCallback, closeCallback)
+
+                    table.queueSave()
+                    category.queueSave()
+
+                    openReward(p, category, table, reward, backCallback, closeCallback)
                 }, () -> {
                     Players.playSound(p, Sound.UI_BUTTON_CLICK)
                     Players.msg(player, "§] §> §cSuccessfully stopped resetting times pulled")
-                    openReward(p, table, reward, backCallback, closeCallback)
+                    openReward(p, category, table, reward, backCallback, closeCallback)
                 })
             })
 
@@ -758,8 +785,11 @@ class LootTableHandler {
                 Players.playSound(p, Sound.UI_BUTTON_CLICK)
 
                 reward.antiDupe = !reward.antiDupe
-                getLootTableCategory(table.parentCategory).queueSave()
-                openReward(p, table, reward, backCallback, closeCallback)
+
+                table.queueSave()
+                category.queueSave()
+
+                openReward(p, category, table, reward, backCallback, closeCallback)
             })
         }
 
@@ -775,15 +805,17 @@ class LootTableHandler {
                 Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
 
                 table.removeReward(reward)
-                getLootTableCategory(table.parentCategory).queueSave()
+
+                table.queueSave()
+                category.queueSave()
 
                 Schedulers.sync().runLater({
-                    openTableGui(p, table, 1, backCallback, closeCallback)
+                    openTableGui(p, category, table, 1, backCallback, closeCallback)
                 }, 1)
             }, () -> {
                 Players.playSound(p, Sound.UI_BUTTON_CLICK)
                 Players.msg(player, "§] §> §cSuccessfully stopped deleting this reward")
-                openReward(p, table, reward, backCallback, closeCallback)
+                openReward(p, category, table, reward, backCallback, closeCallback)
             })
         })
 
@@ -792,12 +824,13 @@ class LootTableHandler {
                 "§a * Click to go back *"
         ]), { p, t, s ->
             Players.playSound(p, Sound.UI_BUTTON_CLICK)
-            openTableGui(p, table, 1, backCallback, closeCallback)
+            openTableGui(p, category, table, 1, backCallback, closeCallback)
         })
 
 
         menu.setCloseCallback { p ->
-            getLootTableCategory(table.parentCategory).queueSave()
+            table.queueSave()
+            category.queueSave()
         }
 
         menu.openSync(player)
