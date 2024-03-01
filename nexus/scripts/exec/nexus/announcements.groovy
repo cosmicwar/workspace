@@ -18,4 +18,4 @@ Exports.ptr("announcement_global", [
         "§] §>§f Do you need help about any of our features? do §e/help§f to get started"
 ])
 
-Starlight.watch("scripts/servers/nexus/announcements.groovy")
+Starlight.watch("scripts/announcements.groovy")
