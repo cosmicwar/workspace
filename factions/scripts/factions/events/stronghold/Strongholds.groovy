@@ -49,7 +49,7 @@ class Strongholds {
     }
 
     static def commands() {
-        FCBuilder command = new FCBuilder("stronghold").defaultAction {
+        FCBuilder command = new FCBuilder("stronghold", "sh").defaultAction {
             openGui(it)
         }
 
