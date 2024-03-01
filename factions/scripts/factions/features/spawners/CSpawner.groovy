@@ -6,7 +6,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.World
 import org.bukkit.entity.EntityType
 import scripts.factions.data.DataObject
-import scripts.shared.legacy.objects.Position
+import scripts.factions.data.obj.Position
 import scripts.shared.legacy.utils.RandomUtils
 
 @CompileStatic(TypeCheckingMode.SKIP)
