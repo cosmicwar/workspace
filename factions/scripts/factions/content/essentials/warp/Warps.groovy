@@ -101,7 +101,7 @@ class Warps {
 
         if (player.isOp()) {
             menu.set(menu.get().size - 4, FastItemUtils.createItem(Material.RED_DYE, "§cCreate Warp", [
-                "§7Click to create a new warp."
+                    "§7Click to create a new warp."
             ]), { p, t, s ->
                 SelectionUtils.selectString(p, "§3Enter the new warp name.") {
                     def warp = getWarp(it)
@@ -122,7 +122,7 @@ class Warps {
         menu = new MenuBuilder(18, "§3Editing §b${warp.displayName}")
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.BARRIER, "§cDelete Warp", [
-            "§7Click to delete this warp."
+                "§7Click to delete this warp."
         ]), { p, t, s ->
             DataManager.getByClass(Warp).delete(warp.id)
 
@@ -130,10 +130,12 @@ class Warps {
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.NAME_TAG, "§bEdit Name", [
-            "§7Click to edit the warp name."
+                "§7Click to edit the warp name.",
+                "",
+                "§7Current: §b${warp.displayName}"
         ]), { p, t, s ->
             SelectionUtils.selectString(p, "§3Enter the new warp name.") {
-                warp.displayName = it
+                warp.displayName = it.replaceAll("&", "§")
                 warp.queueSave()
 
                 openWarpEdit(p, warp)
@@ -141,10 +143,13 @@ class Warps {
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.PAPER, "§bEdit Description", [
-            "§7Click to edit the warp description."
+                "§7Click to edit the warp description.",
+                "",
+                "§7Current: ",
+                *warp.description.collect { "§7- §b$it" }.toArray()
         ]), { p, t, s ->
             SelectionUtils.selectStringList(p, warp.description) {
-                warp.description = it
+                warp.description = it.isEmpty() ? [] : it.collect { it.replaceAll("&", "§") }
                 warp.queueSave()
 
                 openWarpEdit(p, warp)
@@ -152,7 +157,9 @@ class Warps {
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.ITEM_FRAME, "§bEdit Icon", [
-            "§7Click to edit the warp icon."
+                "§7Click to edit the warp icon.",
+                "",
+                "§7Current: §b${warp.icon.toString()}"
         ]), { p, t, s ->
             SelectionUtils.selectMaterial(p) {
                 warp.icon = it
@@ -162,8 +169,17 @@ class Warps {
             }
         })
 
+        def pos = warp.position
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.COMPASS, "§bEdit Position", [
-            "§7Click to edit the warp position."
+                "§7Click to edit the warp position.",
+                "",
+                "§7Current: ",
+                "§bWorld: §7${pos.world}",
+                "§bX: §7${pos.x}",
+                "§bY: §7${pos.y}",
+                "§bZ: §7${pos.z}",
+                "§bYaw: §7${pos.yaw}",
+                "§bPitch: §7${pos.pitch}"
         ]), { p, t, s ->
             SelectionUtils.confirmPosition(p, Position.of(p.getLocation())) {
                 if (it) {
@@ -176,9 +192,11 @@ class Warps {
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.CLOCK, "§bEdit Warp Time", [
-            "§7Click to edit the warp time."
+                "§7Click to edit the warp time.",
+                "",
+                "§7Current: §b${warp.warpTime}"
         ]), { p, t, s ->
-            SelectionUtils.selectDouble(p, "", [0,1,2,3,4,5,6,7]) {
+            SelectionUtils.selectDouble(p, "", [0, 1, 2, 3, 4, 5, 6, 7]) {
                 warp.warpTime = it
                 warp.queueSave()
 
@@ -187,7 +205,7 @@ class Warps {
         })
 
         menu.set(17, FastItemUtils.createItem(Material.RED_DYE, "§cBack", [
-            "§7Click to go back."
+                "§7Click to go back."
         ]), { p, t, s ->
             openWarpGui(p)
         })
