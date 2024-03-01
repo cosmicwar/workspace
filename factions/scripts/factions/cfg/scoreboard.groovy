@@ -29,7 +29,7 @@ def board = new SidebarBuilder("main")
         .title({ Player player ->
             def now = LocalDate.ofInstant(Instant.now(), TimeZone.getTimeZone(ZoneId.of("America/New_York")).toZoneId())
 
-            return player.hasResourcePack() ? "糷糸" : "${ColorUtil.rainbow("ꜱᴛᴀʀᴄᴀᴅᴇ", ["#00e5ff", "#4284ff"] as String[], "§l").toString()} §7| ${ColorUtil.color("§<#3F9DFF>${dtf.format(now)}")}"
+            return /*player.hasResourcePack() ? "糷糸" : */"${ColorUtil.rainbow("ꜱᴛᴀʀᴄᴀᴅᴇ", ["#00e5ff", "#4284ff"] as String[], "§l").toString()} §7| ${ColorUtil.color("§<#3F9DFF>${dtf.format(now)}")}"
         })
         .lines({ Player player ->
             if (player == null || player instanceof FakeEntityPlayer) return []
