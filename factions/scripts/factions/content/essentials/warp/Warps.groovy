@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.ClickType
 import org.bukkit.persistence.PersistentDataType
 import org.starcade.starlight.Starlight
 import org.starcade.starlight.enviorment.GroovyScript
+import org.starcade.starlight.helper.Commands
 import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
 import scripts.factions.core.faction.FCBuilder
@@ -38,6 +39,57 @@ class Warps {
     }
 
     def commands() {
+        Commands.create().assertUsage("<warp> [player]").handler {ctx ->
+            if (ctx.sender() instanceof Player) {
+                if (ctx.args().size() == 0) {
+                    openWarpGui(ctx.sender() as Player)
+                    return
+                } else if (ctx.args().size() == 1) {
+                    def warpName = ctx.arg(0).parseOrFail(String)
+
+                    def warp = getWarp(warpName, false)
+                    if (warp == null) {
+                        ctx.reply("§cWarp not found.")
+                        return
+                    }
+
+                    if (warp.position.world == null) {
+                        ctx.reply("§cThis warp is not set up correctly.")
+                        return
+                    }
+
+                    TeleportHandler.teleportPlayer(ctx.sender() as Player,
+                            warp.position.getLocation(null),
+                            warp.warpTime,
+                            false,
+                            "§3Teleporting to §b${warp.displayName}§3..."
+                    )
+                    return
+                }
+            }
+
+            def warpName = ctx.arg(0).parseOrFail(String)
+            def target = ctx.arg(1).parseOrFail(Player)
+
+            def warp = getWarp(warpName, false)
+            if (warp == null) {
+                ctx.reply("§cWarp not found.")
+                return
+            }
+
+            if (warp.position.world == null) {
+                ctx.reply("§cThis warp is not set up correctly.")
+                return
+            }
+
+            TeleportHandler.teleportPlayer(target,
+                    warp.position.getLocation(null),
+                    warp.warpTime,
+                    false,
+                    "§3Teleporting to §b${warp.displayName}§3..."
+            )
+        }.register("warp", "warps")
+
         FCBuilder cmd = new FCBuilder("warp", "warps").defaultAction {
             openWarpGui(it)
         }
