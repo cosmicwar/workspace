@@ -8,6 +8,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerTeleportEvent
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.promise.Promise
@@ -71,6 +72,12 @@ class TeleportHandler {
 
                 teleportingPlayers.remove(event.player.getUniqueId()).cancel()
                 event.player.sendMessage("§cYou have moved, cancelling pending teleportation.")
+            }
+        }
+
+        Events.subscribe(PlayerTeleportEvent.class).handler {event ->
+            if (teleportingPlayers.containsKey(event.player.getUniqueId())) {
+                teleportingPlayers.remove(event.player.getUniqueId()).cancel()
             }
         }
     }
