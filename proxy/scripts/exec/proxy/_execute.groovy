@@ -28,8 +28,8 @@ execute {
     } else {
         loadFromConfig("configs/proxy/proxy.toml", "velocity.toml")
 
-        loadPlugin("BotSentry")
-        loadFromConfig("configs/proxy/botsentry", "plugins/botsentry")
+/*        loadPlugin("BotSentry")
+        loadFromConfig("configs/proxy/botsentry", "plugins/botsentry")*/
     }
 
     if (Temple.templeId.contains("bedrock")) {
