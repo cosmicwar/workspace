@@ -89,12 +89,6 @@ class Warps {
                     "§3Teleporting to §b${warp.displayName}§3..."
             )
         }.register("warp", "warps")
-
-        FCBuilder cmd = new FCBuilder("warp", "warps").defaultAction {
-            openWarpGui(it)
-        }
-
-        cmd.build()
     }
 
     private static NamespacedKey warpKey = new NamespacedKey(Starlight.plugin, "warp")
