@@ -38,7 +38,7 @@ Starlight.watch(
         "scripts/shared/legacy/currency.groovy",
 
         "~/fixes.groovy",
-        "~/spoof.groovy",
+//        "~/spoof.groovy",
 
         "~/interactions.groovy",
         "~/votifier.groovy",
