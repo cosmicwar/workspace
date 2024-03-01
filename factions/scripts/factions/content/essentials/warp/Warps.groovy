@@ -10,7 +10,6 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Commands
 import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
-import scripts.factions.core.faction.FCBuilder
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.shared.legacy.utils.FastItemUtils
@@ -26,6 +25,20 @@ class Warps {
         }
 
         DataManager.register("ess_warps", Warp)
+
+        // this allows us to make the warp id non case sensitive
+        Commands.parserRegistry().register(Warp.class) { s ->
+            if (s.equalsIgnoreCase("desert") || s.equalsIgnoreCase("des")) s = "Desert"
+            if (s.equalsIgnoreCase("forest") || s.equalsIgnoreCase("for")) s = "Forest"
+            if (s.equalsIgnoreCase("mountain") || s.equalsIgnoreCase("mtn")) s = "Mountain"
+            if (s.equalsIgnoreCase("plains") || s.equalsIgnoreCase("pln")) s = "Plains"
+            if (s.equalsIgnoreCase("swamp") || s.equalsIgnoreCase("swp")) s = "Swamp"
+            if (s.equalsIgnoreCase("tundra") || s.equalsIgnoreCase("tun")) s = "Tundra"
+            if (s.equalsIgnoreCase("ocean") || s.equalsIgnoreCase("ocn")) s = "Ocean"
+            if (s.equalsIgnoreCase("koth")) s = "KOTH"
+
+            return Optional.ofNullable(getWarp(s, false))
+        }
 
         commands()
     }
@@ -45,9 +58,7 @@ class Warps {
                     openWarpGui(ctx.sender() as Player)
                     return
                 } else if (ctx.args().size() == 1) {
-                    def warpName = ctx.arg(0).parseOrFail(String)
-
-                    def warp = getWarp(warpName, false)
+                    def warp = ctx.arg(0).parseOrFail(Warp)
                     if (warp == null) {
                         ctx.reply("§cWarp not found.")
                         return
@@ -68,10 +79,9 @@ class Warps {
                 }
             }
 
-            def warpName = ctx.arg(0).parseOrFail(String)
+            def warp = ctx.arg(0).parseOrFail(Warp)
             def target = ctx.arg(1).parseOrFail(Player)
 
-            def warp = getWarp(warpName, false)
             if (warp == null) {
                 ctx.reply("§cWarp not found.")
                 return
