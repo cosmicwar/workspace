@@ -31,6 +31,7 @@ Starlight.watch(
         "~/content/worldgen/WorldManager.groovy",
 
         // Systems & Content \\
+        "~/core/profile/Profiles.groovy",
         "~/content/log/Logs.groovy",
         "~/eco/loottable/LootTableHandler.groovy",
 
