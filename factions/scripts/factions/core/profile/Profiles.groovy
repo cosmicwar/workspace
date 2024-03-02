@@ -47,6 +47,8 @@ class Profiles {
 
             profile.queueSave()
         }
+
+        commands()
     }
 
     def commands() {
