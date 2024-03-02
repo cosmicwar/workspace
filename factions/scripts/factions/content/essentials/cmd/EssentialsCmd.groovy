@@ -11,6 +11,7 @@ class EssentialsCmd {
         // flight commands
         Commands.create().assertPermission("essentials.fly").assertPlayer().handler { ctx ->
             def sender = ctx.sender()
+
             if (ctx.args().size() == 0 || !sender.isOp() || !sender.hasPermission("essentials.fly.others")) {
                 sender.setAllowFlight(!sender.getAllowFlight())
                 ctx.reply("§] §> §aYou have toggled flight to ${sender.getAllowFlight() ? "§a§lENABLED" : "§c§lDISABLED"}§a.")
