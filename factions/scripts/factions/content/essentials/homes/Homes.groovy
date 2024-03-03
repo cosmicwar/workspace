@@ -119,7 +119,7 @@ class Homes {
     }
 
     List<Home> getHomes(Player player) {
-        return playerHomes.get(player.getUniqueId())
+        return playerHomes.get(player.getUniqueId()) == null ? new ArrayList<Home>() : playerHomes.get(player.getUniqueId())
     }
 
     private static NamespacedKey homeKey = new NamespacedKey(Starlight.plugin, "home")
