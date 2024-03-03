@@ -11,7 +11,6 @@ import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Schedulers
 import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
-import scripts.factions.content.essentials.warp.Warp
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.features.spawners.CSpawner
@@ -77,7 +76,7 @@ class Homes {
                     }
 
                     if (home.position.world == null) {
-                        ctx.reply("§cThis warp is not set up correctly.")
+                        ctx.reply("§cThis home is not in a valid world.")
                         return
                     }
 
@@ -93,12 +92,13 @@ class Homes {
         }.register("home", "homes")
 
         Commands.create().assertUsage("[homeName]").handler { ctx ->
-            Player player = ctx.sender()
+            Player player = ctx.sender() as Player
             if (ctx.args().size() == 0) {
                 player.sendMessage("§cPlease set a home with a name.")
                 return
             }
             String name = ctx.arg(0).parseOrFail(String)
+
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
             home.displayName = name
             home.position = Position.of(player.location)
@@ -108,7 +108,27 @@ class Homes {
                 list.add(home)
                 playerHomes.put(home.playerId, list)
             }
+            home.queueSave()
+            player.sendMessage("§eHome '${home.displayName}' created.")
         }.register("sethome")
+
+        Commands.create().assertUsage("[homeName]").handler { ctx ->
+            Player player = ctx.sender() as Player
+            if (ctx.args().size() == 0) {
+                player.sendMessage("§cPlease set a home with a valid name.")
+                return
+            }
+            String name = ctx.arg(0).parseOrFail(String)
+            Home home = getHome(player, name)
+            if (home == null) {
+                player.sendMessage("§cHome '${name}' not found.")
+                return
+            }
+            DataManager.getByClass(Home).delete(home.id)
+            getHomes(player).remove(getHome(player, home.displayName))
+            player.sendMessage("§eHome '${home.displayName}' deleted.")
+            home.queueSave()
+        }
     }
 
     Home getHome(Player player, String name) {
@@ -129,7 +149,7 @@ class Homes {
         MenuBuilder menu
 
         menu = MenuUtils.createPagedMenu("§3Homes", getHomes(player), { Home home, int index ->
-            List<String> lore = ["${home.position.x.toInteger()}, ${home.position.z.toInteger()}"]
+            List<String> lore = ["§r${home.position.x.toInteger()}, ${home.position.z.toInteger()}"]
 
             lore.add("§7§oRight click to edit.")
 
@@ -188,7 +208,7 @@ class Homes {
                 "§7Click to delete this home."
         ]), { p, t, s ->
             DataManager.getByClass(Home).delete(home.id)
-            getHomes(p).remove(getHome(p, home.displayName))
+            getHomes(p).remove(home)
 
             openHomeGui(p)
         })
@@ -208,7 +228,7 @@ class Homes {
 
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.ITEM_FRAME, "§bEdit Icon", [
-                "§7Click to edit the warp icon.",
+                "§7Click to edit the home icon.",
                 "",
                 "§7Current: §b${home.icon.toString()}"
         ]), { p, t, s ->
