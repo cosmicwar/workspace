@@ -101,6 +101,7 @@ class Homes {
             String name = ctx.arg(0).parseOrFail(String)
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
             home.displayName = name
+            home.position = Position.of(player.location)
             if (playerHomes.containsKey(home.playerId)) playerHomes.get(home.playerId).add(home)
             else {
                 def list = new ArrayList<Home>()
