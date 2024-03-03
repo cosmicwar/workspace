@@ -100,7 +100,7 @@ class Homes {
             }
             String name = ctx.arg(0).parseOrFail(String)
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
-
+            home.displayName = name
             if (playerHomes.containsKey(home.playerId)) playerHomes.get(home.playerId).add(home)
             else {
                 def list = new ArrayList<Home>()
@@ -127,7 +127,7 @@ class Homes {
     def openHomeGui(Player player, int page = 1) {
         MenuBuilder menu
 
-        menu = MenuUtils.createPagedMenu("§3Warps", getHomes(player), { Home home, int index ->
+        menu = MenuUtils.createPagedMenu("§3Homes", getHomes(player), { Home home, int index ->
             List<String> lore = ["${home.position.x.toInteger()}, ${home.position.z.toInteger()}"]
 
             lore.add("§7§oRight click to edit.")
