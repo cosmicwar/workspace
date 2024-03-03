@@ -13,6 +13,7 @@ import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
 import scripts.factions.content.essentials.warp.Warp
 import scripts.factions.data.DataManager
+import scripts.factions.data.obj.Position
 import scripts.factions.features.spawners.CSpawner
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
@@ -20,6 +21,7 @@ import scripts.shared.systems.MenuBuilder
 import scripts.shared.utils.DataUtils
 
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.TimeUnit
 
 class Homes {
 
@@ -89,6 +91,23 @@ class Homes {
                 }
             }
         }.register("home", "homes")
+
+        Commands.create().assertUsage("[homeName]").handler { ctx ->
+            Player player = ctx.sender()
+            if (ctx.args().size() == 0) {
+                player.sendMessage("§cPlease set a home with a name.")
+                return
+            }
+            String name = ctx.arg(0).parseOrFail(String)
+            def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
+
+            if (playerHomes.containsKey(home.playerId)) playerHomes.get(home.playerId).add(home)
+            else {
+                def list = new ArrayList<Home>()
+                list.add(home)
+                playerHomes.put(home.playerId, list)
+            }
+        }.register("sethome")
     }
 
     Home getHome(Player player, String name) {
@@ -109,8 +128,7 @@ class Homes {
         MenuBuilder menu
 
         menu = MenuUtils.createPagedMenu("§3Warps", getHomes(player), { Home home, int index ->
-            List<String> lore = warp.description.clone() as List<String>
-
+            List<String> lore = ["${home.position.x.toInteger()}, ${home.position.z.toInteger()}"]
 
             lore.add("§7§oRight click to edit.")
 
@@ -123,28 +141,30 @@ class Homes {
                 { Player p, ClickType t, int slot ->
                     def item = menu.get().getItem(slot)
 
-                    if (item == null || item.type.isAir() || !DataUtils.hasTag(item, warpKey, PersistentDataType.STRING)) return
+                    if (item == null || item.type.isAir() || !DataUtils.hasTag(item, homeKey, PersistentDataType.STRING)) return
 
-                    def home = getWarp(DataUtils.getTag(item, warpKey, PersistentDataType.STRING), false)
-                    if (warp == null) return
+                    def home = getHome(p, DataUtils.getTag(item, homeKey, PersistentDataType.STRING))
+                    if (home == null) return
 
                     if (t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
-                        openWarpEdit(p, warp)
+                        openHomeEdit(p, home)
                         return
                     }
 
                     p.closeInventory()
 
-                    if (warp.position.world == null) {
-                        p.sendMessage("§cThis warp is not set up correctly.")
+                    if (home.position.world == null) {
+                        p.sendMessage("§cThis home is invalid - deleting home.")
+                        getHomes(player).remove(home)
+                        DataManager.getByClass(Home).delete(home.id)
                         return
                     }
 
                     TeleportHandler.teleportPlayer(p,
-                            warp.position.getLocation(null),
-                            warp.warpTime,
+                            home.position.getLocation(null),
+                            home.warpTime,
                             false,
-                            "§3Teleporting to §b${warp.displayName}§3..."
+                            "§3Teleporting to §b${home.displayName}§3..."
                     )
                 },
                 { Player p, ClickType t, int slot ->
@@ -155,19 +175,55 @@ class Homes {
                 },
         ])
 
-        if (player.isOp()) {
-            menu.set(menu.get().size - 4, FastItemUtils.createItem(Material.GREEN_DYE, "§cCreate Warp", [
-                    "§7Click to create a new warp."
-            ]), { p, t, s ->
-                SelectionUtils.selectString(p, "§3Enter the new warp name.") {
-                    def warp = getWarp(it)
-                    warp.displayName = it
-                    warp.queueSave()
+        menu.openSync(player)
+    }
 
-                    openWarpEdit(p, warp)
-                }
-            })
-        }
+    def openHomeEdit(Player player, Home home) {
+        MenuBuilder menu
+
+        menu = new MenuBuilder(18, "§3Editing §b${home.displayName}")
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.BARRIER, "§cDelete Home", [
+                "§7Click to delete this home."
+        ]), { p, t, s ->
+            DataManager.getByClass(Home).delete(home.id)
+            getHomes(p).remove(getHome(p, home.displayName))
+
+            openHomeGui(p)
+        })
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.NAME_TAG, "§bEdit Name", [
+                "§7Click to edit the home name.",
+                "",
+                "§7Current: §b${home.displayName}"
+        ]), { p, t, s ->
+            SelectionUtils.selectString(p, "§3Enter the new home name.") {
+                home.displayName = it.replaceAll("&", "§")
+                home.queueSave()
+
+                openHomeEdit(p, home)
+            }
+        })
+
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.ITEM_FRAME, "§bEdit Icon", [
+                "§7Click to edit the warp icon.",
+                "",
+                "§7Current: §b${home.icon.toString()}"
+        ]), { p, t, s ->
+            SelectionUtils.selectMaterial(p) {
+                home.icon = it
+                home.queueSave()
+
+                openHomeEdit(p, home)
+            }
+        })
+
+        menu.set(17, FastItemUtils.createItem(Material.RED_DYE, "§cBack", [
+                "§7Click to go back."
+        ]), { p, t, s ->
+            openHomeGui(p)
+        })
 
         menu.openSync(player)
     }
