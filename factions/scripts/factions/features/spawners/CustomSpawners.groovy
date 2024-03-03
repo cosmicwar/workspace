@@ -36,7 +36,7 @@ import scripts.factions.core.faction.addon.ftop.FTopUtils
 import scripts.factions.core.faction.claim.Board
 import scripts.factions.data.DataManager
 import scripts.shared.legacy.command.SubCommandBuilder
-import scripts.shared.legacy.objects.Position
+import scripts.factions.data.obj.Position
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.StringUtils
 import scripts.shared.utils.DataUtils
