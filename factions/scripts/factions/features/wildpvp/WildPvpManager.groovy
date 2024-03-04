@@ -73,7 +73,7 @@ class WildPvpManager {
     static def pvpMenu(Player player, int page = 1) {
         MenuBuilder menu
 
-        menu = MenuUtils.createPagedMenu("§3Wild PvP", ActivePvps.keySet().toList(), { UUID playerId, int index ->
+        menu = MenuUtils.createPagedMenu("§7Wild PvP", ActivePvps.keySet().toList(), { UUID playerId, int index ->
             Player wildPlayer = Bukkit.getPlayer(playerId)
             Member MWildPlayer = Factions.getMember(playerId)
             Faction faction = Factions.getFaction(MWildPlayer.factionId)
@@ -127,48 +127,48 @@ class WildPvpManager {
         menu.openSync(player)
     }
 
-    static def openPvpMenu(Player player) {
-        int numPvps = ActivePvps.size()
-        MenuBuilder builder
-        int rows = (numPvps + 1).intdiv(9)
-        builder = new MenuBuilder(rows == 0 ? 9 : rows * 9, "§lWild Pvp")
-        UUID[] playerUUIDs = ActivePvps.keySet().toArray() as UUID[]
-        Member playerOpen = Factions.getMember(player.getUniqueId())
-
-        for (int i = 0; i < numPvps; i++) {
-            int row = i.intdiv(9)
-            Player wildPlayer = Bukkit.getPlayer(playerUUIDs[i])
-            Member MWildPlayer = Factions.getMember(wildPlayer.getUniqueId())
-            def faction = Factions.getFaction(MWildPlayer.getFactionId())
-            if (faction == null)
-            {
-                faction = "Wilderness"
-            }
-            else
-            {
-                def relation = Factions.getRelationType(playerOpen, MWildPlayer)
-                faction = relation.getColor() + faction.getName()
-            }
-
-            builder.set(row + 1, i % 9 + 1, FastItemUtils.createSkull(wildPlayer, faction + " §r" + wildPlayer.getName(), ["§c ▎ §7Left click to join pvp.§7", "§c ▎ §7Right click to view inventory.§7"]), { p, t, s ->
-                p = (Player) p
-                t = (ClickType) t
-                s = (Integer) s
-                if (t == ClickType.LEFT) {
-                    joinWildPvp(p, ActivePvps.get(playerUUIDs[s]))
-                } else if (t == ClickType.RIGHT) {
-                    PvpInventories.get(p.getUniqueId()).openSync(p)
-                }
-            })
-        }
-        ItemStack pvpItem = ActivePvps.containsKey(player.getUniqueId()) ? FastItemUtils.createItem(Material.BARRIER, "§cClick to cancel your pvp.", []) : FastItemUtils.createItem(Material.SUNFLOWER, "§eClick to create a wild pvp.", [])
-        builder.set(rows + 1, 9, pvpItem, {p, t, s ->
-            p = (Player) p
-            if (ActivePvps.containsKey(p.getUniqueId())) leaveWildPvp(p)
-            else createWildPvp(p)
-        })
-        builder.openSync(player)
-    }
+//    static def openPvpMenu(Player player) {
+//        int numPvps = ActivePvps.size()
+//        MenuBuilder builder
+//        int rows = (numPvps + 1).intdiv(9)
+//        builder = new MenuBuilder(rows == 0 ? 9 : rows * 9, "§lWild Pvp")
+//        UUID[] playerUUIDs = ActivePvps.keySet().toArray() as UUID[]
+//        Member playerOpen = Factions.getMember(player.getUniqueId())
+//
+//        for (int i = 0; i < numPvps; i++) {
+//            int row = i.intdiv(9)
+//            Player wildPlayer = Bukkit.getPlayer(playerUUIDs[i])
+//            Member MWildPlayer = Factions.getMember(wildPlayer.getUniqueId())
+//            def faction = Factions.getFaction(MWildPlayer.getFactionId())
+//            if (faction == null)
+//            {
+//                faction = "Wilderness"
+//            }
+//            else
+//            {
+//                def relation = Factions.getRelationType(playerOpen, MWildPlayer)
+//                faction = relation.getColor() + faction.getName()
+//            }
+//
+//            builder.set(row + 1, i % 9 + 1, FastItemUtils.createSkull(wildPlayer, faction + " §r" + wildPlayer.getName(), ["§c ▎ §7Left click to join pvp.§7", "§c ▎ §7Right click to view inventory.§7"]), { p, t, s ->
+//                p = (Player) p
+//                t = (ClickType) t
+//                s = (Integer) s
+//                if (t == ClickType.LEFT) {
+//                    joinWildPvp(p, ActivePvps.get(playerUUIDs[s]))
+//                } else if (t == ClickType.RIGHT) {
+//                    PvpInventories.get(p.getUniqueId()).openSync(p)
+//                }
+//            })
+//        }
+//        ItemStack pvpItem = ActivePvps.containsKey(player.getUniqueId()) ? FastItemUtils.createItem(Material.BARRIER, "§cClick to cancel your pvp.", []) : FastItemUtils.createItem(Material.SUNFLOWER, "§eClick to create a wild pvp.", [])
+//        builder.set(rows + 1, 9, pvpItem, {p, t, s ->
+//            p = (Player) p
+//            if (ActivePvps.containsKey(p.getUniqueId())) leaveWildPvp(p)
+//            else createWildPvp(p)
+//        })
+//        builder.openSync(player)
+//    }
 
     static def createWildPvp(Player player) {
         if (ActivePvps.containsKey(player.getUniqueId())) {
