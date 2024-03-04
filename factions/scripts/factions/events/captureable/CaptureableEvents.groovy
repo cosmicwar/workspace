@@ -12,6 +12,7 @@ import scripts.factions.content.dbconfig.ConfigCategory
 import scripts.factions.content.dbconfig.DBConfigUtil
 import scripts.factions.core.faction.FCBuilder
 import scripts.factions.data.DataManager
+import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
 import scripts.factions.events.stronghold.CachedStronghold
 import scripts.factions.events.stronghold.Stronghold
@@ -23,13 +24,13 @@ class CaptureableEvents {
     static Config config
     static ConfigCategory settingsCategory
 
-    static Set<Stronghold> strongholds = Sets.newConcurrentHashSet()
+    static Set<CaptureableEvent> events = Sets.newConcurrentHashSet()
 
     CaptureableEvents() {
         GroovyScript.addUnloadHook {
             config.queueSave()
 
-            DataManager.getByClass(CachedStronghold.class).saveAll(false)
+            DataManager.getByClass(CachedEvent.class).saveAll(false)
         }
 
         config = DBConfigUtil.createConfig("cap_events", "§eCap Events", [], Material.END_PORTAL_FRAME)
@@ -44,8 +45,8 @@ class CaptureableEvents {
     }
 
     static def commands() {
-        FCBuilder command = new FCBuilder("stronghold", "sh").defaultAction {
-            openGui(it)
+        FCBuilder command = new FCBuilder("captureableevents").defaultAction {
+//            openGui(it)
         }
 
         command.create("wipeeventsconfig").requirePermission("starlight.admin").register {ctx ->
@@ -66,7 +67,7 @@ class CaptureableEvents {
             DataManager.wipe(CachedEvent.class)
             config.queueSave()
 
-            ctx.reply("§aCaptureable events cache has been reset. Creating default strongholds...")
+            ctx.reply("§aCaptureable events cache has been reset. Creating default events...")
 
 //            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
@@ -123,4 +124,13 @@ class CaptureableEvents {
 //
 //        return stronghold
 //    }
+
+    static def createEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), List<SR> placeRegions = [], Position location = new Position()) {
+        if (events.any { it.getInternalName() == internalName }) return
+
+        def event = new CaptureableEvent(internalName, displayName, eventType, inventoryTitle, hexColor, icon, globalRegion, capRegion, placeRegions)
+        events.add(event)
+
+        return event
+    }
 }

@@ -4,8 +4,13 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockPlaceEvent
+import org.starcade.starlight.enviorment.GroovyScript
+import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.scheduler.Task
+import org.starcade.starlight.helper.utils.Players
 import scripts.factions.content.dbconfig.RegularConfig
 import scripts.factions.content.dbconfig.entries.BooleanEntry
 import scripts.factions.content.dbconfig.entries.MaterialEntry
@@ -13,14 +18,22 @@ import scripts.factions.content.dbconfig.entries.PositionEntry
 import scripts.factions.content.dbconfig.entries.SREntry
 import scripts.factions.content.dbconfig.entries.StringEntry
 import scripts.factions.content.dbconfig.entries.list.SRListEntry
+import scripts.factions.content.scoreboard.sidebar.Sidebar
+import scripts.factions.content.scoreboard.sidebar.SidebarBuilder
+import scripts.factions.content.scoreboard.sidebar.SidebarHandler
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
+import scripts.factions.events.stronghold.Strongholds
 import scripts.shared.utils.BukkitUtils
+import scripts.shared.utils.ColorUtil
 
 import java.text.DecimalFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.ThreadLocalRandom
 
@@ -31,10 +44,12 @@ class CaptureableEvent {
     CachedEvent cachedEvent
     Task currentTask = null
     RegularConfig config
+    CaptureType captureType
 
-    CaptureableEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), List<SR> placeRegions = [], Position location = new Position()) {
+    CaptureableEvent(CaptureType captureType, String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         this.internalName = internalName
         this.cachedEvent = DataManager.getData(internalName, CachedEvent.class, true)
+        this.captureType = captureType
 
         config = CaptureableEvents.settingsCategory.getOrCreateConfig(internalName, internalName, icon)
         config.addDefault([
@@ -50,6 +65,30 @@ class CaptureableEvent {
         ])
         CaptureableEvents.config.queueSave()
 
+        if (isEnabled()) {
+            enableEvent()
+        }
+
+        GroovyScript.addUnloadHook {
+            currentTask.stop()
+            SidebarHandler.unregisterSidebar("event_${internalName}")
+
+            cachedEvent.queueSave()
+        }
+    }
+
+    def enableEvent() {
+        config.getBooleanEntry("enabled").setValue(true)
+        CaptureableEvents.config.queueSave()
+
+        SidebarHandler.registerSidebar(getScoreboard())
+
+        if (currentTask != null) {
+            currentTask.stop()
+            SidebarHandler.unregisterSidebar("event_${internalName}")
+        }
+
+        currentTask = scheduleTask()
     }
 
     Task scheduleTask() {
@@ -342,6 +381,75 @@ class CaptureableEvent {
                 }
             }
         }, 20L, 20L)
+    }
+
+    Sidebar getScoreboard() {
+        def board = new SidebarBuilder("event_${internalName}").lines { player ->
+            def member = Factions.getMember(player.getUniqueId())
+            if (member == null) {
+                return []
+            }
+
+            def list = []
+
+            list.add("")
+            list.add(ColorUtil.color("§<${getHexColor()}>§lAttacking"))
+            if (cachedEvent.attackingFactionId != null) {
+                def faction = Factions.getFaction(cachedEvent.attackingFactionId, false)
+                if (faction != null) {
+                    def relation = Factions.getRelationType(member, faction)
+
+                    list.add("§f${relation.color + faction.getName()}")
+                }
+            } else {
+                list.add("§fN/A")
+            }
+
+            list.add("")
+            list.add(ColorUtil.color("§<${getHexColor()}>§l${cachedEvent.controllingFactionId != null ? "Controlling" : "Capturing"}"))
+            if (cachedEvent.controllingFactionId != null) {
+                def faction = Factions.getFaction(cachedEvent.controllingFactionId, false)
+                if (faction != null) {
+                    def relation = Factions.getRelationType(member, faction)
+
+                    list.add("§f${relation.color + faction.getName()}")
+                }
+            } else {
+                if (cachedEvent.capturingFactionId != null) {
+                    def faction = Factions.getFaction(cachedEvent.capturingFactionId, false)
+                    if (faction != null) {
+                        def relation = Factions.getRelationType(member, faction)
+
+                        list.add("§f${relation.color + faction.getName()}")
+                    }
+                } else {
+                    list.add("§fN/A")
+                }
+            }
+
+            list.add("")
+            list.add(ColorUtil.color("§<${getHexColor()}>§lCap %"))
+            list.add("§f${format.format(cachedEvent.cappedPercent)}%")
+
+            list.add("")
+            list.add(ColorUtil.color("§<${getHexColor()}>§lStatus"))
+            list.add("§f${cachedEvent.captureState.displayName}")
+
+            list.add("")
+            list.add(ColorUtil.color("§<${getHexColor()}>§lAccount"))
+            list.add(player.name)
+
+            return list
+        }.title {
+            def now = LocalDate.ofInstant(Instant.now(), TimeZone.getTimeZone(ZoneId.of("America/New_York")).toZoneId())
+            return ColorUtil.color("§<${getHexColor()}>${getDisplayName()} §7| §<${getHexColor()}>${dtf.format(now)}")
+        }.priority {
+            return 3
+        }.shouldDisplayTo { player ->
+            return getGlobalRegion().world && getGlobalRegion().world == player.getWorld().name && getGlobalRegion().contains(player.getLocation())
+        }.build()
+
+        return board
     }
 
     boolean isEnabled() { return config.getBooleanEntry("enabled").getValue() }
