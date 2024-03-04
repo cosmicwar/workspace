@@ -30,6 +30,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.ThreadLocalRandom
+import java.util.concurrent.TimeUnit
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class KOTH {
@@ -84,6 +85,13 @@ class KOTH {
         currentTask = scheduleTask()
     }
 
+    def disableEvent() {
+        currentTask.stop()
+        config.getBooleanEntry("enabled").setValue(false)
+        KOTHs.config.queueSave()
+        Schedulers.sync().runLater({ SidebarHandler.unregisterSidebar("koth_${internalName}") }, 15, TimeUnit.SECONDS)
+    }
+
     Task scheduleTask() {
         def random = ThreadLocalRandom.current()
         return Schedulers.async().runRepeating({
@@ -104,7 +112,7 @@ class KOTH {
                             if (players.contains(Bukkit.getPlayer(cachedEvent.cappingPlayerId))) {
                                 cachedEvent.timeRemaining = cachedEvent.timeRemaining - 1
                                 if (cachedEvent.timeRemaining == 0) {
-                                    currentTask.stop()
+                                    disableEvent()
                                     BroadcastUtils.broadcast("Koth concluded")
                                 }
                             } else {
