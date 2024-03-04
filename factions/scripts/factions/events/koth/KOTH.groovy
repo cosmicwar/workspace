@@ -39,7 +39,7 @@ class KOTH {
     Task currentTask = null
     RegularConfig config
 
-    KOTH(Integer duration, String internalName, String displayName, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
+    KOTH(Integer duration, String internalName, String displayName, String inventoryTitle, String hexColor, Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         this.internalName = internalName
         this.cachedEvent = DataManager.getData(internalName, CachedKoth.class, true)
         cachedEvent.timeRemaining = duration
