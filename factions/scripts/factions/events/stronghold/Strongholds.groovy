@@ -42,7 +42,7 @@ class Strongholds {
 
         DataManager.register("strongholds", CachedStronghold.class)
 
-        createStronghold("arctic", "𝙰𝚛𝚌𝚝𝚒𝚌 𝚂𝚝𝚛𝚘𝚗𝚐𝚑𝚘𝚕𝚍", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
+        createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
         createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
 
         commands()

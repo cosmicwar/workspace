@@ -40,22 +40,24 @@ class CaptureableEvents {
 
 //        createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //        createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
-
+        createEvent("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
         commands()
     }
 
     static def commands() {
-        FCBuilder command = new FCBuilder("captureableevents").defaultAction {
+        FCBuilder command = new FCBuilder("outpost").defaultAction {
 //            openGui(it)
         }
 
-        command.create("wipeeventsconfig").requirePermission("starlight.admin").register {ctx ->
+        command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->
             DataManager.wipe(CachedEvent.class)
 
             settingsCategory.configs.clear()
             config.queueSave()
 
             ctx.reply("§aEvents have been wiped. Creating default events...")
+
+            createEvent("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
 
 //            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
@@ -71,64 +73,34 @@ class CaptureableEvents {
 
 //            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
-
+            createEvent("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
             ctx.reply("§aDefault captureable events have been created.")
         }
 
         command.build()
     }
 
-//    static def openGui(Player player) {
-//        MenuBuilder menu
-//
-//        menu = new MenuBuilder(9, "§aStrongholds")
-//
-//        if (strongholds.size() == 1) {
-//            def stronghold = strongholds.first()
-//            menu.set(4, FastItemUtils.createItem(stronghold.getIcon(), stronghold.getInventoryTitle(), stronghold.getInventoryDescription(player)), { p, t, s ->
-//                if (p.isOp() && stronghold.getLocation().world != null) {
-//                    p.teleportAsync(stronghold.getLocation().getLocation(null))
-//                }
-//            })
-//        } else if (strongholds.size() == 2) {
-//            def stronghold = strongholds.first()
-//            def second = strongholds.last()
-//
-//            menu.set(3, FastItemUtils.createItem(stronghold.getIcon(), stronghold.getInventoryTitle(), stronghold.getInventoryDescription(player)), {p, t, s ->
-//                if (p.isOp() && stronghold.getLocation().world != null) {
-//                    p.teleportAsync(stronghold.getLocation().getLocation(null))
-//                }
-//            })
-//
-//            menu.set(5, FastItemUtils.createItem(second.getIcon(),  second.getInventoryTitle(), second.getInventoryDescription(player)), {p, t, s ->
-//                if (p.isOp() && second.getLocation().world != null) {
-//                    p.teleportAsync(second.getLocation().getLocation(null))
-//                }
-//            })
-//        } else {
-//            strongholds.each { stronghold ->
-//                menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(stronghold.getIcon(), stronghold.getInventoryTitle(), stronghold.getInventoryDescription(player)), { p, t, s ->
-//
-//                })
-//            }
-//        }
-//
-//        menu.openSync(player)
-//    }
-//
-//    static def createStronghold(String internalName, String displayName, String inventoryTitle, String hexColor, Material icon = Material.STONE, SR globalRegion = new SR(), SR capRegion = new SR(), List<SR> placeRegions = []) {
-//        if (strongholds.any { it.getInternalName() == internalName }) return
-//
-//        def stronghold = new Stronghold(internalName, displayName, inventoryTitle, hexColor, icon, globalRegion, capRegion, placeRegions)
-//        strongholds.add(stronghold)
-//
-//        return stronghold
-//    }
+    static def openGui(Player player) {
+        MenuBuilder menu
 
-    static def createEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), List<SR> placeRegions = [], Position location = new Position()) {
+        menu = new MenuBuilder(9, "§aOutposts")
+
+        if (events.size() == 1) {
+            def event = events.first()
+            menu.set(4, FastItemUtils.createItem(event.getIcon(), event.getInventoryTitle(), event.getInventoryDescription(player)), { p, t, s ->
+                if (p.isOp() && event.getLocation().world != null) {
+                    p.teleportAsync(event.getLocation().getLocation(null))
+                }
+            })
+
+            menu.openSync(player)
+        }
+    }
+
+    static def createEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         if (events.any { it.getInternalName() == internalName }) return
 
-        def event = new CaptureableEvent(internalName, displayName, eventType, inventoryTitle, hexColor, icon, globalRegion, capRegion, placeRegions)
+        def event = new CaptureableEvent(internalName, displayName, eventType, inventoryTitle, hexColor, icon, globalRegion, capRegion, location)
         events.add(event)
 
         return event

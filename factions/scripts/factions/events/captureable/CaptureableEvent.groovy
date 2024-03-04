@@ -4,6 +4,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.starcade.starlight.enviorment.GroovyScript
@@ -46,7 +47,7 @@ class CaptureableEvent {
     RegularConfig config
     CaptureType captureType
 
-    CaptureableEvent(CaptureType captureType, String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
+    CaptureableEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         this.internalName = internalName
         this.cachedEvent = DataManager.getData(internalName, CachedEvent.class, true)
         this.captureType = captureType
@@ -450,6 +451,75 @@ class CaptureableEvent {
         }.build()
 
         return board
+    }
+
+    List<String> getInventoryDescription(Player player) {
+        def member = Factions.getMember(player.getUniqueId())
+
+        List<String> description = []
+
+        description.add("§7This is an outpost.")
+        description.add("§7You can capture it.")
+
+        description.add("")
+        description.add(ColorUtil.color("§<${getHexColor()}>Find the outpost in Darkzone§7:"))
+        if (getLocation().world && getLocation().x && getLocation().y && getLocation().z) {
+            if (player.world.name == getLocation().world) {
+                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z [§o${distanceFormat.format(getLocation().getLocation(player.world).distance(player.getLocation()))}§<${getHexColor()}>m]"))
+            } else {
+                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z"))
+            }
+        } else {
+            description.add("§fN/A")
+        }
+
+        description.add("")
+        description.add(ColorUtil.color("§<${getHexColor()}>Current Info§7:"))
+        switch (cachedEvent.captureState) {
+            case scripts.factions.events.stronghold.CaptureState.NEUTRAL:
+                description.add(" §f${cachedEvent.captureState.displayName}")
+                break
+            case scripts.factions.events.stronghold.CaptureState.CAPTURING:
+                description.add(" §f${cachedEvent.captureState.displayName} §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
+                break
+            case scripts.factions.events.stronghold.CaptureState.ATTACKING:
+                description.add(" §f${cachedEvent.captureState.displayName} §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
+                break
+            case scripts.factions.events.stronghold.CaptureState.CONTROLLED:
+                if (cachedEvent.controllingFactionId != null) {
+                    def faction = Factions.getFaction(cachedEvent.controllingFactionId, false)
+                    if (faction != null) {
+                        def relation = Factions.getRelationType(member, faction)
+
+                        description.add(" §f${cachedEvent.captureState.displayName} §7(${relation.color + faction.getName()}§7) §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
+                    } else {
+                        description.add(" §f${cachedEvent.captureState.displayName}")
+                    }
+                } else {
+                    description.add(" §f${cachedEvent.captureState.displayName}")
+                }
+
+                break
+            case scripts.factions.events.stronghold.CaptureState.CONTESTED:
+                description.add(" §f${cachedEvent.captureState.displayName} §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
+                break
+        }
+
+
+        description.add("")
+        description.add(ColorUtil.color("§<${getHexColor()}>Rewards & Bonuses§7:"))
+        description.add(" §f- §7Capture this outpost to gain access to the rewards and bonuses it provides.")
+//        description.add(" §f- §7Rewards and bonuses are unique to each outpost.")
+
+        description.add("")
+        description.add("§7Control the §Outpost§7 to gain access to")
+        description.add("§7these unique rewards for §nyou§7 and your §nfaction§7.")
+
+        return description
+    }
+
+    String getInventoryTitle() {
+        return ColorUtil.color("§<${getHexColor()}>${getTitle()}")
     }
 
     boolean isEnabled() { return config.getBooleanEntry("enabled").getValue() }

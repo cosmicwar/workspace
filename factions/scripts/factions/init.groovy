@@ -123,6 +123,7 @@ Starlight.watch(
         "~/events/darkzone/Darkzone.groovy",
         "~/events/koth/KOTH.groovy",
         "~/events/stronghold/Strongholds.groovy",
+        "~/events/captureable/CaptureableEvents.groovy",
         "~/events/envoy/Envoys.groovy",
         "~/events/arcade/Arcade.groovy",
 
