@@ -13,14 +13,12 @@ import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
-import scripts.factions.features.spawners.CSpawner
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder
 import scripts.shared.utils.DataUtils
 
 import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.TimeUnit
 
 class Homes {
 
@@ -109,7 +107,7 @@ class Homes {
                 playerHomes.put(home.playerId, list)
             }
             home.queueSave()
-            player.sendMessage("§eHome '${home.displayName}' created.")
+            player.sendMessage("§7Home '§e${home.displayName}§7' created.")
         }.register("sethome")
 
         Commands.create().assertUsage("[homeName]").handler { ctx ->
@@ -126,7 +124,7 @@ class Homes {
             }
             DataManager.getByClass(Home).delete(home.id)
             getHomes(player).remove(getHome(player, home.displayName))
-            player.sendMessage("§eHome '${home.displayName}' deleted.")
+            player.sendMessage("§7Home '§e${home.displayName}§7' deleted.")
             home.queueSave()
         }
     }
