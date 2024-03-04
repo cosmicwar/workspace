@@ -29,6 +29,7 @@ class RankCmd {
             }
         }
 
+        rank.build()
     }
 
     private static NamespacedKey rankKey = new NamespacedKey(Starlight.plugin, "rankEditKey")
