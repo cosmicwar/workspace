@@ -51,7 +51,7 @@ class KOTHs {
 
             ctx.reply("§akoths have been wiped. Creating default koths...")
 
-            createKoth("standard_koth", "KOTH", "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
+            createKoth("standard_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
 
 //            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)

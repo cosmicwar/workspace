@@ -3,6 +3,7 @@ package scripts.factions.features.wildpvp
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.block.data.BlockData
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
@@ -11,10 +12,13 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.PlayerInventory
 import org.bukkit.inventory.meta.ItemMeta
+import org.bukkit.persistence.PersistentDataType
+import org.starcade.starlight.Starlight
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.event.filter.EventFilters
+import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.claim.Board
 import scripts.factions.core.faction.claim.Claim
@@ -26,8 +30,10 @@ import scripts.factions.features.wildpvp.utils.MatchState
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.FastItemUtils
+import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder
 import org.starcade.starlight.helper.scheduler.Task
+import scripts.shared.utils.DataUtils
 
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
@@ -54,7 +60,7 @@ class WildPvpManager {
 
     static void registerCommands() {
         SubCommandBuilder command = new SubCommandBuilder("pvp", "wildpvp").defaultAction {player ->
-            openPvpMenu(player)
+            pvpMenu(player)
         }.create("create").register { cmd ->
             createWildPvp(cmd.sender())
         }.create("cancel").register {cmd ->
@@ -62,6 +68,62 @@ class WildPvpManager {
         }.build()
     }
 
+    private static NamespacedKey wildPvpKey = new NamespacedKey(Starlight.plugin, "wildpvp")\
+
+    static def pvpMenu(Player player, int page = 1) {
+        MenuBuilder menu
+
+        menu = MenuUtils.createPagedMenu("§3Wild PvP", ActivePvps.keySet().toList(), { UUID playerId, int index ->
+            Player wildPlayer = Bukkit.getPlayer(playerId)
+            Member MWildPlayer = Factions.getMember(playerId)
+            Faction faction = Factions.getFaction(MWildPlayer.factionId)
+
+            String facName
+            if (faction == null)
+            {
+                facName = "Wilderness"
+            }
+            else
+            {
+                def relation = Factions.getRelationType(Factions.getMember(player.getUniqueId()), MWildPlayer)
+                facName = relation.getColor() + faction.getName()
+            }
+
+            def item = FastItemUtils.createSkull(wildPlayer, facName + " §r" + wildPlayer.getName(), ["§c ▎ §7Left click to join pvp.§7", "§c ▎ §7Right click to view inventory.§7"])
+
+            DataUtils.setTag(item, wildPvpKey, PersistentDataType.STRING, playerId.toString())
+
+        }, page, false, [
+                { Player p, ClickType t, int slot ->
+                    def item = menu.get().getItem(slot)
+                    if (item == null || item.type.isAir() || !DataUtils.hasTag(item, wildPvpKey, PersistentDataType.STRING)) return
+
+                    def playerId = UUID.fromString(DataUtils.getTag(item, wildPvpKey, PersistentDataType.STRING))
+
+                    if (t == ClickType.LEFT) {
+                        joinWildPvp(p, ActivePvps.get(playerId))
+                    } else if (t == ClickType.RIGHT) {
+                        PvpInventories.get(p.getUniqueId()).openSync(p)
+                    }
+
+                },
+                { Player p, ClickType t, int slot ->
+                    pvpMenu(p, page + 1)
+                },
+                { Player p, ClickType t, int slot ->
+                    pvpMenu(p, page - 1)
+                },
+        ])
+
+        ItemStack pvpItem = ActivePvps.containsKey(player.getUniqueId()) ? FastItemUtils.createItem(Material.BARRIER, "§cClick to cancel your pvp.", []) : FastItemUtils.createItem(Material.SUNFLOWER, "§eClick to create a wild pvp.", [])
+        menu.set(menu.get().size - 4, pvpItem, { p, t, s ->
+            p = (Player) p
+            if (ActivePvps.containsKey(p.getUniqueId())) leaveWildPvp(p)
+            else createWildPvp(p)
+        })
+
+        menu.openSync(player)
+    }
 
     static def openPvpMenu(Player player) {
         int numPvps = ActivePvps.size()
