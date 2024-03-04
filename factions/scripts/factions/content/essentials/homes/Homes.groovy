@@ -13,6 +13,7 @@ import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
+import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder
@@ -30,13 +31,14 @@ class Homes {
         }
 
         GroovyScript.addScriptHook(GroovyScript.HookType.RECOMPILE, {
-            DataManager.getByClass(Home.class).saveAll(false)
+            DataManager.getByClass(Home).saveAll(false)
         })
 
         DataManager.register("ess_homes", Home)
 
         Schedulers.sync().runLater({
             getAllHomes().forEach { home ->
+                BroadcastUtils.broadcast(home.displayName)
                 if (home == null) return
 
                 def loc = home.position
