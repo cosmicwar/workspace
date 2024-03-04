@@ -18,7 +18,6 @@ import scripts.shared.utils.DataUtils
 class RankCmd {
 
     RankCmd() {
-
         commands()
     }
 
@@ -71,6 +70,21 @@ class RankCmd {
                 { Player p, ClickType t, int s -> openRankEditor(p, page + 1) },
                 { Player p, ClickType t, int s -> openRankEditor(p, page - 1) },
         ])
+
+        menu.set(menu.get().size - 4, FastItemUtils.createItem(Material.LIME_DYE, "§bAdd Rank", [
+                "§aClick to add a new rank."
+        ]), {p, t, s ->
+            if (!p.isOp()) return
+
+            p.closeInventory()
+            SelectionUtils.selectString(p, "§bEnter new rank name...", { input ->
+                def rank = Profiles.getRank(UUID.randomUUID(), true)
+                rank.internalName = input
+                rank.queueSave()
+
+                openRankEditor(p, rank)
+            })
+        })
 
         menu.openSync(player)
     }
@@ -199,7 +213,7 @@ class RankCmd {
 
         menu.setCloseCallback {
             rank.queueSave()
-            Profiles.broadcastRankUpdate(rank)
+            Profiles.updateRank(rank, true)
         }
 
         menu.openSync(player)
@@ -250,7 +264,7 @@ class RankCmd {
 
         menu.setCloseCallback {
             rank.queueSave()
-            Profiles.broadcastRankUpdate(rank)
+            Profiles.updateRank(rank, true)
         }
 
         menu.openSync(player)

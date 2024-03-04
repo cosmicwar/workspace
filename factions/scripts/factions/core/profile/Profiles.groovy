@@ -106,7 +106,8 @@ class Profiles {
         }
     }
 
-    static def broadcastRankUpdate(Rank rank) {}
+    static def syncRanks() {}
+    static def updateRank(Rank rank, boolean sending = false) {}
 
     static def openProfile(Player player, UUID targetId = null) {
         if (targetId == null) targetId = player.getUniqueId()
