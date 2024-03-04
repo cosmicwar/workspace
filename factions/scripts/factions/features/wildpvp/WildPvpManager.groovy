@@ -93,6 +93,8 @@ class WildPvpManager {
 
             DataUtils.setTag(item, wildPvpKey, PersistentDataType.STRING, playerId.toString())
 
+            return item
+
         }, page, false, [
                 { Player p, ClickType t, int slot ->
                     def item = menu.get().getItem(slot)
@@ -116,7 +118,7 @@ class WildPvpManager {
         ])
 
         ItemStack pvpItem = ActivePvps.containsKey(player.getUniqueId()) ? FastItemUtils.createItem(Material.BARRIER, "§cClick to cancel your pvp.", []) : FastItemUtils.createItem(Material.SUNFLOWER, "§eClick to create a wild pvp.", [])
-        menu.set(menu.get().size - 4, pvpItem, { p, t, s ->
+        menu.set(menu.get().size - 1, pvpItem, { p, t, s ->
             p = (Player) p
             if (ActivePvps.containsKey(p.getUniqueId())) leaveWildPvp(p)
             else createWildPvp(p)
