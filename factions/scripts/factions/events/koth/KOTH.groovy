@@ -86,9 +86,7 @@ class KOTH {
 
     Task scheduleTask() {
         def random = ThreadLocalRandom.current()
-        Task task
-        Schedulers.sync().runLater({ return task }, 40L)
-        task = Schedulers.async().runRepeating({
+        return Schedulers.async().runRepeating({
             if (isEnabled()) {
                 if (getCapRegion().world) {
                     def world = Bukkit.getWorld(getCapRegion().world)
@@ -106,7 +104,7 @@ class KOTH {
                             if (players.contains(Bukkit.getPlayer(cachedEvent.cappingPlayerId))) {
                                 cachedEvent.timeRemaining = cachedEvent.timeRemaining - 1
                                 if (cachedEvent.timeRemaining == 0) {
-                                    task.stop()
+                                    currentTask.stop()
                                     BroadcastUtils.broadcast("Koth concluded")
                                 }
                             } else {
@@ -145,7 +143,7 @@ class KOTH {
 
             list.add("")
             list.add(ColorUtil.color("§<${getHexColor()}>§lTime remaining:"))
-            list.add("§f${cachedEvent.timeRemaining / 60}m ${cachedEvent.timeRemaining % 60}s")
+            list.add("§f${(cachedEvent.timeRemaining / 60) as Integer}m ${cachedEvent.timeRemaining % 60}s")
 
             list.add("")
             list.add(ColorUtil.color("§<${getHexColor()}>§lAccount"))

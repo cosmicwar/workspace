@@ -33,7 +33,7 @@ class KOTHs {
         DataManager.register("koth", CachedKoth.class)
 
         int dur = 15 * 60
-        createKoth(dur, "spawn_koth",  "Spawn KOTH", "Spawn KOTH", "#32a89e", Material.ENCHANTING_TABLE)
+        createKoth(15, "spawn_koth",  "Spawn KOTH", "Spawn KOTH", "#32a89e", Material.ENCHANTING_TABLE)
         commands()
     }
 
