@@ -164,7 +164,7 @@ class KOTH {
         }.priority {
             return 3
         }.shouldDisplayTo { player ->
-            return getGlobalRegion().world && getGlobalRegion().world == player.getWorld().name && getGlobalRegion().contains(player.getLocation())
+            return isEnabled() && getGlobalRegion().world && getGlobalRegion().world == player.getWorld().name && getGlobalRegion().contains(player.getLocation())
         }.build()
 
         return board

@@ -62,6 +62,7 @@ class KOTHs {
 
         command.create("resetcache").requirePermission("starlight.admin").register {ctx ->
             DataManager.wipe(CachedKoth.class)
+            koths.clear()
             config.queueSave()
 
             ctx.reply("§aCaptureable koths cache has been reset. Creating default koths...")
