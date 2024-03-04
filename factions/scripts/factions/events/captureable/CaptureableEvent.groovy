@@ -58,7 +58,6 @@ class CaptureableEvent {
                 new MaterialEntry("icon", icon),
                 new SREntry("global-region", globalRegion),
                 new SREntry("cap-region", capRegion),
-                new SRListEntry("place-regions", placeRegions),
                 new PositionEntry("location", location)
         ])
         CaptureableEvents.config.queueSave()
@@ -539,13 +538,6 @@ class CaptureableEvent {
 
     void setCapRegion(SR capRegion) {
         config.getSREntry("cap-region").setValue(capRegion)
-        CaptureableEvents.config.queueSave()
-    }
-
-    List<SR> getPlaceRegions() { return config.getSRListEntry("place-regions").getValue() }
-
-    void setPlaceRegions(List<SR> placeRegions) {
-        config.getSRListEntry("place-regions").setValue(placeRegions)
         CaptureableEvents.config.queueSave()
     }
 
