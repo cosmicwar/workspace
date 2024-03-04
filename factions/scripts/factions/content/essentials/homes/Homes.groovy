@@ -11,6 +11,10 @@ import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Schedulers
 import scripts.factions.content.dbconfig.utils.SelectionUtils
 import scripts.factions.content.essentials.tp.TeleportHandler
+import scripts.factions.core.faction.Factions
+import scripts.factions.core.faction.data.Faction
+import scripts.factions.core.faction.data.Member
+import scripts.factions.core.faction.data.relation.RelationType
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.shared.legacy.utils.BroadcastUtils
@@ -28,15 +32,12 @@ class Homes {
     Homes() {
         GroovyScript.addUnloadHook {
             DataManager.getByClass(Home).saveAll(false)
-            BroadcastUtils.broadcast("31")
         }
 
         DataManager.register("ess_homes", Home)
-        BroadcastUtils.broadcast("40")
 
         Schedulers.sync().runLater({
             getAllHomes().forEach { home ->
-                BroadcastUtils.broadcast(home.displayName)
                 if (home == null) return
 
                 def loc = home.position
@@ -63,6 +64,7 @@ class Homes {
     void commands() {
         Commands.create().assertUsage("[home]").handler { ctx ->
             if (ctx.sender() instanceof Player) {
+                Player player = ctx.sender() as Player
                 if (ctx.args().size() == 0) {
                     openHomeGui(ctx.sender() as Player)
                     return
@@ -76,6 +78,15 @@ class Homes {
                     if (home.position.world == null) {
                         ctx.reply("§cThis home is not in a valid world.")
                         return
+                    }
+
+                    Faction facAt = Factions.getFactionAt(home.position.getLocation(null))
+
+                    if (facAt.getRelation(Factions.getMember(player.getUniqueId()).factionId).type.isAtMost(RelationType.TRUCE) && facAt.id != Factions.wildernessId && facAt.id != Factions.warZoneId) {
+                        player.sendMessage("§cThis home is no longer in friendly claims - removing home.")
+                        DataManager.getByClass(Home).delete(home.id)
+                        getHomes(player).remove(getHome(player, home.displayName))
+                        home.queueSave()
                     }
 
                     TeleportHandler.teleportPlayer(ctx.sender() as Player,
@@ -96,6 +107,13 @@ class Homes {
                 return
             }
             String name = ctx.arg(0).parseOrFail(String)
+
+            Faction facAt = Factions.getFactionAt(player.location)
+
+            if (facAt.getRelation(Factions.getMember(player.getUniqueId()).factionId).type.isAtMost(RelationType.TRUCE) && facAt.id != Factions.wildernessId && facAt.id != Factions.warZoneId) {
+                player.sendMessage("§cYou may not set a home in ${facAt.name}'s claims.")
+                return
+            }
 
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
             home.displayName = name
@@ -131,7 +149,7 @@ class Homes {
             getHomes(player).remove(getHome(player, home.displayName))
             player.sendMessage("§7Home '§e${home.displayName}§7' deleted.")
             home.queueSave()
-        }
+        }.register("delhome", "deletehome")
     }
 
     Home getHome(Player player, String name) {
