@@ -87,9 +87,12 @@ class KOTH {
 
     def disableEvent() {
         currentTask.stop()
-        config.getBooleanEntry("enabled").setValue(false)
-        KOTHs.config.queueSave()
-        Schedulers.sync().runLater({ SidebarHandler.unregisterSidebar("koth_${internalName}") }, 15, TimeUnit.SECONDS)
+        currentTask = null
+        Schedulers.sync().runLater({
+            config.getBooleanEntry("enabled").setValue(false)
+            KOTHs.config.queueSave()
+            SidebarHandler.unregisterSidebar("koth_${internalName}")
+        }, 15, TimeUnit.SECONDS)
     }
 
     Task scheduleTask() {
