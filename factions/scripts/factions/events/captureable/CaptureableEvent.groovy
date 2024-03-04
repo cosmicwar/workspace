@@ -459,15 +459,15 @@ class CaptureableEvent {
 
         description.add("")
         description.add(ColorUtil.color("§<${getHexColor()}>Find the outpost in Darkzone§7:"))
-        if (getLocation().world && getLocation().x && getLocation().y && getLocation().z) {
-            if (player.world.name == getLocation().world) {
-                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z [§o${distanceFormat.format(getLocation().getLocation(player.world).distance(player.getLocation()))}§<${getHexColor()}>m]"))
-            } else {
-                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z"))
-            }
-        } else {
-            description.add("§fN/A")
-        }
+//        if (getLocation().world && getLocation().x && getLocation().y && getLocation().z) {
+//            if (player.world.name == getLocation().world) {
+//                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z [§o${distanceFormat.format(getLocation().getLocation(player.world).distance(player.getLocation()))}§<${getHexColor()}>m]"))
+//            } else {
+//                description.add(ColorUtil.color(" §f${getLocation().x}§<${getHexColor()}>x §f${getLocation().y}§<${getHexColor()}>y §f${getLocation().z}§<${getHexColor()}>z"))
+//            }
+//        } else {
+//            description.add("§fN/A")
+//        }
 
         description.add("")
         description.add(ColorUtil.color("§<${getHexColor()}>Current Info§7:"))
