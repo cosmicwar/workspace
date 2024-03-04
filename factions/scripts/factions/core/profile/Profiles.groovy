@@ -113,7 +113,7 @@ class Profiles {
 
         def profile = UUIDDataManager.getData(targetId, Profile)
 
-        def templeData = profile.templeData
+        def templeData = profile.getActiveTempleData()
 
         MenuBuilder menu = new MenuBuilder(54, "§aprofile")
 

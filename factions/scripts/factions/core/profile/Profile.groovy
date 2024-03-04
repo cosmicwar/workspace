@@ -37,8 +37,8 @@ class Profile extends UUIDDataObject {
     }
 
     @BsonIgnore
-    TempleProfileData getTempleData() {
-        def data = templeData.find { it.templeId.equalsIgnoreCase(Temple.templeId) }
+    TempleProfileData getActiveTempleData() {
+        def data = templeData.find { it.templeId.equalsIgnoreCase(Temple.templeId.replaceAll("\\d", "").replace("_local", "")) }
         if (data == null) {
             data = new TempleProfileData(Temple.templeId.replaceAll("\\d", "").replace("_local", ""))
             templeData.add(data)
