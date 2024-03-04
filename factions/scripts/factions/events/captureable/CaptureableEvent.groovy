@@ -439,7 +439,7 @@ class CaptureableEvent {
             return list
         }.title {
             def now = LocalDate.ofInstant(Instant.now(), TimeZone.getTimeZone(ZoneId.of("America/New_York")).toZoneId())
-            return ColorUtil.color("§<${getHexColor()}>${getDisplayName()} §7| §<${getHexColor()}>${dtf.format(now)}")
+            return ColorUtil.color("§l§<${getHexColor()}>${getDisplayName()} §r§7| §<${getHexColor()}>${dtf.format(now)}")
         }.priority {
             return 3
         }.shouldDisplayTo { player ->
@@ -508,7 +508,7 @@ class CaptureableEvent {
 //        description.add(" §f- §7Rewards and bonuses are unique to each outpost.")
 
         description.add("")
-        description.add("§7Control the §Outpost§7 to gain access to")
+        description.add("§7Control the §nOutpost§7 to gain access to")
         description.add("§7these unique rewards for §nyou§7 and your §nfaction§7.")
 
         return description
