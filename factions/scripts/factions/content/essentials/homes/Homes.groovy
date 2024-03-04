@@ -28,13 +28,16 @@ class Homes {
     Homes() {
         GroovyScript.addUnloadHook {
             DataManager.getByClass(Home).saveAll(false)
+            BroadcastUtils.broadcast("31")
         }
 
         GroovyScript.addScriptHook(GroovyScript.HookType.RECOMPILE, {
             DataManager.getByClass(Home).saveAll(false)
+            BroadcastUtils.broadcast("36")
         })
 
         DataManager.register("ess_homes", Home)
+        BroadcastUtils.broadcast("40")
 
         Schedulers.sync().runLater({
             getAllHomes().forEach { home ->
