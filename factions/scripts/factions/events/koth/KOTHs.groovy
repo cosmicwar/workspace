@@ -38,8 +38,12 @@ class KOTHs {
     }
 
     static def commands() {
-        FCBuilder command = new FCBuilder("outpost").defaultAction {
+        FCBuilder command = new FCBuilder("koth").defaultAction {
             openGui(it)
+        }
+
+        command.create("start").requirePermission("starlight.admin").register {ctx ->
+            koths[0].enableEvent()
         }
 
         command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->

@@ -21,6 +21,7 @@ import scripts.factions.core.faction.Factions
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
+import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.utils.ColorUtil
 
 import java.text.DecimalFormat
@@ -85,8 +86,9 @@ class KOTH {
 
     Task scheduleTask() {
         def random = ThreadLocalRandom.current()
-
-        return Schedulers.async().runRepeating({
+        Task task
+        Schedulers.sync().runLater({ return task }, 40L)
+        task = Schedulers.async().runRepeating({
             if (isEnabled()) {
                 if (getCapRegion().world) {
                     def world = Bukkit.getWorld(getCapRegion().world)
@@ -103,6 +105,10 @@ class KOTH {
                         } else {
                             if (players.contains(Bukkit.getPlayer(cachedEvent.cappingPlayerId))) {
                                 cachedEvent.timeRemaining = cachedEvent.timeRemaining - 1
+                                if (cachedEvent.timeRemaining == 0) {
+                                    task.stop()
+                                    BroadcastUtils.broadcast("Koth concluded")
+                                }
                             } else {
                                 cachedEvent.cappingPlayerId = null
                                 cachedEvent.attackingFactionId = null
