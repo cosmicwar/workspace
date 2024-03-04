@@ -439,7 +439,7 @@ class CaptureableEvent {
             return list
         }.title {
             def now = LocalDate.ofInstant(Instant.now(), TimeZone.getTimeZone(ZoneId.of("America/New_York")).toZoneId())
-            return ColorUtil.color("§l§<${getHexColor()}>${getDisplayName()} §r§7| §<${getHexColor()}>${dtf.format(now)}")
+            return ColorUtil.color("§<${getHexColor()}>§l${getDisplayName()} §r§7| §<${getHexColor()}>${dtf.format(now)}")
         }.priority {
             return 3
         }.shouldDisplayTo { player ->
