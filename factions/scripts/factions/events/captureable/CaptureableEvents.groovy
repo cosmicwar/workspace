@@ -46,7 +46,7 @@ class CaptureableEvents {
 
     static def commands() {
         FCBuilder command = new FCBuilder("outpost").defaultAction {
-//            openGui(it)
+            openGui(it)
         }
 
         command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->

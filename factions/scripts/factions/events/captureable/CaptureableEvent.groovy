@@ -27,7 +27,6 @@ import scripts.factions.core.faction.data.Faction
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
-import scripts.factions.events.stronghold.Strongholds
 import scripts.shared.utils.BukkitUtils
 import scripts.shared.utils.ColorUtil
 
@@ -45,12 +44,10 @@ class CaptureableEvent {
     CachedEvent cachedEvent
     Task currentTask = null
     RegularConfig config
-    CaptureType captureType
 
     CaptureableEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         this.internalName = internalName
         this.cachedEvent = DataManager.getData(internalName, CachedEvent.class, true)
-        this.captureType = captureType
 
         config = CaptureableEvents.settingsCategory.getOrCreateConfig(internalName, internalName, icon)
         config.addDefault([
@@ -476,16 +473,16 @@ class CaptureableEvent {
         description.add("")
         description.add(ColorUtil.color("§<${getHexColor()}>Current Info§7:"))
         switch (cachedEvent.captureState) {
-            case scripts.factions.events.stronghold.CaptureState.NEUTRAL:
+            case CaptureState.NEUTRAL:
                 description.add(" §f${cachedEvent.captureState.displayName}")
                 break
-            case scripts.factions.events.stronghold.CaptureState.CAPTURING:
+            case CaptureState.CAPTURING:
                 description.add(" §f${cachedEvent.captureState.displayName} §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
                 break
-            case scripts.factions.events.stronghold.CaptureState.ATTACKING:
+            case CaptureState.ATTACKING:
                 description.add(" §f${cachedEvent.captureState.displayName} §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
                 break
-            case scripts.factions.events.stronghold.CaptureState.CONTROLLED:
+            case CaptureState.CONTROLLED:
                 if (cachedEvent.controllingFactionId != null) {
                     def faction = Factions.getFaction(cachedEvent.controllingFactionId, false)
                     if (faction != null) {
@@ -500,7 +497,7 @@ class CaptureableEvent {
                 }
 
                 break
-            case scripts.factions.events.stronghold.CaptureState.CONTESTED:
+            case CaptureState.CONTESTED:
                 description.add(" §f${cachedEvent.captureState.displayName} §7[§f${format.format(cachedEvent.cappedPercent)}%§7]")
                 break
         }
