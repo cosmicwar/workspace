@@ -1,4 +1,4 @@
-package scripts.factions.events.captureable
+package scripts.factions.events.koth
 
 import com.google.common.collect.Sets
 import org.bukkit.Material
@@ -11,31 +11,30 @@ import scripts.factions.core.faction.FCBuilder
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
+import scripts.factions.events.captureable.CachedEvent
+import scripts.factions.events.captureable.CaptureableEvent
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 
-
-class CaptureableEvents {
+class KOTHs {
     static Config config
     static ConfigCategory settingsCategory
 
-    static Set<CaptureableEvent> events = Sets.newConcurrentHashSet()
+    static Set<KOTH> koths = Sets.newConcurrentHashSet()
 
-    CaptureableEvents() {
+    KOTHs() {
         GroovyScript.addUnloadHook {
             config.queueSave()
 
             DataManager.getByClass(CachedEvent.class).saveAll(false)
         }
 
-        config = DBConfigUtil.createConfig("cap_events", "§eCap Events", [], Material.END_PORTAL_FRAME)
+        config = DBConfigUtil.createConfig("koths", "§eKoth", [], Material.END_PORTAL_FRAME)
         settingsCategory = config.getOrCreateCategory("settings", "§eSettings", Material.BOOK)
 
-        DataManager.register("captureableEvents", CachedEvent.class)
+        DataManager.register("koth", CachedEvent.class)
 
-//        createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
-//        createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
-        createEvent("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
+        createKoth("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
         commands()
     }
 
@@ -50,26 +49,26 @@ class CaptureableEvents {
             settingsCategory.configs.clear()
             config.queueSave()
 
-            ctx.reply("§aEvents have been wiped. Creating default events...")
+            ctx.reply("§akoths have been wiped. Creating default koths...")
 
-            createEvent("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
+            createKoth("standard_koth", "KOTH", "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
 
 //            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
 
-            ctx.reply("§aDefault events have been created.")
+            ctx.reply("§aDefault koths have been created.")
         }
 
         command.create("resetcache").requirePermission("starlight.admin").register {ctx ->
             DataManager.wipe(CachedEvent.class)
             config.queueSave()
 
-            ctx.reply("§aCaptureable events cache has been reset. Creating default events...")
+            ctx.reply("§aCaptureable koths cache has been reset. Creating default koths...")
 
 //            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
-            createEvent("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
-            ctx.reply("§aDefault captureable events have been created.")
+            createKoth("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
+            ctx.reply("§aDefault captureable koths have been created.")
         }
 
         command.build()
@@ -80,8 +79,8 @@ class CaptureableEvents {
 
         menu = new MenuBuilder(9, "§aOutposts")
 
-        if (events.size() == 1) {
-            def event = events.first()
+        if (koths.size() == 1) {
+            def event = koths.first()
             menu.set(4, FastItemUtils.createItem(event.getIcon(), event.getInventoryTitle(), event.getInventoryDescription(player)), { p, t, s ->
                 if (p.isOp() && event.getLocation().world != null) {
                     p.teleportAsync(event.getLocation().getLocation(null))
@@ -92,12 +91,12 @@ class CaptureableEvents {
         }
     }
 
-    static def createEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
-        if (events.any { it.getInternalName() == internalName }) return
+    static def createKoth(String internalName, String displayName, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
+        if (koths.any { it.getInternalName() == internalName }) return
 
-        def event = new CaptureableEvent(internalName, displayName, eventType, inventoryTitle, hexColor, icon, globalRegion, capRegion, location)
-        events.add(event)
+        def koth = new KOTH(internalName, displayName, inventoryTitle, hexColor, icon, globalRegion, capRegion, location)
+        koths.add(koth)
 
-        return event
+        return koth
     }
 }

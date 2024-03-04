@@ -14,7 +14,7 @@ Map<UUID, Long> blessCooldowns = Persistent.of("bless_cooldown", new HashMap<UUI
 
 Closure removeMatchingEffect = Exports.ptr("potionEffects:removeMatchingEffect") as Closure
 
-Commands.create().assertPermission("starcade.bless").assertPlayer().handler { c ->
+Commands.create()/*.assertPermission("starcade.bless")*/.assertPlayer().handler { c ->
     Long cooldown = blessCooldowns.get(c.sender().getUniqueId())
     if (cooldown != null && cooldown > System.currentTimeMillis()) {
         c.sender().sendMessage("§c§l(!) §cYou must wait " + TimeUtils.getTimeAmount(cooldown) + " before using /bless again!")
