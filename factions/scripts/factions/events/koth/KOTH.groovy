@@ -49,7 +49,7 @@ class KOTH {
         cachedEvent.timeRemaining = duration
         cachedEvent.duration = duration
 
-        config = CaptureableEvents.settingsCategory.getOrCreateConfig(internalName, internalName, icon)
+        config = KOTHs.settingsCategory.getOrCreateConfig(internalName, internalName, icon)
         config.addDefault([
                 new BooleanEntry("enabled", false),
                 new StringEntry("display-name", displayName),
