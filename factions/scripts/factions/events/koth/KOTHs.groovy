@@ -32,7 +32,8 @@ class KOTHs {
 
         DataManager.register("koth", CachedKoth.class)
 
-        createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#32a89e", Material.ENCHANTING_TABLE)
+        int dur = 15 * 60
+        createKoth(dur, "spawn_koth",  "Spawn KOTH", "Spawn KOTH", "#32a89e", Material.ENCHANTING_TABLE)
         commands()
     }
 
@@ -85,7 +86,7 @@ class KOTHs {
         }
     }
 
-    static def createKoth(Integer duration, String internalName, String displayName, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
+    static def createKoth(Integer duration, String internalName, String displayName, String inventoryTitle, String hexColor, Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         if (koths.any { it.getInternalName() == internalName }) return
 
         def koth = new KOTH(duration, internalName, displayName, inventoryTitle, hexColor, icon, globalRegion, capRegion, location)
