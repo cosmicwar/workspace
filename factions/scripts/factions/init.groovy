@@ -121,7 +121,7 @@ Starlight.watch(
         // Events \\
         "~/events/meteors/Meteors.groovy",
         "~/events/darkzone/Darkzone.groovy",
-        "~/events/koth/KOTH.groovy",
+        "~/events/koth/KOTHs.groovy",
         "~/events/stronghold/Strongholds.groovy",
         "~/events/captureable/CaptureableEvents.groovy",
         "~/events/envoy/Envoys.groovy",

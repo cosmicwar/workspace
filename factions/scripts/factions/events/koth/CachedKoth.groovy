@@ -6,10 +6,12 @@ import scripts.factions.events.captureable.CaptureState
 
 class CachedKoth extends DataObject {
     UUID cappingPlayerId = null
+    UUID attackingFactionId = null
 
     CaptureState captureState = CaptureState.NEUTRAL
 
     Integer timeRemaining = 0
+    Integer duration = 0
 
     CachedKoth() {}
 

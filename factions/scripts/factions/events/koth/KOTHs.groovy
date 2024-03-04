@@ -12,7 +12,6 @@ import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
 import scripts.factions.events.captureable.CachedEvent
-import scripts.factions.events.captureable.CaptureableEvent
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 
@@ -34,7 +33,7 @@ class KOTHs {
 
         DataManager.register("koth", CachedEvent.class)
 
-        createKoth("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
+        createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
         commands()
     }
 
@@ -51,10 +50,8 @@ class KOTHs {
 
             ctx.reply("§akoths have been wiped. Creating default koths...")
 
-            createKoth("standard_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
+            createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
 
-//            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
-//            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
 
             ctx.reply("§aDefault koths have been created.")
         }
@@ -65,9 +62,7 @@ class KOTHs {
 
             ctx.reply("§aCaptureable koths cache has been reset. Creating default koths...")
 
-//            createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
-//            createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
-            createKoth("nebula_outpost", "Nebula Outpost", "outpost", "Nebula Outpost", "#474fbf", Material.ENDER_EYE)
+            createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
             ctx.reply("§aDefault captureable koths have been created.")
         }
 
@@ -91,10 +86,10 @@ class KOTHs {
         }
     }
 
-    static def createKoth(String internalName, String displayName, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
+    static def createKoth(Integer duration, String internalName, String displayName, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         if (koths.any { it.getInternalName() == internalName }) return
 
-        def koth = new KOTH(internalName, displayName, inventoryTitle, hexColor, icon, globalRegion, capRegion, location)
+        def koth = new KOTH(duration, internalName, displayName, inventoryTitle, hexColor, icon, globalRegion, capRegion, location)
         koths.add(koth)
 
         return koth
