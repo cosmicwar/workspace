@@ -11,7 +11,6 @@ import scripts.factions.core.faction.FCBuilder
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
-import scripts.factions.events.captureable.CachedEvent
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 
@@ -25,15 +24,15 @@ class KOTHs {
         GroovyScript.addUnloadHook {
             config.queueSave()
 
-            DataManager.getByClass(CachedEvent.class).saveAll(false)
+            DataManager.getByClass(CachedKoth.class).saveAll(false)
         }
 
         config = DBConfigUtil.createConfig("koths", "§eKoth", [], Material.END_PORTAL_FRAME)
         settingsCategory = config.getOrCreateCategory("settings", "§eSettings", Material.BOOK)
 
-        DataManager.register("koth", CachedEvent.class)
+        DataManager.register("koth", CachedKoth.class)
 
-        createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
+        createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#32a89e", Material.ENCHANTING_TABLE)
         commands()
     }
 
@@ -43,7 +42,7 @@ class KOTHs {
         }
 
         command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->
-            DataManager.wipe(CachedEvent.class)
+            DataManager.wipe(CachedKoth.class)
 
             settingsCategory.configs.clear()
             config.queueSave()
@@ -57,7 +56,7 @@ class KOTHs {
         }
 
         command.create("resetcache").requirePermission("starlight.admin").register {ctx ->
-            DataManager.wipe(CachedEvent.class)
+            DataManager.wipe(CachedKoth.class)
             config.queueSave()
 
             ctx.reply("§aCaptureable koths cache has been reset. Creating default koths...")
