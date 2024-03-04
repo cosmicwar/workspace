@@ -31,11 +31,6 @@ class Homes {
             BroadcastUtils.broadcast("31")
         }
 
-        GroovyScript.addScriptHook(GroovyScript.HookType.RECOMPILE, {
-            DataManager.getByClass(Home).saveAll(false)
-            BroadcastUtils.broadcast("36")
-        })
-
         DataManager.register("ess_homes", Home)
         BroadcastUtils.broadcast("40")
 
@@ -105,12 +100,17 @@ class Homes {
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
             home.displayName = name
             home.position = Position.of(player.location)
-            if (playerHomes.containsKey(home.playerId)) playerHomes.get(home.playerId).add(home)
+            if (playerHomes.containsKey(home.playerId)) {
+                playerHomes.get(home.playerId).add(home)
+                DataManager.getData(home.displayName, Home, true)
+            }
             else {
                 def list = new ArrayList<Home>()
                 list.add(home)
                 playerHomes.put(home.playerId, list)
+                DataManager.getData(home.displayName, Home, true)
             }
+
             home.queueSave()
             player.sendMessage("§7Home '§e${home.displayName}§7' created.")
         }.register("sethome")
