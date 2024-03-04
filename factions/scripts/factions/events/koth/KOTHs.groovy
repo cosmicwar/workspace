@@ -54,7 +54,7 @@ class KOTHs {
 
             ctx.reply("§akoths have been wiped. Creating default koths...")
 
-            createKoth(15 * 60, "spawn_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
+            createKoth(15 , "spawn_koth",  "KOTH", "KOTH", "#474fbf", Material.ENDER_EYE)
 
 
             ctx.reply("§aDefault koths have been created.")
