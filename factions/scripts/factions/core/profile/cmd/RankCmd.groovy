@@ -274,20 +274,20 @@ class RankCmd {
         MenuBuilder menu = new MenuBuilder(18, "§6Rank Permission Editor")
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.RED_STAINED_GLASS, "§cDelete Permission", [
-                "§aCurrent: §7${permission.permission}}",
+                "§aCurrent: §7${permission.permission}",
                 "",
                 "§7Click to delete this permission"
         ]), {p, t, s ->
             if (!p.isOp()) return
 
-            rank.templePermissions.remove(permission)
+            rank.permissions.remove(permission)
             rank.queueSave()
 
             openRankEditor(p, rank)
         })
 
         menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.PAPER, "§bPermission", [
-                "§aCurrent: §7${permission.permission}}",
+                "§aCurrent: §7${permission.permission}",
                 "",
                 "§7Click to edit"
         ]), {p, t, s ->
