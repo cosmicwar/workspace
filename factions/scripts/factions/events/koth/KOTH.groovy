@@ -18,14 +18,9 @@ import scripts.factions.content.scoreboard.sidebar.Sidebar
 import scripts.factions.content.scoreboard.sidebar.SidebarBuilder
 import scripts.factions.content.scoreboard.sidebar.SidebarHandler
 import scripts.factions.core.faction.Factions
-import scripts.factions.core.faction.data.Faction
 import scripts.factions.data.DataManager
 import scripts.factions.data.obj.Position
 import scripts.factions.data.obj.SR
-import scripts.factions.events.captureable.CachedEvent
-import scripts.factions.events.captureable.CaptureState
-import scripts.factions.events.captureable.CaptureableEvents
-import scripts.shared.utils.BukkitUtils
 import scripts.shared.utils.ColorUtil
 
 import java.text.DecimalFormat
@@ -60,7 +55,7 @@ class KOTH {
                 new SREntry("cap-region", capRegion),
                 new PositionEntry("location", location)
         ])
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
 
         if (isEnabled()) {
             enableEvent()
@@ -76,7 +71,7 @@ class KOTH {
 
     def enableEvent() {
         config.getBooleanEntry("enabled").setValue(true)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
 
         SidebarHandler.registerSidebar(getScoreboard())
 
@@ -201,49 +196,49 @@ class KOTH {
 
     void setDisplayName(String displayName) {
         config.getStringEntry("display-name").setValue(displayName)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     SR getGlobalRegion() { return config.getSREntry("global-region").getValue() }
 
     void setGlobalRegion(SR globalRegion) {
         config.getSREntry("global-region").setValue(globalRegion)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     SR getCapRegion() { return config.getSREntry("cap-region").getValue() }
 
     void setCapRegion(SR capRegion) {
         config.getSREntry("cap-region").setValue(capRegion)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     Material getIcon() { return config.getMaterialEntry("icon").getValue() }
 
     void setIcon(Material icon) {
         config.getMaterialEntry("icon").setValue(icon)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     Position getLocation() { return config.getPositionEntry("location").getValue() }
 
     void setLocation(Position location) {
         config.getPositionEntry("location").setValue(location)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     String getHexColor() { return config.getStringEntry("hex-color").getValue() }
 
     void setHexColor(String hexColor) {
         config.getStringEntry("hex-color").setValue(hexColor)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     String getTitle() { return config.getStringEntry("inventory-title").getValue() }
 
     void setTitle(String title) {
         config.getStringEntry("inventory-title").setValue(title)
-        CaptureableEvents.config.queueSave()
+        KOTHs.config.queueSave()
     }
 
     static DecimalFormat format = new DecimalFormat("#,###.##")
