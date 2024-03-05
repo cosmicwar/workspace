@@ -107,10 +107,11 @@ class Homes {
             String name = ctx.arg(0).parseOrFail(String)
 
             Faction facAt = Factions.getFactionAt(player.location)
-
-            if (facAt.getRelation(Factions.getMember(player.getUniqueId()).factionId).type.isAtMost(RelationType.TRUCE) && facAt.id != Factions.wildernessId && facAt.id != Factions.warZoneId) {
-                player.sendMessage("§cYou may not set a home in ${facAt.name}'s claims.")
-                return
+            if (facAt != null) {
+                if (facAt.getRelation(Factions.getMember(player.getUniqueId()).factionId).type.isAtMost(RelationType.TRUCE) && facAt.id != Factions.wildernessId && facAt.id != Factions.warZoneId) {
+                    player.sendMessage("§cYou may not set a home in ${facAt.name}'s claims.")
+                    return
+                }
             }
 
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
