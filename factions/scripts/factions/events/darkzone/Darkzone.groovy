@@ -95,7 +95,7 @@ class Darkzone {
                 new PositionEntry("spawn", new Position("darkzone", 111, 101, 124, -180, 0)),
         ])
 
-        lootTableCategory = LootTableHandler.getLootTableCategory("darkzone")
+        lootTableCategory = LootTableHandler.getTableCategoryByName("darkzone")
         lootTableCategory.icon = Material.END_STONE
 
         DarkzoneTier.values().each {
