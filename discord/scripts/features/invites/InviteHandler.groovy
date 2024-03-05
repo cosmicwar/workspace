@@ -156,6 +156,7 @@ class InviteHandler extends ListenerAdapter {
 
             if (inviteUsed == null) {
                 println("ERROR could not find guild")
+                return
             }
             if (inviteUsed.inviter != null) {
                 User inviter = inviteUsed.inviter
