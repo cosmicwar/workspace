@@ -79,12 +79,13 @@ class Homes {
                     }
 
                     Faction facAt = Factions.getFactionAt(home.position.getLocation(null))
-
-                    if (facAt.getRelation(Factions.getMember(player.getUniqueId()).factionId).type.isAtMost(RelationType.TRUCE) && facAt.id != Factions.wildernessId && facAt.id != Factions.warZoneId) {
-                        player.sendMessage("§cThis home is no longer in friendly claims - removing home.")
-                        DataManager.getByClass(Home).delete(home.id)
-                        getHomes(player).remove(getHome(player, home.displayName))
-                        home.queueSave()
+                    if (facAt != null) {
+                        if (facAt.getRelation(Factions.getMember(player.getUniqueId()).factionId).type.isAtMost(RelationType.TRUCE) && facAt.id != Factions.wildernessId && facAt.id != Factions.warZoneId) {
+                            player.sendMessage("§cThis home is no longer in friendly claims - removing home.")
+                            DataManager.getByClass(Home).delete(home.id)
+                            getHomes(player).remove(getHome(player, home.displayName))
+                            home.queueSave()
+                        }
                     }
 
                     TeleportHandler.teleportPlayer(ctx.sender() as Player,
