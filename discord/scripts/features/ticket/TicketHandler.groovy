@@ -134,9 +134,9 @@ class TicketHandler extends ListenerAdapter {
                 String issue = event.getValue("issue").getAsString() == "" ? "No Issue Provided." : event.getValue("issue").getAsString()
 
                 int ticketId = (int) Math.floor(Math.random() * 90000) + 10000
-                def staffRole = findRoleByName(event.getGuild(), "Staff")
+                def staffRole = findRoleByName(event.getGuild(), "Staff Team")
 
-//                if (!staffRole) return
+                if (!staffRole) return
 
                 TextChannel newTicketChannel
                 if (ticketType.adminOnly) {
@@ -183,6 +183,7 @@ class TicketHandler extends ListenerAdapter {
     static Role findRoleByName(guild, roleName) {
         for (Role role : guild.getRoles()) {
             if (role.getName() == roleName) {
+                println(role.name)
                 return role
             }
         }
