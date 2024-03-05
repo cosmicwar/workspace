@@ -512,10 +512,12 @@ class FClaim {
         try {
             def map = CustomSpawners.spawnerChunkCache.get(Bukkit.getWorld(cl.worldName))
 
-            if (map != null || !map.isEmpty()) {
-                def cache = map.get(CustomSpawners.chunkToHash(cl.x, cl.z))
-                if (cache != null) {
-                    FTopUtils.addFTopEntry(faction.getId(), cache.totalSpawnerValue, FTEntryType.SPAWNER_VALUE)
+            if (map != null) {
+                if (!map.isEmpty()) {
+                    def cache = map.get(CustomSpawners.chunkToHash(cl.x, cl.z))
+                    if (cache != null) {
+                        FTopUtils.addFTopEntry(faction.getId(), cache.totalSpawnerValue, FTEntryType.SPAWNER_VALUE)
+                    }
                 }
             }
         } catch (Exception e) {
