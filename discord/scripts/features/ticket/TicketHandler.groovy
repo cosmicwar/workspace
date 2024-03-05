@@ -134,7 +134,7 @@ class TicketHandler extends ListenerAdapter {
                 String issue = event.getValue("issue").getAsString() == "" ? "No Issue Provided." : event.getValue("issue").getAsString()
 
                 int ticketId = (int) Math.floor(Math.random() * 90000) + 10000
-                def staffRole = findRoleByName(event.getGuild(), "Staff")
+                def staffRole = findRoleByName(event.getGuild(), "Staff Team")
 
                 if (!staffRole) return
 

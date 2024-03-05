@@ -37,7 +37,7 @@ class Warps {
             if (s.equalsIgnoreCase("ocean") || s.equalsIgnoreCase("ocn")) s = "Ocean"
             if (s.equalsIgnoreCase("koth")) s = "KOTH"
             if (s.equalsIgnoreCase("crates")) s = "Crates"
-
+            println(s)
             return Optional.ofNullable(getWarp(s, false))
         }
 

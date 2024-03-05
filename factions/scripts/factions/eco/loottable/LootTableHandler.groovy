@@ -20,6 +20,7 @@ import scripts.factions.eco.loottable.v2.api.Reward
 import scripts.factions.eco.loottable.v2.impl.CommandReward
 import scripts.factions.eco.loottable.v2.impl.ItemReward
 import scripts.factions.eco.loottable.v2.api.RewardCategory
+import scripts.factions.util.PromptUtils
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
@@ -411,23 +412,38 @@ class LootTableHandler {
                 "",
                 "§a * Click create a Category * "
         ]), { p, t, s ->
-            SignUtils.openSign(p, ["", "^ ^ ^", "Enter Name"], { String[] lines, Player p1 ->
-                String name = lines[0]
-
+            PromptUtils.prompt(p, "Enter Loottable Category Name:", { name ->
                 if (name == null || name.isEmpty()) {
-                    Players.msg(p1, "§cInvalid name.")
+                    Players.msg(p, "§cInvalid name.")
                     return
                 }
 
                 if (getTableCategoryByName(name) != null) {
-                    Players.msg(p1, "§cA Category with that name already exists.")
+                    Players.msg(p, "§cA Category with that name already exists.")
                     return
                 }
 
                 def category = getLootTableCategory(UUID.randomUUID())
 
-                openCategory(p1, page, category, selectTableCallback)
+                openCategory(p, page, category, selectTableCallback)
             })
+//            SignUtils.openSign(p, ["", "^ ^ ^", "Enter Name"], { String[] lines, Player p1 ->
+//                String name = lines[0]
+//
+//                if (name == null || name.isEmpty()) {
+//                    Players.msg(p1, "§cInvalid name.")
+//                    return
+//                }
+//
+//                if (getTableCategoryByName(name) != null) {
+//                    Players.msg(p1, "§cA Category with that name already exists.")
+//                    return
+//                }
+//
+//                def category = getLootTableCategory(UUID.randomUUID())
+//
+//                openCategory(p1, page, category, selectTableCallback)
+//            })
         })
 
         menu.openSync(player)
