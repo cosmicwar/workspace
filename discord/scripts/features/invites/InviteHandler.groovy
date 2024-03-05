@@ -70,26 +70,26 @@ class InviteHandler extends ListenerAdapter {
 
     @Override
     void onGuildReady(GuildReadyEvent event) {
-        if (event.getGuild().id != Globals.MAIN_GUILD_ID.toString()) return
+        if (event.getGuild().idLong != Globals.MAIN_GUILD_ID) return
         createLeaderboard(event)
         this.cacheGuildInvites(event.getGuild());
     }
 
     @Override
     void onGuildInviteCreate(GuildInviteCreateEvent event) {
-        if (event.getGuild().id != Globals.MAIN_GUILD_ID.toString()) return
+        if (event.getGuild().idLong != Globals.MAIN_GUILD_ID) return
         this.cacheGuildInvites(event.getGuild());
     }
 
     @Override
     void onGuildInviteDelete(GuildInviteDeleteEvent event) {
-        if (event.getGuild().id != Globals.MAIN_GUILD_ID.toString()) return
+        if (event.getGuild().idLong != Globals.MAIN_GUILD_ID) return
         this.cacheGuildInvites(event.getGuild());
     }
 
     @Override
     void onGuildMemberJoin(GuildMemberJoinEvent event) {
-        if (event.getGuild().id != Globals.MAIN_GUILD_ID.toString()) return
+        if (event.getGuild().idLong != Globals.MAIN_GUILD_ID) return
         final User user = event.getUser()
         if (user.isBot()) return
 
