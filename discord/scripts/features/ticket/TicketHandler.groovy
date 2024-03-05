@@ -183,7 +183,6 @@ class TicketHandler extends ListenerAdapter {
     static Role findRoleByName(guild, roleName) {
         for (Role role : guild.getRoles()) {
             if (role.getName() == roleName) {
-                println(role.name)
                 return role
             }
         }
