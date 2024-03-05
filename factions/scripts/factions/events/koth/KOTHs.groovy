@@ -77,7 +77,7 @@ class KOTHs {
     static def openGui(Player player) {
         MenuBuilder menu
 
-        menu = new MenuBuilder(9, "§aOutposts")
+        menu = new MenuBuilder(9, "§aKOTH")
 
         if (koths.size() == 1) {
             def event = koths.first()

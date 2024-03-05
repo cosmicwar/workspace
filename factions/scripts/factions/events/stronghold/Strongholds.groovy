@@ -9,6 +9,7 @@ import org.bukkit.Material
 import org.bukkit.WorldCreator
 import org.bukkit.entity.Player
 import org.starcade.starlight.enviorment.GroovyScript
+import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.utils.Players
 import scripts.factions.content.dbconfig.Config
 import scripts.factions.content.dbconfig.ConfigCategory
@@ -51,27 +52,6 @@ class Strongholds {
     static def commands() {
         FCBuilder command = new FCBuilder("stronghold", "sh").defaultAction {
             openGui(it)
-        }
-
-        command.create("createhub").register {ctx ->
-            def world  = new WorldCreator("world-hub").generator(new VoidWorldGen17()).createWorld()
-
-            world.setDifficulty(Difficulty.NORMAL)
-
-            world.setGameRule(GameRule.RANDOM_TICK_SPEED, 0)
-            world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
-            world.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
-            world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
-            world.setGameRule(GameRule.MOB_GRIEFING, false)
-            world.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false)
-            world.setGameRule(GameRule.DO_TRADER_SPAWNING, false)
-            world.setGameRule(GameRule.DO_PATROL_SPAWNING, false)
-            world.setGameRule(GameRule.DO_INSOMNIA, false)
-            world.setGameRule(GameRule.DO_WARDEN_SPAWNING, false)
-            world.setGameRule(GameRule.DO_VINES_SPREAD, false)
-            world.setGameRule(GameRule.FALL_DAMAGE, true)
-            world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false)
-            world.setGameRule(GameRule.MAX_ENTITY_CRAMMING, 0)
         }
 
         command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->
