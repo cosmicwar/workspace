@@ -21,6 +21,13 @@ import scripts.shared3.utils.Callback
 @CompileStatic(TypeCheckingMode.SKIP)
 class Profiles {
 
+    static Set<UUID> OWNER_IDS = [
+        UUID.fromString("ea4e71dd-b61b-4a7f-b77c-e09085ed7402"), // cobblecowboy
+        UUID.fromString("6bec70ea-2c0d-4cc5-b8b9-73761509a0aa"), // bubbleboyhero
+        UUID.fromString("fefadadb-0493-4fc9-ae81-158141693ada"), // ukwifi
+        UUID.fromString("79fcff11-65e7-4a7b-9b3c-2d6a07dad9b6") // shmeeted
+    ]
+
     Profiles() {
         GroovyScript.addUnloadHook {
             Starlight.unload("~/cmd/RankCmd.groovy")

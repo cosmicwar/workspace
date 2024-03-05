@@ -224,7 +224,10 @@ class RankCmd {
 
         menu = MenuUtils.createPagedMenu("§6Rank Permissions", rank.permissions.toList(), { RankPermission permission, Integer slot ->
             def item = FastItemUtils.createItem(Material.PAPER, "§b${permission.permission}", [
-                    "§aClick to edit"
+                    "§aPermission: §7${permission.permission}",
+                    "",
+                    "§aLeft-Click to edit permission",
+                    "§cRight-Click to delete permission"
             ])
 
             DataUtils.setTagString(item, rankPermissionKey, permission.permissionId.toString())
@@ -242,7 +245,20 @@ class RankCmd {
                 def permission = rank.permissions.find { it.permissionId == id }
                 if (permission == null) return
 
-                openRankPermission(p, rank, permission)
+                if (t.isRightClick()) {
+                    rank.permissions.remove(permission)
+                    rank.queueSave()
+
+                    openRankPermissions(p, rank, page)
+                    return
+                } else if (t.isLeftClick()) {
+                    SelectionUtils.selectString(p, "§bEnter new permission...", { input ->
+                        permission.permission = input
+                        rank.queueSave()
+
+                        openRankPermissions(p, rank, page)
+                    })
+                }
             },
             { Player p, ClickType t, int s -> openRankPermissions(p, rank, page + 1) },
             { Player p, ClickType t, int s -> openRankPermissions(p, rank, page - 1) },
@@ -258,7 +274,7 @@ class RankCmd {
                 rank.permissions.add(permission)
                 rank.queueSave()
 
-                openRankPermission(p, rank, permission)
+                openRankPermissions(p, rank, page)
             })
         })
 
@@ -266,45 +282,6 @@ class RankCmd {
             rank.queueSave()
             Profiles.updateRank(rank, true)
         }
-
-        menu.openSync(player)
-    }
-
-    static def openRankPermission(Player player, Rank rank, RankPermission permission) {
-        MenuBuilder menu = new MenuBuilder(18, "§6Rank Permission Editor")
-
-        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.RED_STAINED_GLASS, "§cDelete Permission", [
-                "§aCurrent: §7${permission.permission}",
-                "",
-                "§7Click to delete this permission"
-        ]), {p, t, s ->
-            if (!p.isOp()) return
-
-            rank.permissions.remove(permission)
-            rank.queueSave()
-
-            openRankEditor(p, rank)
-        })
-
-        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.PAPER, "§bPermission", [
-                "§aCurrent: §7${permission.permission}",
-                "",
-                "§7Click to edit"
-        ]), {p, t, s ->
-            if (!p.isOp()) return
-
-            p.closeInventory()
-            SelectionUtils.selectString(p, "§bEnter new permission...", { input ->
-                permission.permission = input
-                rank.queueSave()
-
-                openRankPermission(p, rank, permission)
-            })
-        })
-
-        menu.set(menu.get().size - 1, FastItemUtils.createItem(Material.RED_DYE, "§cBack", ["§7Return to rank permissions"]), {p, t, s ->
-            openRankPermissions(p, rank)
-        })
 
         menu.openSync(player)
     }
