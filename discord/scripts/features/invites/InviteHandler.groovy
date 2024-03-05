@@ -117,7 +117,7 @@ class InviteHandler extends ListenerAdapter {
                 if (doc == null) doc = new Document()
 
                 Integer real = doc.getOrDefault("realInvites", 0) as Integer
-                event.replyEmbeds(Collections.singleton(new EmbedBuilder().setTitle("${event.user.name} - ${real} invites.")) as Collection<? extends MessageEmbed>).queue()
+                event.replyEmbeds(new EmbedBuilder().setTitle("${event.user.name} - ${real} invites.").build()).queue()
             }
         }
     }
@@ -258,7 +258,10 @@ class InviteHandler extends ListenerAdapter {
                     messageId = it.getIdLong()
                 }
             } else {
-                messages.each { it.delete().queue() }
+                messages.each {
+                    if (it.isPinned()) return
+                    it.delete().queue()
+                }
                 ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
                 }
