@@ -9,7 +9,6 @@ Starlight.watch(
         "scripts/shared/legacy/executables.groovy",
         "scripts/shared/legacy/nicknames.groovy",
         "scripts/shared/content/systems/stardust.groovy",
-        "scripts/shared/features/actionbar/ActionBars.groovy",
         "~/core/commands/_subcommandbuilder.groovy",
         "~/core/faction/FCommand.groovy",
 
@@ -86,6 +85,7 @@ Starlight.watch(
 
         // Features \\
         "~/features/enchant/potion/PotionEffects.groovy",
+        "scripts/shared/features/actionbar/ActionBars.groovy",
 
         // cOsMiC \\
         "~/features/enchant/utils/EnchantmentCooldowns.groovy",
