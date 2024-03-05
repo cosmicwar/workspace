@@ -136,7 +136,7 @@ class TicketHandler extends ListenerAdapter {
                 int ticketId = (int) Math.floor(Math.random() * 90000) + 10000
                 def staffRole = findRoleByName(event.getGuild(), "Staff")
 
-                if (!staffRole) return
+//                if (!staffRole) return
 
                 TextChannel newTicketChannel
                 if (ticketType.adminOnly) {
