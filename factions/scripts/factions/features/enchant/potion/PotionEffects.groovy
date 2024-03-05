@@ -65,14 +65,14 @@ class PotionEffects {
                     break
                 case EntityPotionEffectEvent.Action.CLEARED:
                 case EntityPotionEffectEvent.Action.REMOVED:
-                    if (it.getAction() == EntityPotionEffectEvent.Action.CLEARED && it.getCause() == EntityPotionEffectEvent.Cause.DEATH) return
+                    if (it.getAction() == EntityPotionEffectEvent.Action.CLEARED && it.getCause() == EntityPotionEffectEvent.Cause.DEATH) break
 
                     PotionEffect effect = it.getOldEffect()
                     PotionEffect bestEquipped = equippedEffects.findAll { it.getType() == effect.getType() }?.max { it.getAmplifier() }
-                    if (bestEquipped == null || effect.getAmplifier() > bestEquipped.getAmplifier()) return
+                    if (bestEquipped == null || effect.getAmplifier() > bestEquipped.getAmplifier()) break
 
-                    if (it.getOldEffect().getDuration() == 0) return
-                    if (it.getNewEffect().getDuration() == 0) return
+                    if (it.getOldEffect() != null && it.getOldEffect().getDuration() == 0) break
+                    if (it.getNewEffect() != null && it.getNewEffect().getDuration() == 0) break
 
                     it.setCancelled(true)
                     break
