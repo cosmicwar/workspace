@@ -70,5 +70,7 @@ class BetaMenu {
                     createBetaMenu(p, page - 1)
                 },
         ])
+
+        menu.openSync(player)
     }
 }
