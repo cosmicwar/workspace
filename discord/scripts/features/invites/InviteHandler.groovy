@@ -276,28 +276,28 @@ class InviteHandler extends ListenerAdapter {
         TextChannel ticketChannel = event.getJDA().getTextChannelById(Globals.INVITE_CHANNEL_ID)
         ticketChannel.getHistoryFromBeginning(1).queue {
             List<Message> messages = it.getRetrievedHistory()
-            if (messages.size() < 3) {
-                for (Message msg : messages) {
-                    try {
-                        msg.editMessageEmbeds(inviteEmbed.build()).queue {
-                            messageId = it.getIdLong()
-                        }
-                    } catch (Exception ignored) {
-                        println("msg not sent by bot edit failed")
-                    }
-                }
-            } else if (messages.size() == 0) {
-                ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
-                    messageId = it.getIdLong()
-                }
-            } else {
+//            if (messages.size() < 3) {
+//                for (Message msg : messages) {
+//                    try {
+//                        msg.editMessageEmbeds(inviteEmbed.build()).queue {
+//                            messageId = it.getIdLong()
+//                        }
+//                    } catch (Exception ignored) {
+//                        println("msg not sent by bot edit failed")
+//                    }
+//                }
+//            } else if (messages.size() == 0) {
+//                ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
+//                    messageId = it.getIdLong()
+//                }
+//            } else {
                 messages.each {
                     if (!it.isPinned()) it.delete().queue()
                 }
                 ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
                 }
-            }
+//            }
         }
     }
 }
