@@ -27,15 +27,15 @@ class BetaMenu {
             items.add(Enchantments.mysteryBook.getStack(Enchantments.createMysteryBook(tier)))
         }
 
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createEnchantmentOrb(100, 6, EnchantmentOrbType.WEAPON)))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createEnchantmentOrb(100, 3, EnchantmentOrbType.ARMOR)))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createWhiteScroll()))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createHolyWhiteScroll()))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createBlackScroll(75)))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createTransmogScroll()))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createItemNametag()))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createSoulPearl()))
-        items.add(Enchantments.mysteryBook.getStack(Enchantments.createRandomSoulGenerator()))
+        items.add(Enchantments.enchantmentOrb.getStack(Enchantments.createEnchantmentOrb(100, 6, EnchantmentOrbType.WEAPON)))
+        items.add(Enchantments.enchantmentOrb.getStack(Enchantments.createEnchantmentOrb(100, 3, EnchantmentOrbType.ARMOR)))
+        items.add(Enchantments.whiteScroll.getStack(Enchantments.createWhiteScroll()))
+        items.add(Enchantments.holyWhiteScroll.getStack(Enchantments.createHolyWhiteScroll()))
+        items.add(Enchantments.blackScroll.getStack(Enchantments.createBlackScroll(75)))
+        items.add(Enchantments.transmogScroll.getStack(Enchantments.createTransmogScroll()))
+        items.add(Enchantments.itemNametag.getStack(Enchantments.createItemNametag()))
+        items.add(Enchantments.soulPearl.getStack(Enchantments.createSoulPearl()))
+        items.add(Enchantments.randomSoulGenerator.getStack(Enchantments.createRandomSoulGenerator()))
 
         commands()
     }
