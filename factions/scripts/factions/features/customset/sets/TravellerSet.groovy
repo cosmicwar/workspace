@@ -104,7 +104,7 @@ class TravellerSet extends CustomSet {
 
             Players.msg(player, "§5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
             Players.msg(player, "")
-            Players.msg(player, "§5§lTRAVELLER ABILITY ACTIVATED")
+            Players.msg(player, "§5§l        TRAVELLER ABILITY ACTIVATED")
             Players.msg(player, "")
             Players.msg(player, "§5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 
@@ -155,7 +155,7 @@ class TravellerSet extends CustomSet {
             if (start == null) {
                 start = System.currentTimeMillis()
             }
-            if (tick % 10 == 0) {
+            if (tick % 20 == 0) {
                 if (layersSpawned <= 4) {
                     spawnBlocks(player.location)
                     layersSpawned++
@@ -188,7 +188,7 @@ class TravellerSet extends CustomSet {
                 return false
             }
 
-            if (blocks.isEmpty() || tick >= 350) {
+            if (System.currentTimeMillis() - start > 3_500) {
                 stop()
             } else {
                 tick++
@@ -196,7 +196,6 @@ class TravellerSet extends CustomSet {
         }
 
         def stop() {
-            println("stopping - [${System.currentTimeMillis() - start}ms]")
             active = false
             blocks.each { it.untrack() }
         }

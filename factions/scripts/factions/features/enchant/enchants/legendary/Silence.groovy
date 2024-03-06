@@ -52,12 +52,17 @@ class Silence extends CustomEnchantment {
             Players.msg(target, "§5§l* §5§lSILENCED §7§o({duration} Seconds) §5§l*".replace("{duration}", ((enchantLevel * 2) + getSolitude.call(player) as Integer).toString()))
         }
     }
+
+    @Override
+    double getRandomBypassChance(int enchantLevel) {
+        return 0D
+    }
 }
 
 class ScilenceIndicator implements Indicator {
 
     @Override
     List<String> build(Object data) {
-        return [" §1§l* PARALYZE * "]
+        return [" §5§l* SILENCED * "]
     }
 }
