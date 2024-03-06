@@ -84,7 +84,7 @@ import java.util.stream.Collectors
 @CompileStatic(TypeCheckingMode.SKIP)
 class Enchantments {
 
-    static String enchantPrefix = "${ColorUtil.rainbow("Enchants", ["#DD22E9", "#AA07B4"] as String[], "§l").toString()} §8»"
+    static String enchantPrefix = "${Text.colorize(ColorUtil.rainbow("Enchants", ["#D639E0", "#AA07B4"] as String[], "§l").toString())} §8»"
 
     Map<String, CustomEnchantment> registeredEnchantments = new ConcurrentHashMap<>()
     static Map<UUID, Map<ItemStack, Map<CustomEnchantment, Integer>>> equippedEnchantsCache = new ConcurrentHashMap<>()
@@ -176,7 +176,7 @@ class Enchantments {
         SubCommandBuilder builder = SubCommandBuilder.of("enchants", "customenchant", "enchantapi", "ce").defaultAction { player -> openEnchantPreview(player) }
 
         builder.create("devtestuk").register {ctx ->
-            ctx.reply("${enchantPrefix} §7- §aTest")
+            ctx.reply("${enchantPrefix} §c§lPHOENIX §c- §eshmeeted")
         }
 
         builder.create("givebook").requirePermission("enchants.*").usage("<player> <enchant> [level] [success] [destory]").register { c ->
