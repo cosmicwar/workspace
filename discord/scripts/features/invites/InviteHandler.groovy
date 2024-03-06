@@ -277,9 +277,10 @@ class InviteHandler extends ListenerAdapter {
         ticketChannel.getHistoryFromBeginning(1).queue {
             List<Message> messages = it.getRetrievedHistory()
             if (messages.size() < 3) {
-                def msg = messages[messages.size()-1]
-                msg.editMessageEmbeds(inviteEmbed.build()).queue {
-                    messageId = it.getIdLong()
+                for (Message msg : messages) {
+                    msg.editMessageEmbeds(inviteEmbed.build()).queue {
+                        messageId = it.getIdLong()
+                    }
                 }
             } else if (messages.size() == 0) {
                 ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
