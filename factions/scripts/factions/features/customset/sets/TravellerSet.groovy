@@ -188,7 +188,7 @@ class TravellerSet extends CustomSet {
                 return false
             }
 
-            if (blocks.isEmpty() || (System.currentTimeMillis() - start) > 10_000) {
+            if (System.currentTimeMillis() - start > 10_000) {
                 stop()
             } else {
                 tick++
