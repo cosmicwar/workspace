@@ -259,7 +259,7 @@ class TicketHandler extends ListenerAdapter {
                         .setFooter("starcade.org", Bot.getStartedBot().selfUser.getAvatarUrl())
                         .build()
 
-                ticketLogChannel.sendMessage("").addEmbeds(ticketAlert).addFiles(FileUpload.fromData(file)).queue()
+//                ticketLogChannel.sendMessage("").addEmbeds(ticketAlert).addFiles(FileUpload.fromData(file)).queue()
 
                 def member = event.guild.getMemberById(ticket.creatorId)
                 if (member)
