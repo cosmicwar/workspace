@@ -380,7 +380,7 @@ class LootTableHandler {
                     if (category == null) return
 
                     if (t == ClickType.LEFT || t == ClickType.SHIFT_LEFT || t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
-                        openCategory(p as Player, 1, category, selectTableCallback)
+                        openCategory(p, 1, category, selectTableCallback)
                     } else if (t == ClickType.MIDDLE) {
                         MenuUtils.createConfirmMenu(player, "§8Confirm Delete", item, () -> {
                             category.tables.each {
