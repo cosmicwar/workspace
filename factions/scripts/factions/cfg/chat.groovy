@@ -103,7 +103,7 @@ Events.subscribe(AsyncPlayerChatEvent.class, EventPriority.HIGHEST).filter(Event
             if (split.size() >= 1) messageClickable.addText(ColorUtils.getColor(player) + split[0])
 
             def name = item.getItemMeta().hasDisplayName() ? "${FastItemUtils.getDisplayName(item)}" : "${item.getI18NDisplayName()}"
-            messageClickable.addHoverEvent(ColorUtil.color("§f » $name§f « "), HoverEvent.Action.SHOW_TEXT, itemToComponents(item))
+            messageClickable.addHoverEvent(ColorUtil.color("§f » $name§f « §r"), HoverEvent.Action.SHOW_TEXT, itemToComponents(item))
 
             if (split.size() >= 2) messageClickable.addText(ColorUtils.getColor(player) + split[1])
         } else {
