@@ -74,6 +74,15 @@ class LootTable extends UUIDDataObject {
     }
 
     @BsonIgnore
+    def addReward(Reward reward) {
+        if (reward instanceof ItemReward) {
+            this.itemRewards.add(reward)
+        } else if (reward instanceof CommandReward) {
+            this.commandRewards.add(reward)
+        }
+    }
+
+    @BsonIgnore
     LootTableCategory getParentCategory() {
         return UUIDDataManager.getData(parentCategoryId, LootTableCategory, false)
     }
