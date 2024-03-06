@@ -111,7 +111,6 @@ class InviteHandler extends ListenerAdapter {
     @Override
     void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (event.getName() == "invites") {
-            println("invites command?")
 
             getUserInvites(event.user.id) { doc ->
                 if (doc == null) doc = new Document()
@@ -119,6 +118,34 @@ class InviteHandler extends ListenerAdapter {
                 Integer real = doc.getOrDefault("realInvites", 0) as Integer
                 event.replyEmbeds(new EmbedBuilder().setTitle("${event.user.name} - ${real} invites.").build()).setEphemeral(true).queue()
             }
+        } else if (event.getName() == "inviteleaderboard") {
+            def sortedUsers
+            Mongo.getGlobal().sync { mongo ->
+                sortedUsers = mongo.getCollection(Globals.INVITE_COLLECTION).find().sort(Sorts.descending("realInvites"))
+            }
+
+            if (sortedUsers == null) println("ERROR could not retrieve sortedUsers")
+
+            String leaderboard = "\n"
+            ArrayList<String> places = ["🥇", "🥈", "🥉", "🎖️"]
+            int usersOnLeaderBoard = 10
+            int counter = 0
+            for (Document doc : sortedUsers) {
+                if (counter > usersOnLeaderBoard) break
+                String userId = doc.get("userId")
+                String place = counter < 3 ? places[counter] : places[3]
+                leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + doc.getOrDefault("realInvites", 0) + " invites \n"
+                counter++
+            }
+
+            EmbedBuilder inviteEmbed = new EmbedBuilder()
+            inviteEmbed.setTitle("📩 **Starcade Invites**")
+            inviteEmbed.setColor(Color.BLUE) // Replace with your desired color
+            inviteEmbed.setDescription(
+                    "**Welcome to Starcade Invites!** \r\n Bellow are the invite rankings, reach the top for rewards!\n" + leaderboard
+            )
+
+            event.reply("").addEmbeds(inviteEmbed.build()).setEphemeral(true)
         }
     }
 
@@ -249,7 +276,7 @@ class InviteHandler extends ListenerAdapter {
         TextChannel ticketChannel = event.getJDA().getTextChannelById(Globals.INVITE_CHANNEL_ID)
         ticketChannel.getHistoryFromBeginning(1).queue {
             List<Message> messages = it.getRetrievedHistory()
-            if (messages.size()  ==  1) {
+            if (messages.size() < 3) {
                 def msg = messages[0]
                 msg.editMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
@@ -260,8 +287,7 @@ class InviteHandler extends ListenerAdapter {
                 }
             } else {
                 messages.each {
-                    if (it.isPinned()) return
-                    it.delete().queue()
+                    if (!it.isPinned()) it.delete().queue()
                 }
                 ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
