@@ -27,6 +27,7 @@ class ClickItem {
     InteractConsumeAction _consume = null
 
     boolean showInGui = true
+    boolean showInBeta = false
 
     static NamespacedKey metaKey
 
@@ -97,6 +98,11 @@ class ClickItem {
         FastItemUtils.setCustomTag(stack, metaKey, ItemTagType.STRING, _id)
 
         FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, stack, message)
+    }
+
+    def getStack(ItemStack stack) {
+        FastItemUtils.setCustomTag(stack, metaKey, ItemTagType.STRING, _id)
+        return stack
     }
 
     static def consume(Player player, String id, Sound sound = null) {

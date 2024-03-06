@@ -1223,21 +1223,21 @@ class Enchantments {
     static String timeMachineId = "enchant_timemachine"
     static String itemNametagId = "enchant_itemnametag"
 
-    ClickItem whiteScroll
-    ClickItem holyWhiteScroll
-    ClickItem blackScroll
-    ClickItem transmogScroll
-    ClickItem itemNametag
+    static ClickItem whiteScroll
+    static ClickItem holyWhiteScroll
+    static ClickItem blackScroll
+    static ClickItem transmogScroll
+    static ClickItem itemNametag
 
-    ClickItem enchantmentDust
-    ClickItem mysteryEnchantmentDust
-    ClickItem enchantmentOrb
+    static ClickItem enchantmentDust
+    static ClickItem mysteryEnchantmentDust
+    static ClickItem enchantmentOrb
 
-    ClickItem mysteryBook
-    ClickItem enchantmentBook
-    ClickItem soulPearl
-    ClickItem randomSoulGenerator
-    ClickItem timeMachine
+    static ClickItem mysteryBook
+    static ClickItem enchantmentBook
+    static ClickItem soulPearl
+    static ClickItem randomSoulGenerator
+    static ClickItem timeMachine
 
     static int getMaxSlots() {
         return items.getOrCreateConfig(enchantmentOrbId).getIntEntry(EnchantConfigConst.enchantOrbMaxSlots.getId()).value
@@ -1248,6 +1248,7 @@ class Enchantments {
     }
 
     def createClickItems() {
+
         whiteScroll = new ClickItem(whiteScrollId, createWhiteScroll(), { Player player, PlayerInteractEvent event, ClickItem item ->
             event.setCancelled(true)
             Players.msg(player, "§] §> §cYou cannot use this item.")
@@ -1873,6 +1874,11 @@ class Enchantments {
         ClickItems.register(soulPearl)
         ClickItems.register(timeMachine)
         ClickItems.register(itemNametag)
+    }
+
+    static def createEachTierClickItem() {
+        List enchTiers = [EnchantmentTier.SIMPLE, EnchantmentTier.UNIQUE, EnchantmentTier.ELITE, EnchantmentTier.ULTIMATE, EnchantmentTier.LEGENDARY, EnchantmentTier.SOUL, EnchantmentTier.HEROIC]
+
     }
 
     static ItemStack createBook(CustomEnchantment enchantment, int enchantLevel, int successChance = 100, int destroyChance = 0) {

@@ -26,24 +26,23 @@ class BetaMenu {
 
     BetaMenu() {
         for (EnchantmentTier tier : enchTiers) {
-            items.add(Enchantments.createMysteryBook(tier))
+            items.add(Enchantments.mysteryBook.getStack(Enchantments.createMysteryBook(tier)))
         }
         for (EnchantmentTier tier : enchTiers) {
-            items.add(Enchantments.createMysteryEnchantmentDust(tier))
+            items.add(Enchantments.mysteryEnchantmentDust.getStack(Enchantments.createMysteryEnchantmentDust(tier)))
         }
-        items.add(Enchantments.createEnchantmentOrb(100, 6, EnchantmentOrbType.WEAPON))
-        items.add(Enchantments.createEnchantmentOrb(100, 3, EnchantmentOrbType.ARMOR))
-        items.add(Enchantments.createWhiteScroll())
-        items.add(Enchantments.createHolyWhiteScroll())
-        items.add(Enchantments.createBlackScroll(75))
-        items.add(Enchantments.createTransmogScroll())
-        items.add(Enchantments.createItemNametag())
-        items.add(Enchantments.createSoulPearl())
-        items.add(Enchantments.createRandomSoulGenerator())
+
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createEnchantmentOrb(100, 6, EnchantmentOrbType.WEAPON)))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createEnchantmentOrb(100, 3, EnchantmentOrbType.ARMOR)))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createWhiteScroll()))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createHolyWhiteScroll()))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createBlackScroll(75)))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createTransmogScroll()))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createItemNametag()))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createSoulPearl()))
+        items.add(Enchantments.mysteryBook.getStack(Enchantments.createRandomSoulGenerator()))
 
         commands()
-
-        BroadcastUtils.broadcast("TEST")
     }
 
     static void commands() {
