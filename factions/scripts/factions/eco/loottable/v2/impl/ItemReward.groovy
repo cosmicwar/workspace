@@ -48,7 +48,19 @@ class ItemReward implements Reward {
 
     @Override
     ItemReward clone() {
-        return new ItemReward(getItemStack(), weight, enabled, antiDupe, maxPulls, timesPulled, finalReward)
+        def reward = new ItemReward()
+
+        reward.itemBase64 = this.itemBase64
+        reward.message = this.message
+        reward.tracking = this.tracking
+        reward.weight = this.weight
+        reward.enabled = this.enabled
+        reward.antiDupe = this.antiDupe
+        reward.finalReward = this.finalReward
+        reward.maxPulls = this.maxPulls
+        reward.timesPulled = this.timesPulled
+
+        return reward
     }
 
     @BsonIgnore @Override
