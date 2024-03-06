@@ -147,8 +147,8 @@ class LotteryUtils2 {
                     drawLottery(lottery)
                 }
                 if (BROADCAST_TIMES_LEFT.contains(lottery.ticksLeft)) {
-                    announce(["§c§lLOTTERY §f(${lottery.type.displayName}§f) §> §fDrawing in §e${TimeUtils.getTimeAmount(lottery.ticksLeft.intdiv(20) * 1000L)}§f! §7§o(/lottery)\n",
-                              "§c§lLOTTERY §f(${lottery.type.displayName}§f) §> §fThe pot is currently §e${(Exports.ptr(lottery.type.currencyKey) as CurrencyStorage)?.map(lottery.calcPot())}§f!"])
+                    announce(["§3§lLOTTERY §f) §> §fDrawing in §e${TimeUtils.getTimeAmount(lottery.ticksLeft.intdiv(20) * 1000L)}§f! §7§o(/lottery)\n",
+                              "§3§lLOTTERY §f) §> §fThe pot is currently §e${(Exports.ptr(lottery.type.currencyKey) as CurrencyStorage)?.map(lottery.calcPot())}§f!"])
                 }
                 lottery.tick()
             }
