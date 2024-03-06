@@ -94,7 +94,7 @@ class BetaMenu {
         }.register("feed")
 
         Commands.create().assertPlayer().handler {ctx ->
-            ctx.sender().inventory.contents.each {
+            ctx.sender().inventory.contents.findAll { it != null && it.type.maxDurability > 0 }.each {
                 if (it.getDurability() != it.type.maxDurability) {
                     it.setDurability(it.type.maxDurability)
                 }
