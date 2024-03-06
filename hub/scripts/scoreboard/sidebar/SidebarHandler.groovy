@@ -11,9 +11,9 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.metadata.Metadata
 import org.starcade.starlight.helper.metadata.MetadataKey
 import org.starcade.starlight.helper.metadata.MetadataMap
-import scripts.factions.content.scoreboard.SCUtils
-import scripts.factions.content.scoreboard.sidebar.data.SBoard
-import scripts.factions.content.scoreboard.sidebar.data.SBoardEntry
+import scripts.scoreboard.SCUtils
+import scripts.scoreboard.sidebar.data.SBoard
+import scripts.scoreboard.sidebar.data.SBoardEntry
 import scripts.shared.utils.BukkitUtils
 import scripts.shared.utils.ColorUtil
 
