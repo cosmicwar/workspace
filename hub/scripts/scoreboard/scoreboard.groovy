@@ -25,7 +25,7 @@ def hubBoard = new SidebarBuilder("hub_board")
 
             List<String> lines = []
 
-            lines.add("§8§m${StringUtils.repeat('-', 22)}") // spacer
+            lines.add("§8§m${StringUtils.repeat('-', 24)}") // spacer
             lines.add("§<#45A0FF>ᴀᴄᴄᴏᴜɴᴛ: §<#09FB29>${player.name}")
 
             LocalDateTime firstPlayed = LocalDateTime.ofInstant(Instant.ofEpochMilli(player.firstPlayed), TimeZone.getDefault().toZoneId())
@@ -35,7 +35,7 @@ def hubBoard = new SidebarBuilder("hub_board")
             // global player count
             lines.add("§<#45A0FF>ᴘʟᴀʏᴇʀꜱ: §<#09FB29>${Bukkit.getOnlinePlayers().size()}§7/§<#FFA445>${NumberUtils.format(BungeeCache.getGlobalPlayerCount())}")
 
-            lines.add("§8§m${StringUtils.repeat('-', 22)}") // spacer
+            lines.add("§8§m${StringUtils.repeat('-', 24)}") // spacer
             return lines
         }.priority { return 0 }
         .shouldDisplayTo { Player player -> return true }
