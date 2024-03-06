@@ -84,7 +84,7 @@ import java.util.stream.Collectors
 @CompileStatic(TypeCheckingMode.SKIP)
 class Enchantments {
 
-    static String enchantPrefix = ColorUtil.color("§<#D639E0>§lᴇɴᴄʜᴀɴᴛꜱ §8»")
+    static String enchantPrefix = ColorUtil.color("§<#D639E0>§lᴇɴᴄʜᴀɴᴛꜱ§8»")
 
     Map<String, CustomEnchantment> registeredEnchantments = new ConcurrentHashMap<>()
     static Map<UUID, Map<ItemStack, Map<CustomEnchantment, Integer>>> equippedEnchantsCache = new ConcurrentHashMap<>()
