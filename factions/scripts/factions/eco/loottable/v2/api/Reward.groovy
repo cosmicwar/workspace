@@ -55,5 +55,7 @@ interface Reward {
 
     @BsonIgnore void giveReward(UUID uuid)
 
+    @BsonIgnore Reward clone()
+
 }
 

@@ -60,6 +60,26 @@ class CommandReward implements Reward {
         if (isTracking()) timesPulled++
     }
 
+    @Override
+    CommandReward clone() {
+        def reward = new CommandReward()
+
+        reward.commands = this.commands
+        reward.title = this.title
+        reward.lore = this.lore
+        reward.icon = this.icon
+        reward.tracking = this.tracking
+        reward.message = this.message
+        reward.weight = this.weight
+        reward.enabled = this.enabled
+        reward.antiDupe = this.antiDupe
+        reward.finalReward = this.finalReward
+        reward.maxPulls = this.maxPulls
+        reward.timesPulled = this.timesPulled
+
+        return reward
+    }
+
     @BsonIgnore @Override
     void giveReward(Player player, String message) {
         for (String command : this.commands) {//{uuid} §a| §d{player}

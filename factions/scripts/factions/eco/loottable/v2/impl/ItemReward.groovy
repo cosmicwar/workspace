@@ -46,6 +46,11 @@ class ItemReward implements Reward {
         if (isTracking()) timesPulled++
     }
 
+    @Override
+    ItemReward clone() {
+        return new ItemReward(getItemStack(), weight, enabled, antiDupe, maxPulls, timesPulled, finalReward)
+    }
+
     @BsonIgnore @Override
     void giveReward(Player player, String message) {
         FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, getItemStack(), message)
