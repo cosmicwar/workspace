@@ -117,7 +117,7 @@ class InviteHandler extends ListenerAdapter {
                 if (doc == null) doc = new Document()
 
                 Integer real = doc.getOrDefault("realInvites", 0) as Integer
-                event.replyEmbeds(new EmbedBuilder().setTitle("${event.user.name} - ${real} invites.").build()).queue()
+                event.replyEmbeds(new EmbedBuilder().setTitle("${event.user.name} - ${real} invites.").build()).setEphemeral(true).queue()
             }
         }
     }
