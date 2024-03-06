@@ -15,14 +15,12 @@ import scripts.shared.legacy.utils.FastInventoryUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder
 
-import java.util.concurrent.ConcurrentHashMap
 
 class BetaMenu {
 
     static Set<ItemStack> items = Sets.newConcurrentHashSet()
     static List enchTiers = [EnchantmentTier.SIMPLE, EnchantmentTier.UNIQUE, EnchantmentTier.ELITE, EnchantmentTier.ULTIMATE, EnchantmentTier.LEGENDARY, EnchantmentTier.SOUL, EnchantmentTier.HEROIC]
     private static NamespacedKey BETA_ITEM = new NamespacedKey(Starlight.plugin, "betaItem")
-    static ConcurrentHashMap<Integer, ItemStack> itemMap = new ConcurrentHashMap<>()
 
     BetaMenu() {
         for (EnchantmentTier tier : enchTiers) {
