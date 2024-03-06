@@ -571,9 +571,7 @@ class ItemFilter {
     }
 
     static void createDefaultFilter(Player player) {
-        updateFilterData(player) { data ->
-            data.addFilter("Default")
-        }
+        getFilterData(player).addFilter("Default")
     }
 }
 
