@@ -195,7 +195,7 @@ class TicketHandler extends ListenerAdapter {
         def channelName = channel.getName()
         def channelNameSplit = channelName.split('-')
         def ticketId = channelNameSplit[1] as Integer
-        def ticketLogChannel = event.getGuild().getTextChannelById(Globals.TICKET_LOG_CHANNEL_ID)
+//        def ticketLogChannel = event.getGuild().getTextChannelById(Globals.TICKET_LOG_CHANNEL_ID)
 
         if (!reactor.roles.any { it.name in ["Staff Team", "*", "**"] }) return
 
