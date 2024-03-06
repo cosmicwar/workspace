@@ -1,17 +1,21 @@
 package scripts.exec
 
+import net.minecraft.world.level.block.entity.SignBlockEntity
+import org.starcade.starlight.Starlight
+import org.starcade.starlight.enviorment.Exports
+import io.papermc.paper.configuration.GlobalConfiguration
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.IChatBaseComponent
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.network.protocol.game.ClientboundOpenSignEditorPacket
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.entity.SignText
+import net.minecraft.world.level.block.entity.TileEntitySign
 import org.bukkit.Location
 import org.bukkit.Material
-import org.starcade.starlight.Starlight
-import org.starcade.starlight.enviorment.Exports
-import io.papermc.paper.configuration.GlobalConfiguration
 import org.bukkit.entity.Player
 import org.spigotmc.AsyncCatcher
 import scripts.shared.legacy.utils.PacketUtils
@@ -27,13 +31,23 @@ Exports.ptr("pingOverride", { Player p ->
 })
 
 Exports.ptr("signOpenOverride", { Player p, List<String> text ->
-    Location location = p.getLocation()
+    Location location = p.getEyeLocation()
 
-    p.sendBlockChange(new Location(location.getWorld(), location.getBlockX(), 255, location.getBlockZ()), Material.OAK_WALL_SIGN.createBlockData())
+    location = location.clone().add(location.getDirection() * -3)
 
-    BlockPos pos = new BlockPos(location.getBlockX(), 255, location.getBlockZ())
+    p.sendBlockChange(new Location(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ()), Material.OAK_WALL_SIGN.createBlockData())
+
+    BlockPos pos = new BlockPos(location.getBlockX(), location.getBlockY(), location.getBlockZ())
+
 
     CompoundTag tag = new CompoundTag()
+
+    TileEntitySign sign = new TileEntitySign(pos, null);
+    SignText signText = sign.a(true) // flag = front/back of sign
+    for (int i = 0; i < text.size(); i++)
+        signText = signText.a(i, IChatBaseComponent.a(text[i]));
+    sign.a(signText, true);
+
 
     BlockEntity blockEntity = new BlockEntity(BlockEntityType.SIGN, pos, Blocks.OAK_SIGN.defaultBlockState()) {
         @Override
