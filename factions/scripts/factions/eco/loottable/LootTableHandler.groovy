@@ -35,10 +35,12 @@ class LootTableHandler {
         GroovyScript.addUnloadHook {
             UUIDDataManager.getByClass(RewardCategory.class).each { it.saveAll(false) }
             UUIDDataManager.getByClass(LootTableCategory.class).each { it.saveAll(false) }
+            UUIDDataManager.getByClass(LootTable.class).each { it.saveAll(false) }
         }
 
-        UUIDDataManager.register("loot_table_rewards", RewardCategory.class)
-        UUIDDataManager.register("loot_table_category", LootTableCategory.class)
+        UUIDDataManager.register("loot_table_rewards", RewardCategory)
+        UUIDDataManager.register("loot_table_category", LootTableCategory)
+        UUIDDataManager.register("loot_table_tables", LootTable)
 
         registerCommands()
     }
@@ -432,10 +434,9 @@ class LootTableHandler {
     static def openCategory(Player player, int page = 1, LootTableCategory category, Callback<LootTable> selectTableCallback = null) {
         MenuBuilder builder
 
-        builder = MenuUtils.createPagedMenu("§3Loot Manager §7(${category.tables.size()})", category.tables.toList(), { LootTable table, Integer i ->
-            def item = FastItemUtils.createItem(
-                    table.icon,
-                    "§3Table - §6${table.name}",
+        builder = MenuUtils.createPagedMenu("§3Loot Manager §7(${category.tables.size()})", category.tables.toList(), { UUID tableId, Integer i ->
+            def table = category.getOrCreateTable(tableId)
+            def item = FastItemUtils.createItem(table.icon, "§3Table - §6${table.name}",
                     [
                             "",
                             "§7${table.rewards.size()} rewards",
