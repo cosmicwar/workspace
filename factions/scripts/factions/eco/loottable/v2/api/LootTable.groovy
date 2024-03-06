@@ -75,7 +75,7 @@ class LootTable extends UUIDDataObject {
 
     @BsonIgnore
     LootTableCategory getParentCategory() {
-        return UUIDDataManager.getData(parentCategoryId, LootTableCategory.class, false)
+        return UUIDDataManager.getData(parentCategoryId, LootTableCategory, false)
     }
 
     @BsonIgnore
