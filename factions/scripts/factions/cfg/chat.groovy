@@ -103,7 +103,7 @@ Events.subscribe(AsyncPlayerChatEvent.class, EventPriority.HIGHEST).filter(Event
             if (split.size() >= 1) messageClickable.addText(ColorUtils.getColor(player) + split[0])
 
             def name = item.getItemMeta().hasDisplayName() ? "${FastItemUtils.getDisplayName(item)}" : "${item.getI18NDisplayName()}"
-            messageClickable.addHoverEvent(ColorUtil.color("§f » $name§f « "), HoverEvent.Action.SHOW_TEXT, itemToComponents(item))
+            messageClickable.addHoverEvent(ColorUtil.color("§f » $name§f « §r"), HoverEvent.Action.SHOW_TEXT, itemToComponents(item))
 
             if (split.size() >= 2) messageClickable.addText(ColorUtils.getColor(player) + split[1])
         } else {
@@ -162,16 +162,16 @@ static List<String> itemToComponents(ItemStack item) {
 
     ItemMeta meta = item.getItemMeta()
 
-    lore.add("§f${meta.hasDisplayName() ? "${FastItemUtils.getDisplayName(item)}" : "${item.getI18NDisplayName()}"}")
+    lore.add("§f${meta.hasDisplayName() ? "${FastItemUtils.getDisplayName(item)}" : "${item.getI18NDisplayName()}"}§r")
 
     if (!meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasEnchants()) {
         item.getEnchantments().entrySet().each { entry ->
-            lore.add("§3${FastItemUtils.getEnchantmentName(entry.getKey())} ${NumberUtils.roman(entry.getValue())}")
+            lore.add("§3${FastItemUtils.getEnchantmentName(entry.getKey())} ${NumberUtils.roman(entry.getValue())}§r")
         }
     }
 
     if (FastItemUtils.getLore(item) != null)
-        FastItemUtils.getLore(item).each { line -> lore.add("§f${line}") }
+        FastItemUtils.getLore(item).each { line -> lore.add("§f${line}§r") }
 
     return lore
 }
