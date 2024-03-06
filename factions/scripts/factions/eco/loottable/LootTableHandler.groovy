@@ -432,10 +432,9 @@ class LootTableHandler {
     static def openCategory(Player player, int page = 1, LootTableCategory category, Callback<LootTable> selectTableCallback = null) {
         MenuBuilder builder
 
-        builder = MenuUtils.createPagedMenu("§3Loot Manager §7(${category.tables.size()})", category.tables.toList(), { LootTable table, Integer i ->
-            def item = FastItemUtils.createItem(
-                    table.icon,
-                    "§3Table - §6${table.name}",
+        builder = MenuUtils.createPagedMenu("§3Loot Manager §7(${category.tables.size()})", category.tables.toList(), { UUID tableId, Integer i ->
+            def table = category.getOrCreateTable(tableId)
+            def item = FastItemUtils.createItem(table.icon, "§3Table - §6${table.name}",
                     [
                             "",
                             "§7${table.rewards.size()} rewards",
