@@ -43,6 +43,7 @@ class Globals {
     static int MONGO_PORT = 27037
 
     // collections
+    static String TICKET_COLLECTION = "tickets"
     static String APPLICATION_COLLECTION = "staffapplications"
     static String INVITE_COLLECTION = "invites"
     static String INVITERS = "inviters"
