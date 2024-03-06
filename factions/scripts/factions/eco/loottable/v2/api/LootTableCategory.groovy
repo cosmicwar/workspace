@@ -41,13 +41,17 @@ class LootTableCategory extends UUIDDataObject {
     }
 
     @BsonIgnore
-    LootTable getOrCreateTable(UUID uuid, String defaultName = "") {
+    LootTable getOrCreateTable(UUID uuid, String defaultName = "default") {
         if (!tables.contains(uuid)) tables.add(uuid)
         if (tableCache.containsKey(uuid)) return tableCache.get(uuid)
 
         def table = UUIDDataManager.getData(uuid, LootTable.class)
+        table.name = defaultName
+        table.queueSave()
 
         tableCache.put(uuid, table)
+        queueSave()
+
         return table
     }
 
