@@ -45,7 +45,7 @@ class LootTableCategory extends UUIDDataObject {
         if (!tables.contains(uuid)) tables.add(uuid)
         if (tableCache.containsKey(uuid)) return tableCache.get(uuid)
 
-        def table = UUIDDataManager.getData(uuid, LootTable.class)
+        def table = UUIDDataManager.getData(uuid, LootTable, true)
         if (table.name == "default") {
             table.name = defaultName
             table.queueSave()
