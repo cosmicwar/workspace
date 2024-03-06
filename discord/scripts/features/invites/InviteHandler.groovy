@@ -297,7 +297,7 @@ class InviteHandler extends ListenerAdapter {
                 ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
                 }
-//            }
+            }
         }
     }
 }
