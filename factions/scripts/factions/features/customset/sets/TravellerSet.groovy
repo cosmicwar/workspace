@@ -155,7 +155,7 @@ class TravellerSet extends CustomSet {
             if (start == null) {
                 start = System.currentTimeMillis()
             }
-            if (tick % 10 == 0) {
+            if (tick % 200 == 0) {
                 if (layersSpawned <= 4) {
                     spawnBlocks(player.location)
                     layersSpawned++
@@ -188,7 +188,7 @@ class TravellerSet extends CustomSet {
                 return false
             }
 
-            if (System.currentTimeMillis() - start > 10_000) {
+            if (System.currentTimeMillis() - start > 5_000) {
                 stop()
             } else {
                 tick++
