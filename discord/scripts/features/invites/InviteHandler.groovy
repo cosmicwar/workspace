@@ -278,8 +278,12 @@ class InviteHandler extends ListenerAdapter {
             List<Message> messages = it.getRetrievedHistory()
             if (messages.size() < 3) {
                 for (Message msg : messages) {
-                    msg.editMessageEmbeds(inviteEmbed.build()).queue {
-                        messageId = it.getIdLong()
+                    try {
+                        msg.editMessageEmbeds(inviteEmbed.build()).queue {
+                            messageId = it.getIdLong()
+                        }
+                    } catch (Exception ignored) {
+                        println("msg not sent by bot edit failed")
                     }
                 }
             } else if (messages.size() == 0) {
