@@ -50,6 +50,12 @@ execute {
 
     loadPlugin("VanishNoPacket")
 
+    // -------------------------------------------- //
+    // WORLD EDITING
+    // -------------------------------------------- //
+    loadPlugin("FastAsyncWorldEdit-Bukkit-2.8.3-SNAPSHOT-606")
+    loadPlugin("WorldGuard-7.0.9")
+
     loadConfig("hub/starlight", "starlight")
     loadFromConfig("configs/proxy/floodgate.yml", "plugins/floodgate/config.yml")
     loadFromConfig("configs/global/floodgate/key.pem", "plugins/floodgate/key.pem")
