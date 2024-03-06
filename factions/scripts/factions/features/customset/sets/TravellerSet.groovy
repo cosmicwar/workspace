@@ -104,7 +104,7 @@ class TravellerSet extends CustomSet {
 
             Players.msg(player, "§5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
             Players.msg(player, "")
-            Players.msg(player, "§5§l      TRAVELLER ABILITY ACTIVATED")
+            Players.msg(player, "§5§l         TRAVELLER ABILITY ACTIVATED")
             Players.msg(player, "")
             Players.msg(player, "§5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 
