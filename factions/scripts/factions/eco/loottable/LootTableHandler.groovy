@@ -296,7 +296,7 @@ class LootTableHandler {
                     Reward reward = category.rewards.find { it.id == rewardUuid }
                     if (reward == null) return
 
-//                    openReward(p, table, reward, backCallback, closeCallback)
+                    openRewardCategoryEdit(p, category, reward)
                 },
                 { Player p, ClickType t, int s -> openRewardCategory(p, category, page + 1) },
                 { Player p, ClickType t, int s -> openRewardCategory(p, category, page - 1) },
@@ -366,6 +366,135 @@ class LootTableHandler {
                 Players.msg(player, "§] §> §cSuccessfully stopped adding this reward")
                 openRewardCategory(player, category, page)
             })
+        }
+
+        menu.openSync(player)
+    }
+
+    static def openRewardCategoryEdit(Player player, RewardCategory category, Reward reward) {
+        MenuBuilder menu
+
+        menu = new MenuBuilder(18, "§3Reward Editor")
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(reward.isEnabled() ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE, "§aToggle Status", [
+                "",
+                "§a * Click to toggle status *"
+        ]), { p, t, s ->
+            Players.playSound(p, reward.enabled ? Sound.UI_BUTTON_CLICK : Sound.ENTITY_PLAYER_LEVELUP)
+
+            reward.enabled = !reward.enabled
+            category.queueSave()
+
+            openRewardCategoryEdit(p, category, reward)
+        })
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(reward.isTracking() ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE, "§aToggle Tracking", [
+                "§7Current: §e${reward.tracking ? "§aEnabled" : "§cDisabled"}",
+                "",
+                "§a * Click to toggle tracking *"
+        ]), { p, t, s ->
+            Players.playSound(p, reward.isTracking() ? Sound.UI_BUTTON_CLICK : Sound.ENTITY_PLAYER_LEVELUP)
+
+            reward.tracking = !reward.tracking
+            category.queueSave()
+
+            openRewardCategoryEdit(p, category, reward)
+        })
+
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.MAGENTA_STAINED_GLASS_PANE, "§aChange Weight", [
+                "§7Current: §e${reward.weight}",
+                "",
+                "§a * Click to change weight *"
+        ]), { p, t, s ->
+            Players.playSound(p, Sound.UI_BUTTON_CLICK)
+
+            SelectionUtils.selectDouble(p, "Enter Weight", [1D, 2D, 3D, 4D, 5D, 6D, 7D, 8D],{ int weight ->
+                Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
+                reward.weight = weight
+                category.queueSave()
+
+                openRewardCategoryEdit(p, category, reward)
+            })
+        })
+
+        if (reward.isTracking()) {
+            menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.YELLOW_STAINED_GLASS_PANE, "§aChange Max Pulls", [
+                    "§7Current: §e${reward.maxPulls}",
+                    "",
+                    "§a * Click to change max pulls *",
+                    "§a * 0 = Unlimited *",
+
+            ]), { p, t, s ->
+                Players.playSound(p, Sound.UI_BUTTON_CLICK)
+
+                SelectionUtils.selectInteger(p, "Enter Max Pulls", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],{ int maxPulls ->
+                    Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
+                    reward.maxPulls = maxPulls
+                    category.queueSave()
+
+                    openRewardCategoryEdit(p, category, reward)
+                })
+            })
+
+            menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.ANVIL, "§aChange Anti-Dupe", [
+                    "§7Current: §e${reward.antiDupe}",
+                    "",
+                    "§a * Click to toggle anti-dupe *",
+
+            ]), { p, t, s ->
+                Players.playSound(p, Sound.UI_BUTTON_CLICK)
+
+                reward.antiDupe = !reward.antiDupe
+                category.queueSave()
+
+                openRewardCategoryEdit(p, category, reward)
+            })
+        }
+
+        // delete reward
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.RED_WOOL, "§cDelete Reward", [
+                "",
+                "§a * Click to delete this reward *"
+        ]), { p, t, s ->
+            Players.playSound(p, Sound.UI_BUTTON_CLICK)
+
+            MenuUtils.createConfirmMenu(player, "§8Confirm Delete", FastItemUtils.createItem(Material.BARRIER, "§l", []), () -> {
+                Players.msg(player, "§] §> §cDeleted this reward.")
+                Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
+
+                category.removeReward(reward)
+                category.queueSave()
+
+                Schedulers.sync().runLater({
+                    openRewardCategory(p, category)
+                }, 1)
+            }, () -> {
+                Players.playSound(p, Sound.UI_BUTTON_CLICK)
+                Players.msg(player, "§] §> §cSuccessfully stopped deleting this reward")
+                openRewardCategoryEdit(p, category, reward)
+            })
+        })
+
+        // add to loottable
+        menu.set(menu.get().firstEmpty(), FastItemUtils.createItem(Material.NETHERITE_INGOT, "§aAdd to Loot Table", [
+                "",
+                "§a * Click to add to loot table *"
+        ]), { p, t, s ->
+            Players.playSound(p, Sound.UI_BUTTON_CLICK)
+
+
+        })
+
+        menu.set(17, FastItemUtils.createItem(Material.RED_DYE, "§cBack", [
+                "",
+                "§a * Click to go back *"
+        ]), { p, t, s ->
+            Players.playSound(p, Sound.UI_BUTTON_CLICK)
+            openRewardCategory(p, category)
+        })
+
+        menu.setCloseCallback { p ->
+            category.queueSave()
         }
 
         menu.openSync(player)

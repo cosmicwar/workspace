@@ -38,6 +38,15 @@ class RewardCategory extends UUIDDataObject {
         return this.getRewards().find { it.id == uuid }
     }
 
+    @BsonIgnore
+    void removeReward(Reward reward) {
+        if (reward instanceof ItemReward) {
+            this.itemRewards.remove(reward)
+        } else if (reward instanceof CommandReward) {
+            this.commandRewards.remove(reward)
+        }
+    }
+
     @BsonIgnore @Override
     boolean isEmpty() {
         return false
