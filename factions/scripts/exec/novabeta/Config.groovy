@@ -67,6 +67,7 @@ class Config {
         nmsworld.spigotConfig.wartModifier = 10
         nmsworld.spigotConfig.wheatModifier = 10
 
+        WorldConfig.SPAWN_WORLD_PREFIX = "beta_map"
         WorldConfig.spawn = new Location(world, 233.5, 165, 78.5, 90, 0)
     }
 }
