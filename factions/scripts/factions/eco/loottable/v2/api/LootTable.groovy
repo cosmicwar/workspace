@@ -1,6 +1,7 @@
 package scripts.factions.eco.loottable.v2.api
 
 import groovy.transform.CompileStatic
+import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
 import org.starcade.starlight.helper.random.RandomSelector
@@ -9,7 +10,7 @@ import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.eco.loottable.v2.impl.CommandReward
 import scripts.factions.eco.loottable.v2.impl.ItemReward
 
-@CompileStatic
+@CompileStatic(TypeCheckingMode.SKIP)
 class LootTable extends UUIDDataObject {
 
     String name = "default"
