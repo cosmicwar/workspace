@@ -10,7 +10,7 @@ import scripts.factions.eco.loottable.v2.impl.ItemReward
 class RewardCategory extends UUIDDataObject {
 
     String name
-    Material icon
+    Material icon = Material.STONE
 
     Set<CommandReward> commandRewards = Sets.newConcurrentHashSet()
     Set<ItemReward> itemRewards = Sets.newConcurrentHashSet()
@@ -36,6 +36,15 @@ class RewardCategory extends UUIDDataObject {
     @BsonIgnore
     Reward getReward(UUID uuid) {
         return this.getRewards().find { it.id == uuid }
+    }
+
+    @BsonIgnore
+    void removeReward(Reward reward) {
+        if (reward instanceof ItemReward) {
+            this.itemRewards.remove(reward)
+        } else if (reward instanceof CommandReward) {
+            this.commandRewards.remove(reward)
+        }
     }
 
     @BsonIgnore @Override
