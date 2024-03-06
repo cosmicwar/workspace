@@ -95,8 +95,8 @@ class BetaMenu {
         }.register("feed")
 
         Commands.create().assertPlayer().handler {ctx ->
-            ctx.sender().inventory.contents.findAll { it != null }.each {
-                if (it instanceof Repairable) {
+            ctx.sender().inventory.contents.each {
+                if (it != null && it instanceof Repairable) {
                     it.setDurability(0 as short)
                 }
             }
