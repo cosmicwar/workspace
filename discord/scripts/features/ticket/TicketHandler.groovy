@@ -197,7 +197,7 @@ class TicketHandler extends ListenerAdapter {
         def ticketId = channelNameSplit[1] as Integer
         def ticketLogChannel = event.getGuild().getTextChannelById(Globals.TICKET_LOG_CHANNEL_ID)
 
-        if (!reactor.roles.any { it.name in ['👑Owner', '👮Management', '👮Developer', '👮Administrator', '*'] }) return
+        if (!reactor.roles.any { it.name in ["Staff Team", "*", "**"] }) return
 
         channel.history.retrievePast(100).queue { results ->
             def messages = []
@@ -219,7 +219,7 @@ class TicketHandler extends ListenerAdapter {
 
             def transcript = messages.join('\n')
 
-            getTicket(ticketId, channel, { Ticket ticket ->
+            Ticket.getTicketByChannelId(channel.idLong, { Ticket ticket ->
                 if (ticket == null) {
                     event.reply(":x: An error occurred while closing your ticket. Please try again later.").setEphemeral(true).complete()
                     println("Error while closing ticket ${ticketId} (ticket not found)")
@@ -280,18 +280,18 @@ class TicketHandler extends ListenerAdapter {
         }
     }
 
-    static void getTicket(int ticketId, MessageChannel channel, Callback<Ticket> callback) {
-        try {
-            MySQL.getGlobalAsyncDatabase().executeQuery('SELECT * FROM discord_tickets WHERE ticket_id = ? AND channel = ?', { statement ->
-                statement.setInt(1, ticketId)
-                statement.setLong(2, channel.idLong)
-            }, { result ->
-                if (result.next()) callback.exec((new Ticket(ticketId, result.getLong("member"), result.getLong("channel"), result.getString("type"), result.getLong("time"))))
-            })
-        } catch (Exception exception) {
-            exception.printStackTrace()
-        }
-    }
+//    static void getTicket(int ticketId, MessageChannel channel, Callback<Ticket> callback) {
+//        try {
+//            MySQL.getGlobalAsyncDatabase().executeQuery('SELECT * FROM discord_tickets WHERE ticket_id = ? AND channel = ?', { statement ->
+//                statement.setInt(1, ticketId)
+//                statement.setLong(2, channel.idLong)
+//            }, { result ->
+//                if (result.next()) callback.exec((new Ticket(ticketId, result.getLong("member"), result.getLong("channel"), result.getString("type"), result.getLong("time"))))
+//            })
+//        } catch (Exception exception) {
+//            exception.printStackTrace()
+//        }
+//    }
 
     static String clean(String string) {
         string = string.replaceAll(/[\u2700-\u27BF\uE000-\uF8FF\uD83C\uD83D\u2011-\u26FF\uD83E]/, '')

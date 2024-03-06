@@ -34,9 +34,18 @@ class Application {
         }
     }
 
-    static void getApplicationByChannelId(long id) {
+    //TODO make this work (return application object)
+    static def getApplicationByChannelId(long id, Callback<Application> callback) {
+
         Mongo.getGlobal().async { mongo ->
-            mongo.getCollection(Globals.APPLICATION_COLLECTION).find(Filters.eq("channelId", id)).first()
+            def document = mongo.getCollection(Globals.APPLICATION_COLLECTION).find(Filters.eq("channelId", id)).first()
+
+            if (document != null) {
+                Application application = Gson.gson.fromJson(document.toJson(), Application.class);
+                callback.exec(application)
+            } else {
+                callback.exec(null) // Ticket not found
+            }
         }
     }
 
