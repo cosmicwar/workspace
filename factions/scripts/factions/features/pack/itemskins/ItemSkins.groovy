@@ -294,6 +294,7 @@ class ItemSkins {
                     break
                 case PacketType.Play.Server.WINDOW_ITEMS:
                     if (player.getGameMode() != GameMode.SURVIVAL) break
+
                     List<ItemStack> windowItems = packet.itemListModifier.read(0)
                     boolean modified = false
                     for (int slot = 0; slot < windowItems.size(); slot++) {

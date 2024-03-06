@@ -74,6 +74,9 @@ Starlight.watch(
 
         // Profiles \\
         "scripts/shared/core/profile/Profiles.groovy",
+
+        // Essentials \\
+        "scripts/shared/core/ess/Essentials.groovy",
 )
 
 Schedulers.sync().runLater({
