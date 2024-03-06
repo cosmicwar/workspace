@@ -49,6 +49,7 @@ class Bot {
                         .addOption(OptionType.STRING, "token", "The code provided from in-game.", true),
                 Commands.slash("unsync", "Un-sync your discord account."),
                 Commands.slash("invites", "Get your personal invite statistics."),
+                Commands.slash("inviteleaderboard", "See the invite leaderboard."),
                 Commands.slash("rename", "Rename a ticket.")
                         .addOption(OptionType.STRING, "name", "The new name.", true),
                 Commands.slash("suggest", "Suggest something.")
