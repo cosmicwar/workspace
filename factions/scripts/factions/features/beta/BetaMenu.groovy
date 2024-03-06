@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.Starlight
 import org.starcade.starlight.helper.Commands
 import scripts.factions.features.enchant.Enchantments
+import scripts.factions.features.enchant.data.item.BookEnchantmentData
 import scripts.factions.features.enchant.items.EnchantmentOrbType
 import scripts.factions.features.enchant.struct.EnchantmentTier
 import scripts.shared.legacy.utils.BroadcastUtils
@@ -66,6 +67,24 @@ class BetaMenu {
 
             ctx.reply("§aGiven §e${item.getAmount()}x §a${item.type.name()} §ato all players.")
         }.register("giveall")
+
+        Commands.create().assertPlayer().handler {ctx ->
+            def item = ctx.sender().getInventory().getItemInMainHand()
+
+            if (item == null || item.type.isAir()) {
+                ctx.reply("§cYou must be holding an item to dupe.")
+                return
+            }
+
+            def bookData = BookEnchantmentData.read(item)
+            if (bookData == null) {
+                ctx.reply("§cYou must be holding an enchanted book to dupe.")
+                return
+            }
+
+            item.setAmount(64)
+            ctx.reply("§aDuplicated §e${item.getAmount()}x §a${item.type.name()} §afor you.")
+        }.register("dupe")
     }
 
     static void createBetaMenu(Player player, int page = 1) {
