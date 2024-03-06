@@ -12,7 +12,7 @@ class FilterData extends UUIDDataObject {
     boolean enabled = false
 
     Map<String, FilterOptions> filterOptions = new ConcurrentHashMap<>()
-    String lastOptions
+    String lastOptions = "Default"
 
     FilterData() {}
 

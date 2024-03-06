@@ -13,7 +13,8 @@ import org.starcade.starlight.Starlight
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
-import scripts.shared.data.uuid.UUIDDataManager
+import org.starcade.starlight.helper.command.context.PlayerContext
+import scripts.factions.data.uuid.UUIDDataManager
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
@@ -279,51 +280,14 @@ class ItemFilter {
             }
 
             if (data.filterOptions.isEmpty()) {
-                cmd.reply("§3§lFilter §> §cNo filters.")
-                return
+                createDefaultFilter(player)
+//                cmd.reply("§3§lFilter §> §cNo filters.")
+//                return
             }
 
             cmd.reply("§3§lFilter §> §eFilters: §a${data.filterOptions.keySet().join(", ")}")
         }.create("toggle").register { cmd ->
-            def player = cmd.sender()
-
-            updateFilterData(player) { data ->
-                if (cmd.args().size() == 0) {
-                    def state = data.toggle()
-                    if (state) {
-                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §eFilter §a§lENABLED")
-                    } else {
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §eFilter §c§lDISABLED")
-                    }
-                    return state
-                }
-
-                String filterId = cmd.arg(0).parseOrFail(String.class)
-                if (data.filterOptions.get(filterId) == null) {
-                    def state = data.toggle()
-                    if (state) {
-                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §e${filterId} §a§lENABLED")
-                    } else {
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §e${filterId} §c§lDISABLED")
-                    }
-
-                    return state
-                }
-
-                if (data.enable(filterId)) {
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
-                    cmd.reply("§3§lFilter §> §e${filterId} §a§lENABLED")
-                    return true
-                }
-
-                cmd.reply("§3§lFilter §> §cError.")
-
-                return false
-            }
+            toggleFilter(cmd)
         }.create("create").register { cmd ->
             def player = cmd.sender()
 
@@ -368,45 +332,7 @@ class ItemFilter {
         }.build()
 
         Commands.create().assertPlayer().handler { cmd ->
-            def player = cmd.sender()
-
-            updateFilterData(player) { data ->
-                if (cmd.args().size() == 0) {
-                    def state = data.toggle()
-                    if (state) {
-                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §eFilter §a§lENABLED")
-                    } else {
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §eFilter §c§lDISABLED")
-                    }
-                    return state
-                }
-
-                String filterId = cmd.arg(0).parseOrFail(String.class)
-                if (data.filterOptions.get(filterId) == null) {
-                    def state = data.toggle()
-                    if (state) {
-                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §e${filterId} §a§lENABLED")
-                    } else {
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
-                        cmd.reply("§3§lFilter §> §e${filterId} §c§lDISABLED")
-                    }
-
-                    return state
-                }
-
-                if (data.enable(filterId)) {
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
-                    cmd.reply("§3§lFilter §> §e${filterId} §a§lENABLED")
-                    return true
-                }
-
-                cmd.reply("§3§lFilter §> §cError.")
-
-                return false
-            }
+            toggleFilter(cmd)
         }.register("ft", "filtertoggle", "togglefilter")
     }
 
@@ -416,7 +342,7 @@ class ItemFilter {
         def data = getFilterData(player)
 
         if (data == null) return
-
+        if (data.filterOptions.isEmpty()) createDefaultFilter(player)
         MenuBuilder builder
 
         builder = MenuUtils.createPagedMenu("§3Filter Preview", data.filterOptions.values().toList(), { FilterOptions filterOptions, Integer i ->
@@ -582,9 +508,11 @@ class ItemFilter {
     static boolean updateFilterData(Player player, BooleanCallback<FilterData> update) {
         FilterData data = getFilterData(player)
 
-        if (data != null && update.exec(data)) {
-            data.queueSave()
-            return true
+        if (data != null) {
+            if (update.exec(data)) {
+                data.queueSave()
+                return true
+            }
         }
 
         return false
@@ -598,6 +526,54 @@ class ItemFilter {
         return UUIDDataManager.getData(playerId, FilterData.class)
     }
 
+    static void toggleFilter(PlayerContext cmd) {
+        def player = cmd.sender()
+        def d = getFilterData(player)
+        if (d.filterOptions.isEmpty()) createDefaultFilter(player)
 
+        updateFilterData(player) { data ->
+            if (cmd.args().size() == 0) {
+                def state = data.toggle()
+                if (state) {
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
+                    cmd.reply("§3§lFilter §> §eFilter §a§lENABLED")
+                } else {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
+                    cmd.reply("§3§lFilter §> §eFilter §c§lDISABLED")
+                }
+                return state
+            }
+
+            String filterId = cmd.arg(0).parseOrFail(String.class)
+            if (data.filterOptions.get(filterId) == null) {
+                def state = data.toggle()
+                if (state) {
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
+                    cmd.reply("§3§lFilter §> §e${filterId} §a§lENABLED")
+                } else {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 1f)
+                    cmd.reply("§3§lFilter §> §e${filterId} §c§lDISABLED")
+                }
+
+                return state
+            }
+
+            if (data.enable(filterId)) {
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f)
+                cmd.reply("§3§lFilter §> §e${filterId} §a§lENABLED")
+                return true
+            }
+
+            cmd.reply("§3§lFilter §> §cError.")
+
+            return false
+        }
+    }
+
+    static void createDefaultFilter(Player player) {
+        updateFilterData(player) { data ->
+            data.addFilter("Default")
+        }
+    }
 }
 
