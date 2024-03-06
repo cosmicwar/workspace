@@ -883,7 +883,7 @@ class LootTableHandler {
         ]), { p, t, s ->
             Players.playSound(p, Sound.UI_BUTTON_CLICK)
 
-            SelectionUtils.selectDouble(p, "Enter Weight", [1D, 2D, 3D, 4D, 5D, 6D, 7D, 8D],{ int weight ->
+            SelectionUtils.selectDouble(p, "Enter Weight", [1D, 2D, 3D, 4D, 5D, 6D, 7D, 8D],{ weight ->
                 Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
                 reward.weight = weight
 
