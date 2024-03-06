@@ -29,7 +29,7 @@ class BetaMenu {
     private static NamespacedKey BETA_ITEM = new NamespacedKey(Starlight.plugin, "betaItem")
 
     BetaMenu() {
-        def world = WorldCreator.name("beta_map").environment(World.Environment.THE_END)
+        def world = WorldCreator.name("beta_map").environment(World.Environment.NORMAL)
                 .generator(new VoidWorldGen17())
                 .createWorld()
 
