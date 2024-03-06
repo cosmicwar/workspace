@@ -508,9 +508,11 @@ class ItemFilter {
     static boolean updateFilterData(Player player, BooleanCallback<FilterData> update) {
         FilterData data = getFilterData(player)
 
-        if (data != null && update.exec(data)) {
-            data.queueSave()
-            return true
+        if (data != null) {
+            if (update.exec(data)) {
+                data.queueSave()
+                return true
+            }
         }
 
         return false
