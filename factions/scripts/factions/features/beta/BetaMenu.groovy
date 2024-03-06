@@ -85,6 +85,23 @@ class BetaMenu {
             item.setAmount(64)
             ctx.reply("§aDuplicated §e${item.getAmount()}x §a${item.type.name()} §afor you.")
         }.register("dupe")
+
+        Commands.create().assertPlayer().handler {ctx ->
+            ctx.sender().setFoodLevel(20)
+            ctx.sender().setSaturation(20)
+
+            ctx.reply("§aFed you.")
+        }.register("feed")
+
+        Commands.create().assertPlayer().handler {ctx ->
+            ctx.sender().inventory.contents.each {
+                if (it.getDurability() != it.type.maxDurability) {
+                    it.setDurability(it.type.maxDurability)
+                }
+            }
+
+            ctx.reply("§aRepaired all items in your inventory.")
+        }.register("fixall")
     }
 
     static void createBetaMenu(Player player, int page = 1) {
