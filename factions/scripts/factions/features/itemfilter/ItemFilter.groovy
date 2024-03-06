@@ -14,7 +14,7 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.command.context.PlayerContext
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
