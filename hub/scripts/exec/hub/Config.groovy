@@ -39,7 +39,7 @@ class Config {
             WorldConfig.spawn.getWorld().setDifficulty(Difficulty.PEACEFUL)
 
 //            WorldConfig.spawn.getWorld().execute({
-                spawnNpc("factions", "§c§lFactions §e§lNova §7§o(Beta)", new Location(world, 0.5, 18, -17.5, 0, 0), "bubbleboyhero", { Player player ->
+                spawnNpc("factions", "§c§lFactions §e§lNova §7§o(Beta)", new Location(world, 0.5, 18, -17.5, 0, 0), "FaceClan", { Player player ->
                     player.performCommand("server nova1")
                 })
 //            })
