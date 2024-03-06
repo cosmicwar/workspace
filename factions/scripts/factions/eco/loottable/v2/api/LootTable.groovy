@@ -67,18 +67,18 @@ class LootTable extends UUIDDataObject {
     @BsonIgnore
     void removeReward(Reward reward) {
         if (reward instanceof ItemReward) {
-            this.itemRewards.remove(reward)
+            itemRewards.remove(reward)
         } else if (reward instanceof CommandReward) {
-            this.commandRewards.remove(reward)
+            commandRewards.remove(reward)
         }
     }
 
     @BsonIgnore
     void addReward(Reward reward) {
         if (reward instanceof ItemReward) {
-            this.itemRewards.add(reward)
+            itemRewards.add(reward)
         } else if (reward instanceof CommandReward) {
-            this.commandRewards.add(reward)
+            commandRewards.add(reward)
         }
     }
 
