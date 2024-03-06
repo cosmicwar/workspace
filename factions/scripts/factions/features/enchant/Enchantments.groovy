@@ -1839,10 +1839,12 @@ class Enchantments {
                     FastItemUtils.setDisplayName(player.getItemInHand(), newString)
                     player.closeInventory()
                     player.updateInventory()
+                }, {
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, "")
                 })
                 return
             })
-            FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, "")
+
         })
 
         ClickItems.register(whiteScroll)
