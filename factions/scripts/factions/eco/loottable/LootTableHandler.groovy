@@ -167,7 +167,7 @@ class LootTableHandler {
             FastItemUtils.setCustomTag(item, CATEGORY_KEY, ItemTagType.STRING, category.id.toString())
 
             return item
-        }, page, false, [
+        }, page, true, [
                 { Player p, ClickType t, int slot ->
                     if (!p.isOp()) return
 
@@ -198,12 +198,33 @@ class LootTableHandler {
                     }
                 },
                 { Player p, ClickType t, int slot ->
-                    openRewards(p as Player, page + 1)
+                    openRewards(p, page + 1)
                 },
                 { Player p, ClickType t, int slot ->
-                    openRewards(p as Player, page - 1)
+                    openRewards(p, page - 1)
+                },
+                { Player p, ClickType t, int slot ->
+                    openLootMenu(p)
                 }
         ])
+
+        menu.set(menu.get().getSize() - 4, FastItemUtils.createItem(Material.SUNFLOWER, "§aCreate Reward Category", [
+                "",
+                "§a * Click create a Reward Category * "
+        ]), { p, t, s ->
+            PromptUtils.prompt(p, "§aEnter Category Name:", { name ->
+                if (getRewardCategoryByName(name) != null) {
+                    Players.msg(p, "§cA Category with that name already exists.")
+                    return
+                }
+
+                def category = getRewardCategory(UUID.randomUUID())
+                category.name = name
+                category.queueSave()
+
+                openRewards(p, page)
+            })
+        })
 
         menu.openSync(player)
     }
@@ -369,7 +390,7 @@ class LootTableHandler {
 
             FastItemUtils.setCustomTag(item, CATEGORY_KEY, ItemTagType.STRING, category.id.toString())
             return item
-        }, page, false, [
+        }, page, true, [
                 { Player p, ClickType t, int slot ->
                     if (!p.isOp()) return
 
@@ -407,6 +428,9 @@ class LootTableHandler {
                 },
                 { Player p, ClickType t, int slot ->
                     openCategories(p as Player, page - 1, selectTableCallback)
+                },
+                { Player p, ClickType t, int slot ->
+                    openLootMenu(p)
                 }
         ])
 
