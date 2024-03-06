@@ -10,6 +10,7 @@ import org.starcade.starlight.helper.Commands
 import scripts.factions.features.enchant.Enchantments
 import scripts.factions.features.enchant.items.EnchantmentOrbType
 import scripts.factions.features.enchant.struct.EnchantmentTier
+import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.FastInventoryUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder
@@ -41,6 +42,8 @@ class BetaMenu {
         items.add(Enchantments.createRandomSoulGenerator())
 
         commands()
+
+        BroadcastUtils.broadcast("TEST")
     }
 
     static void commands() {
