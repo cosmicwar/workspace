@@ -26,7 +26,10 @@ Starlight.watch(
         "~/toggles.groovy",
         "~/chat.groovy",
         "~/version_fixes.groovy",
-        "~/hotfix.groovy"
+        "~/hotfix.groovy",
+
+        "~/scoreboard/sidebar/SidebarHandler.groovy",
+        "~/scoreboard/scoreboard.groovy",
 )
 
 /*Schedulers.sync().run {
