@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter
 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy")
 
 def hubBoard = new SidebarBuilder("hub_board")
-        .title { player -> return "${ColorUtil.rainbow("ꜱᴛᴀʀᴄᴀᴅᴇ", ["#00e5ff", "#4284ff"] as String[], "§l").toString()} §8| §7${Temple.templeId}" }
+        .title { player -> return "${ColorUtil.rainbow("ꜱᴛᴀʀᴄᴀᴅᴇ", ["#00e5ff", "#4284ff"] as String[], "§l").toString()} §8| §<#FFA445>${Temple.templeId}" }
         .lines { player ->
             if (player == null || player instanceof FakeEntityPlayer) return []
 
