@@ -26,9 +26,6 @@ class BetaMenu {
         for (EnchantmentTier tier : enchTiers) {
             items.add(Enchantments.mysteryBook.getStack(Enchantments.createMysteryBook(tier)))
         }
-        for (EnchantmentTier tier : enchTiers) {
-            items.add(Enchantments.mysteryEnchantmentDust.getStack(Enchantments.createMysteryEnchantmentDust(tier)))
-        }
 
         items.add(Enchantments.mysteryBook.getStack(Enchantments.createEnchantmentOrb(100, 6, EnchantmentOrbType.WEAPON)))
         items.add(Enchantments.mysteryBook.getStack(Enchantments.createEnchantmentOrb(100, 3, EnchantmentOrbType.ARMOR)))
