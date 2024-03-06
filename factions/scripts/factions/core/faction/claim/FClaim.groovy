@@ -624,7 +624,7 @@ class FClaim {
         }
     }
 
-    static List<String> symbols = ['#', '-', 'a', /*'/',*/ '=', 'h', /*'@',*/ 'g', 'b', 'e', 'c', 'd']
+    static List<String> symbols = ['#', '-', 'a', '/', '=', 'h', '@', 'g', 'b', 'e', 'c', 'd']
 
     static String[][] compass = [
             ["\\", "N", "/"],
@@ -689,7 +689,7 @@ class FClaim {
             int compassY = 0
 
             for (int y = -8; y <= 8; y++) {
-                for (int x = -20; x <= 20; x++) {
+                for (int x = -19; x <= 19; x++) {
                     CL newCl = new CL(cl.worldName, cl.getX() + x, cl.getZ() + y)
 
                     if (lastY != y) {
@@ -699,7 +699,7 @@ class FClaim {
 
                     // compass
                     if (y == -8 || y == -7 || y == -6) { // first three rows
-                        if (x == -20 || x == -19 || x == -18) {// first three columns
+                        if (x == -17 || x == -19 || x == -18) {// first three columns
                             if (compassY >= 0 && compassY <= 2) {
                                 if (compassMap[facingIndex][0] == compassX && compassMap[facingIndex][1] == compassY) {
                                     message.append("§e${compass[compassX][compassY]}")
