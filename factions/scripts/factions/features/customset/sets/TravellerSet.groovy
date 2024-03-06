@@ -188,7 +188,7 @@ class TravellerSet extends CustomSet {
                 return false
             }
 
-            if (System.currentTimeMillis() - start > 5_000) {
+            if (System.currentTimeMillis() - start > 3_500) {
                 stop()
             } else {
                 tick++
@@ -202,7 +202,6 @@ class TravellerSet extends CustomSet {
         }
 
         def spawnBlocks(Location startingLoc) {
-            println("spawning blocks ${System.currentTimeMillis() - start}ms | ${layersSpawned}")
             for (int x = -5; x < 5; x++) {
                 for (int z = -5; z < 5; z++) {
                     if (ThreadLocalRandom.current().nextDouble(0, 1) < 0.6) continue
