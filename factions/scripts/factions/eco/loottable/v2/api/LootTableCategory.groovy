@@ -12,9 +12,9 @@ import scripts.shared.data.uuid.UUIDDataObject
 class LootTableCategory extends UUIDDataObject {
 
     String name
-    Material icon
+    Material icon = Material.STONE
 
-    Set<UUID> tables
+    Set<UUID> tables = []
 
     @BsonIgnore
     transient LinkedHashMap<UUID, LootTable> tableCache = Maps.<UUID, LootTable> newLinkedHashMap()
