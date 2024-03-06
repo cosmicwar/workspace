@@ -13,15 +13,7 @@ class BeatsSword extends ItemSkin {
         super("beatssword")
     }
 
-    @Override
-    void onEquip(Player player, ItemStack itemStack) {
-        player.sendMessage("${getDisplayName()} equipped!")
-    }
-
-    @Override
-    void onUnequip(Player player, ItemStack itemStack) {
-        player.sendMessage("${getDisplayName()} unequipped!")
-    }
+    
 
     @Override
     void onAttack(Player player, ItemStack itemStack, LivingEntity target, EntityDamageByEntityEvent event) {

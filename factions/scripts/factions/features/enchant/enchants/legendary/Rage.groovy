@@ -44,7 +44,7 @@ class Rage extends CustomEnchantment {
 
         getConfig().addDefault([
                 new IntEntry("maxCombo", 10),
-                new DoubleEntry("dmgIncPerCombo", 0.1)
+                new DoubleEntry("dmgIncPerCombo", 0.05)
         ])
 
         Enchantments.enchantConfig.queueSave()
@@ -80,7 +80,7 @@ class Rage extends CustomEnchantment {
         int combo
         if (!(target instanceof LivingEntity) || event.getFinalDamage() <= 0D) return
         if (target instanceof Player) {
-            if (new Random().nextDouble() < 0.3) target.damage(4D) //additional crit dmg
+            if (new Random().nextDouble() < 0.03) target.damage(4D) //additional crit dmg
             combo = getPvpCombo(player)
             if (combo > 0) {
                 EnchantUtils.scaleDamage(event, 1D + combo * getConfig().getDoubleEntry("dmgIncPerCombo").value)

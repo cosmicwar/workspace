@@ -10,13 +10,5 @@ class Japan2023Shovel extends ItemSkin {
         super("japan2023shovel")
     }
 
-    @Override
-    void onEquip(Player player, ItemStack itemStack) {
-        player.sendMessage("${getDisplayName()} equipped!")
-    }
-
-    @Override
-    void onUnequip(Player player, ItemStack itemStack) {
-        player.sendMessage("${getDisplayName()} unequipped!")
-    }
+    
 }

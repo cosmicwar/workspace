@@ -143,7 +143,6 @@ class CustomSetListener {
             if (set != null && data != null) {
                 if (areItemsSimilar(oldItem, newItem)) return
 
-                Bukkit.broadcastMessage("removing set")
 
                 setEquippedSet.call(player, null)
                 set.onUnequip(player)

@@ -10,14 +10,6 @@ class Japan2023Chestplate extends ItemSkin {
         super("japan2023chestplate")
     }
 
-    @Override
-    void onEquip(Player player, ItemStack itemStack) {
-        player.sendMessage("${getDisplayName()} equipped!")
-    }
-
-    @Override
-    void onUnequip(Player player, ItemStack itemStack) {
-        player.sendMessage("${getDisplayName()} unequipped!")
-    }
+    
 }
 
