@@ -491,7 +491,7 @@ class LootTableHandler {
                     return
                 }
 
-                table.addReward(reward)
+                table.addReward(reward.clone() as Reward)
                 table.queueSave()
                 table.parentCategory.queueSave()
 
