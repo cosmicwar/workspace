@@ -746,7 +746,7 @@ class FClaim {
                         } else if (lastY == y) {
                             message.append("§7${symbol}")
                         } else {
-                            cmd.reply(message.toString())
+//                            cmd.reply(message.toString())
                             message = new StringBuilder("§7${symbol}")
                         }
                     } else {
@@ -756,7 +756,6 @@ class FClaim {
                             message.append("§7\\")
                         }
                     }
-                    if (x == 20)  message.append("\n")
                     lastY = y
                 }
 
