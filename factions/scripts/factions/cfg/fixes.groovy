@@ -17,6 +17,7 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.EulerAngle
 import org.spigotmc.event.player.PlayerSpawnLocationEvent
+import scripts.shared.core.ess.tp.TeleportHandler
 import scripts.shared.legacy.utils.FastItemUtils
 
 //@Field Map<Player, Long> factionLogoutCache = Persistent.of("faction_logout_cache", new ConcurrentHashMap<Player, Long>())
@@ -53,9 +54,9 @@ Events.subscribe(PlayerSpawnLocationEvent.class, EventPriority.LOWEST).handler {
 
     if (player.hasPlayedBefore()) {
         (Exports.ptr("handleJoin") as Closure)?.call(player)
-    } /*else {
+    } else {
         event.setSpawnLocation(WorldConfig.getSpawn())
-    }*/
+    }
 }
 
 Events.subscribe(PlayerRespawnEvent.class).handler { event ->
@@ -63,7 +64,7 @@ Events.subscribe(PlayerRespawnEvent.class).handler { event ->
 }
 
 Commands.create().assertPlayer().handler { command ->
-    command.sender().teleportAsync(WorldConfig.getSpawn())
+    TeleportHandler.teleportPlayer(command.sender(), WorldConfig.getSpawn(), 7.0, false, "§aTeleporting to spawn...", "§3Teleported to spawn!")
 }.register("spawn")
 
 Commands.create().assertPlayer().assertOp().assertUsage("<angle>").handler({ c ->
