@@ -76,15 +76,10 @@ execute {
     loadFromConfig("configs/factions/paper-global.yml", "config/paper-global.yml")
     loadFromConfig("configs/factions/paper-world-defaults.yml", "config/paper-world-defaults.yml")
 
-    loadConfig("factions/AnimatedScoreboard", "AnimatedScoreboard")
     loadConfig("factions/Essentials", "Essentials")
-    loadConfig("global/ChatControlDefaults", "ChatControl")
-    loadConfig("global/CombatLogX_expansions", "CombatLogX")
     loadConfig("global/LiteBans${Temple.templeEnv == "dev" ? "-dev" : ""}", "LiteBans")
     loadConfig("global/ViaRewind", "ViaRewind")
     loadConfig("global/ViaVersion", "ViaVersion")
     loadConfig("global/ViaBackwards", "ViaBackwards")
     loadConfig("global/ChatControl", "ChatControl")
-
-    loadConfig("factions/CombatLogX", "CombatLogX")
 }
