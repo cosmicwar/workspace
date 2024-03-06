@@ -39,13 +39,11 @@ Exports.ptr("signOpenOverride", { Player p, List<String> text ->
 
     CompoundTag tag = new CompoundTag()
 
-    //noinspection GrUnresolvedAccess
     TileEntitySign sign = new TileEntitySign(pos, null);
     SignText signText = sign.a(true) // flag = front/back of sign
     for (int i = 0; i < text.size(); i++)
         signText = signText.a(i, IChatBaseComponent.a(text[i]));
     sign.a(signText, true);
-
 
     BlockEntity blockEntity = new BlockEntity(BlockEntityType.SIGN, pos, Blocks.OAK_SIGN.defaultBlockState()) {
         @Override
