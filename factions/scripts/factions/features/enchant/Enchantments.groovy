@@ -1831,9 +1831,11 @@ class Enchantments {
                 newString = newString.replace("货", "&")
 
                 ItemStack itemInHand = player.getItemInHand().clone()
+                FastItemUtils.setDisplayName(itemInHand, newString)
 
-                MenuUtils.createConfirmMenu(player, "Item Nametag", FastItemUtils.setDisplayName(itemInHand, newString), {
+                MenuUtils.createConfirmMenu(player, "Item Nametag", itemInHand, {
                     FastItemUtils.setDisplayName(player.getItemInHand(), newString)
+                    player.closeInventory()
                     player.updateInventory()
                 })
             })
