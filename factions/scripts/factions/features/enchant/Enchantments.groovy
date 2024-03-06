@@ -1824,10 +1824,12 @@ class Enchantments {
             if (event.getAction().isLeftClick()) return
             def nametagData = ItemNametagData.read(event.getItem())
             if (nametagData == null) return
+            ItemStack clickItem = player.getItemInHand().clone()
+            player.setItemInHand(null)
 
             SelectionUtils.selectString(player, "§eHold the item you would like to rename and enter the desired name into chat.", { string ->
                 def newString = string.replace("&&", "货")
-                newString = newString.replace("&", "§")
+                newString = "§r" + newString.replace("&", "§")
                 newString = newString.replace("货", "&")
 
                 ItemStack itemInHand = player.getItemInHand().clone()
@@ -1838,7 +1840,9 @@ class Enchantments {
                     player.closeInventory()
                     player.updateInventory()
                 })
+                return
             })
+            FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, "")
         })
 
         ClickItems.register(whiteScroll)
