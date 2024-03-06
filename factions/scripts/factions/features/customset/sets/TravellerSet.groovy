@@ -188,7 +188,7 @@ class TravellerSet extends CustomSet {
                 return false
             }
 
-            if (blocks.isEmpty() || tick >= 350) {
+            if (blocks.isEmpty() || System.currentTimeMillis() - start > 6_000L) {
                 stop()
             } else {
                 tick++
@@ -196,7 +196,6 @@ class TravellerSet extends CustomSet {
         }
 
         def stop() {
-            println("stopping - [${System.currentTimeMillis() - start}ms]")
             active = false
             blocks.each { it.untrack() }
         }
