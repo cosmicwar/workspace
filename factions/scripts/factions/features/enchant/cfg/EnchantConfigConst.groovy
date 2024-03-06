@@ -177,7 +177,8 @@ class EnchantConfigConst {
     static StringEntry itemNametagName = new StringEntry("itemNametagName", "§e§lItem Nametag")
     static StringListEntry itemNametagLore = new StringListEntry("itemNametagLore", [
             "§7Click to apply a custom name to an item in your hand.",
-            "§7§o(Use '&' to denote color codes and '&&' to represent an '&')"
+            "",
+            "§8§o(Use '&' to denote color codes and '&&' to represent an '&')"
     ])
 
     static Collection<ConfigEntry<?>> getItemNametagEntries() {

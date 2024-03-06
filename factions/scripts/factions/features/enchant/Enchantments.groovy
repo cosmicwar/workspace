@@ -6,6 +6,7 @@ import com.google.common.collect.Sets
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Location
+import org.bukkit.enchantments.EnchantmentTarget
 import org.bukkit.event.block.Action
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -1833,6 +1834,17 @@ class Enchantments {
                 newString = newString.replace("货", "&")
 
                 ItemStack itemInHand = player.getItemInHand().clone()
+
+                if (itemInHand == null) {
+                    player.sendMessage("§cYou must be holding something you wish to name.")
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, null)
+                }
+
+                if (!EnchantmentTarget.ALL.includes(itemInHand)) {
+                    player.sendMessage("§cYou may not rename this item.")
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, null)
+                }
+
                 FastItemUtils.setDisplayName(itemInHand, newString)
 
                 MenuUtils.createConfirmMenu(player, "Item Nametag", itemInHand, {
