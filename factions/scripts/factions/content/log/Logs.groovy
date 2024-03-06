@@ -328,8 +328,6 @@ class Logs {
 
         logData.history.add(log)
         logData.queueSave()
-
-        BroadcastUtils.broadcast("§7§l(!) §f${log.getTitle()} saved")
     }
 
     static Collection<LogData> getAllLogs() {
