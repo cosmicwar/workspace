@@ -34,5 +34,11 @@ class Application {
         }
     }
 
+    static void getApplicationByChannelId(long id) {
+        Mongo.getGlobal().async { mongo ->
+            mongo.getCollection(Globals.APPLICATION_COLLECTION).find(Filters.eq("channelId", id)).first()
+        }
+    }
+
 }
 
