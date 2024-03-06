@@ -1832,7 +1832,7 @@ class Enchantments {
                 def newString = string.replace("&&", "货")
                 newString = "§r" + newString.replace("&", "§")
                 newString = newString.replace("货", "&")
-
+                newString = newString + "§r"
                 ItemStack itemInHand = player.getItemInHand().clone()
 
                 if (itemInHand == null) {
