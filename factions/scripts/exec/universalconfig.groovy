@@ -7,6 +7,7 @@ import net.minecraft.network.protocol.game.ClientboundOpenSignEditorPacket
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.entity.SignBlockEntity
 import net.minecraft.world.level.block.entity.SignText
 import org.bukkit.Location
 import org.bukkit.Material
@@ -39,11 +40,12 @@ Exports.ptr("signOpenOverride", { Player p, List<String> text ->
 
     CompoundTag tag = new CompoundTag()
 
-    TileEntitySign sign = new TileEntitySign(pos, null);
+    SignBlockEntity sign = new SignBlockEntity(pos, null);
     SignText signText = sign.a(true) // flag = front/back of sign
     for (int i = 0; i < text.size(); i++)
-        signText = signText.a(i, IChatBaseComponent.a(text[i]));
+        signText = signText.a(i, ChatComponent.a(text[i]));
     sign.a(signText, true);
+
 
     BlockEntity blockEntity = new BlockEntity(BlockEntityType.SIGN, pos, Blocks.OAK_SIGN.defaultBlockState()) {
         @Override
