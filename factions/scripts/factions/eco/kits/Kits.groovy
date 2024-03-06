@@ -16,7 +16,7 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
 import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.shared.data.uuid.UUIDDataManager
-import scripts.factions.util.PromptUtils
+import scripts.shared.core.cfg.utils.PromptUtils
 import scripts.shared.legacy.CooldownUtils
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.*

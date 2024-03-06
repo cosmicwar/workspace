@@ -21,7 +21,7 @@ import scripts.shared.data.obj.Position
 import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.eco.crates.api.Crate
 import scripts.factions.eco.loottable.LootTableHandler
-import scripts.factions.util.PromptUtils
+import scripts.shared.core.cfg.utils.PromptUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder

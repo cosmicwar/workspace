@@ -62,7 +62,7 @@ import scripts.factions.features.enchant.utils.SoulUtils
 import scripts.factions.features.enchant.data.item.BlackScrollData
 import scripts.factions.features.enchant.data.item.EnchantmentOrbData
 import scripts.factions.features.enchant.data.item.SoulGemData
-import scripts.factions.util.PromptUtils
+import scripts.shared.core.cfg.utils.PromptUtils
 import scripts.shared.legacy.AntiDupeUtils
 import scripts.shared.legacy.CooldownUtils
 import scripts.shared.legacy.command.SubCommandBuilder

@@ -22,7 +22,7 @@ import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.shared.data.string.StringDataManager
 import scripts.factions.eco.loottable.LootTableHandler
 import scripts.factions.eco.rewardbox.data.RewardBox
-import scripts.factions.util.PromptUtils
+import scripts.shared.core.cfg.utils.PromptUtils
 import scripts.shared.legacy.AntiDupeUtils
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastInventoryUtils

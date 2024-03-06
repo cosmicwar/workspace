@@ -20,7 +20,7 @@ import scripts.factions.eco.loottable.v2.api.Reward
 import scripts.factions.eco.loottable.v2.impl.CommandReward
 import scripts.factions.eco.loottable.v2.impl.ItemReward
 import scripts.factions.eco.loottable.v2.api.RewardCategory
-import scripts.factions.util.PromptUtils
+import scripts.shared.core.cfg.utils.PromptUtils
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
