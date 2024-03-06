@@ -422,7 +422,7 @@ class LootTableHandler {
                 category.name = name
                 category.queueSave()
 
-                openCategory(p, page, category, selectTableCallback)
+                openCategories(p, page, selectTableCallback)
             })
         })
 
@@ -447,6 +447,7 @@ class LootTableHandler {
                     false)
 
             FastItemUtils.setCustomTag(item, TABLE_KEY, ItemTagType.STRING, table.id.toString())
+
             return item
         }, page, true, [
                 { Player p, ClickType t, int s ->
