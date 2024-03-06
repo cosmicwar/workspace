@@ -422,7 +422,7 @@ class LootTableHandler {
                 category.name = name
                 category.queueSave()
 
-                openCategory(p, page, category, selectTableCallback)
+                openCategories(p, page, selectTableCallback)
             })
         })
 
@@ -447,6 +447,7 @@ class LootTableHandler {
                     false)
 
             FastItemUtils.setCustomTag(item, TABLE_KEY, ItemTagType.STRING, table.id.toString())
+
             return item
         }, page, true, [
                 { Player p, ClickType t, int s ->
@@ -457,17 +458,19 @@ class LootTableHandler {
                     if (!FastItemUtils.hasCustomTag(item, TABLE_KEY, ItemTagType.STRING)) return
 
                     def tableId = UUID.fromString(FastItemUtils.getCustomTag(item, TABLE_KEY, ItemTagType.STRING))
+                    def table = category.getOrCreateTable(tableId)
+                    if (table == null) return
 
                     if (selectTableCallback != null) {
-                        selectTableCallback.exec(category.getOrCreateTable(tableId))
+                        selectTableCallback.exec(table)
                     } else {
                         if (t == ClickType.LEFT || t == ClickType.SHIFT_LEFT) {
-                            openTableGui(p as Player, category, category.getOrCreateTable(tableId))
+                            openTableGui(p as Player, category, table)
                         } else if (t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
-                            giveReward(p as Player, category.getOrCreateTable(tableId))
+                            giveReward(p as Player, table)
                         } else if (t == ClickType.MIDDLE) {
                             MenuUtils.createConfirmMenu(player, "§8Confirm Delete", item, () -> {
-                                Players.msg(player, "§] §> §cDeleted this table.")
+                                Players.msg(player, "§] §> §cDeleted this category.")
 
                                 category.tables.removeIf { it == tableId }
                                 category.queueSave()
@@ -476,7 +479,7 @@ class LootTableHandler {
                                     openCategory(player, page, category)
                                 }, 1)
                             }, () -> {
-                                Players.msg(player, "§] §> §cSuccessfully stopped deleting this table")
+                                Players.msg(player, "§] §> §cSuccessfully stopped deleting this category")
                                 openCategory(player, page, category)
                             })
                         }
@@ -491,23 +494,15 @@ class LootTableHandler {
                 "",
                 "§a * Click create a Loot Table * "
         ]), { p, t, s ->
-            SignUtils.openSign(p, ["", "^ ^ ^", "Enter Name"], { String[] lines, Player p1 ->
-                String name = lines[0]
-
-                if (name == null || name.isEmpty()) {
-                    Players.msg(p1, "§cInvalid name.")
-                    return
-                }
-
+            PromptUtils.prompt(p, "§aEnter Table Name:", { name ->
                 if (category.hasTable(name)) {
-                    Players.msg(p1, "§cA Loot Table with that name already exists.")
+                    Players.msg(p, "§cA Loot Table with that name already exists.")
                     return
                 }
 
-                category.getOrCreateTable(UUID.randomUUID())
-                category.queueSave()
+                category.getOrCreateTable(UUID.randomUUID(), name)
 
-                openCategory(p1, page, category)
+                openCategory(p, page, category)
             })
         })
 
