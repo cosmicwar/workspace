@@ -722,7 +722,7 @@ class FClaim {
 
                         if (faction == null) {
                             if (isOrigin) message.append("§3+")
-                            else message.append("§7-")
+                            else message.append("§7\\")
 
                             continue
                         }
@@ -753,7 +753,7 @@ class FClaim {
                         if (isOrigin) {
                             message.append("§3+")
                         } else {
-                            message.append("§7-")
+                            message.append("§7\\")
                         }
                     }
                     if (x == 20)  message.append("\n")
@@ -766,7 +766,7 @@ class FClaim {
 
             if (factions.isEmpty())
             {
-                cmd.reply("§2- §7- §2Wilderness")
+                cmd.reply("§2\\ §7- §2Wilderness")
             }
             else
             {
@@ -776,7 +776,7 @@ class FClaim {
                     return "§7${symbol} §7- ${relation.color + it.getName()}"
                 }.join("§7, ")
 
-                cmd.reply("§2- §7- §2Wilderness§7, ${msg}")
+                cmd.reply("§2\\ §7- §2Wilderness§7, ${msg}")
             }
         }
     }
