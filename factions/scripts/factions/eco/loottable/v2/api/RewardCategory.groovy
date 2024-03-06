@@ -10,7 +10,7 @@ import scripts.factions.eco.loottable.v2.impl.ItemReward
 class RewardCategory extends UUIDDataObject {
 
     String name
-    Material icon
+    Material icon = Material.STONE
 
     Set<CommandReward> commandRewards = Sets.newConcurrentHashSet()
     Set<ItemReward> itemRewards = Sets.newConcurrentHashSet()
