@@ -46,6 +46,23 @@ class ItemReward implements Reward {
         if (isTracking()) timesPulled++
     }
 
+    @Override
+    ItemReward clone() {
+        def reward = new ItemReward()
+
+        reward.itemBase64 = this.itemBase64
+        reward.message = this.message
+        reward.tracking = this.tracking
+        reward.weight = this.weight
+        reward.enabled = this.enabled
+        reward.antiDupe = this.antiDupe
+        reward.finalReward = this.finalReward
+        reward.maxPulls = this.maxPulls
+        reward.timesPulled = this.timesPulled
+
+        return reward
+    }
+
     @BsonIgnore @Override
     void giveReward(Player player, String message) {
         FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, getItemStack(), message)

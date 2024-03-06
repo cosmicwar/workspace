@@ -5,7 +5,6 @@ import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.Sound
-import org.bukkit.WorldCreator
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.ItemStack
@@ -491,7 +490,7 @@ class LootTableHandler {
                     return
                 }
 
-                table.addReward(reward)
+                table.addReward(reward.clone() as Reward)
                 table.queueSave()
                 table.parentCategory.queueSave()
 
@@ -883,7 +882,7 @@ class LootTableHandler {
         ]), { p, t, s ->
             Players.playSound(p, Sound.UI_BUTTON_CLICK)
 
-            SelectionUtils.selectDouble(p, "Enter Weight", [1D, 2D, 3D, 4D, 5D, 6D, 7D, 8D],{ int weight ->
+            SelectionUtils.selectDouble(p, "Enter Weight", [1D, 2D, 3D, 4D, 5D, 6D, 7D, 8D],{ weight ->
                 Players.playSound(p, Sound.ENTITY_PLAYER_LEVELUP)
                 reward.weight = weight
 
