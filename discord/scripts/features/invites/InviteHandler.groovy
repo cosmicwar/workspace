@@ -140,7 +140,7 @@ class InviteHandler extends ListenerAdapter {
 
             EmbedBuilder inviteEmbed = new EmbedBuilder()
             inviteEmbed.setTitle("📩 **Starcade Invites**")
-            inviteEmbed.setColor(Color.BLUE) // Replace with your desired color
+            inviteEmbed.setColor(Color.BLUE)
             inviteEmbed.setDescription(
                     "**Welcome to Starcade Invites!** \r\n Bellow are the invite rankings, reach the top for rewards!\n" + leaderboard
             )
@@ -277,7 +277,7 @@ class InviteHandler extends ListenerAdapter {
         ticketChannel.getHistoryFromBeginning(1).queue {
             List<Message> messages = it.getRetrievedHistory()
             if (messages.size() < 3) {
-                def msg = messages[0]
+                def msg = messages[messages.size()-1]
                 msg.editMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
                 }
