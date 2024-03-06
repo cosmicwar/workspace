@@ -7,7 +7,7 @@ import org.starcade.starlight.enviorment.GroovyScript
 import scripts.shared.core.cfg.Config
 import scripts.shared.core.cfg.ConfigCategory
 import scripts.shared.core.cfg.utils.DBConfigUtil
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.shared.data.string.StringDataManager
 import scripts.shared.data.obj.Position
 import scripts.shared.data.obj.SR
@@ -38,7 +38,7 @@ class KOTHs {
     }
 
     static def commands() {
-        FCBuilder command = new FCBuilder("koth").defaultAction {
+        SCBuilder command = new SCBuilder("koth").defaultAction {
             openGui(it)
         }
 

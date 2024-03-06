@@ -16,7 +16,7 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import scripts.shared.core.cfg.utils.SelectionUtils
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.shared.data.obj.Position
 import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.eco.crates.api.Crate
@@ -71,7 +71,7 @@ class Crates {
     }
 
     def commands() {
-        FCBuilder command = new FCBuilder("crate", "crates").defaultAction {
+        SCBuilder command = new SCBuilder("crate", "crates").defaultAction {
             if (it.isOp()) {
                 openCrates(it)
             }

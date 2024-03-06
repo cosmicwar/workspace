@@ -9,13 +9,13 @@ import scripts.shared.core.cfg.ConfigCategory
 import scripts.shared.core.cfg.utils.DBConfigUtil
 import scripts.shared.core.cfg.RegularConfig
 import scripts.shared.core.cfg.entries.IntEntry
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class Meteors
 {
 
-    static FCBuilder command
+    static SCBuilder command
 
     static Config config
     static ConfigCategory values
@@ -46,7 +46,7 @@ class Meteors
     }
 
     static def commands() {
-        command = new FCBuilder("meteors")
+        command = new SCBuilder("meteors")
 
         command.build()
     }

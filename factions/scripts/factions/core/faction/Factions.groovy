@@ -23,6 +23,7 @@ import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.event.filter.EventFilters
 import org.starcade.starlight.helper.utils.Players
+import scripts.shared.content.SCBuilder
 import scripts.shared.core.cfg.Config
 import scripts.shared.core.cfg.ConfigCategory
 import scripts.factions.core.faction.addon.upgrade.UpgradeUtil
@@ -74,7 +75,7 @@ class Factions {
 
     static String configId = "factions_config"
     
-    static FCBuilder fCommand
+    static SCBuilder fCommand
 
     Factions() {
         GroovyScript.addUnloadHook {
@@ -120,7 +121,7 @@ class Factions {
             }
         }
 
-        fCommand = new FCBuilder("f", "factions", "faction", "fac", "clan", "island")
+        fCommand = new SCBuilder("f", "factions", "faction", "fac", "clan", "island")
 
         config = DBConfigUtil.createConfig(configId, "§bFactions", ["§bFactions Configuration"], Material.TNT)
         setupConfig()

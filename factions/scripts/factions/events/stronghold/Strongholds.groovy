@@ -14,7 +14,7 @@ import org.starcade.starlight.helper.utils.Players
 import scripts.shared.core.cfg.Config
 import scripts.shared.core.cfg.ConfigCategory
 import scripts.shared.core.cfg.utils.DBConfigUtil
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FactionUtils
 import scripts.shared.data.string.StringDataManager
 import scripts.shared.data.obj.SR
@@ -50,7 +50,7 @@ class Strongholds {
     }
 
     static def commands() {
-        FCBuilder command = new FCBuilder("stronghold", "sh").defaultAction {
+        SCBuilder command = new SCBuilder("stronghold", "sh").defaultAction {
             openGui(it)
         }
 

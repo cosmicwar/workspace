@@ -21,7 +21,7 @@ import scripts.shared.core.cfg.entries.SREntry
 import scripts.shared.core.cfg.entries.StringEntry
 import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.factions.content.worldgen.schem.Schematic
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.shared.data.obj.Position
 import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.features.duel.arena.Arena
@@ -146,7 +146,7 @@ class Duels {
 
         }.register("duel")
 
-        FCBuilder cmd = new FCBuilder("duels")
+        SCBuilder cmd = new SCBuilder("duels")
 
         cmd.create("admin").requirePermission("duels.admin").register { ctx ->
             openAdminDuels(ctx.sender())

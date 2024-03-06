@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.meta.tags.ItemTagType
 import org.starcade.starlight.Starlight
 import org.starcade.starlight.enviorment.GroovyScript
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
@@ -43,7 +43,7 @@ class FPerms {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("perms", "permissions", "perm", "permission").description("Display Faction Permissions").register { cmd ->
             FCommandUtil.factionMemberFromCommand(cmd) { faction, member ->

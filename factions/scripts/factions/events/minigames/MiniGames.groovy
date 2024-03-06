@@ -26,7 +26,7 @@ import scripts.shared.core.cfg.entries.StringEntry
 import scripts.factions.content.scoreboard.sidebar.Sidebar
 import scripts.factions.content.scoreboard.sidebar.SidebarBuilder
 import scripts.factions.content.scoreboard.sidebar.SidebarHandler
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.Factions
 import scripts.shared.data.obj.Position
 import scripts.shared.data.obj.SR
@@ -96,7 +96,7 @@ class MiniGames {
     }
 
     def commands() {
-        FCBuilder cmd = new FCBuilder("arcade").defaultAction {
+        SCBuilder cmd = new SCBuilder("arcade").defaultAction {
             Players.msg(it, "§cThis command is not yet implemented.")
         }
 

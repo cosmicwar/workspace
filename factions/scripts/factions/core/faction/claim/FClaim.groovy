@@ -18,7 +18,7 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.command.context.PlayerContext
 import org.starcade.starlight.helper.utils.Players
 import scripts.shared.core.cfg.utils.SelectionUtils
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.ftop.FTEntryType
@@ -199,7 +199,7 @@ class FClaim {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("claim").description("Claim an Area").register { cmd ->
             FCommandUtil.factionMemberFromCommand(cmd) { faction, member ->

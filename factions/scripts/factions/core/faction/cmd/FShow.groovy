@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils
 import org.bukkit.Bukkit
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.command.context.PlayerContext
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
@@ -37,7 +37,7 @@ class FShow {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         // F Show Logic
         fCommand.create("show", "who", "f").usage("[target]").description("Show a faction.").register { cmd ->

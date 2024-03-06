@@ -13,7 +13,7 @@ import org.starcade.starlight.Starlight
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.FactionUtils
 import scripts.factions.core.faction.Factions
@@ -86,7 +86,7 @@ class FBanner {
     }
 
     static void commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("banner").description("Gives you a faction banner.").register { cmd ->
             Player player = cmd.sender()

@@ -7,7 +7,7 @@ import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.enviorment.GroovyScript
 import scripts.factions.content.log.v2.api.Log
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
@@ -34,7 +34,7 @@ class FLogs
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("logs").register { cmd ->
             FCommandUtil.factionMemberFromCommand(cmd, { faction, member ->

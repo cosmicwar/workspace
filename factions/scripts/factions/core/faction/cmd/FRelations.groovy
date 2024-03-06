@@ -9,7 +9,7 @@ import org.starcade.starlight.helper.utils.Players
 import scripts.factions.content.log.Logs
 import scripts.factions.content.log.v2.api.Log
 import scripts.factions.content.log.v2.api.LogType
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.FConst
 import scripts.factions.core.faction.Factions
@@ -56,7 +56,7 @@ class FRelations {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("create").usage("<name>").description("Create a faction.").register { cmd ->
             FCommandUtil.memberFromCommand(cmd) { member ->

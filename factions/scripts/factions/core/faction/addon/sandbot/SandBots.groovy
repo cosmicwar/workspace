@@ -7,7 +7,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.sandbot.data.SandBot
@@ -66,7 +66,7 @@ class SandBots {
     }
 
     static def commands() {
-        FCBuilder builder = Factions.fCommand
+        SCBuilder builder = Factions.fCommand
 
         builder.create("sandbot", "sandbots", "bot").register { ctx ->
             FCommandUtil.factionMemberFromCommand(ctx) { faction, member ->

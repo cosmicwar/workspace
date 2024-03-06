@@ -7,7 +7,7 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.starcade.starlight.enviorment.GroovyScript
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.FactionUtils
 import scripts.factions.core.faction.Factions
@@ -35,7 +35,7 @@ class FWarp {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         // f warp
         fCommand.create("warp").usage("[target]").description("Teleport to a faction warp.").register { cmd ->

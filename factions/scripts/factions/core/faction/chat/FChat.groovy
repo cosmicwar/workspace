@@ -6,7 +6,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 
@@ -85,7 +85,7 @@ class FChat {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("chat", "c").register { ctx ->
             FCommandUtil.factionMemberFromCommand(ctx) { faction, member ->

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
@@ -32,7 +32,7 @@ class FAdmin {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("debug").requirePermission("faction.dev").register { cmd ->
             Schedulers.async().execute {

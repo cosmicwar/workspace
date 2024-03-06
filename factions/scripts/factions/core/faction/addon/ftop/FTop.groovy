@@ -9,7 +9,7 @@ import org.starcade.starlight.enviorment.Exports
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.item.ItemStackBuilder
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
@@ -69,7 +69,7 @@ class FTop {
     }
 
     static def commands() {
-        FCBuilder fCommand = Factions.fCommand
+        SCBuilder fCommand = Factions.fCommand
 
         fCommand.create("top").description("Faction leaderboards.").register { cmd ->
             Player player = cmd.sender()

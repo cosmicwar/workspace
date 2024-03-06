@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.command.context.PlayerContext
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.FactionUtils
 import scripts.factions.core.faction.Factions
@@ -32,7 +32,7 @@ class FTnt {
     }
 
     static def commands() {
-        FCBuilder builder = Factions.fCommand
+        SCBuilder builder = Factions.fCommand
 
         builder.create("tntfill").register {ctx ->
             FCommandUtil.factionMemberFromCommand(ctx) {faction, member ->

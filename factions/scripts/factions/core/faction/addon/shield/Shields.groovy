@@ -9,7 +9,7 @@ import org.bukkit.entity.TNTPrimed
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
-import scripts.factions.core.faction.FCBuilder
+import scripts.shared.content.SCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.shield.data.RaidData
@@ -86,7 +86,7 @@ class Shields {
 
 
     static def commands() {
-        FCBuilder builder = Factions.fCommand
+        SCBuilder builder = Factions.fCommand
 
         builder.create("shield", "shields").register { ctx ->
             FCommandUtil.factionMemberFromCommand(ctx) { faction, member ->
