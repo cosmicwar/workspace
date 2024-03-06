@@ -505,7 +505,7 @@ class LootTableHandler {
 
         // make this show either categorized view or all loottables
 
-        menu = MenuUtils.createPagedMenu("§3Loot Manager §7(${getLootTableCategories().size()})", getLootTableCategories().toList(), { LootTableCategory category, Integer slot ->
+        menu = MenuUtils.createPagedMenu("§3Loot Manager §7(${getLootTableCategories()?.size() ?: 0})", getLootTableCategories().toList(), { LootTableCategory category, Integer slot ->
             def item = FastItemUtils.createItem(
                     category.icon,
                     "§3Category - §6${category.name}",
