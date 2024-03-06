@@ -35,10 +35,12 @@ class LootTableHandler {
         GroovyScript.addUnloadHook {
             UUIDDataManager.getByClass(RewardCategory.class).each { it.saveAll(false) }
             UUIDDataManager.getByClass(LootTableCategory.class).each { it.saveAll(false) }
+            UUIDDataManager.getByClass(LootTable.class).each { it.saveAll(false) }
         }
 
-        UUIDDataManager.register("loot_table_rewards", RewardCategory.class)
-        UUIDDataManager.register("loot_table_category", LootTableCategory.class)
+        UUIDDataManager.register("loot_table_rewards", RewardCategory)
+        UUIDDataManager.register("loot_table_category", LootTableCategory)
+        UUIDDataManager.register("loot_table_tables", LootTable)
 
         registerCommands()
     }
