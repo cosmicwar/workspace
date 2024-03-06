@@ -624,7 +624,7 @@ class FClaim {
         }
     }
 
-    static List<String> symbols = ['#', '-', 'a', '/', '=', 'h', '@', 'g', 'b', 'e', 'c', 'd']
+    static List<String> symbols = ['#', '-', 'a', /*'/',*/ '=', 'h', /*'@',*/ 'g', 'b', 'e', 'c', 'd']
 
     static String[][] compass = [
             ["\\", "N", "/"],
