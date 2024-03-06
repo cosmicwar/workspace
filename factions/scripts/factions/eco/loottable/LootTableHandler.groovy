@@ -482,7 +482,20 @@ class LootTableHandler {
         ]), { p, t, s ->
             Players.playSound(p, Sound.UI_BUTTON_CLICK)
 
+            openCategories(p, 1, { LootTable table ->
+                if (table.rewards.contains(reward)) {
+                    Players.msg(p, "§cThis reward is already in this table.")
+                    return
+                }
 
+                table.rewards.add(reward)
+                table.queueSave()
+                table.parentCategory.queueSave()
+
+                Players.msg(p, "§] §> §cAdded this reward to table ${table.name}.")
+
+                openRewardCategoryEdit(p, category, reward)
+            })
         })
 
         menu.set(17, FastItemUtils.createItem(Material.RED_DYE, "§cBack", [
