@@ -60,7 +60,7 @@ if (Temple.templeId.contains("beta")) {
                     lines.add("§<#09FB29>${faction.getOnlineMembers().size()}§7/§<#FFA445>${faction.getMembers().size()}")
                 }
 
-                lines.add("§8§m${StringUtils.repeat('-', 22)}") // spacer
+                lines.add("§8§m${StringUtils.repeat('-', 24)}") // spacer
                 return lines
             })
             .priority({ return 0 })
