@@ -412,38 +412,18 @@ class LootTableHandler {
                 "",
                 "§a * Click create a Category * "
         ]), { p, t, s ->
-            PromptUtils.prompt(p, "Enter Loottable Category Name:", { name ->
-                if (name == null || name.isEmpty()) {
-                    Players.msg(p, "§cInvalid name.")
-                    return
-                }
-
+            PromptUtils.prompt(p, "§aEnter Category Name:", { name ->
                 if (getTableCategoryByName(name) != null) {
                     Players.msg(p, "§cA Category with that name already exists.")
                     return
                 }
 
                 def category = getLootTableCategory(UUID.randomUUID())
+                category.name = name
+                category.queueSave()
 
                 openCategory(p, page, category, selectTableCallback)
             })
-//            SignUtils.openSign(p, ["", "^ ^ ^", "Enter Name"], { String[] lines, Player p1 ->
-//                String name = lines[0]
-//
-//                if (name == null || name.isEmpty()) {
-//                    Players.msg(p1, "§cInvalid name.")
-//                    return
-//                }
-//
-//                if (getTableCategoryByName(name) != null) {
-//                    Players.msg(p1, "§cA Category with that name already exists.")
-//                    return
-//                }
-//
-//                def category = getLootTableCategory(UUID.randomUUID())
-//
-//                openCategory(p1, page, category, selectTableCallback)
-//            })
         })
 
         menu.openSync(player)
