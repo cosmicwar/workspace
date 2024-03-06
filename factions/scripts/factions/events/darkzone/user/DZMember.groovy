@@ -3,7 +3,7 @@ package scripts.factions.events.darkzone.user
 import groovy.transform.CompileStatic
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import scripts.factions.core.faction.data.Member
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.events.darkzone.DarkzoneTier
 
 @CompileStatic

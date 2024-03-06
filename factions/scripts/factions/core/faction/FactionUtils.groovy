@@ -20,7 +20,7 @@ import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
 import scripts.factions.core.faction.data.relation.RelationType
 import scripts.factions.core.faction.perm.perms.BuildPermission
-import scripts.factions.data.obj.CL
+import scripts.shared.data.obj.CL
 import scripts.shared.legacy.ChatUtils
 import scripts.shared.utils.ColorUtil
 

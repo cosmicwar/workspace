@@ -6,7 +6,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import scripts.factions.data.DataObject
+import scripts.shared.data.string.StringDataObject
 import scripts.factions.eco.loottable.LootTableHandler
 import scripts.factions.eco.loottable.v2.api.LootTable
 import scripts.factions.eco.rewardbox.RewardBoxes
@@ -16,7 +16,7 @@ import scripts.shared.utils.DataUtils
 // TODO: this will currently not work right if the internal id is updated, the items will break most likely
 // To fix, change this to use an internal id (UUID) and a display id
 @CompileStatic(TypeCheckingMode.SKIP)
-class RewardBox extends DataObject {
+class RewardBox extends StringDataObject {
 
     String itemName = ""
     List<String> itemLore = []

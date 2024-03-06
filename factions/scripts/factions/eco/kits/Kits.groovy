@@ -14,8 +14,8 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.utils.SelectionUtils
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.core.cfg.utils.SelectionUtils
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.util.PromptUtils
 import scripts.shared.legacy.CooldownUtils
 import scripts.shared.legacy.command.SubCommandBuilder

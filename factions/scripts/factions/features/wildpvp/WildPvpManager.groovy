@@ -18,14 +18,14 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.event.filter.EventFilters
-import scripts.factions.content.dbconfig.utils.SelectionUtils
+import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.claim.Board
 import scripts.factions.core.faction.claim.Claim
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
 import scripts.factions.core.faction.data.relation.RelationType
-import scripts.factions.data.obj.BlockPosition
+import scripts.shared.data.obj.BlockPosition
 import scripts.factions.features.wildpvp.utils.MatchState
 import scripts.shared.legacy.command.SubCommandBuilder
 import scripts.shared.legacy.utils.BroadcastUtils

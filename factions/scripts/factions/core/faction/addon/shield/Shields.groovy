@@ -14,8 +14,8 @@ import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.shield.data.RaidData
 import scripts.factions.core.faction.data.Faction
-import scripts.factions.data.obj.CL
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.obj.CL
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.legacy.utils.TimeUtils

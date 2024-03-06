@@ -17,7 +17,7 @@ import scripts.factions.content.log.v2.api.Log
 import scripts.factions.content.log.v2.LogData
 import scripts.factions.content.log.v2.api.LogFilterType
 import scripts.factions.content.log.v2.api.LogType
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils

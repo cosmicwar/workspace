@@ -4,8 +4,8 @@ import groovy.transform.CompileStatic
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
 import org.starcade.starlight.helper.random.RandomSelector
-import scripts.factions.data.uuid.UUIDDataManager
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.eco.loottable.v2.impl.CommandReward
 import scripts.factions.eco.loottable.v2.impl.ItemReward
 

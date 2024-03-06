@@ -16,10 +16,10 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.DBConfigUtil
-import scripts.factions.content.dbconfig.utils.SelectionUtils
-import scripts.factions.data.DataManager
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.utils.DBConfigUtil
+import scripts.shared.core.cfg.utils.SelectionUtils
+import scripts.shared.data.string.StringDataManager
 import scripts.factions.eco.loottable.LootTableHandler
 import scripts.factions.eco.rewardbox.data.RewardBox
 import scripts.factions.util.PromptUtils
@@ -50,10 +50,10 @@ class RewardBoxes {
         })
 
         GroovyScript.addUnloadHook {
-            DataManager.getByClass(RewardBox.class).saveAll(false)
+            StringDataManager.getByClass(RewardBox.class).saveAll(false)
         }
 
-        DataManager.register("rewardboxes", RewardBox)
+        StringDataManager.register("rewardboxes", RewardBox)
 
 //        GroovyScript.addUnloadHook {
 //            openingBoxes.values().forEach { it.finish() }
@@ -353,15 +353,15 @@ class RewardBoxes {
     static NamespacedKey REWARD_KEY = new NamespacedKey(Starlight.plugin, "rb_reward")
 
     static Collection<RewardBox> getRewardBoxes() {
-        return DataManager.getAllData(RewardBox.class)
+        return StringDataManager.getAllData(RewardBox.class)
     }
 
     static RewardBox getRewardBox(String id, boolean create = true) {
-        return DataManager.getData(id, RewardBox.class, create)
+        return StringDataManager.getData(id, RewardBox.class, create)
     }
 
     static RewardBox removeBox(String id) {
-        return DataManager.removeOne(id, RewardBox.class)
+        return StringDataManager.removeOne(id, RewardBox.class)
     }
 
     static RewardBox getBoxFromItem(ItemStack stack) {

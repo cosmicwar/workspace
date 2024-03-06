@@ -10,27 +10,14 @@ Starlight.watch(
         "scripts/shared/legacy/nicknames.groovy",
         "scripts/shared/content/systems/stardust.groovy",
         "~/core/commands/_subcommandbuilder.groovy",
-        "~/core/faction/FCommand.groovy",
+        "~/core/faction/Commands.groovy",
 
         "~/content/mobs/MobHandler.groovy",
-
-        // Data \\
-        "~/data/DataManager.groovy",
-        "~/data/uuid/UUIDDataManager.groovy",
-
-
-        // Utils \\
-        "~/util/ChatPrompt.groovy",
-
-
-        // Data Handling \\
-        "~/content/dbconfig/DBConfig.groovy",
 
         // World Generation \\
         "~/content/worldgen/WorldManager.groovy",
 
         // Systems & Content \\
-        "~/core/profile/Profiles.groovy",
         "~/content/log/Logs.groovy",
         "~/eco/loottable/LootTableHandler.groovy",
 

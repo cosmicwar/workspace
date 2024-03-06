@@ -5,7 +5,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.content.dbconfig.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
 import scripts.factions.features.pets.ItemPets
 import scripts.factions.features.pets.struct.ItemPet
 

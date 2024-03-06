@@ -11,7 +11,7 @@ import scripts.factions.core.faction.FCBuilder
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.legacy.utils.TimeUtils

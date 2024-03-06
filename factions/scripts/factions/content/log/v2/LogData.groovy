@@ -7,7 +7,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Bukkit
 import scripts.factions.content.log.v2.api.Log
 import scripts.factions.content.log.v2.api.LogType
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class LogData extends UUIDDataObject {

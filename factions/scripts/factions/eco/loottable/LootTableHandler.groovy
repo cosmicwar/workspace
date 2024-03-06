@@ -12,8 +12,8 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.random.RandomSelector
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.utils.SelectionUtils
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.core.cfg.utils.SelectionUtils
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.eco.loottable.v2.api.LootTable
 import scripts.factions.eco.loottable.v2.api.LootTableCategory
 import scripts.factions.eco.loottable.v2.api.Reward

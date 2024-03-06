@@ -1,7 +1,7 @@
 package scripts.factions.features.duel.arena
 
 import org.bukkit.Material
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.Position
 
 enum ArenaType {
     NETHER("nether", "§cNether", "nether_arena", Material.NETHERRACK),

@@ -4,8 +4,8 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import scripts.factions.core.faction.data.Faction
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.SR
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.SR
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class Claim {

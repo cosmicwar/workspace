@@ -4,7 +4,7 @@ import com.google.common.collect.Sets
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Bukkit
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.shared.utils.ColorUtil
 
 class DuelParty extends UUIDDataObject {

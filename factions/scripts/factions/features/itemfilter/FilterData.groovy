@@ -2,7 +2,7 @@ package scripts.factions.features.itemfilter
 
 import groovy.transform.CompileStatic
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 
 import java.util.concurrent.ConcurrentHashMap
 

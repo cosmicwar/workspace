@@ -12,7 +12,7 @@ import org.starcade.starlight.helper.utils.Players
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.fbanner.FBanner
 import scripts.factions.core.faction.data.Role
-import scripts.factions.data.obj.CL
+import scripts.shared.data.obj.CL
 import scripts.factions.core.faction.perm.Permission
 import scripts.shared.utils.DataUtils
 

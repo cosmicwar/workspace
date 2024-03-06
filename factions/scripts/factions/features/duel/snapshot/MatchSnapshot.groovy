@@ -1,7 +1,7 @@
 package scripts.factions.features.duel.snapshot
 
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.features.duel.arena.Arena
 import scripts.factions.features.duel.match.MatchState
 

@@ -13,7 +13,7 @@ import scripts.factions.core.faction.FCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 //import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder

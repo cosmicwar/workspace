@@ -4,7 +4,7 @@ import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
-import scripts.factions.content.dbconfig.entries.StringEntry
+import scripts.shared.core.cfg.entries.StringEntry
 import scripts.factions.features.enchant.struct.CustomEnchantment
 import scripts.factions.features.enchant.struct.EnchantmentTier
 import scripts.factions.features.enchant.struct.EnchantmentType

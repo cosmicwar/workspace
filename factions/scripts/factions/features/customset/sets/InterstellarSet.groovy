@@ -4,7 +4,7 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.potion.PotionEffectType
-import scripts.factions.content.dbconfig.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
 import scripts.factions.features.customset.struct.CustomSet
 
 import java.util.concurrent.ThreadLocalRandom

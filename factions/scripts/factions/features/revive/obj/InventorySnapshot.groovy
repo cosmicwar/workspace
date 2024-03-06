@@ -1,7 +1,7 @@
 package scripts.factions.features.revive.obj
 
 import com.google.common.collect.Sets
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.Position
 
 class InventorySnapshot {
 

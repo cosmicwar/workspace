@@ -33,10 +33,10 @@ import org.bukkit.inventory.ItemStack
 import org.jetbrains.annotations.NotNull
 import scripts.factions.content.clickitem.ClickItem
 import scripts.factions.content.clickitem.ClickItems
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.ConfigCategory
-import scripts.factions.content.dbconfig.DBConfigUtil
-import scripts.factions.content.dbconfig.utils.SelectionUtils
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.ConfigCategory
+import scripts.shared.core.cfg.utils.DBConfigUtil
+import scripts.shared.core.cfg.utils.SelectionUtils
 
 import scripts.factions.features.enchant.cfg.EnchantConfigConst
 
@@ -116,7 +116,7 @@ class Enchantments {
             Starlight.unload("~/indicators/Indicators.groovy")
             Starlight.unload("~/indicators/HealthIndicator.groovy")
 
-//            DataManager.getByClass(EnchantConfig).saveAll(false)
+//            StringDataManager.getByClass(EnchantConfig).saveAll(false)
 
             registeredEnchantments.clear()
             Starlight.unload(enchantScriptPaths as String[])

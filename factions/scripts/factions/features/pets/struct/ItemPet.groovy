@@ -16,11 +16,11 @@ import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.enviorment.GroovyScript
-import scripts.factions.content.dbconfig.RegularConfig
-import scripts.factions.content.dbconfig.entries.BooleanEntry
-import scripts.factions.content.dbconfig.entries.DoubleEntry
-import scripts.factions.content.dbconfig.entries.StringEntry
-import scripts.factions.content.dbconfig.entries.list.StringListEntry
+import scripts.shared.core.cfg.RegularConfig
+import scripts.shared.core.cfg.entries.BooleanEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.StringEntry
+import scripts.shared.core.cfg.entries.list.StringListEntry
 import scripts.factions.features.pets.ItemPets
 
 import java.util.concurrent.TimeUnit

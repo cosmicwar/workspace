@@ -16,8 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.entries.DoubleEntry
-import scripts.factions.content.dbconfig.entries.LongEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.LongEntry
 import scripts.factions.core.faction.Factions
 import scripts.factions.features.customset.struct.CustomSet
 import scripts.factions.features.enchant.utils.EnchantUtils

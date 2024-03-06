@@ -6,7 +6,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
-import scripts.factions.content.dbconfig.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.relation.RelationType
 import scripts.factions.features.enchant.struct.CustomEnchantment

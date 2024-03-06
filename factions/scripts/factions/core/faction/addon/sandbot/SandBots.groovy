@@ -14,8 +14,8 @@ import scripts.factions.core.faction.addon.sandbot.data.SandBot
 import scripts.factions.core.faction.addon.upgrade.Upgrades
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
-import scripts.factions.data.obj.CL
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.obj.CL
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 import scripts.shared.utils.MenuDecorator

@@ -17,7 +17,7 @@ import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.command.context.PlayerContext
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.utils.SelectionUtils
+import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.factions.core.faction.FCBuilder
 import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
@@ -28,10 +28,10 @@ import scripts.factions.core.faction.data.Member
 import scripts.factions.core.faction.data.Role
 import scripts.factions.core.faction.data.relation.RelationType
 import scripts.factions.core.faction.perm.perms.cmd.ClaimPerm
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.Position
-import scripts.factions.data.obj.SR
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.Position
+import scripts.shared.data.obj.SR
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.features.spawners.CustomSpawners
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.RandomUtils

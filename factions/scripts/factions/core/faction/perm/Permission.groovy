@@ -9,7 +9,7 @@ import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
 import scripts.factions.core.faction.data.Role
-import scripts.factions.data.obj.CL
+import scripts.shared.data.obj.CL
 import scripts.factions.core.faction.perm.access.AccessType
 import scripts.factions.core.faction.perm.access.TargetType
 

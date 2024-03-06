@@ -4,13 +4,13 @@ import com.google.common.collect.Sets
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.starcade.starlight.enviorment.GroovyScript
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.ConfigCategory
-import scripts.factions.content.dbconfig.DBConfigUtil
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.ConfigCategory
+import scripts.shared.core.cfg.utils.DBConfigUtil
 import scripts.factions.core.faction.FCBuilder
-import scripts.factions.data.DataManager
-import scripts.factions.data.obj.Position
-import scripts.factions.data.obj.SR
+import scripts.shared.data.string.StringDataManager
+import scripts.shared.data.obj.Position
+import scripts.shared.data.obj.SR
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 
@@ -24,13 +24,13 @@ class KOTHs {
         GroovyScript.addUnloadHook {
             config.queueSave()
 
-            DataManager.getByClass(CachedKoth.class).saveAll(false)
+            StringDataManager.getByClass(CachedKoth.class).saveAll(false)
         }
 
         config = DBConfigUtil.createConfig("koths", "§eKoth", [], Material.END_PORTAL_FRAME)
         settingsCategory = config.getOrCreateCategory("settings", "§eSettings", Material.BOOK)
 
-        DataManager.register("koth", CachedKoth.class)
+        StringDataManager.register("koth", CachedKoth.class)
 
         int dur = 15 * 60
         createKoth(15, "spawn_koth",  "Spawn KOTH", "Spawn KOTH", "#32a89e", Material.ENCHANTING_TABLE)
@@ -47,7 +47,7 @@ class KOTHs {
         }
 
         command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->
-            DataManager.wipe(CachedKoth.class)
+            StringDataManager.wipe(CachedKoth.class)
 
             settingsCategory.configs.clear()
             config.queueSave()
@@ -61,7 +61,7 @@ class KOTHs {
         }
 
         command.create("resetcache").requirePermission("starlight.admin").register {ctx ->
-            DataManager.wipe(CachedKoth.class)
+            StringDataManager.wipe(CachedKoth.class)
             koths.clear()
             config.queueSave()
 

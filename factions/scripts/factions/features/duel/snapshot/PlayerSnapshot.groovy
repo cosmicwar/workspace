@@ -1,6 +1,6 @@
 package scripts.factions.features.duel.snapshot
 
-import scripts.factions.data.obj.SInventory
+import scripts.shared.data.obj.SInventory
 
 class PlayerSnapshot {
 

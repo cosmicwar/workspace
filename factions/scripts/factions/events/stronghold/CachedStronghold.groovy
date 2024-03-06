@@ -2,10 +2,10 @@ package scripts.factions.events.stronghold
 
 import groovy.transform.CompileStatic
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.DataObject
+import scripts.shared.data.string.StringDataObject
 
 @CompileStatic
-class CachedStronghold extends DataObject {
+class CachedStronghold extends StringDataObject {
 
     UUID attackingFactionId = null
     UUID capturingFactionId = null

@@ -27,16 +27,16 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.DBConfigUtil
-import scripts.factions.content.dbconfig.RegularConfig
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.utils.DBConfigUtil
+import scripts.shared.core.cfg.RegularConfig
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.ftop.FTEntryType
 import scripts.factions.core.faction.addon.ftop.FTopUtils
 import scripts.factions.core.faction.claim.Board
-import scripts.factions.data.DataManager
+import scripts.shared.data.string.StringDataManager
 import scripts.shared.legacy.command.SubCommandBuilder
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.Position
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.StringUtils
 import scripts.shared.utils.DataUtils
@@ -73,7 +73,7 @@ class CustomSpawners {
 
     static void main(String[] args) {
         GroovyScript.addUnloadHook {
-            DataManager.getByClass(CSpawner.class).saveAll(false)
+            StringDataManager.getByClass(CSpawner.class).saveAll(false)
 
             Starlight.unload("~/mobs/MobStacker.groovy")
             Starlight.unload("~/collection/CollectionChests.groovy")
@@ -81,12 +81,12 @@ class CustomSpawners {
         }
 
         GroovyScript.addScriptHook(GroovyScript.HookType.RECOMPILE, {
-            DataManager.getByClass(CSpawner.class).saveAll(false)
+            StringDataManager.getByClass(CSpawner.class).saveAll(false)
         })
 
         config = DBConfigUtil.createConfig("spawners", "§cSpawners", [], Material.SPAWNER)
 
-        DataManager.register("custom_spawner", CSpawner.class)
+        StringDataManager.register("custom_spawner", CSpawner.class)
 
         Starlight.watch("~/drops/CustomDrops.groovy")
         Starlight.watch("~/mobs/MobStacker.groovy")
@@ -98,7 +98,7 @@ class CustomSpawners {
         shopData = (Exports.ptr("shops") as Map<String, Map<String, Object>>).get("spawner_shop")
 
         Schedulers.sync().runLater({
-            DataManager.getAllData(CSpawner.class).each { cSpawner ->
+            StringDataManager.getAllData(CSpawner.class).each { cSpawner ->
                 def world = Bukkit.getWorld(cSpawner.world)
                 if (world == null) {
                     return
@@ -106,19 +106,19 @@ class CustomSpawners {
 
                 def loc = cSpawner.position.getLocation(world)
                 if (loc == null) {
-                    DataManager.removeOne(cSpawner.spawnerId, CSpawner.class)
+                    StringDataManager.removeOne(cSpawner.spawnerId, CSpawner.class)
                     return
                 }
 
                 def block = loc.getBlock()
                 if (block == null || block.getType() != Material.SPAWNER) {
-                    DataManager.removeOne(cSpawner.spawnerId, CSpawner.class)
+                    StringDataManager.removeOne(cSpawner.spawnerId, CSpawner.class)
                     return
                 }
 
                 def creatureSpawner = block.getState() as CreatureSpawner
                 if (creatureSpawner == null) {
-                    DataManager.removeOne(cSpawner.spawnerId, CSpawner.class)
+                    StringDataManager.removeOne(cSpawner.spawnerId, CSpawner.class)
                     return
                 }
 
@@ -292,7 +292,7 @@ class CustomSpawners {
 
                 SpawnerChunkCache cache = spawnerChunkCache.get(spawner.getWorld()).get(chunkToHash(spawner.getChunk()))
                 cache.spawnersInChunk.remove(cSpawner)
-                DataManager.removeOne(spawnerId, CSpawner.class)
+                StringDataManager.removeOne(spawnerId, CSpawner.class)
 
                 Board board = Factions.getBoard(block.world)
 
@@ -325,7 +325,7 @@ class CustomSpawners {
             if (cSpawner.spawnerStackSize == 1) {
                 SpawnerChunkCache cache = spawnerChunkCache.get(spawner.getWorld()).get(chunkToHash(spawner.getChunk()))
                 cache.spawnersInChunk.remove(cSpawner)
-                DataManager.removeOne(spawnerId, CSpawner.class)
+                StringDataManager.removeOne(spawnerId, CSpawner.class)
 
                 cache.totalSpawnerValue -= getSpawnerTypeValue(cSpawner.spawnerType)
                 FTopUtils.addFTopEntry(Factions.getMember(player.getUniqueId()).getFactionId(), -1 * getSpawnerTypeValue(cSpawner.spawnerType), FTEntryType.SPAWNER_VALUE)
@@ -335,7 +335,7 @@ class CustomSpawners {
                 SpawnerChunkCache cache = spawnerChunkCache.get(spawner.getWorld()).get(chunkToHash(spawner.getChunk()))
                 if (player.isOp() && player.isSneaking()) {
                     cache.spawnersInChunk.remove(cSpawner)
-                    DataManager.removeOne(spawnerId, CSpawner.class)
+                    StringDataManager.removeOne(spawnerId, CSpawner.class)
 
                     cache.totalSpawnerValue -= getSpawnerTypeValue(cSpawner.spawnerType) * cSpawner.spawnerStackSize
                     FTopUtils.addFTopEntry(Factions.getMember(player.getUniqueId()).getFactionId(), -1 * getSpawnerTypeValue(cSpawner.spawnerType) * cSpawner.spawnerStackSize, FTEntryType.SPAWNER_VALUE)
@@ -391,7 +391,7 @@ class CustomSpawners {
     }
 
     static CSpawner getCSpawner(String id, boolean create = true) {
-        return DataManager.getData(id, CSpawner.class, create)
+        return StringDataManager.getData(id, CSpawner.class, create)
     }
 
     static CSpawner getCSpawner(Location location, boolean create = true) {
@@ -411,7 +411,7 @@ class CustomSpawners {
     }
 
     static Collection<CSpawner> getAllCSpawners() {
-        return DataManager.getAllData(CSpawner.class)
+        return StringDataManager.getAllData(CSpawner.class)
     }
 
     static def updatePlacedBlock(Block block, CSpawner cSpawner) {

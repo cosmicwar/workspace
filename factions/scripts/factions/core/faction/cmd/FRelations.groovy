@@ -21,7 +21,7 @@ import scripts.factions.core.faction.perm.perms.cmd.InvitePerm
 import scripts.factions.core.faction.perm.perms.cmd.KickPerm
 import scripts.factions.core.faction.perm.perms.cmd.RelationChangePerm
 import scripts.factions.core.faction.perm.perms.cmd.RenamePerm
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.legacy.utils.StringUtils
 
 @CompileStatic(TypeCheckingMode.SKIP)

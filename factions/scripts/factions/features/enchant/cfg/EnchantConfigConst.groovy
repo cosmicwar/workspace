@@ -3,12 +3,12 @@ package scripts.factions.features.enchant.cfg
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
-import scripts.factions.content.dbconfig.data.ConfigEntry
-import scripts.factions.content.dbconfig.entries.BooleanEntry
-import scripts.factions.content.dbconfig.entries.IntEntry
-import scripts.factions.content.dbconfig.entries.MaterialEntry
-import scripts.factions.content.dbconfig.entries.StringEntry
-import scripts.factions.content.dbconfig.entries.list.StringListEntry
+import scripts.shared.core.cfg.data.ConfigEntry
+import scripts.shared.core.cfg.entries.BooleanEntry
+import scripts.shared.core.cfg.entries.IntEntry
+import scripts.shared.core.cfg.entries.MaterialEntry
+import scripts.shared.core.cfg.entries.StringEntry
+import scripts.shared.core.cfg.entries.list.StringListEntry
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class EnchantConfigConst {

@@ -15,9 +15,9 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
 import org.starcade.starlight.enviorment.Exports
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.RegularConfig
-import scripts.factions.content.dbconfig.entries.StringEntry
-import scripts.factions.content.dbconfig.entries.list.StringListEntry
+import scripts.shared.core.cfg.RegularConfig
+import scripts.shared.core.cfg.entries.StringEntry
+import scripts.shared.core.cfg.entries.list.StringListEntry
 import scripts.factions.features.customset.CustomSets
 import scripts.factions.features.customset.data.CustomSetItemData
 import scripts.shared.legacy.utils.FastItemUtils

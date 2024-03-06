@@ -12,21 +12,21 @@ import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.scheduler.Task
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.RegularConfig
-import scripts.factions.content.dbconfig.entries.BooleanEntry
-import scripts.factions.content.dbconfig.entries.MaterialEntry
-import scripts.factions.content.dbconfig.entries.PositionEntry
-import scripts.factions.content.dbconfig.entries.SREntry
-import scripts.factions.content.dbconfig.entries.StringEntry
-import scripts.factions.content.dbconfig.entries.list.SRListEntry
+import scripts.shared.core.cfg.RegularConfig
+import scripts.shared.core.cfg.entries.BooleanEntry
+import scripts.shared.core.cfg.entries.MaterialEntry
+import scripts.shared.core.cfg.entries.PositionEntry
+import scripts.shared.core.cfg.entries.SREntry
+import scripts.shared.core.cfg.entries.StringEntry
+import scripts.shared.core.cfg.entries.list.SRListEntry
 import scripts.factions.content.scoreboard.sidebar.Sidebar
 import scripts.factions.content.scoreboard.sidebar.SidebarBuilder
 import scripts.factions.content.scoreboard.sidebar.SidebarHandler
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
-import scripts.factions.data.DataManager
-import scripts.factions.data.obj.Position
-import scripts.factions.data.obj.SR
+import scripts.shared.data.string.StringDataManager
+import scripts.shared.data.obj.Position
+import scripts.shared.data.obj.SR
 import scripts.shared.utils.BukkitUtils
 import scripts.shared.utils.ColorUtil
 
@@ -47,7 +47,7 @@ class CaptureableEvent {
 
     CaptureableEvent(String internalName, String displayName, String eventType, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), Position location = new Position()) {
         this.internalName = internalName
-        this.cachedEvent = DataManager.getData(internalName, CachedEvent.class, true)
+        this.cachedEvent = StringDataManager.getData(internalName, CachedEvent.class, true)
 
         config = CaptureableEvents.settingsCategory.getOrCreateConfig(internalName, internalName, icon)
         config.addDefault([

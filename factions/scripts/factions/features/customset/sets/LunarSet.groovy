@@ -4,7 +4,7 @@ import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
-import scripts.factions.content.dbconfig.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
 import scripts.factions.features.customset.struct.CustomSet
 import scripts.factions.features.enchant.utils.EnchantUtils
 import scripts.shared.legacy.utils.BroadcastUtils

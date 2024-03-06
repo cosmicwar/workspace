@@ -17,7 +17,7 @@ import scripts.factions.core.faction.data.Role
 import scripts.factions.core.faction.perm.access.Access
 import scripts.factions.core.faction.perm.access.AccessData
 import scripts.factions.core.faction.perm.access.TargetType
-import scripts.factions.data.obj.CL
+import scripts.shared.data.obj.CL
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder

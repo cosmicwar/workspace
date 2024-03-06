@@ -19,17 +19,17 @@ import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.scheduler.Task
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.content.dbconfig.RegularConfig
-import scripts.factions.content.dbconfig.entries.*
-import scripts.factions.content.dbconfig.entries.list.SRListEntry
+import scripts.shared.core.cfg.RegularConfig
+import scripts.shared.core.cfg.entries.*
+import scripts.shared.core.cfg.entries.list.SRListEntry
 import scripts.factions.content.scoreboard.sidebar.Sidebar
 import scripts.factions.content.scoreboard.sidebar.SidebarBuilder
 import scripts.factions.content.scoreboard.sidebar.SidebarHandler
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
-import scripts.factions.data.DataManager
-import scripts.factions.data.obj.Position
-import scripts.factions.data.obj.SR
+import scripts.shared.data.string.StringDataManager
+import scripts.shared.data.obj.Position
+import scripts.shared.data.obj.SR
 import scripts.shared.legacy.utils.PacketUtils
 import scripts.shared.utils.BukkitUtils
 import scripts.shared.utils.ColorUtil
@@ -58,7 +58,7 @@ class Stronghold {
     Stronghold(String internalName, String displayName, String inventoryTitle, String hexColor = "§c", Material icon, SR globalRegion = new SR(), SR capRegion = new SR(), List<SR> placeRegions = [], Position location = new Position()) {
         this.internalName = internalName
 
-        cachedStronghold = DataManager.getData(internalName, CachedStronghold.class, true)
+        cachedStronghold = StringDataManager.getData(internalName, CachedStronghold.class, true)
 
         config = Strongholds.settingsCategory.getOrCreateConfig(internalName, internalName, icon)
         config.addDefault([

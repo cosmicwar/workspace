@@ -23,7 +23,7 @@ import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.scheduler.Task
-import scripts.factions.content.dbconfig.utils.SelectionUtils
+import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.factions.content.worldgen.api.WorldMaterial
 import scripts.factions.content.worldgen.api.WorldTree
 import scripts.factions.content.worldgen.schem.Schematic

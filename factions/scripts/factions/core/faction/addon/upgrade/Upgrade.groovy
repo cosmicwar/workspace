@@ -3,8 +3,8 @@ package scripts.factions.core.faction.addon.upgrade
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
-import scripts.factions.content.dbconfig.entries.DoubleEntry
-import scripts.factions.content.dbconfig.entries.IntEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.IntEntry
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.upgrade.data.StoredUpgrade
 import scripts.factions.core.faction.data.Faction

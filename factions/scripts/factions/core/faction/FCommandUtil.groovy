@@ -5,7 +5,7 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.command.context.PlayerContext
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared3.utils.Callback
 
 import java.util.function.BiConsumer

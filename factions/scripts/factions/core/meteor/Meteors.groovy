@@ -4,11 +4,11 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
 import org.starcade.starlight.enviorment.GroovyScript
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.ConfigCategory
-import scripts.factions.content.dbconfig.DBConfigUtil
-import scripts.factions.content.dbconfig.RegularConfig
-import scripts.factions.content.dbconfig.entries.IntEntry
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.ConfigCategory
+import scripts.shared.core.cfg.utils.DBConfigUtil
+import scripts.shared.core.cfg.RegularConfig
+import scripts.shared.core.cfg.entries.IntEntry
 import scripts.factions.core.faction.FCBuilder
 
 @CompileStatic(TypeCheckingMode.SKIP)

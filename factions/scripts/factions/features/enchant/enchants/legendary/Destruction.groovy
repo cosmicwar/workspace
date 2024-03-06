@@ -4,7 +4,7 @@ import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.content.dbconfig.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.relation.RelationType
 import scripts.factions.features.enchant.Enchantments

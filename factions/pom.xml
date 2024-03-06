@@ -101,20 +101,6 @@
         </dependency>
         <dependency>
             <groupId>internal</groupId>
-            <artifactId>worldedit</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../../shared/versions/v1_20_R1/plugins/FastAsyncWorldEdit-Bukkit-2.8.3-SNAPSHOT-606.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>internal</groupId>
-            <artifactId>worldguard</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../../shared/versions/v1_20_R1/plugins/WorldGuard-7.0.9.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>internal</groupId>
             <artifactId>essentials</artifactId>
             <version>1.0</version>
             <scope>system</scope>

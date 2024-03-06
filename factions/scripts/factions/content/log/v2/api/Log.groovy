@@ -3,7 +3,7 @@ package scripts.factions.content.log.v2.api
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.Position
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class Log {

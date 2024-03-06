@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
 import org.starcade.starlight.enviorment.Exports
-import scripts.factions.content.dbconfig.entries.IntEntry
+import scripts.shared.core.cfg.entries.IntEntry
 import scripts.factions.features.enchant.struct.CustomEnchantment
 import scripts.factions.features.enchant.struct.EnchantmentTier
 

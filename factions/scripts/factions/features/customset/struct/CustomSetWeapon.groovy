@@ -3,9 +3,9 @@ package scripts.factions.features.customset.struct
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import scripts.factions.content.dbconfig.entries.MaterialEntry
-import scripts.factions.content.dbconfig.entries.StringEntry
-import scripts.factions.content.dbconfig.entries.list.StringListEntry
+import scripts.shared.core.cfg.entries.MaterialEntry
+import scripts.shared.core.cfg.entries.StringEntry
+import scripts.shared.core.cfg.entries.list.StringListEntry
 import scripts.factions.features.customset.data.CustomWeaponData
 import scripts.factions.features.customset.struct.CustomSet
 import scripts.shared.legacy.utils.FastItemUtils

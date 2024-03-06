@@ -63,7 +63,17 @@ Starlight.watch(
         "scripts/shared3/commands/CustomLore.groovy",
         "scripts/shared3/commands/RandomNick.groovy",
         "scripts/shared/utils/events/litebans/LiteBans.groovy",
-        "scripts/shared/content/commands/worlds.groovy"
+        "scripts/shared/content/commands/worlds.groovy",
+
+        "scripts/shared/content/Commands.groovy",
+
+        // Data Storage \\
+        "scripts/shared/data/uuid/UUIDDataManager.groovy",
+        "scripts/shared/data/string/StringDataManager.groovy",
+        "scripts/shared/core/cfg/DBConfig.groovy",
+
+        // Profiles \\
+        "scripts/shared/core/profile/Profiles.groovy",
 )
 
 Schedulers.sync().runLater({

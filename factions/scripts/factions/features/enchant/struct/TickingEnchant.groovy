@@ -5,7 +5,7 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.event.Subscription
 import org.bukkit.World
 import org.bukkit.entity.Player
-import scripts.factions.content.dbconfig.entries.IntEntry
+import scripts.shared.core.cfg.entries.IntEntry
 import scripts.factions.features.enchant.Enchantments
 import scripts.shared.utils.ItemType
 

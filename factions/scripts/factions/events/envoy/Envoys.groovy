@@ -9,13 +9,13 @@ import org.bukkit.Material
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.scheduler.Task
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.ConfigCategory
-import scripts.factions.content.dbconfig.DBConfigUtil
-import scripts.factions.content.dbconfig.RegularConfig
-import scripts.factions.content.dbconfig.entries.LongEntry
-import scripts.factions.content.dbconfig.entries.SREntry
-import scripts.factions.data.obj.SR
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.ConfigCategory
+import scripts.shared.core.cfg.utils.DBConfigUtil
+import scripts.shared.core.cfg.RegularConfig
+import scripts.shared.core.cfg.entries.LongEntry
+import scripts.shared.core.cfg.entries.SREntry
+import scripts.shared.data.obj.SR
 import scripts.shared.utils.Persistent
 
 import java.util.concurrent.ThreadLocalRandom

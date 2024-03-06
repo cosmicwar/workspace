@@ -3,8 +3,7 @@ package scripts.factions.eco.kits
 import groovy.transform.CompileStatic
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
-import scripts.factions.data.DataObject
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 
 @CompileStatic
 class Kit extends UUIDDataObject

@@ -14,8 +14,8 @@ import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.Member
 import scripts.factions.core.faction.data.random.WarpData
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.Position
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 

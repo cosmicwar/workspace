@@ -1,7 +1,7 @@
 package scripts.factions.core.faction.data.random
 
 import org.bukkit.Material
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.Position
 
 class WarpData {
 

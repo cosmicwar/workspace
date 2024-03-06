@@ -5,8 +5,8 @@ import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Bukkit
 import scripts.factions.core.faction.Factions
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.Position
 import scripts.shared.features.holograms.HologramRegistry
 import scripts.shared.features.holograms.HologramTracker
 

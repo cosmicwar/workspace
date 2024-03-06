@@ -10,7 +10,7 @@ import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.utils.Players
 import scripts.factions.core.faction.claim.Claim
 import scripts.factions.core.faction.data.relation.RelationType
-import scripts.factions.data.obj.CL
+import scripts.shared.data.obj.CL
 
 import java.util.concurrent.ConcurrentHashMap
 

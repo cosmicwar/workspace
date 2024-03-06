@@ -15,10 +15,10 @@ import org.starcade.starlight.Starlight
 import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.content.dbconfig.utils.SelectionUtils
+import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.factions.core.faction.FCBuilder
-import scripts.factions.data.obj.Position
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.obj.Position
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.eco.crates.api.Crate
 import scripts.factions.eco.loottable.LootTableHandler
 import scripts.factions.util.PromptUtils

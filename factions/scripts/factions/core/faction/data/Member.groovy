@@ -10,7 +10,7 @@ import scripts.factions.content.log.v2.LogData
 import scripts.factions.content.log.v2.api.LogType
 import scripts.factions.core.faction.chat.ChatMode
 import scripts.factions.core.faction.data.random.FPSData
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 
 import java.lang.ref.WeakReference
 

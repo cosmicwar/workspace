@@ -15,7 +15,7 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.claim.Board
-import scripts.factions.data.obj.BlockPosition
+import scripts.shared.data.obj.BlockPosition
 import scripts.factions.features.customitem.buckets.util.GenDirection
 import scripts.factions.features.customitem.buckets.util.GenUtils
 import scripts.factions.features.customitem.buckets.data.GenBucketData

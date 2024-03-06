@@ -4,13 +4,13 @@ import com.google.common.collect.Sets
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.starcade.starlight.enviorment.GroovyScript
-import scripts.factions.content.dbconfig.Config
-import scripts.factions.content.dbconfig.ConfigCategory
-import scripts.factions.content.dbconfig.DBConfigUtil
+import scripts.shared.core.cfg.Config
+import scripts.shared.core.cfg.ConfigCategory
+import scripts.shared.core.cfg.utils.DBConfigUtil
 import scripts.factions.core.faction.FCBuilder
-import scripts.factions.data.DataManager
-import scripts.factions.data.obj.Position
-import scripts.factions.data.obj.SR
+import scripts.shared.data.string.StringDataManager
+import scripts.shared.data.obj.Position
+import scripts.shared.data.obj.SR
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.MenuBuilder
 
@@ -25,13 +25,13 @@ class CaptureableEvents {
         GroovyScript.addUnloadHook {
             config.queueSave()
 
-            DataManager.getByClass(CachedEvent.class).saveAll(false)
+            StringDataManager.getByClass(CachedEvent.class).saveAll(false)
         }
 
         config = DBConfigUtil.createConfig("cap_events", "§eCap Events", [], Material.END_PORTAL_FRAME)
         settingsCategory = config.getOrCreateCategory("settings", "§eSettings", Material.BOOK)
 
-        DataManager.register("captureableEvents", CachedEvent.class)
+        StringDataManager.register("captureableEvents", CachedEvent.class)
 
 //        createStronghold("arctic", "Arctic Stronghold", "❆ Arctic Stronghold ❆", "#3FDFEC", Material.SNOWBALL)
 //        createStronghold("infernal", "Infernal Stronghold", "╓╪╖ Infernal Stronghold ╓╪╖", "#D40B1A", Material.BLAZE_POWDER)
@@ -45,7 +45,7 @@ class CaptureableEvents {
         }
 
         command.create("wipeconfig").requirePermission("starlight.admin").register {ctx ->
-            DataManager.wipe(CachedEvent.class)
+            StringDataManager.wipe(CachedEvent.class)
 
             settingsCategory.configs.clear()
             config.queueSave()
@@ -61,7 +61,7 @@ class CaptureableEvents {
         }
 
         command.create("resetcache").requirePermission("starlight.admin").register {ctx ->
-            DataManager.wipe(CachedEvent.class)
+            StringDataManager.wipe(CachedEvent.class)
             config.queueSave()
 
             ctx.reply("§aCaptureable events cache has been reset. Creating default events...")

@@ -7,8 +7,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.ItemStack
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.content.dbconfig.entries.DoubleEntry
-import scripts.factions.content.dbconfig.entries.IntEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.IntEntry
 import scripts.factions.features.enchant.Enchantments
 import scripts.factions.features.enchant.struct.CustomEnchantment
 import scripts.factions.features.enchant.struct.EnchantPriority

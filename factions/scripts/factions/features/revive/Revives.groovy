@@ -17,8 +17,8 @@ import org.starcade.starlight.helper.utils.Players
 import scripts.factions.content.log.Logs
 import scripts.factions.content.log.v2.api.Log
 import scripts.factions.content.log.v2.api.LogType
-import scripts.factions.data.obj.Position
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.obj.Position
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.features.revive.obj.BukkitInventorySnapshot
 import scripts.factions.features.revive.obj.InventorySnapshot
 import scripts.factions.features.revive.obj.ReviveSortType

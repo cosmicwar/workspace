@@ -9,8 +9,8 @@ import org.bukkit.entity.Player
 import org.starcade.starlight.helper.Schedulers
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.addon.upgrade.UpgradeUtil
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.Position
 import scripts.shared.legacy.utils.npc.NPCRegistry
 import scripts.shared.legacy.utils.npc.NPCTracker
 

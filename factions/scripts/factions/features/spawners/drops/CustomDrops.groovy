@@ -18,7 +18,7 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.event.filter.EventFilters
-import scripts.factions.data.DataManager
+import scripts.shared.data.string.StringDataManager
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.legacy.utils.RandomUtils
@@ -34,12 +34,12 @@ class CustomDrops {
 
     CustomDrops() {
         GroovyScript.addUnloadHook {
-            DataManager.getByClass(CustomDrop).saveAll(false)
+            StringDataManager.getByClass(CustomDrop).saveAll(false)
         }
 
-        DataManager.register("customDrops", CustomDrop.class)
+        StringDataManager.register("customDrops", CustomDrop.class)
 
-        DataManager.getAllData(CustomDrop.class).each {
+        StringDataManager.getAllData(CustomDrop.class).each {
             cachedDrops.put(it.id, it)
         }
 
@@ -59,7 +59,7 @@ class CustomDrops {
         }.register("customdrops")
 
         Commands.create().assertOp().assertPlayer().handler {ctx ->
-            DataManager.wipe(CustomDrop.class)
+            StringDataManager.wipe(CustomDrop.class)
             cachedDrops.clear()
 
             getDrop("blaze")
@@ -227,7 +227,7 @@ class CustomDrops {
         def cachedDrop = cachedDrops.get(mobName)
         if (cachedDrop != null) return cachedDrop
 
-        def drop = DataManager.getData(mobName, CustomDrop.class, true)
+        def drop = StringDataManager.getData(mobName, CustomDrop.class, true)
 
         return cachedDrops.put(mobName, drop)
     }

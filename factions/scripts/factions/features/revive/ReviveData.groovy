@@ -2,7 +2,7 @@ package scripts.factions.features.revive
 
 import com.google.common.collect.Sets
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.features.revive.obj.InventorySnapshot
 import scripts.factions.features.revive.obj.ReviveSortType
 

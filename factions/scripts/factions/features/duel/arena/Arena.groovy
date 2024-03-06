@@ -1,9 +1,9 @@
 package scripts.factions.features.duel.arena
 
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.obj.Position
-import scripts.factions.data.obj.SR
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.obj.Position
+import scripts.shared.data.obj.SR
+import scripts.shared.data.uuid.UUIDDataObject
 
 class Arena extends UUIDDataObject {
 

@@ -9,8 +9,8 @@ import org.bukkit.Material
 import org.bukkit.block.Chest
 import org.bukkit.persistence.PersistentDataType
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.data.obj.Position
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.obj.Position
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.eco.crates.Crates
 import scripts.factions.eco.loottable.LootTableHandler
 import scripts.factions.eco.loottable.v2.api.LootTable

@@ -6,13 +6,13 @@ import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Bukkit
 import org.bukkit.World
-import scripts.factions.data.DataObject
+import scripts.shared.data.string.StringDataObject
 import scripts.shared.features.holograms.HologramRegistry
 import scripts.shared.features.holograms.HologramTracker
-import scripts.shared.legacy.objects.Position
+import scripts.shared.data.obj.Position
 
 @CompileStatic(TypeCheckingMode.SKIP)
-class CollectionChest extends DataObject
+class CollectionChest extends StringDataObject
 {
     String chestId
 

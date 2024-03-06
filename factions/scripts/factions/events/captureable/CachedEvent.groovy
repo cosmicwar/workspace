@@ -1,9 +1,9 @@
 package scripts.factions.events.captureable
 
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.DataObject
+import scripts.shared.data.string.StringDataObject
 
-class CachedEvent extends DataObject {
+class CachedEvent extends StringDataObject {
     UUID attackingFactionId = null
     UUID capturingFactionId = null
     UUID controllingFactionId = null

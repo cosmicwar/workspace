@@ -5,8 +5,8 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
-import scripts.factions.data.uuid.UUIDDataManager
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataObject
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class LootTableCategory extends UUIDDataObject {

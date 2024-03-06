@@ -12,7 +12,7 @@ import scripts.factions.core.faction.FCommandUtil
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.relation.RelationType
-import scripts.factions.data.uuid.UUIDDataManager
+import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.util.Clickable
 import scripts.shared.legacy.utils.NumberUtils
 import scripts.shared.legacy.utils.TimeUtils

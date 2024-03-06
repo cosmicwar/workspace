@@ -15,7 +15,7 @@ import org.starcade.starlight.helper.scheduler.Task
 import scripts.factions.content.scoreboard.sidebar.Sidebar
 import scripts.factions.content.scoreboard.sidebar.SidebarBuilder
 import scripts.factions.content.scoreboard.sidebar.SidebarHandler
-import scripts.factions.data.obj.SR
+import scripts.shared.data.obj.SR
 import scripts.shared.legacy.command.SubCommandBuilder
 
 @CompileStatic(TypeCheckingMode.SKIP)

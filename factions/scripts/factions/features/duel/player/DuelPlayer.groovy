@@ -2,8 +2,8 @@ package scripts.factions.features.duel.player
 
 import com.google.common.collect.Sets
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.obj.SInventory
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.obj.SInventory
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.features.duel.match.MatchState
 import scripts.factions.features.duel.snapshot.MatchSnapshot
 

@@ -3,7 +3,7 @@ package scripts.factions.core.faction.addon.shield.data
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 
 @CompileStatic(TypeCheckingMode.SKIP)
 class RaidData extends UUIDDataObject

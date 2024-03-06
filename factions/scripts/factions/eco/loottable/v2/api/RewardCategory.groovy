@@ -3,7 +3,7 @@ package scripts.factions.eco.loottable.v2.api
 import com.google.common.collect.Sets
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.eco.loottable.v2.impl.CommandReward
 import scripts.factions.eco.loottable.v2.impl.ItemReward
 

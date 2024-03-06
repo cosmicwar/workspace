@@ -1,10 +1,10 @@
 package scripts.factions.core.faction
 
-import scripts.factions.content.dbconfig.data.ConfigEntry
-import scripts.factions.content.dbconfig.entries.BooleanEntry
-import scripts.factions.content.dbconfig.entries.DoubleEntry
-import scripts.factions.content.dbconfig.entries.IntEntry
-import scripts.factions.content.dbconfig.entries.StringEntry
+import scripts.shared.core.cfg.data.ConfigEntry
+import scripts.shared.core.cfg.entries.BooleanEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.IntEntry
+import scripts.shared.core.cfg.entries.StringEntry
 
 class FConst {
 

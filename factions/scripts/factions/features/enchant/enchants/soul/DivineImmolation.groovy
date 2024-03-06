@@ -13,9 +13,9 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffectType
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.content.dbconfig.entries.DoubleEntry
-import scripts.factions.content.dbconfig.entries.IntEntry
-import scripts.factions.content.dbconfig.entries.LongEntry
+import scripts.shared.core.cfg.entries.DoubleEntry
+import scripts.shared.core.cfg.entries.IntEntry
+import scripts.shared.core.cfg.entries.LongEntry
 import scripts.factions.features.enchant.Enchantments
 import scripts.factions.features.enchant.struct.CustomEnchantment
 import scripts.factions.features.enchant.struct.EnchantmentTier

@@ -7,7 +7,7 @@ import org.bukkit.Bukkit
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.relation.RelationType
-import scripts.factions.data.obj.CL
+import scripts.shared.data.obj.CL
 
 @CompileStatic
 class AccessData {

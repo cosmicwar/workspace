@@ -26,10 +26,10 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.data.DataManager
+import scripts.shared.data.string.StringDataManager
 import scripts.shared.legacy.CurrencyStorage
 import scripts.shared.legacy.command.SubCommandBuilder
-import scripts.shared.legacy.objects.Position
+import scripts.shared.data.obj.Position
 import scripts.shared.legacy.utils.FastInventoryUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
@@ -140,12 +140,12 @@ class CollectionChests {
             chests.each {
                 it.removeHologram(true)
             }
-            DataManager.getByClass(CollectionChest.class).each { it.saveAll(false) }
+            StringDataManager.getByClass(CollectionChest.class).each { it.saveAll(false) }
         }
 
-        DataManager.register("collection_chest", CollectionChest.class)
+        StringDataManager.register("collection_chest", CollectionChest.class)
 
-        DataManager.getAllData(CollectionChest.class).each { chest ->
+        StringDataManager.getAllData(CollectionChest.class).each { chest ->
             // ugh so sloppy ik :(
             // update chunk cache :]
             Schedulers.async().runLater({
@@ -177,7 +177,7 @@ class CollectionChests {
 
     static def killeveryone() {
         Schedulers.async().execute {
-            DataManager.wipe(CollectionChest.class)
+            StringDataManager.wipe(CollectionChest.class)
 
             chestChunkCache.each { world, map ->
                 map.each { hash, chunkCache ->
@@ -273,7 +273,7 @@ class CollectionChests {
 
             collectionChest.removeHologram(true)
 
-            DataManager.removeOne(chestId, CollectionChest.class)
+            StringDataManager.removeOne(chestId, CollectionChest.class)
             chestChunkCache.get(chest.getWorld()).remove(chunkToHash(chest.getChunk()))
 
             event.dropItems = false
@@ -651,7 +651,7 @@ class CollectionChests {
     }
 
     static CollectionChest getChest(String id, boolean create = true) {
-        return DataManager.getData(id, CollectionChest.class, create)
+        return StringDataManager.getData(id, CollectionChest.class, create)
     }
 
     static CollectionChest getChest(Location location, boolean create = true) {
@@ -662,7 +662,7 @@ class CollectionChests {
     }
 
     static Collection<CollectionChest> getAllChests() {
-        return DataManager.getAllData(CollectionChest.class)
+        return StringDataManager.getAllData(CollectionChest.class)
     }
 
 }

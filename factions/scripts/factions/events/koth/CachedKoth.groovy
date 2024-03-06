@@ -1,10 +1,10 @@
 package scripts.factions.events.koth
 
 import org.bson.codecs.pojo.annotations.BsonIgnore
-import scripts.factions.data.DataObject
+import scripts.shared.data.string.StringDataObject
 import scripts.factions.events.captureable.CaptureState
 
-class CachedKoth extends DataObject {
+class CachedKoth extends StringDataObject {
     UUID cappingPlayerId = null
     UUID attackingFactionId = null
 

@@ -2,7 +2,7 @@ package scripts.factions.features.revive.obj
 
 import com.google.common.collect.Maps
 import org.bukkit.inventory.ItemStack
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.Position
 import scripts.shared.legacy.utils.FastItemUtils
 
 class BukkitInventorySnapshot {

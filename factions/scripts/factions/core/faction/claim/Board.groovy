@@ -8,8 +8,8 @@ import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
 import org.starcade.starlight.helper.Schedulers
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.SR
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.SR
 import scripts.shared3.utils.Callback
 
 @CompileStatic(TypeCheckingMode.SKIP)

@@ -19,15 +19,15 @@ import scripts.factions.core.faction.addon.shield.data.ShieldData
 import scripts.factions.core.faction.claim.Claim
 import scripts.factions.core.faction.claim.CoreChunkData
 import scripts.factions.core.faction.data.random.WarpData
-import scripts.factions.data.obj.CL
-import scripts.factions.data.obj.Position
+import scripts.shared.data.obj.CL
+import scripts.shared.data.obj.Position
 import scripts.factions.core.faction.data.relation.Relation
 import scripts.factions.core.faction.data.relation.RelationType
 import scripts.factions.core.faction.perm.access.Access
 import scripts.factions.core.faction.perm.access.AccessData
 import scripts.factions.core.faction.perm.access.TargetType
 import scripts.factions.core.faction.addon.upgrade.data.UpgradeData
-import scripts.factions.data.uuid.UUIDDataObject
+import scripts.shared.data.uuid.UUIDDataObject
 import scripts.shared.legacy.utils.TimeUtils
 
 import java.util.concurrent.TimeUnit
