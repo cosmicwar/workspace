@@ -149,7 +149,7 @@ abstract class CustomEnchantment {
         if (cooldown > 0 && proc) {
             long cooldownTime = TimeUnit.SECONDS.toMillis(cooldown)
             if (EnchantmentCooldownUtils.get(player.getUniqueId(), getInternalName(), cooldownTime) > 0) {
-                if (ThreadLocalRandom.current().nextDouble() > 0.05) return false //5% cooldown bypass chance
+                if (ThreadLocalRandom.current().nextDouble() > getRandomBypassChance(enchantLevel)) return false //5% cooldown bypass chance
             } else {
                 EnchantmentCooldownUtils.set(player, getInternalName())
             }
@@ -259,6 +259,10 @@ abstract class CustomEnchantment {
     void onBlockBreak(Player player, ItemStack itemStack, int enchantLevel, Block block, BlockBreakEvent event) {}
 
     void onBlockBreakMonitor(Player player, ItemStack itemStack, int enchantLevel, Block block, BlockBreakEvent event) {}
+
+    double getRandomBypassChance(int enchantLevel) {
+        return 0.005 * enchantLevel
+    }
 
 }
 
