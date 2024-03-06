@@ -1876,11 +1876,6 @@ class Enchantments {
         ClickItems.register(itemNametag)
     }
 
-    static def createEachTierClickItem() {
-        List enchTiers = [EnchantmentTier.SIMPLE, EnchantmentTier.UNIQUE, EnchantmentTier.ELITE, EnchantmentTier.ULTIMATE, EnchantmentTier.LEGENDARY, EnchantmentTier.SOUL, EnchantmentTier.HEROIC]
-
-    }
-
     static ItemStack createBook(CustomEnchantment enchantment, int enchantLevel, int successChance = 100, int destroyChance = 0) {
         ItemStack enchantedBook = new ItemStack(Material.BOOK)
 
