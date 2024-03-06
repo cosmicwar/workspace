@@ -16,8 +16,7 @@ class LootTableCategory extends UUIDDataObject {
 
     Set<UUID> tables = []
 
-    @BsonIgnore
-    transient LinkedHashMap<UUID, LootTable> tableCache = Maps.<UUID, LootTable> newLinkedHashMap()
+    @BsonIgnore transient Map<UUID, LootTable> tableCache = Maps.<UUID, LootTable> newConcurrentMap()
 
     LootTableCategory() {}
 
