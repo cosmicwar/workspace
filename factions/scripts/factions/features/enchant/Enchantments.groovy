@@ -6,6 +6,7 @@ import com.google.common.collect.Sets
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.bukkit.Location
+import org.bukkit.enchantments.EnchantmentTarget
 import org.bukkit.event.block.Action
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -43,6 +44,7 @@ import scripts.factions.features.enchant.data.enchant.StoredEnchantment
 import scripts.factions.features.enchant.data.item.BookEnchantmentData
 import scripts.factions.features.enchant.data.item.EnchantmentDustData
 import scripts.factions.features.enchant.data.item.ItemEnchantmentData
+import scripts.factions.features.enchant.data.item.ItemNametagData
 import scripts.factions.features.enchant.data.item.MysteryBookData
 import scripts.factions.features.enchant.data.item.MysteryEnchantmentDustData
 import scripts.factions.features.enchant.data.item.RandomSoulGenData
@@ -60,6 +62,7 @@ import scripts.factions.features.enchant.utils.SoulUtils
 import scripts.factions.features.enchant.data.item.BlackScrollData
 import scripts.factions.features.enchant.data.item.EnchantmentOrbData
 import scripts.factions.features.enchant.data.item.SoulGemData
+import scripts.factions.util.PromptUtils
 import scripts.shared.legacy.AntiDupeUtils
 import scripts.shared.legacy.CooldownUtils
 import scripts.shared.legacy.command.SubCommandBuilder
@@ -391,6 +394,7 @@ class Enchantments {
         items.getOrCreateConfig(enchantmentBookId).addDefault(EnchantConfigConst.getEnchantBookEntries())
         items.getOrCreateConfig(soulPearlId).addDefault(EnchantConfigConst.getSoulPearlEntries())
         items.getOrCreateConfig(timeMachineId).addDefault(EnchantConfigConst.getTimeMachineEntries())
+        items.getOrCreateConfig(itemNametagId).addDefault(EnchantConfigConst.getItemNametagEntries())
 
         values = enchantConfig.getOrCreateCategory("values")
         enchantConfig.queueSave()
@@ -1217,11 +1221,13 @@ class Enchantments {
     static String soulPearlId = "enchant_soulpearl"
     static String randomSoulGeneratorId = "enchant_randomsoulgenerator"
     static String timeMachineId = "enchant_timemachine"
+    static String itemNametagId = "enchant_itemnametag"
 
     ClickItem whiteScroll
     ClickItem holyWhiteScroll
     ClickItem blackScroll
     ClickItem transmogScroll
+    ClickItem itemNametag
 
     ClickItem enchantmentDust
     ClickItem mysteryEnchantmentDust
@@ -1815,6 +1821,45 @@ class Enchantments {
             }
         })
 
+        itemNametag = new ClickItem(itemNametagId, createItemNametag(), { Player player, PlayerInteractEvent event, ClickItem item ->
+            if (event.getAction().isLeftClick()) return
+            def nametagData = ItemNametagData.read(event.getItem())
+            if (nametagData == null) return
+            ItemStack clickItem = player.getItemInHand().clone()
+            player.setItemInHand(null)
+
+            SelectionUtils.selectString(player, "§eHold the item you would like to rename and enter the desired name into chat.", { string ->
+                def newString = string.replace("&&", "货")
+                newString = "§r" + newString.replace("&", "§")
+                newString = newString.replace("货", "&")
+                newString = newString + "§r"
+                ItemStack itemInHand = player.getItemInHand().clone()
+
+                if (itemInHand == null) {
+                    player.sendMessage("§cYou must be holding something you wish to name.")
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, null)
+                }
+
+                if (!EnchantmentTarget.ALL.includes(itemInHand)) {
+                    player.sendMessage("§cYou may not rename this item.")
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, null)
+                }
+
+                FastItemUtils.setDisplayName(itemInHand, newString)
+
+                MenuUtils.createConfirmMenu(player, "Item Nametag", itemInHand, {
+                    FastItemUtils.setDisplayName(player.getItemInHand(), newString)
+                    player.closeInventory()
+                    player.updateInventory()
+                }, {
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, null)
+                    player.closeInventory()
+                })
+                return
+            })
+
+        })
+
         ClickItems.register(whiteScroll)
         ClickItems.register(holyWhiteScroll)
         ClickItems.register(transmogScroll)
@@ -1827,6 +1872,7 @@ class Enchantments {
         ClickItems.register(randomSoulGenerator)
         ClickItems.register(soulPearl)
         ClickItems.register(timeMachine)
+        ClickItems.register(itemNametag)
     }
 
     ItemStack createBook(CustomEnchantment enchantment, int enchantLevel, int successChance = 100, int destroyChance = 0) {
@@ -2018,6 +2064,18 @@ class Enchantments {
         new TimeMachineData().write(timeMachine)
 
         return timeMachine
+    }
+
+    ItemStack createItemNametag() {
+        def itemNametag = FastItemUtils.createItem(
+                items.getOrCreateConfig(itemNametagId).getMaterialEntry(EnchantConfigConst.itemNametagMaterial.getId()).value,
+                items.getOrCreateConfig(itemNametagId).getStringEntry(EnchantConfigConst.itemNametagName.getId()).value,
+                items.getOrCreateConfig(itemNametagId).getStringListEntry(EnchantConfigConst.itemNametagLore.getId()).value
+        )
+
+        new ItemNametagData().write(itemNametag)
+
+        return itemNametag
     }
 }
 
