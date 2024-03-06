@@ -1840,7 +1840,8 @@ class Enchantments {
                     player.closeInventory()
                     player.updateInventory()
                 }, {
-                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, "")
+                    FastInventoryUtils.addOrBox(player.getUniqueId(), player, null, clickItem, null)
+                    player.closeInventory()
                 })
                 return
             })
