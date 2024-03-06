@@ -35,6 +35,12 @@ class FactionEvents {
 
             if (playerMember == null || targetMember == null) return
 
+            def playerFaction = Factions.getFaction(playerMember.factionId)
+            def targetFaction = Factions.getFaction(targetMember.factionId)
+
+            if (playerFaction == null || targetFaction == null) return
+            if (playerFaction.id == Factions.wildernessId || targetFaction.id == Factions.wildernessId) return
+
             def relation = Factions.getRelationType(playerMember, targetMember)
             switch (relation) {
                 case RelationType.ALLY:
@@ -68,6 +74,12 @@ class FactionEvents {
             def targetMember = Factions.getMember(target.getUniqueId())
 
             if (playerMember == null || targetMember == null) return
+
+            def playerFaction = Factions.getFaction(playerMember.factionId)
+            def targetFaction = Factions.getFaction(targetMember.factionId)
+
+            if (playerFaction == null || targetFaction == null) return
+            if (playerFaction.id == Factions.wildernessId || targetFaction.id == Factions.wildernessId) return
 
             def relation = Factions.getRelationType(playerMember, targetMember)
 
