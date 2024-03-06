@@ -490,6 +490,7 @@ class LootTableHandler {
 
                 table.rewards.add(reward)
                 table.queueSave()
+                table.parentCategory.queueSave()
 
                 Players.msg(p, "§] §> §cAdded this reward to table ${table.name}.")
 
