@@ -19,6 +19,7 @@ import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.scheduler.Task
+import org.starcade.starlight.helper.text3.Text
 import org.starcade.starlight.helper.utils.Players
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -70,6 +71,7 @@ import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.legacy.utils.MenuUtils
 import scripts.shared.systems.MenuBuilder
 import scripts.shared.systems.MenuEvent
+import scripts.shared.utils.ColorUtil
 import scripts.shared.utils.DataUtils
 import scripts.shared.utils.ItemType
 import scripts.shared3.utils.Callback
@@ -83,6 +85,8 @@ import java.util.stream.Collectors
 // Enchant Proccing - Enchant Priority: ex priority 1 will execute with all priority 1 enchants before priority 2 enchants or vice versa
 @CompileStatic(TypeCheckingMode.SKIP)
 class Enchantments {
+
+    static String enchantPrefix = ColorUtil.color("§<#D639E0>§lᴇɴᴄʜᴀɴᴛꜱ §8»")
 
     Map<String, CustomEnchantment> registeredEnchantments = new ConcurrentHashMap<>()
     static Map<UUID, Map<ItemStack, Map<CustomEnchantment, Integer>>> equippedEnchantsCache = new ConcurrentHashMap<>()
@@ -172,6 +176,10 @@ class Enchantments {
 
     def registerCommands() {
         SubCommandBuilder builder = SubCommandBuilder.of("enchants", "customenchant", "enchantapi", "ce").defaultAction { player -> openEnchantPreview(player) }
+
+        builder.create("devtestuk").register {ctx ->
+            ctx.reply("${enchantPrefix} §c§lPHOENIX §c- §eshmeeted")
+        }
 
         builder.create("givebook").requirePermission("enchants.*").usage("<player> <enchant> [level] [success] [destory]").register { c ->
             Player player = c.arg(0).parse(Player.class).get()

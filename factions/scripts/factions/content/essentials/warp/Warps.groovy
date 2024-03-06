@@ -77,6 +77,27 @@ class Warps {
                             "§3Teleporting to §b${warp.displayName}§3..."
                     )
                     return
+                } else {
+                    def warp = ctx.arg(0).parseOrFail(Warp)
+                    def target = ctx.arg(1).parseOrFail(Player)
+
+                    if (warp == null) {
+                        ctx.reply("§cWarp not found.")
+                        return
+                    }
+
+                    if (warp.position.world == null) {
+                        ctx.reply("§cThis warp is not set up correctly.")
+                        return
+                    }
+
+                    TeleportHandler.teleportPlayer(target,
+                            warp.position.getLocation(null),
+                            warp.warpTime,
+                            false,
+                            "§3Teleporting to §b${warp.displayName}§3..."
+                    )
+                    return
                 }
             }
 

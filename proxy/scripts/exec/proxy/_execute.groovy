@@ -28,22 +28,23 @@ execute {
     } else {
         loadFromConfig("configs/proxy/proxy.toml", "velocity.toml")
 
-/*        loadPlugin("BotSentry")
-        loadFromConfig("configs/proxy/botsentry", "plugins/botsentry")*/
+        loadPlugin("BotSentry")
+        loadFromConfig("configs/proxy/botsentry", "plugins/botsentry")
     }
 
-    if (Temple.templeId.contains("bedrock")) {
-        loadPlugin("Geyser-Velocity")
-        loadPlugin("floodgate-velocity")
-
-        loadFromConfig("configs/proxy/Geyser-Velocity", "plugins/Geyser-Velocity")
-
-        loadFromConfig("configs/proxy/proxy_bedrock-geyser.yml", "plugins/Geyser-Velocity/config.yml")
-        loadFromConfig("configs/global/floodgate/key.pem", "plugins/floodgate/key.pem")
-        loadFromConfig("configs/proxy/floodgate.yml", "plugins/floodgate/config.yml")
-    }
+//    if (Temple.templeId.contains("bedrock")) {
+//        loadPlugin("Geyser-Velocity")
+//        loadPlugin("floodgate-velocity")
+//
+//        loadFromConfig("configs/proxy/Geyser-Velocity", "plugins/Geyser-Velocity")
+//
+//        loadFromConfig("configs/proxy/proxy_bedrock-geyser.yml", "plugins/Geyser-Velocity/config.yml")
+//        loadFromConfig("configs/global/floodgate/key.pem", "plugins/floodgate/key.pem")
+//        loadFromConfig("configs/proxy/floodgate.yml", "plugins/floodgate/config.yml")
+//    }
 
     loadPlugin("scproxy")
+    loadPlugin("TCPShield-2.7.0")
 
     loadFromConfig("configs/proxy/starcade.toml", "plugins/starcade.toml")
     loadFromConfig("configs/proxy/icons", "icons")
