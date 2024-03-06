@@ -104,7 +104,7 @@ class TravellerSet extends CustomSet {
 
             Players.msg(player, "§5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
             Players.msg(player, "")
-            Players.msg(player, "§5§lTRAVELLER ABILITY ACTIVATED")
+            Players.msg(player, "§5§l      TRAVELLER ABILITY ACTIVATED")
             Players.msg(player, "")
             Players.msg(player, "§5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 
@@ -196,7 +196,6 @@ class TravellerSet extends CustomSet {
         }
 
         def stop() {
-            println("stopping - [${System.currentTimeMillis() - start}ms]")
             active = false
             blocks.each { it.untrack() }
         }
