@@ -42,6 +42,7 @@ import scripts.factions.features.enchant.data.enchant.StoredEnchantment
 import scripts.factions.features.enchant.data.item.BookEnchantmentData
 import scripts.factions.features.enchant.data.item.EnchantmentDustData
 import scripts.factions.features.enchant.data.item.ItemEnchantmentData
+import scripts.factions.features.enchant.data.item.ItemNametagData
 import scripts.factions.features.enchant.data.item.MysteryBookData
 import scripts.factions.features.enchant.data.item.MysteryEnchantmentDustData
 import scripts.factions.features.enchant.data.item.RandomSoulGenData
@@ -59,6 +60,7 @@ import scripts.factions.features.enchant.utils.SoulUtils
 import scripts.factions.features.enchant.data.item.BlackScrollData
 import scripts.factions.features.enchant.data.item.EnchantmentOrbData
 import scripts.factions.features.enchant.data.item.SoulGemData
+import scripts.factions.util.PromptUtils
 import scripts.shared.legacy.AntiDupeUtils
 import scripts.shared.legacy.CooldownUtils
 import scripts.shared.legacy.command.SubCommandBuilder
@@ -383,6 +385,7 @@ class Enchantments {
         items.getOrCreateConfig(enchantmentBookId).addDefault(EnchantConfigConst.getEnchantBookEntries())
         items.getOrCreateConfig(soulPearlId).addDefault(EnchantConfigConst.getSoulPearlEntries())
         items.getOrCreateConfig(timeMachineId).addDefault(EnchantConfigConst.getTimeMachineEntries())
+        items.getOrCreateConfig(itemNametagId).addDefault(EnchantConfigConst.getItemNametagEntries())
 
         values = enchantConfig.getOrCreateCategory("values")
         enchantConfig.queueSave()
@@ -1209,11 +1212,13 @@ class Enchantments {
     static String soulPearlId = "enchant_soulpearl"
     static String randomSoulGeneratorId = "enchant_randomsoulgenerator"
     static String timeMachineId = "enchant_timemachine"
+    static String itemNametagId = "enchant_itemnametag"
 
     ClickItem whiteScroll
     ClickItem holyWhiteScroll
     ClickItem blackScroll
     ClickItem transmogScroll
+    ClickItem itemNametag
 
     ClickItem enchantmentDust
     ClickItem mysteryEnchantmentDust
@@ -1807,6 +1812,25 @@ class Enchantments {
             }
         })
 
+        itemNametag = new ClickItem(itemNametagId, createItemNametag(), { Player player, PlayerInteractEvent event, ClickItem item ->
+            if (event.getAction().isLeftClick()) return
+            def nametagData = ItemNametagData.read(event.getItem())
+            if (nametagData == null) return
+
+            SelectionUtils.selectString(player, "§eHold the item you would like to rename and enter the desired name into chat.", { string ->
+                def newString = string.replace("&&", "货")
+                newString = newString.replace("&", "§")
+                newString = newString.replace("货", "&")
+
+                ItemStack itemInHand = player.getItemInHand().clone()
+
+                MenuUtils.createConfirmMenu(player, "Item Nametag", FastItemUtils.setDisplayName(itemInHand, newString), {
+                    FastItemUtils.setDisplayName(player.getItemInHand(), newString)
+                    player.updateInventory()
+                })
+            })
+        })
+
         ClickItems.register(whiteScroll)
         ClickItems.register(holyWhiteScroll)
         ClickItems.register(transmogScroll)
@@ -1819,6 +1843,7 @@ class Enchantments {
         ClickItems.register(randomSoulGenerator)
         ClickItems.register(soulPearl)
         ClickItems.register(timeMachine)
+        ClickItems.register(itemNametag)
     }
 
     ItemStack createBook(CustomEnchantment enchantment, int enchantLevel, int successChance = 100, int destroyChance = 0) {
@@ -2010,6 +2035,18 @@ class Enchantments {
         new TimeMachineData().write(timeMachine)
 
         return timeMachine
+    }
+
+    ItemStack createItemNametag() {
+        def itemNametag = FastItemUtils.createItem(
+                items.getOrCreateConfig(itemNametagId).getMaterialEntry(EnchantConfigConst.itemNametagMaterial.getId()).value,
+                items.getOrCreateConfig(itemNametagId).getStringEntry(EnchantConfigConst.itemNametagName.getId()).value,
+                items.getOrCreateConfig(itemNametagId).getStringListEntry(EnchantConfigConst.itemNametagLore.getId()).value
+        )
+
+        new ItemNametagData().write(itemNametag)
+
+        return itemNametag
     }
 }
 
