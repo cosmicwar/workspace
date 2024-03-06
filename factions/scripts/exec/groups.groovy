@@ -121,26 +121,26 @@ ArkGroups.addGroups([
         "group.donator.captain"  : [
                 priority  : 225,
                 color     : "#1cbfff",
-                short     : "${ColorUtil.color("§<#1cbfff>")}Captain§r",
-                scoreboard: "${ColorUtil.color("§<#1cbfff>")}Captain§r",
-                long      : "§b§k|§r§8[${ColorUtil.color("§<#1cbfff>")}Captain§8]§b§k|§r",
-                custom    : "${ColorUtil.color("§<#1cbfff>")}Captain§r"
+                short     : "${ColorUtil.color("§<#1cbfff>Captain")}§r",
+                scoreboard: "${ColorUtil.color("§<#1cbfff>Captain")}§r",
+                long      : "§b§k|§r§8[${ColorUtil.color("§<#1cbfff>Captain")}§8]§b§k|§r",
+                custom    : "${ColorUtil.color("§<#1cbfff>Captain")}§r"
         ],
         "group.donator.voyager"  : [
                 priority  : 175,
                 color     : "#4561ff",
-                short     : "${ColorUtil.color("§<#4561ff>")}Voyager§r",
-                scoreboard: "${ColorUtil.color("§<#4561ff>")}Voyager§r",
-                long      : "§b§k|§r§8[${ColorUtil.color("§<#4561ff>")}Voyager§8]§b§k|§r",
-                custom    : "${ColorUtil.color("§<#4561ff>")}Voyager§r"
+                short     : "${ColorUtil.color("§<#4561ff>Voyager")}§r",
+                scoreboard: "${ColorUtil.color("§<#4561ff>Voyager")}§r",
+                long      : "§b§k|§r§8[${ColorUtil.color("§<#4561ff>Voyager")}§8]§b§k|§r",
+                custom    : "${ColorUtil.color("§<#4561ff>Voyager")}§r"
         ],
         "group.donator.nomad"    : [
                 priority  : 75,
                 color     : "#4f80ff",
-                short     : "${ColorUtil.color("§<#4f80ff>")}Nomad§r",
-                scoreboard: "${ColorUtil.color("§<#4f80ff>")}Nomad§r",
+                short     : "${ColorUtil.color("§<#4f80ff>Nomad")}§r",
+                scoreboard: "${ColorUtil.color("§<#4f80ff>Nomad")}§r",
                 long      : "§b§k|§r§8[${ColorUtil.color("#4f80ff")}Nomad§8]§b§k|§r",
-                custom    : "${ColorUtil.color("§<#4f80ff>")}Nomad§r"
+                custom    : "${ColorUtil.color("§<#4f80ff>Nomad")}§r"
         ]
 ])
 
@@ -148,10 +148,10 @@ ArkGroups.addGroups([
         "default": [
                 priority  : 0,
                 color     : "#85e9ff",
-                short     : "${ColorUtil.color("§<#85e9ff>")}Explorer§r",
-                scoreboard: "${ColorUtil.color("§<#85e9ff>")}Explorer§r",
-                long      : "§b§k|§r§8[${ColorUtil.color("§<#85e9ff>")}Explorer§8]§b§k|§r",
-                custom    : "${ColorUtil.color("§<#85e9ff>")}Explorer§r"
+                short     : "${ColorUtil.color("§<#85e9ff>Explorer")}§r",
+                scoreboard: "${ColorUtil.color("§<#85e9ff>Explorer")}§r",
+                long      : "§b§k|§r§8[${ColorUtil.color("§<#85e9ff>Explorer")}§8]§b§k|§r",
+                custom    : "${ColorUtil.color("§<#85e9ff>Explorer")}§r"
         ]
 ])
 
