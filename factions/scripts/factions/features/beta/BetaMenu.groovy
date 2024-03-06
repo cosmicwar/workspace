@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.v1_20_R1.CraftWorld
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.Repairable
 import org.starcade.starlight.Starlight
 import org.starcade.starlight.helper.Commands
 import scripts.factions.features.enchant.Enchantments
@@ -94,8 +95,8 @@ class BetaMenu {
         }.register("feed")
 
         Commands.create().assertPlayer().handler {ctx ->
-            ctx.sender().inventory.contents.findAll { it != null && it.type.maxDurability > 0 }.each {
-                if (it.getDurability() != it.type.maxDurability) {
+            ctx.sender().inventory.contents.findAll { it != null }.each {
+                if (it instanceof Repairable) {
                     it.setDurability(it.type.maxDurability)
                 }
             }
