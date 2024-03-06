@@ -1,5 +1,7 @@
 package scripts.factions.eco.loottable
 
+import groovy.transform.CompileStatic
+import groovy.transform.TypeCheckingMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.Sound
@@ -30,6 +32,7 @@ import scripts.shared.systems.MenuBuilder
 import scripts.shared.utils.MenuDecorator
 import scripts.shared3.utils.Callback
 
+@CompileStatic(TypeCheckingMode.SKIP)
 class LootTableHandler {
 
     LootTableHandler() {
