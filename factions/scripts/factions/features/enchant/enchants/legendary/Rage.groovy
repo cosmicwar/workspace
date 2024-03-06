@@ -75,27 +75,27 @@ class Rage extends CustomEnchantment {
         })
     }
 
-    @Override
-    void onAttack(Player player, ItemStack itemStack, int enchantLevel, LivingEntity target, EntityDamageByEntityEvent event) {
-        int combo
-        if (!(target instanceof LivingEntity) || event.getFinalDamage() <= 0D) return
-        if (target instanceof Player) {
-            if (new Random().nextDouble() < 0.3) target.damage(4D) //additional crit dmg
-            combo = getPvpCombo(player)
-            if (combo > 0) {
-                EnchantUtils.scaleDamage(event, 1D + combo * getConfig().getDoubleEntry("dmgIncPerCombo").value)
-            }
-            incPvpCombo(player)
-            usersToRemoveActionBar.put(player.getUniqueId(), System.currentTimeMillis() + 3500L)
-            sendActiveActionBar.call(player)
-        } else if (target instanceof Entity) {
-            combo = getPveCombo(player)
-            if (combo > 0) {
-                EnchantUtils.scaleDamage(event, 1D + combo * getConfig().getDoubleEntry("dmgIncPerCombo").value)
-            }
-            incPveCombo(player)
-        }
-    }
+//    @Override
+//    void onAttack(Player player, ItemStack itemStack, int enchantLevel, LivingEntity target, EntityDamageByEntityEvent event) {
+//        int combo
+//        if (!(target instanceof LivingEntity) || event.getFinalDamage() <= 0D) return
+//        if (target instanceof Player) {
+//            if (new Random().nextDouble() < 0.3) target.damage(4D) //additional crit dmg
+//            combo = getPvpCombo(player)
+//            if (combo > 0) {
+//                EnchantUtils.scaleDamage(event, 1D + combo * getConfig().getDoubleEntry("dmgIncPerCombo").value)
+//            }
+//            incPvpCombo(player)
+//            usersToRemoveActionBar.put(player.getUniqueId(), System.currentTimeMillis() + 3500L)
+//            sendActiveActionBar.call(player)
+//        } else if (target instanceof Entity) {
+//            combo = getPveCombo(player)
+//            if (combo > 0) {
+//                EnchantUtils.scaleDamage(event, 1D + combo * getConfig().getDoubleEntry("dmgIncPerCombo").value)
+//            }
+//            incPveCombo(player)
+//        }
+//    }
 
     @Override
     void onDamaged(Player player, ItemStack itemStack, int enchantLevel, Entity attacker, EntityDamageByEntityEvent event) {
