@@ -1239,11 +1239,11 @@ class Enchantments {
     ClickItem randomSoulGenerator
     ClickItem timeMachine
 
-    int getMaxSlots() {
+    static int getMaxSlots() {
         return items.getOrCreateConfig(enchantmentOrbId).getIntEntry(EnchantConfigConst.enchantOrbMaxSlots.getId()).value
     }
 
-    int getDefSlots() {
+    static int getDefSlots() {
         return items.getOrCreateConfig(enchantmentOrbId).getIntEntry(EnchantConfigConst.enchantOrbDefSlots.getId()).value
     }
 
@@ -1875,7 +1875,7 @@ class Enchantments {
         ClickItems.register(itemNametag)
     }
 
-    ItemStack createBook(CustomEnchantment enchantment, int enchantLevel, int successChance = 100, int destroyChance = 0) {
+    static ItemStack createBook(CustomEnchantment enchantment, int enchantLevel, int successChance = 100, int destroyChance = 0) {
         ItemStack enchantedBook = new ItemStack(Material.BOOK)
 
         BookEnchantmentData bookEnchantmentData = new BookEnchantmentData(Collections.singletonList(new StoredEnchantment(enchantment.getInternalName(), enchantLevel)), successChance, destroyChance)
@@ -1899,7 +1899,7 @@ class Enchantments {
         return enchantedBook
     }
 
-    ItemStack createMysteryBook(EnchantmentTier enchantmentTier) {
+    static ItemStack createMysteryBook(EnchantmentTier enchantmentTier) {
         ItemStack enchantedBook = new ItemStack(Material.BOOK)
 
         MysteryBookData mysteryBookData = new MysteryBookData(enchantmentTier)
@@ -1917,7 +1917,7 @@ class Enchantments {
         return enchantedBook
     }
 
-    ItemStack createEnchantmentDust(EnchantmentTier enchantmentTier, int successIncrease = 1) {
+    static ItemStack createEnchantmentDust(EnchantmentTier enchantmentTier, int successIncrease = 1) {
         if (successIncrease < 1) successIncrease = 1
         if (successIncrease > 100) successIncrease = 100
 
@@ -1941,7 +1941,7 @@ class Enchantments {
         return enchantmentDust
     }
 
-    ItemStack createMysteryEnchantmentDust(EnchantmentTier enchantmentTier) {
+    static ItemStack createMysteryEnchantmentDust(EnchantmentTier enchantmentTier) {
         ItemStack mysteryDust = FastItemUtils.createItem(
                 items.getOrCreateConfig(mysteryEnchantmentDustId).getMaterialEntry(EnchantConfigConst.mysteryEnchantDustMaterial.getId()).value,
                 items.getOrCreateConfig(mysteryEnchantmentDustId).getStringEntry(EnchantConfigConst.mysteryEnchantDustName.getId()).value,
@@ -1953,7 +1953,7 @@ class Enchantments {
         return mysteryDust
     }
 
-    ItemStack createEnchantmentOrb(int successRate, int slotIncrease, EnchantmentOrbType enchantmentOrbType) {
+    static ItemStack createEnchantmentOrb(int successRate, int slotIncrease, EnchantmentOrbType enchantmentOrbType) {
         if (slotIncrease > (maxSlots - defSlots)) slotIncrease = maxSlots - defSlots
 
         def name = items.getOrCreateConfig(enchantmentOrbId).getStringEntry(EnchantConfigConst.enchantOrbName.getId()).value
@@ -1976,7 +1976,7 @@ class Enchantments {
         return enchantmentOrb
     }
 
-    ItemStack createWhiteScroll() {
+    static ItemStack createWhiteScroll() {
         ItemStack whiteScroll = FastItemUtils.createItem(
                 items.getOrCreateConfig(whiteScrollId).getMaterialEntry(EnchantConfigConst.whiteScrollMaterial.getId()).value,
                 items.getOrCreateConfig(whiteScrollId).getStringEntry(EnchantConfigConst.whiteScrollName.getId()).value,
@@ -1987,7 +1987,7 @@ class Enchantments {
         return whiteScroll
     }
 
-    ItemStack createHolyWhiteScroll(boolean antiDupe = false) {
+    static ItemStack createHolyWhiteScroll(boolean antiDupe = false) {
         ItemStack whiteScroll = FastItemUtils.createItem(
                 items.getOrCreateConfig(holyWhiteScrollId).getMaterialEntry(EnchantConfigConst.holyWhiteScrollMaterial.getId()).value,
                 items.getOrCreateConfig(holyWhiteScrollId).getStringEntry(EnchantConfigConst.holyWhiteScrollName.getId()).value,
@@ -2000,7 +2000,7 @@ class Enchantments {
         return whiteScroll
     }
 
-    ItemStack createBlackScroll(int newSuccessRate = 5) {
+    static ItemStack createBlackScroll(int newSuccessRate = 5) {
         if (newSuccessRate < 1) newSuccessRate = 1
         if (newSuccessRate > 100) newSuccessRate = 100
 
@@ -2018,7 +2018,7 @@ class Enchantments {
         return blackScroll
     }
 
-    ItemStack createTransmogScroll() {
+    static ItemStack createTransmogScroll() {
         def scroll = FastItemUtils.createItem(
                 items.getOrCreateConfig(transmogScrollId).getMaterialEntry(EnchantConfigConst.transmogMaterial.getId()).value,
                 items.getOrCreateConfig(transmogScrollId).getStringEntry(EnchantConfigConst.transmogName.getId()).value,
@@ -2030,7 +2030,7 @@ class Enchantments {
         return scroll
     }
 
-    ItemStack createRandomSoulGenerator() {
+    static ItemStack createRandomSoulGenerator() {
         def soulGem = FastItemUtils.createItem(
                 items.getOrCreateConfig(randomSoulGeneratorId).getMaterialEntry(EnchantConfigConst.randomSoulGenMaterial.getId()).value,
                 items.getOrCreateConfig(randomSoulGeneratorId).getStringEntry(EnchantConfigConst.randomSoulGenName.getId()).value,
@@ -2042,7 +2042,7 @@ class Enchantments {
         return soulGem
     }
 
-    ItemStack createSoulPearl() {
+    static ItemStack createSoulPearl() {
         def soulPearl = FastItemUtils.createItem(
             items.getOrCreateConfig(soulPearlId).getMaterialEntry(EnchantConfigConst.soulPearlMaterial.getId()).value,
             items.getOrCreateConfig(soulPearlId).getStringEntry(EnchantConfigConst.soulPearlName.getId()).value,
@@ -2054,7 +2054,7 @@ class Enchantments {
         return soulPearl
     }
 
-    ItemStack createTimeMachine() {
+    static ItemStack createTimeMachine() {
         def timeMachine = FastItemUtils.createItem(
                 items.getOrCreateConfig(timeMachineId).getMaterialEntry(EnchantConfigConst.timeMachineMaterial.getId()).value,
                 items.getOrCreateConfig(timeMachineId).getStringEntry(EnchantConfigConst.timeMachineName.getId()).value,
@@ -2066,7 +2066,7 @@ class Enchantments {
         return timeMachine
     }
 
-    ItemStack createItemNametag() {
+    static ItemStack createItemNametag() {
         def itemNametag = FastItemUtils.createItem(
                 items.getOrCreateConfig(itemNametagId).getMaterialEntry(EnchantConfigConst.itemNametagMaterial.getId()).value,
                 items.getOrCreateConfig(itemNametagId).getStringEntry(EnchantConfigConst.itemNametagName.getId()).value,

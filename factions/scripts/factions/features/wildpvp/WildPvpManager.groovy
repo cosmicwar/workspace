@@ -68,7 +68,7 @@ class WildPvpManager {
         }.build()
     }
 
-    private static NamespacedKey wildPvpKey = new NamespacedKey(Starlight.plugin, "wildpvp")\
+    private static NamespacedKey wildPvpKey = new NamespacedKey(Starlight.plugin, "wildpvp")
 
     static def pvpMenu(Player player, int page = 1) {
         MenuBuilder menu
