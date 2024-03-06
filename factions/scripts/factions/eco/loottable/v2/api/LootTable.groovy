@@ -74,7 +74,7 @@ class LootTable extends UUIDDataObject {
     }
 
     @BsonIgnore
-    def addReward(Reward reward) {
+    void addReward(Reward reward) {
         if (reward instanceof ItemReward) {
             this.itemRewards.add(reward)
         } else if (reward instanceof CommandReward) {
