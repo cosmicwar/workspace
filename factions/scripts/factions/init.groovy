@@ -73,7 +73,7 @@ Starlight.watch(
         // Features \\
         "~/features/enchant/potion/PotionEffects.groovy",
         "scripts/shared/features/actionbar/ActionBars.groovy",
-        "~/features/beta/BetaMenu.groovy",
+        "scripts/factions/features/beta/BetaMenu.groovy",
 
         // cOsMiC \\
         "~/features/enchant/utils/EnchantmentCooldowns.groovy",
