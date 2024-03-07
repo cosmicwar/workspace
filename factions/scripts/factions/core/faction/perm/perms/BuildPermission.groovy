@@ -5,6 +5,7 @@ import groovy.transform.TypeCheckingMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockPistonExtendEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.persistence.PersistentDataType
@@ -57,7 +58,7 @@ class BuildPermission extends Permission {
             }
         }
 
-        Events.subscribe(BlockPistonExtendEvent.class).handler { event ->
+        Events.subscribe(BlockPistonExtendEvent.class, EventPriority.HIGHEST).handler { event ->
             def block = event.getBlock()
             def direction = event.getDirection().direction
             def origin = Factions.getClaimAt(CL.of(block.location))
