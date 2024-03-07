@@ -62,7 +62,7 @@ class BuildPermission extends Permission {
             def block = event.getBlock()
             def direction = event.getDirection().direction
             def origin = Factions.getClaimAt(CL.of(block.location))
-            def destination = Factions.getClaimAt(CL.of(block.location.add(direction)))
+            def destination = Factions.getClaimAt(CL.of(block.location.add(direction).add(direction)))
 
             if (origin.factionId == destination.factionId) return
             if (destination.factionId == Factions.wildernessId) return
