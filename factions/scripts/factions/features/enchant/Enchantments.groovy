@@ -1276,6 +1276,11 @@ class Enchantments {
                 itemEnchantmentData = new ItemEnchantmentData(currentItem)
             }
 
+            if (!EnchantmentTarget.ALL.includes(currentItem)) {
+                Players.msg(player, "§] §> §cYou may not apply a white scroll to this item.")
+                return
+            }
+
             if (itemEnchantmentData.whiteScroll) {
                 Players.playSound(player, Sound.ENTITY_VILLAGER_NO)
                 Players.msg(player, "§] §> §cThis item already has a white scroll applied.")

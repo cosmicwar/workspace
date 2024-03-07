@@ -130,7 +130,7 @@ class FClaim {
                 Players.msg(player, "${blockPos.x} ${blockPos.y} ${blockPos.z} ${blockPos.world}")
 
                 def world = event.getBlockPlaced().world
-                def block = world.getBlockAt(blockPos.x, blockPos.y, blockPos.z)
+                def block = world.getBlockAt(blockPos.x as int, blockPos.y as int, blockPos.z as int)
                 Schedulers.sync().runLater({
                     if (block.type != Material.ENDER_CHEST) block.setType(Material.ENDER_CHEST)
                     data.spawnHologram()

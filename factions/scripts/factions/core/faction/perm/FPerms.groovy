@@ -386,7 +386,7 @@ class FPerms {
     static def openFactionAccessEdit(Player viewer, Member member, Faction faction, Faction targetFaction, int page = 1) {
         MenuBuilder menu
         menu = MenuUtils.createPagedMenu("§3${targetFaction.getName()} Access", new ArrayList<Permission>(Factions.defaultPermissions.findAll {!it.value.baseFactionOnly }.values()), { Permission permission, Integer slot ->
-            def access = faction.getAccess(targetFaction.getFactionId(), TargetType.FACTION)
+            def access = faction.getAccess(targetFaction.id, TargetType.FACTION)
             if (access != null) {
                 if (access.access.find { it.internalId == permission.internalId } != null) {
                     def item = FastItemUtils.createItem(Material.LIME_STAINED_GLASS_PANE, "§a${permission.getName()}", [
@@ -425,9 +425,9 @@ class FPerms {
                     if (internalId == null) return
 
                     //true
-                    def factionAccess = faction.getAccess(targetFaction.getFactionId(), TargetType.FACTION)
+                    def factionAccess = faction.getAccess(targetFaction.id, TargetType.FACTION)
                     if (factionAccess == null) {
-                        AccessData accessData = new AccessData(targetFaction.getFactionId(), TargetType.FACTION)
+                        AccessData accessData = new AccessData(targetFaction.id, TargetType.FACTION)
                         accessData.access.add(new Access(internalId))
                         faction.addAccess(accessData)
                     } else {
