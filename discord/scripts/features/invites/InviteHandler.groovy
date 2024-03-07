@@ -110,7 +110,6 @@ class InviteHandler extends ListenerAdapter {
 
     @Override
     void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
-        println("test4")
         println(event.getName())
         if (event.getName() == "invites") {
             getUserInvites(event.user.id) { doc ->
@@ -120,7 +119,6 @@ class InviteHandler extends ListenerAdapter {
                 event.replyEmbeds(new EmbedBuilder().setTitle("${event.user.name} - ${real} invites.").build()).setEphemeral(true).queue()
             }
         } else if (event.getName() == "inviteleaderboard") {
-            println("test")
             def sortedUsers
             Mongo.getGlobal().sync { mongo ->
                 sortedUsers = mongo.getCollection(Globals.INVITE_COLLECTION).find().sort(Sorts.descending("realInvites"))
@@ -139,7 +137,6 @@ class InviteHandler extends ListenerAdapter {
                 leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + doc.getOrDefault("realInvites", 0) + " invites \n"
                 counter++
             }
-            println("test2")
 
             EmbedBuilder inviteEmbed = new EmbedBuilder()
             inviteEmbed.setTitle("📩 **Starcade Invites**")
@@ -147,9 +144,8 @@ class InviteHandler extends ListenerAdapter {
             inviteEmbed.setDescription(
                     "**Welcome to Starcade Invites!** \r\n Bellow are the invite rankings, reach the top for rewards!\n" + leaderboard
             )
-            println("test3")
 
-            event.reply("test").setEphemeral(true)
+            event.reply("test")//.setEphemeral(true)
         }
     }
 
