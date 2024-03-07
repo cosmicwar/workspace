@@ -4,6 +4,7 @@ import com.google.common.collect.Sets
 import org.starcade.starlight.Starlight
 import org.starcade.starlight.helper.Commands
 import org.starcade.starlight.helper.Events
+import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.event.filter.EventFilters
 import org.bukkit.Chunk
 import org.bukkit.Material
@@ -20,11 +21,11 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.tags.ItemTagType
 import scripts.factions.core.faction.FactionUtils
-import scripts.factions.core.faction.data.Faction
 import scripts.shared.legacy.utils.DatabaseUtils
 import scripts.shared.legacy.utils.FastInventoryUtils
 import scripts.shared.legacy.utils.FastItemUtils
 
+import java.util.concurrent.TimeUnit
 import java.util.function.Consumer
 import java.util.function.Function
 import java.util.stream.Collectors
@@ -88,52 +89,55 @@ Events.subscribe(BlockPlaceEvent.class, EventPriority.NORMAL).filter(EventFilter
         return
     }
 
-    Set<Block> removeBlocks = Sets.newHashSet()
-    Chunk chunk = block.chunk
-    int xC = chunk.x << 4
-    int zC = chunk.z << 4
+    player.sendMessage("§a§lChunk buster placed, please wait 5 seconds.")
+    Schedulers.sync().runLater({
+        Set<Block> removeBlocks = Sets.newHashSet()
+        Chunk chunk = block.chunk
+        int xC = chunk.x << 4
+        int zC = chunk.z << 4
 
-    World world = block.world
+        World world = block.world
 
-    boolean fullRemove = !player.isSneaking()
+        boolean fullRemove = !player.isSneaking()
 
-    int removeHeight = fullRemove ? world.getMaxHeight() : block.y
+        int removeHeight = fullRemove ? world.getMaxHeight() : block.y
 
-    removeBlocks = (Set) IntStream.range(xC, xC + 16).mapToObj((pX) -> {
-        return IntStream.range(zC, zC + 16).mapToObj((pZ) -> {
-            return IntStream.rangeClosed(-63, removeHeight).mapToObj((pY) -> {
-                return world.getBlockAt(pX, pY, pZ)
+        removeBlocks = (Set) IntStream.range(xC, xC + 16).mapToObj((pX) -> {
+            return IntStream.range(zC, zC + 16).mapToObj((pZ) -> {
+                return IntStream.rangeClosed(-63, removeHeight).mapToObj((pY) -> {
+                    return world.getBlockAt(pX, pY, pZ)
+                })
             })
-        })
-    }).flatMap(Function.identity()).flatMap(Function.identity()).filter((blockC) -> {
-        return !blockC.isEmpty()
-    }).filter((blockC) -> {
-        return blockC.type != Material.AIR && blockC.type != Material.CAVE_AIR
-    }).filter((blockC) -> {
-        return !(blockC instanceof Container)
-    }).filter((blockC) -> {
-        return !blockC.type.name().endsWith("_SHULKER_BOX")
-    }).filter((blockC) -> {
-        return !ChunkBusterUtils.chunkBusterBlacklist.contains(blockC.type)
-    }).collect(Collectors.toSet())
+        }).flatMap(Function.identity()).flatMap(Function.identity()).filter((blockC) -> {
+            return !blockC.isEmpty()
+        }).filter((blockC) -> {
+            return blockC.type != Material.AIR && blockC.type != Material.CAVE_AIR
+        }).filter((blockC) -> {
+            return !(blockC instanceof Container)
+        }).filter((blockC) -> {
+            return !blockC.type.name().endsWith("_SHULKER_BOX")
+        }).filter((blockC) -> {
+            return !ChunkBusterUtils.chunkBusterBlacklist.contains(blockC.type)
+        }).collect(Collectors.toSet())
 
-    if (removeBlocks == null || removeBlocks.isEmpty()) {
-        player.sendMessage("§c§l * §cThere are no blocks to remove in this chunk!")
-        player.playSound(player.location, Sound.ENTITY_VILLAGER_NO, 5.0F, 1.0F)
-        return
-    }
+        if (removeBlocks == null || removeBlocks.isEmpty()) {
+            player.sendMessage("§c§l * §cThere are no blocks to remove in this chunk!")
+            player.playSound(player.location, Sound.ENTITY_VILLAGER_NO, 5.0F, 1.0F)
+            return
+        }
 
-    ChunkBusterUtils.updateLore(item, usages - 1)
-    FastItemUtils.setCustomTag(item, ChunkBusterUtils.CHUNK_BUSTER_KEY, ItemTagType.INTEGER, usages - 1)
+        ChunkBusterUtils.updateLore(item, usages - 1)
+        FastItemUtils.setCustomTag(item, ChunkBusterUtils.CHUNK_BUSTER_KEY, ItemTagType.INTEGER, usages - 1)
 
-    player.updateInventory()
-    block.world.spawnParticle(Particle.EXPLOSION_HUGE, block.location.toCenterLocation(), 1, 0.0D, 0.0D, 0.0D, 1.0D)
-    block.world.spawnParticle(Particle.CLOUD, block.location.toCenterLocation(), 8, 0.0, 0.0D, 0.0D, 0.4000000059604645D)
-    block.world.spawnParticle(Particle.SMALL_FLAME, block.location.toCenterLocation(), 4, 0.0D, 0.0D, 0.0D, 0.30000001192092896D)
-    block.world.playSound(block.location, Sound.ENTITY_GENERIC_EXPLODE, 5.0F, 1.0F)
-    removeBlocks.forEach(ChunkBusterUtils.setAir)
-    player.sendMessage("§a§l * §aSuccessfully removed §f${removeBlocks.size()} §ablocks from this chunk!")
-    player.playSound(player.location, Sound.ENTITY_VILLAGER_YES, 5.0F, 1.0F)
+        player.updateInventory()
+        block.world.spawnParticle(Particle.EXPLOSION_HUGE, block.location.toCenterLocation(), 1, 0.0D, 0.0D, 0.0D, 1.0D)
+        block.world.spawnParticle(Particle.CLOUD, block.location.toCenterLocation(), 8, 0.0, 0.0D, 0.0D, 0.4000000059604645D)
+        block.world.spawnParticle(Particle.SMALL_FLAME, block.location.toCenterLocation(), 4, 0.0D, 0.0D, 0.0D, 0.30000001192092896D)
+        block.world.playSound(block.location, Sound.ENTITY_GENERIC_EXPLODE, 5.0F, 1.0F)
+        removeBlocks.forEach(ChunkBusterUtils.setAir)
+        player.sendMessage("§a§l * §aSuccessfully removed §f${removeBlocks.size()} §ablocks from this chunk!")
+        player.playSound(player.location, Sound.ENTITY_VILLAGER_YES, 5.0F, 1.0F)
+    }, 5, TimeUnit.SECONDS)
 }
 
 class ChunkBusterUtils {
@@ -151,8 +155,10 @@ class ChunkBusterUtils {
 
     static ItemStack createChunkBuster(int usages = 1) {
         ItemStack item = FastItemUtils.createItem(chunkBusterMaterial, "§6§l * Chunk Buster * ", [
+                "§ePlace while crouching to remove blocks only at and under the placement location.",
                 "",
-                "§7Usages: §f$usages"
+                "§7Usages: §f$usages",
+                ""
         ])
         FastItemUtils.setCustomTag(item, CHUNK_BUSTER_KEY, ItemTagType.INTEGER, usages)
         FastItemUtils.ensureUnique(item)
