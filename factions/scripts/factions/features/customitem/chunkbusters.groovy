@@ -174,7 +174,7 @@ class ChunkBusterUtils {
             lore.add("")
             lore.add("§7Usages: §f$usages")
         } else {
-            lore.set(1, "§7Usages: §f$usages")
+            lore.set(3, "§7Usages: §f$usages")
         }
 
         FastItemUtils.setLore(chunkBuster, lore)
