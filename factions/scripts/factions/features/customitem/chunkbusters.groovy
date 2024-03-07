@@ -155,7 +155,7 @@ class ChunkBusterUtils {
 
     static ItemStack createChunkBuster(int usages = 1) {
         ItemStack item = FastItemUtils.createItem(chunkBusterMaterial, "§6§l * Chunk Buster * ", [
-                "",
+                "-----------------",
                 "§8➥ §7Place while crouching to remove blocks only at",
                 "§7and under the placement location.",
                 "",
