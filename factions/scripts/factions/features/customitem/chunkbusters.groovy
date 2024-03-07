@@ -155,12 +155,12 @@ class ChunkBusterUtils {
 
     static ItemStack createChunkBuster(int usages = 1) {
         ItemStack item = FastItemUtils.createItem(chunkBusterMaterial, "§6§l * Chunk Buster * ", [
-                "§8+----------------------------------+",
+                "§8------------------------------------",
                 "§8➥ §7Place while crouching to remove blocks",
                 "§7only at and under the placement location.",
                 "",
                 "§7Usages: §f$usages",
-                "§8+----------------------------------+"
+                "§8------------------------------------"
         ])
         FastItemUtils.setCustomTag(item, CHUNK_BUSTER_KEY, ItemTagType.INTEGER, usages)
         FastItemUtils.ensureUnique(item)
