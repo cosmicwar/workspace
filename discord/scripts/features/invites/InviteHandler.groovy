@@ -280,6 +280,7 @@ class InviteHandler extends ListenerAdapter {
             if (messages.size() < 3) {
                 for (Message msg : messages) {
                     try {
+                        if (msg.isPinned()) continue
                         println(messageId + " - messageId")
                         msg.editMessageEmbeds(inviteEmbed.build()).queue {
                             println(it.getIdLong() + " - idlong")
