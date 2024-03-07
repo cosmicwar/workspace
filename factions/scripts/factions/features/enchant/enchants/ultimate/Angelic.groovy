@@ -39,10 +39,10 @@ class Angelic extends CustomEnchantment {
         int repetitions = 0
         player.sendMessage("§e ** Angelic ** ")
         healTask = Schedulers.async().runRepeating({
-            EnchantUtils.heal(player, 0.5D * enchantLevel)
+            EnchantUtils.heal(player, 0.3D * enchantLevel)
             if (repetitions >= 4) healTask.stop()
             repetitions++
-        }, 0, 20)
+        }, 0, 30)
     }
 
 

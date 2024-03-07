@@ -31,6 +31,7 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.projectiles.ProjectileSource
 import scripts.factions.features.enchant.enchants.heroic.DivineEnlightened
+import scripts.factions.features.enchant.enchants.legendary.Enlightened
 import scripts.factions.features.enchant.enchants.legendary.Inversion
 import scripts.factions.features.enchant.enchants.legendary.Lifesteal
 import scripts.factions.features.enchant.enchants.ultimate.Angelic
@@ -158,7 +159,7 @@ class EnchantListener {
 
             forEquippedEnchants(player, { ItemStack itemStack, CustomEnchantment enchantment, int enchantLevel ->
                 if (silenced) {
-                    if (enchantment instanceof DivineEnlightened || enchantment instanceof Lifesteal || enchantment instanceof Angelic || enchantment instanceof Inversion) return
+                    if (enchantment instanceof DivineEnlightened || enchantment instanceof Enlightened || enchantment instanceof Lifesteal || enchantment instanceof Angelic || enchantment instanceof Inversion) return
                 }
                 enchantment.onAttack(player, itemStack, enchantLevel, event.getEntity() as LivingEntity, event)
             })
@@ -217,7 +218,7 @@ class EnchantListener {
 
             forEquippedEnchants(player, { ItemStack itemStack, CustomEnchantment enchantment, int enchantLevel ->
                 if (silenced) {
-                    if (enchantment instanceof DivineEnlightened || enchantment instanceof Lifesteal || enchantment instanceof Angelic || enchantment instanceof Inversion) return
+                    if (enchantment instanceof DivineEnlightened || enchantment instanceof Enlightened || enchantment instanceof Lifesteal || enchantment instanceof Angelic || enchantment instanceof Inversion) return
                 }
                 if (!event.isCancelled()) enchantment.onDamaged(player, itemStack, enchantLevel, attacker, event as EntityDamageByEntityEvent)
             })

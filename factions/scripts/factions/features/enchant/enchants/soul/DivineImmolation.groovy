@@ -46,7 +46,7 @@ class DivineImmolation extends CustomEnchantment {
                 "Divine Immolation",
                 ["Chance to set your target on fire", "and deal extra damage"],
                 [ItemType.SWORD],
-                5
+                4
         )
 
         setProcChance(1.0D)
