@@ -85,7 +85,7 @@ class Permission
         if (member.role == Role.ADMIN) return true // bypass :]
 
         def faction = Factions.getFaction(factionId, false)
-        if (faction == null) return false
+        if (faction == null) return true
 
         def memberAccess = faction.getAccess(member.getId(), TargetType.PLAYER)
         if (memberAccess == null) return false
@@ -104,16 +104,18 @@ class Permission
             return chunk.x == player.getChunk().x && chunk.z == player.getChunk().z
         }
 
-        return access
+        return false
     }
 
     static boolean hasAccessOverride(UUID factionId, UUID targetFactionId, Location location, String internalId) {
-
         def faction = Factions.getFaction(factionId, false)
-        if (faction == null) return false
+        if (faction == null) return true
 
         def memberAccess = faction.getAccess(targetFactionId, TargetType.FACTION)
-        if (memberAccess == null) return false
+        if (memberAccess == null) {
+            println("no member access")
+            return false
+        }
 
         def access = memberAccess.access.find { it.internalId == internalId }
 
@@ -124,9 +126,11 @@ class Permission
             if (world == null) return false
 
             return chunk.x == location.getChunk().x && chunk.z == location.getChunk().z
+        } else {
+            println("no access")
         }
 
-        return access
+        return false
     }
 
     static boolean hasAccessIn(CL cl, Member member, String internalId) {
