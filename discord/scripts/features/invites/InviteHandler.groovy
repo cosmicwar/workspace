@@ -247,12 +247,14 @@ class InviteHandler extends ListenerAdapter {
 
 
     static void createLeaderboard(GenericGuildEvent event) {
+        println("250")
         def sortedUsers
         Mongo.getGlobal().sync { mongo ->
             sortedUsers = mongo.getCollection(Globals.INVITE_COLLECTION).find().sort(Sorts.descending("realInvites"))
         }
 
         if (sortedUsers == null) println("ERROR could not retrieve sortedUsers")
+        println("257")
 
         String leaderboard = "\n"
         ArrayList<String> places = ["🥇", "🥈", "🥉", "🎖️"]
@@ -266,6 +268,7 @@ class InviteHandler extends ListenerAdapter {
             leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + invites + " ${invites == 1 ? "invite" : "invites"} \n"
             counter++
         }
+        println("271")
 
         EmbedBuilder inviteEmbed = new EmbedBuilder()
         inviteEmbed.setTitle("📩 **Starcade Invites**")
@@ -273,11 +276,14 @@ class InviteHandler extends ListenerAdapter {
         inviteEmbed.setDescription(
                 "**Welcome to Starcade Invites!** \r\n Bellow are the invite rankings, reach the top for rewards!\n" + leaderboard
         )
+        println("279")
 
         TextChannel ticketChannel = event.getJDA().getTextChannelById(Globals.INVITE_CHANNEL_ID)
         ticketChannel.getHistoryFromBeginning(1).queue {
             List<Message> messages = it.getRetrievedHistory()
             if (messages.size() < 3) {
+                println("285")
+
                 for (Message msg : messages) {
                     println(msg.getId())
                     try {
@@ -293,10 +299,14 @@ class InviteHandler extends ListenerAdapter {
                     }
                 }
             } else if (messages.size() == 0) {
+                println("302")
+
                 ticketChannel.sendMessageEmbeds(inviteEmbed.build()).queue {
                     messageId = it.getIdLong()
                 }
             } else {
+                println("308")
+
                 messages.each {
                     if (!it.isPinned()) it.delete().queue()
                 }
