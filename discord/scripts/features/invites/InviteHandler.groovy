@@ -134,7 +134,8 @@ class InviteHandler extends ListenerAdapter {
                 if (counter > usersOnLeaderBoard) break
                 String userId = doc.get("userId")
                 String place = counter < 3 ? places[counter] : places[3]
-                leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + doc.getOrDefault("realInvites", 0) + " invites \n"
+                Integer invites =  doc.getOrDefault("realInvites", 0) as Integer
+                leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + invites + " ${invites == 1 ? "invite" : "invites"} \n"
                 counter++
             }
 
@@ -262,7 +263,8 @@ class InviteHandler extends ListenerAdapter {
             if (counter > usersOnLeaderBoard) break
             String userId = doc.get("userId")
             String place = counter < 3 ? places[counter] : places[3]
-            leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + doc.getOrDefault("realInvites", 0) + " invites \n"
+            Integer invites =  doc.getOrDefault("realInvites", 0) as Integer
+            leaderboard += place + " " + event.getJDA().getUserById(userId).name + " | " + invites + " ${invites == 1 ? "invite" : "invites"} \n"
             counter++
         }
 
