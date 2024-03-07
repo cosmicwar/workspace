@@ -30,6 +30,10 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.projectiles.ProjectileSource
+import scripts.factions.features.enchant.enchants.heroic.DivineEnlightened
+import scripts.factions.features.enchant.enchants.legendary.Inversion
+import scripts.factions.features.enchant.enchants.legendary.Lifesteal
+import scripts.factions.features.enchant.enchants.ultimate.Angelic
 import scripts.factions.features.enchant.struct.CustomEnchantment
 import scripts.factions.features.enchant.utils.EnchantUtils
 import scripts.factions.features.enchant.utils.SoulUtils
@@ -139,10 +143,11 @@ class EnchantListener {
 
             Player player = (Player) attacker
             UUID uuid = player.getUniqueId()
+            boolean silenced = false
             if (silencedPlayers.containsKey(uuid)) {
+                silenced = true
                 long time = silencedPlayers.get(uuid)
                 if (System.currentTimeMillis() > time) silencedPlayers.remove(uuid)
-                else return
             }
 
             if (!isInPvpZone(player)) return
@@ -152,6 +157,9 @@ class EnchantListener {
             }
 
             forEquippedEnchants(player, { ItemStack itemStack, CustomEnchantment enchantment, int enchantLevel ->
+                if (silenced) {
+                    if (enchantment instanceof DivineEnlightened || enchantment instanceof Lifesteal || enchantment instanceof Angelic || enchantment instanceof Inversion) return
+                }
                 enchantment.onAttack(player, itemStack, enchantLevel, event.getEntity() as LivingEntity, event)
             })
         })
@@ -184,10 +192,12 @@ class EnchantListener {
 
             Player player = (Player) entity
             UUID uuid = player.getUniqueId()
+
+            boolean silenced = false
             if (silencedPlayers.containsKey(uuid)) {
+                silenced = true
                 long time = silencedPlayers.get(uuid)
                 if (System.currentTimeMillis() > time) silencedPlayers.remove(uuid)
-                else return
             }
             Entity attacker = EnchantUtils.getLiableDamager(event)
 
@@ -206,6 +216,9 @@ class EnchantListener {
             recentDamagers.computeIfAbsent(event.getEntity().getUniqueId(), v -> new ConcurrentHashMap<>()).put(attacker.getUniqueId(), System.currentTimeMillis())
 
             forEquippedEnchants(player, { ItemStack itemStack, CustomEnchantment enchantment, int enchantLevel ->
+                if (silenced) {
+                    if (enchantment instanceof DivineEnlightened || enchantment instanceof Lifesteal || enchantment instanceof Angelic || enchantment instanceof Inversion) return
+                }
                 if (!event.isCancelled()) enchantment.onDamaged(player, itemStack, enchantLevel, attacker, event as EntityDamageByEntityEvent)
             })
         })
