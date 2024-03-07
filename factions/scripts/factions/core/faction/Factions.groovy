@@ -836,12 +836,12 @@ class Factions {
                     }
                 }
 
-                if (member.role != Role.LEADER && member.role != Role.ADMIN) {
-                    cmd.reply("§3You must be the leader to disband the faction.")
+                if (member.role == Role.LEADER || member.role == Role.ADMIN) {
+                    createDisbandMenu(member)
                     return
                 }
 
-                createDisbandMenu(member)
+                cmd.reply("§3You must be the leader to disband the faction.")
             }
         }
 
