@@ -36,7 +36,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 class InviteHandler extends ListenerAdapter {
 
     private final Map<String, Map<String, CachedInvite>> inviteCache = new ConcurrentHashMap<>()
-    private static final long FAKE_INVITE_DAYS_OFFSET = 1
+    private static final long FAKE_INVITE_DAYS_OFFSET = 14
 
     private static Long messageId = 1214992378956349521
 
@@ -153,7 +153,7 @@ class InviteHandler extends ListenerAdapter {
         final String avatar = user.getAvatarUrl()
         final OffsetDateTime timeCreated = user.getTimeCreated()
         final long days = DAYS.between(timeCreated, OffsetDateTime.now())
-        return days > FAKE_INVITE_DAYS_OFFSET && avatar == null
+        return days < FAKE_INVITE_DAYS_OFFSET && avatar == null
     }
 
     private void handleWelcome(Guild guild, User user, Callback<Boolean> success = {}) {
