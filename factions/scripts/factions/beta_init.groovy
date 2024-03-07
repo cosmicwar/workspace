@@ -108,6 +108,7 @@ Starlight.watch(
 
         "~/patch/FPSPatch.groovy",
         "~/patch/InvseePatch.groovy",
+        "~/patch/swappatch.groovy",
 
         // fixes \\
         "~/fixes/PvpPatches.groovy",

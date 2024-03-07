@@ -47,7 +47,7 @@ class NatureWrath extends CustomEnchantment {
         }
         if (!consumeSouls(player, true)) return
 
-        player.sendMessage("§e§l  ** NATURE'S WRATH **  §r§c(-150 souls)")
+        player.sendMessage("§e§l  ** NATURE'S WRATH **  §r§c(-${getConsumption()} souls)")
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 0.65f);
 
         int radius = 8 + enchantLevel * 5;
