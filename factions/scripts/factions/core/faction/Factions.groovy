@@ -836,7 +836,7 @@ class Factions {
                     }
                 }
 
-                if (member.role != Role.LEADER) {
+                if (member.role != Role.LEADER || member.role != Role.ADMIN) {
                     cmd.reply("§3You must be the leader to disband the faction.")
                     return
                 }
