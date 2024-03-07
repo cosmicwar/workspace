@@ -38,7 +38,7 @@ class InviteHandler extends ListenerAdapter {
     private final Map<String, Map<String, CachedInvite>> inviteCache = new ConcurrentHashMap<>()
     private static final long FAKE_INVITE_DAYS_OFFSET = 1
 
-    private static Long messageId = null
+    private static Long messageId = 1214992378956349521
 
     static void updateUserInvites(String userId, int realInvites, int fakeInvites) {
         Mongo.getGlobal().sync(mongo -> {
