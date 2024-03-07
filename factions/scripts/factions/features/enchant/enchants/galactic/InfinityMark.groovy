@@ -42,8 +42,8 @@ class InfinityMark extends CustomEnchantment {
                 false
         )
 
-        setProcChance(1D)
-        setCoolDown(30)
+        setProcChance(0.004D)
+        setCoolDown(120)
 
         Commands.create().assertPlayer().handler {
             def mark = new Mark(it.sender(), it.sender(), System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15))
@@ -59,7 +59,7 @@ class InfinityMark extends CustomEnchantment {
             def mark = activeMarks.get(target.getUniqueId())
             if (mark != null) {
                 if (mark.shownPlayers.contains(player.getUniqueId())) {
-                    EnchantUtils.scaleDamage(event, 1D + ThreadLocalRandom.current().nextDouble(0D, .5D))
+                    EnchantUtils.scaleDamage(event, 1D + ThreadLocalRandom.current().nextDouble(0D, .1D))
                     player.spawnParticle(Particle.CRIT_MAGIC, target.getLocation().add(0D, 0.75D, 0D), 20)
                 }
             }
