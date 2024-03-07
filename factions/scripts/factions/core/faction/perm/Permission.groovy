@@ -112,7 +112,7 @@ class Permission
         def faction = Factions.getFaction(factionId, false)
         if (faction == null) return false
 
-        def memberAccess = faction.getAccess(factionId, TargetType.FACTION)
+        def memberAccess = faction.getAccess(targetFactionId, TargetType.FACTION)
         if (memberAccess == null) return false
 
         def access = memberAccess.access.find { it.internalId == internalId }
