@@ -5,6 +5,7 @@ import groovy.transform.TypeCheckingMode
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.event.block.BlockPistonExtendEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.persistence.PersistentDataType
 import org.starcade.starlight.helper.Events
@@ -54,6 +55,18 @@ class BuildPermission extends Permission {
                     event.setCancelled(true)
                 }
             }
+        }
+
+        Events.subscribe(BlockPistonExtendEvent.class).handler { event ->
+            def block = event.getBlock()
+            def direction = event.getDirection().direction
+            def origin = Factions.getClaimAt(CL.of(block.location))
+            def destination = Factions.getClaimAt(CL.of(block.location.add(direction)))
+
+            if (origin.factionId == destination.factionId) return
+            if (destination.factionId == Factions.wildernessId) return
+
+            event.setCancelled(true)
         }
     }
 

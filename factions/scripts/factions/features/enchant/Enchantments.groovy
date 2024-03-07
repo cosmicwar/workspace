@@ -1404,10 +1404,16 @@ class Enchantments {
             TransmogScrollData transmogScrollData = TransmogScrollData.read(cursor)
             if (transmogScrollData == null) return
 
+            if (!EnchantmentTarget.ALL.includes(currentItem)) {
+                Players.msg(player, "§] §> §cYou may not apply a transmog scroll to this item.")
+                return
+            }
+
             ItemEnchantmentData itemEnchantmentData = ItemEnchantmentData.read(currentItem)
             if (itemEnchantmentData == null) {
                 itemEnchantmentData = new ItemEnchantmentData(currentItem)
             }
+
 
             event.setCancelled(true)
 
