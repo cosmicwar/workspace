@@ -144,9 +144,9 @@ class InviteHandler extends ListenerAdapter {
             inviteEmbed.setDescription(
                     "**Welcome to Starcade Invites!** \r\n Bellow are the invite rankings, reach the top for rewards!\n" + leaderboard
             )
-
-            event.getChannel().sendMessageEmbeds(inviteEmbed.build())
-
+            println(leaderboard)
+//            event.getChannel().sendMessageEmbeds(inviteEmbed.build())
+            event.replyEmbeds(inviteEmbed.build()).setEphemeral(true)
 //            event.reply("test")//.setEphemeral(true)
         }
     }
