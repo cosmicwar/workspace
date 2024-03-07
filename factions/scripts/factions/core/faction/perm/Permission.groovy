@@ -107,6 +107,28 @@ class Permission
         return access
     }
 
+    static boolean hasAccessOverride(UUID factionId, UUID targetFactionId, Location location, String internalId) {
+
+        def faction = Factions.getFaction(factionId, false)
+        if (faction == null) return false
+
+        def memberAccess = faction.getAccess(factionId, TargetType.FACTION)
+        if (memberAccess == null) return false
+
+        def access = memberAccess.access.find { it.internalId == internalId }
+
+        if (access && memberAccess.accessChunk != null) {
+            def chunk = memberAccess.accessChunk
+
+            def world = Bukkit.getWorld(chunk.worldName)
+            if (world == null) return false
+
+            return chunk.x == location.getChunk().x && chunk.z == location.getChunk().z
+        }
+
+        return access
+    }
+
     static boolean hasAccessIn(CL cl, Member member, String internalId) {
         if (member.role == Role.ADMIN) return true // bypass :]
 

@@ -60,14 +60,21 @@ class BuildPermission extends Permission {
 
         Events.subscribe(BlockPistonExtendEvent.class, EventPriority.HIGHEST).handler { event ->
             def block = event.getBlock()
-            def direction = event.getDirection().direction
-            def origin = Factions.getClaimAt(CL.of(block.location))
-            def destination = Factions.getClaimAt(CL.of(block.location.add(direction).add(direction)))
+            def targetBlock = block.getRelative(event.getDirection(), event.getLength() + 1)
 
-            if (origin.factionId == destination.factionId) return
-            if (destination.factionId == Factions.wildernessId) return
+            def origin = Factions.getClaimAt(CL.of(block.location)).factionId ?: Factions.wildernessId
+            def destination = Factions.getClaimAt(CL.of(targetBlock.location)).factionId ?: Factions.wildernessId
 
-            event.setCancelled(true)
+
+            if (origin == destination) return
+            if (!targetBlock.isEmpty() && !targetBlock.isLiquid()) return
+            if (destination== Factions.wildernessId) return
+
+
+            if (!hasAccessOverride(origin, destination, targetBlock.location, buildInternalId)) {
+                event.setCancelled(true)
+            }
+
         }
     }
 
