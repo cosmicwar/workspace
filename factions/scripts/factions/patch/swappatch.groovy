@@ -3,19 +3,7 @@ package scripts.factions.patch
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import org.bukkit.Material
-import org.bukkit.entity.Player
-import org.bukkit.event.inventory.ClickType
-import org.bukkit.event.inventory.CraftItemEvent
-import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.player.PlayerSwapHandItemsEvent
-import org.bukkit.inventory.ItemStack
-import org.starcade.starlight.helper.Events
-import org.starcade.starlight.helper.Schedulers
-import org.starcade.starlight.helper.event.filter.EventFilters
-import org.starcade.starlight.helper.protocol.Protocol
-import org.starcade.starlight.helper.utils.Players
-
-//Protocol.subscribe(PacketType.Play.Client.WINDOW_CLICK).handler({
+import org.bukkit.entity.PlayerProtocol.subscribe(PacketType.Play.Client.WINDOW_CLICK).handler({
 //    if (it.playerTemporary) return
 //
 //    Player player = it.player
@@ -53,3 +41,15 @@ import org.starcade.starlight.helper.utils.Players
 //    Player player = event.getWhoClicked() as Player
 //    Players.msg(player, "§c§lItem swapping currently disabled.")
 //})
+import org.bukkit.event.inventory.ClickType
+import org.bukkit.event.inventory.CraftItemEvent
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.player.PlayerSwapHandItemsEvent
+import org.bukkit.inventory.ItemStack
+import org.starcade.starlight.helper.Events
+import org.starcade.starlight.helper.Schedulers
+import org.starcade.starlight.helper.event.filter.EventFilters
+import org.starcade.starlight.helper.protocol.Protocol
+import org.starcade.starlight.helper.utils.Players
+
+//
