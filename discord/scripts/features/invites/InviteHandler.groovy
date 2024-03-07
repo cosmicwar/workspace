@@ -279,6 +279,7 @@ class InviteHandler extends ListenerAdapter {
             List<Message> messages = it.getRetrievedHistory()
             if (messages.size() < 3) {
                 for (Message msg : messages) {
+                    println(msg.getId())
                     try {
                         if (msg.isPinned()) continue
                         println(messageId + " - messageId")
