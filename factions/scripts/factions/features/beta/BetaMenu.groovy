@@ -102,7 +102,7 @@ class BetaMenu {
             }
 
             ctx.reply("§aRepaired all items in your inventory.")
-        }.register("fixall")
+        }.register("fixall", "fix all")
     }
 
     static void createBetaMenu(Player player, int page = 1) {

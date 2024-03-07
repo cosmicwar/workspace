@@ -19,6 +19,8 @@ import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.tags.ItemTagType
+import scripts.factions.core.faction.FactionUtils
+import scripts.factions.core.faction.data.Faction
 import scripts.shared.legacy.utils.DatabaseUtils
 import scripts.shared.legacy.utils.FastInventoryUtils
 import scripts.shared.legacy.utils.FastItemUtils
