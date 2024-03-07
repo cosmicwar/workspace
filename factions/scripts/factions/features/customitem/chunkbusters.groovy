@@ -155,8 +155,9 @@ class ChunkBusterUtils {
 
     static ItemStack createChunkBuster(int usages = 1) {
         ItemStack item = FastItemUtils.createItem(chunkBusterMaterial, "§6§l * Chunk Buster * ", [
+                "",
                 "§8➥ §7Place while crouching to remove blocks only at",
-                "§eand under the placement location.",
+                "§7and under the placement location.",
                 "",
                 "§7Usages: §f$usages",
                 ""
@@ -174,7 +175,7 @@ class ChunkBusterUtils {
             lore.add("")
             lore.add("§7Usages: §f$usages")
         } else {
-            lore.set(3, "§7Usages: §f$usages")
+            lore.set(4, "§7Usages: §f$usages")
         }
 
         FastItemUtils.setLore(chunkBuster, lore)
