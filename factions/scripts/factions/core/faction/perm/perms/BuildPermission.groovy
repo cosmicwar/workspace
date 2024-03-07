@@ -58,7 +58,9 @@ class BuildPermission extends Permission {
             }
         }
 
-        Events.subscribe(BlockPistonExtendEvent.class, EventPriority.HIGHEST).handler { event ->
+        Events.subscribe(BlockPistonExtendEvent.class).handler { event ->
+            event.setCancelled(true)
+            return
             def block = event.getBlock()
             def targetBlock = block.getRelative(event.getDirection(), event.getLength() + 1)
 
