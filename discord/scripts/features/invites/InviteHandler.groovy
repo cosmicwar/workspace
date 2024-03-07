@@ -110,7 +110,6 @@ class InviteHandler extends ListenerAdapter {
 
     @Override
     void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
-        println(event.getName())
         if (event.getName() == "invites") {
             getUserInvites(event.user.id) { doc ->
                 if (doc == null) doc = new Document()
