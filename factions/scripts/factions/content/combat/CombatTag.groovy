@@ -207,7 +207,7 @@ class CombatTag {
         def data = combatData.computeIfAbsent(player.uniqueId, { new CombatData(it) })
 
         if (!data.isTagged()) {
-            Players.msg(player, "§cYou are now in combat for §l${duration / 1000 as Integer}§c seconds.")
+            Players.msg(player, "§c(!) You are now in combat for §l${duration / 1000 as Integer}§c seconds.")
         }
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
@@ -218,7 +218,7 @@ class CombatTag {
         def data = combatData.computeIfAbsent(player.uniqueId, { new CombatData(it) })
 
         if (!data.isTagged()) {
-            Players.msg(player, "§cYou are now in combat for §l${duration / 1000 as Integer}§c seconds.")
+            Players.msg(player, "§c(!) You are now in combat for §l${duration / 1000 as Integer}§c seconds.")
         }
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
