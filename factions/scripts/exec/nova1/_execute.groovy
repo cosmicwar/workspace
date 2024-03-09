@@ -19,15 +19,11 @@ if (Temple.templeEnv == "dev") addArgs("-DdevMode=true")
 execute {
 
     clear()
-//    loadPlugin("arkgroovy7") // todo update
     loadPlugin("starlight8")
 
     // -------------------------------------------- //
     // STATIC PLUGINS
     // -------------------------------------------- //
-//    loadPlugin("ChatControl")
-    loadPlugin("EssentialsX-2.21.0")
-    loadPlugin("EssentialsXSpawn-2.21.0")
     loadPlugin("CoreProtect-22.2")
     loadPlugin("Multiverse-Core-4.3.1")
     loadPlugin("MVdWPlaceholderAPI-3.1.1")
@@ -38,8 +34,6 @@ execute {
     loadPlugin("LiteBans")
     loadPlugin("VanishNoPacket")
 
-    // todo remove
-//    loadPlugin("AnimatedScoreboard")
     loadPlugin("DecentHolograms-2.8.5")
 
     // -------------------------------------------- //
@@ -76,15 +70,8 @@ execute {
     loadFromConfig("configs/factions/paper-global.yml", "config/paper-global.yml")
     loadFromConfig("configs/factions/paper-world-defaults.yml", "config/paper-world-defaults.yml")
 
-    loadConfig("factions/AnimatedScoreboard", "AnimatedScoreboard")
-    loadConfig("factions/Essentials", "Essentials")
-    loadConfig("global/ChatControlDefaults", "ChatControl")
-    loadConfig("global/CombatLogX_expansions", "CombatLogX")
     loadConfig("global/LiteBans${Temple.templeEnv == "dev" ? "-dev" : ""}", "LiteBans")
     loadConfig("global/ViaRewind", "ViaRewind")
     loadConfig("global/ViaVersion", "ViaVersion")
     loadConfig("global/ViaBackwards", "ViaBackwards")
-    loadConfig("global/ChatControl", "ChatControl")
-
-    loadConfig("factions/CombatLogX", "CombatLogX")
 }
