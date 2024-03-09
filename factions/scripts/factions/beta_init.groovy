@@ -24,6 +24,7 @@ Starlight.watch(
         "~/content/clickitem/ClickItems.groovy",
         "~/content/scoreboard/sidebar/SidebarHandler.groovy",
         "~/content/scoreboard/health/HealthDisplay.groovy",
+        "~/content/combat/CombatTag.groovy",
 
         "~/eco/rewardbox/RewardBoxes.groovy",
 
