@@ -224,6 +224,8 @@ class CombatTag {
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
         data.setLastDamager(damager)
+        taggedPlayers.put(player.uniqueId, player.uniqueId)
+
     }
 
     static CombatNPC spawnCombatLogger(Player player) {
