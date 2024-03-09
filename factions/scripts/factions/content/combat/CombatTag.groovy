@@ -168,7 +168,7 @@ class CombatTag {
                     Arrow arrow = (Arrow) it
                     if (!(arrow.getShooter() instanceof Player)) return
 
-                    Map.Entry<UUID, CombatLogNPC> match = combatLoggers.find { it.value.location.clone().add(0D, 0.9D, 0D).distanceSquared(arrow.location) <= 2D }
+                    Map.Entry<UUID, CombatNPC> match = combatLoggers.find { it.value.location.clone().add(0D, 0.9D, 0D).distanceSquared(arrow.location) <= 2D }
                     if (match) {
                         tag(arrow.getShooter() as Player, DURATION)
 
@@ -372,7 +372,7 @@ class CombatNPC {
         Schedulers.async().runLater({ despawn() }, 20L)
     }
 
-    void damage(double damage = CombatLogNPCs.COMBAT_NPC_DAMAGE_PER_HIT) {
+    void damage(double damage = CombatTag.COMBAT_NPC_DAMAGE_PER_HIT) {
         long now = System.currentTimeMillis()
         if (now - lastHurtTime < 500L) return
         lastHurtTime = now
