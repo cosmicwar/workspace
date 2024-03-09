@@ -211,7 +211,7 @@ class CombatTag {
         }
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
-        taggedPlayers.put(player.uniqueId, player.uniqueId, 20, TimeUnit.SECONDS)
+        taggedPlayers.put(player.uniqueId, player.uniqueId)
     }
 
     static def tag(Player player, Entity damager, Long duration) {
