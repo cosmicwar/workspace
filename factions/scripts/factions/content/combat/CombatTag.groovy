@@ -82,7 +82,7 @@ class CombatTag {
         Exports.ptr("combattag:isCombatTagged", { Player player -> return taggedPlayers.containsKey(player.uniqueId)})
 
         GroovyScript.addUnloadHook {
-//            removePackets()
+            removePackets()
 
             combatLoggers.values().each { it.despawn() }
             combatLoggers.clear()
@@ -91,9 +91,10 @@ class CombatTag {
         Bukkit.getOnlinePlayers().each {
             combatData.computeIfAbsent(it.uniqueId, { new CombatData(it) })
         }
-//        addPackets()
         events()
         schedulers()
+        addPackets()
+
     }
 
     static void events() {
