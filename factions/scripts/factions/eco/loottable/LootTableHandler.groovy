@@ -14,6 +14,8 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.random.RandomSelector
 import org.starcade.starlight.helper.utils.Players
+import scripts.factions.eco.currency.ExpShopItem
+import scripts.factions.eco.loottable.v2.impl.ExpShopReward
 import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.shared.data.uuid.UUIDDataManager
 import scripts.factions.eco.loottable.v2.api.LootTable
@@ -635,9 +637,9 @@ class LootTableHandler {
                         selectTableCallback.exec(table)
                     } else {
                         if (t == ClickType.LEFT || t == ClickType.SHIFT_LEFT) {
-                            openTableGui(p as Player, category, table)
+                            openTableGui(p, category, table)
                         } else if (t == ClickType.RIGHT || t == ClickType.SHIFT_RIGHT) {
-                            giveReward(p as Player, table)
+                            giveReward(p, table)
                         } else if (t == ClickType.MIDDLE) {
                             MenuUtils.createConfirmMenu(player, "§8Confirm Delete", item, () -> {
                                 Players.msg(player, "§] §> §cDeleted this category.")
@@ -712,7 +714,16 @@ class LootTableHandler {
                 }
 
                 FastItemUtils.setLore(item, lore)
-            } else {
+            } else if (reward instanceof ExpShopReward) {
+                def expReward = reward as ExpShopReward
+
+                item = expReward.getItemStack()
+
+                List<String> lore = FastItemUtils.getLore(item) ?: []
+                lore.add("")
+                lore.add("§6Shop Price: §e${expReward.price}")
+            }
+            else {
                 item = FastItemUtils.createItem(Material.PAPER, "§f§lUnknown", [
                         "",
                         "§7${reward}"
