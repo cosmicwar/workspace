@@ -5,6 +5,7 @@ import groovy.transform.TypeCheckingMode
 import org.bson.codecs.pojo.annotations.BsonIgnore
 import org.bukkit.Material
 import org.starcade.starlight.helper.random.RandomSelector
+import scripts.factions.eco.loottable.v2.impl.ExpShopReward
 import scripts.shared.data.uuid.UUIDDataManager
 import scripts.shared.data.uuid.UUIDDataObject
 import scripts.factions.eco.loottable.v2.impl.CommandReward
@@ -19,6 +20,7 @@ class LootTable extends UUIDDataObject {
 
     List<ItemReward> itemRewards = new ArrayList<>()
     List<CommandReward> commandRewards = new ArrayList<>()
+    List<ExpShopReward> expShopRewards = new ArrayList<>()
 
 //    Set<LootTableImage> images = new HashSet<>()
 
@@ -62,6 +64,7 @@ class LootTable extends UUIDDataObject {
         List<Reward> rewards = []
         rewards.addAll(this.itemRewards)
         rewards.addAll(this.commandRewards)
+        rewards.addAll(this.expShopRewards)
         return rewards
     }
 
@@ -71,6 +74,8 @@ class LootTable extends UUIDDataObject {
             itemRewards.remove(reward)
         } else if (reward instanceof CommandReward) {
             commandRewards.remove(reward)
+        } else if (reward instanceof ExpShopReward) {
+            expShopRewards.remove(reward)
         }
     }
 
@@ -80,6 +85,8 @@ class LootTable extends UUIDDataObject {
             itemRewards.add(reward)
         } else if (reward instanceof CommandReward) {
             commandRewards.add(reward)
+        } else if (reward instanceof ExpShopReward) {
+            expShopRewards.add(reward)
         }
     }
 

@@ -66,7 +66,6 @@ class BuildPermission extends Permission {
             def origin = Factions.getClaimAt(CL.of(block.location))?.factionId ?: Factions.wildernessId
             def destination = Factions.getClaimAt(CL.of(targetBlock.location))?.factionId ?: Factions.wildernessId
 
-
             if (origin == destination) return
             if (!targetBlock.isEmpty() && !targetBlock.isLiquid()) return
             if (destination == Factions.wildernessId) return
