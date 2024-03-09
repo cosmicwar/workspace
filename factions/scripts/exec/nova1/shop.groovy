@@ -17,47 +17,47 @@ Map<String, Map<String, Object>> shops = [
                 items: [
                     [
                             item: FactionsShopUtils.createPotion(PotionType.INSTANT_HEAL, 2, false),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.INSTANT_HEAL, 2),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.REGEN, 2, false),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.REGEN, 2),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.STRENGTH, 2, false),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.STRENGTH, 2),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.SPEED, 2, false),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.SPEED, 2),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
                     [
                             item: FactionsShopUtils.createPotion(PotionType.FIRE_RESISTANCE, 1, false),
-                            buy: 1,
+                            buy: 10,
                             sell: -1
                     ],
 

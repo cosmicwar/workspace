@@ -7,6 +7,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockPistonExtendEvent
+import org.bukkit.event.block.BlockPistonRetractEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.persistence.PersistentDataType
 import org.starcade.starlight.helper.Events
@@ -74,8 +75,9 @@ class BuildPermission extends Permission {
             if (!hasAccessOverride(origin, destination, targetBlock.location, buildInternalId)) {
                 event.setCancelled(true)
             }
-
         }
+
+        Events.subscribe(BlockPistonRetractEvent.class)
     }
 
     static boolean canBuild(Player player, Location location) {
