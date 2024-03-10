@@ -53,6 +53,7 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.utils.Players
 import scripts.exec.Globals
 import scripts.shared.legacy.ImmovableUtils
+import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.PacketUtils
 import scripts.shared.legacy.utils.npc.NPCRegistry
 import scripts.shared.legacy.utils.npc.NPCTracker
@@ -122,6 +123,7 @@ class CombatTag {
 
         Events.subscribe(EntityDamageByEntityEvent.class).handler { event ->
             if (event.isCancelled()) return
+            BroadcastUtils.broadcast("TEST")
 
             def entity = event.entity
             def damager = event.damager
