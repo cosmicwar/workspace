@@ -152,8 +152,8 @@ class CombatTag {
                 }
 
                 if (!combatLogNPC.getKilled().get()) {
-                    long remainingSeconds = TimeUnit.MILLISECONDS.toSeconds((COMBAT_NPC_DESPAWN_TIMER + combatLogNPC.getSpawnTime()) - now)
-                    combatLogNPC.npcTracker?.chat(["Despawning in: ${remainingSeconds}s"], 1000L)
+//                    long remainingSeconds = TimeUnit.MILLISECONDS.toSeconds((COMBAT_NPC_DESPAWN_TIMER + combatLogNPC.getSpawnTime()) - now)
+//                    combatLogNPC.npcTracker?.chat(["Despawning in: ${remainingSeconds}s"], 1000L)
                 }
 
                 return false
