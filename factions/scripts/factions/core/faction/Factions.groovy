@@ -277,9 +277,9 @@ class Factions {
                 return relation.color + "dd"
             }
         }
-        Essentials.chatOverwrite = { AsyncPlayerChatEvent event ->
+/*        Essentials.chatOverwrite = { AsyncPlayerChatEvent event ->
             event.setCancelled(true)
-        }
+        }*/
 
         Schedulers.sync().runLater({
             Bukkit.getWorlds().each { world ->
