@@ -215,6 +215,7 @@ class CombatTag {
         }
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
+        BroadcastUtils.broadcast("TAG1")
         taggedPlayers.put(player.uniqueId, player.uniqueId)
     }
 
@@ -227,6 +228,7 @@ class CombatTag {
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
         data.setLastDamager(damager)
+        BroadcastUtils.broadcast("TAG2")
         taggedPlayers.put(player.uniqueId, player.uniqueId)
 
     }
