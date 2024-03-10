@@ -24,6 +24,7 @@ import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.event.filter.EventFilters
 import org.starcade.starlight.helper.utils.Players
 import scripts.shared.content.SCBuilder
+import scripts.shared.content.scoreboard.tab.TabHandler
 import scripts.shared.core.cfg.Config
 import scripts.shared.core.cfg.ConfigCategory
 import scripts.factions.core.faction.addon.upgrade.UpgradeUtil
@@ -236,7 +237,7 @@ class Factions {
             arktags/setBuildNameColor
             arktags/setBuildSuffix
         */
-        BiFunction<Player, Player, String> suffix = { Player player, Player target ->
+        TabHandler.buildSuffix = { Player player, Player target ->
             def member = getMember(player.getUniqueId())
             def targetMember = getMember(target.getUniqueId())
 
@@ -255,7 +256,7 @@ class Factions {
                 return "${relation.color}${targetFac.name}"
             }
         }
-        BiFunction<Player, Player, String> nameColor = { Player player, Player target ->
+        TabHandler.buildNameColor = { Player player, Player target ->
             def member = getMember(player.getUniqueId())
             def targetMember = getMember(target.getUniqueId())
 
@@ -274,8 +275,6 @@ class Factions {
                 return relation.color + "dd"
             }
         }
-        (Exports.ptr("arktags/setBuildNameColor") as Closure).call(nameColor)
-        (Exports.ptr("arktags/setBuildSuffix") as Closure).call(suffix)
 
         Schedulers.sync().runLater({
             Bukkit.getWorlds().each { world ->
