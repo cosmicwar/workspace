@@ -254,16 +254,16 @@ class CombatTag {
                         println(entityId)
                         try {println(combatLoggers.values().collect {it.npcTracker.npc.geteI().toString()}.join(', '))
                         println(1)}
-                        catch (Exception ignore)
+                        catch (Exception ignore) {}
                         try {println(combatLoggers.values().collect {it.npcTracker.npc.geted().toString()}.join(', '))
                             println(2)}
-                        catch (Exception ignore)
+                        catch (Exception ignore) {}
                         try {println(combatLoggers.values().collect {it.npcTracker.npc.getet().toString()}.join(', '))
                             println(3)}
-                        catch (Exception ignore)
+                        catch (Exception ignore) {}
                         try {println(combatLoggers.values().collect {it.npcTracker.npc.getgd().toString()}.join(', '))
                             println(4)}
-                        catch (Exception ignore)
+                        catch (Exception ignore) {}
 
                         CombatNPC combatLogNPC = combatLoggers.values().find { it.npcTracker.npc.ed() == entityId }
                         if (combatLogNPC && combatLogNPC.npcTracker.npc.level.getWorld() == player.world) {
