@@ -252,8 +252,8 @@ class CombatTag {
 
                         int entityId = packet.getIntegers().read(0)
 
-                        CombatNPC combatLogNPC = combatLoggers.values().find { it.npcTracker.getNpcId() == entityId }
-                        if (combatLogNPC && combatLogNPC.npcTracker.getLevel().world == player.world) {
+                        CombatNPC combatLogNPC = combatLoggers.values().find { it.npcTracker.npcId == entityId }
+                        if (combatLogNPC && combatLogNPC.npcTracker.npc.level().world == player.world) {
                             Schedulers.sync().run {
                                 tag(player, DURATION)
                                 combatLogNPC.damage()
