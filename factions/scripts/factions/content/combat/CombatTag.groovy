@@ -39,6 +39,7 @@ import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventPriority
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.player.PlayerAnimationType
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
@@ -130,14 +131,12 @@ class CombatTag {
 
             if (damager instanceof Player) {
                 def data = combatData.computeIfAbsent(player.uniqueId, { new CombatData(it) })
-                if (!data.combatTagExpiration) {
-                    tag(player, damager, DURATION)
-                }
+                tag(player, damager, DURATION)
+
 
                 def damagerData = combatData.computeIfAbsent(damager.uniqueId, { new CombatData(it) })
-                if (!damagerData.combatTagExpiration) {
-                    tag(damager, DURATION)
-                }
+                tag(damager, DURATION)
+
             }
         }
     }
@@ -270,38 +269,6 @@ class CombatTag {
         ProtocolLibrary.getProtocolManager().addPacketListener(packetAdapter)
     }
 
-//    static void addPackets() {
-//        ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(Starlight.plugin, PacketType.Play.Client.USE_ENTITY) {
-//            @Override
-//            void onPacketReceiving(PacketEvent event) {
-//                if (!event.isPlayerTemporary()) {
-//                    Integer entityId = event.getPacket().getIntegers().read(0)
-//
-//                    if (entityId == null) {
-//                        return
-//                    }
-//                    NPCTracker tracker = entities.get(entityId)
-//
-//                    if (tracker == null) {
-//                        return
-//                    }
-//                    Player player = event.getPlayer()
-//                    UUID uuid = player.getUniqueId()
-//
-//                    if (System.currentTimeMillis() - (long) lastUsed.getOrDefault(uuid, 0L) < 200L) {
-//                        return
-//                    }
-//                    lastUsed.put(uuid, System.currentTimeMillis())
-//
-//                    if (tracker.onClick != null) {
-//                        Schedulers.sync().run {
-//                            tracker.onClick.accept(player)
-//                        }
-//                    }
-//                }
-//            }
-//        })
-//    }
 
     static void removePackets() {
         if (packetAdapter == null) return
@@ -419,7 +386,6 @@ class CombatNPC {
         if (now - lastHurtTime < 500L) return
         lastHurtTime = now
 
-        npcTracker.npc.hurt(npcTracker.npc.damageSources().generic(), 0.01)
         ClientboundEntityEventPacket packetPlayOutEntityStatus = new ClientboundEntityEventPacket(npcTracker.npc, (byte) 2)
         npcTracker.viewers.each {
             it.playSound(location, Sound.ENTITY_GENERIC_HURT, 1F, 1F)
