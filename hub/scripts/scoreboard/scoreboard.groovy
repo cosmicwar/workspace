@@ -40,11 +40,6 @@ def hubBoard = new SidebarBuilder("hub_board")
 
             // global player count
             lines.add("§<#45A0FF>ɢʟᴏʙᴀʟ ᴘʟᴀʏᴇʀꜱ: §<#09FB29>${Bukkit.getOnlinePlayers().size()}§7/§<#FFA445>${NumberUtils.format(BungeeCache.getGlobalPlayerCount())}")
-
-            lines.add("")
-
-            lines.add("§<#45A0FF>ꜱᴛᴏʀᴇ.ꜱᴛᴀʀᴄᴀᴅᴇ.ᴏʀɢ")
-
             lines.add("§8§m${StringUtils.repeat('-', 24)}") // spacer
             return lines
         }.priority { return 0 }
