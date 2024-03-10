@@ -349,7 +349,7 @@ class CombatNPC {
         npcTracker = NPCRegistry.get().spawn("combatlognpc_${playerId.toString()}", "§cCombatLogger: §f${player.getName()}", location, playerId)
         health = player.getHealth()
 
-        PlayerInventory playerInventory = player.getInventory()
+        def playerInventory = player.getInventory()
         npcTracker.setHand(playerInventory.getItemInMainHand())
         npcTracker.setHelmet(playerInventory.getHelmet())
         npcTracker.setChestplate(playerInventory.getChestplate())
