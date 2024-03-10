@@ -333,7 +333,7 @@ class CombatTag {
             File file1 = new File(worldStorage.playerDir, "${combatLogNPC.getPlayerId().toString()}.dat")
             File file2 = new File(worldStorage.playerDir, "${combatLogNPC.getPlayerId().toString()}.dat_old")
             Util.safeReplaceFile(file1, file, file2)
-        } catch (Exception e) {
+        } catch (Exception ignore) {
             println("Failed to update offline inventory for ${combatLogNPC.getPlayerId().toString()}")
             return
         }
@@ -419,6 +419,7 @@ class CombatNPC {
         ClientboundEntityEventPacket packetPlayOutEntityStatus = new ClientboundEntityEventPacket(npcTracker.npc, (byte) 2)
         npcTracker.viewers.each {
             it.playSound(location, Sound.ENTITY_GENERIC_HURT, 1F, 1F)
+            it.damage(0.01)
             PacketUtils.send(it, packetPlayOutEntityStatus)
         }
 
