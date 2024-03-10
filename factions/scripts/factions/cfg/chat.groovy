@@ -43,7 +43,7 @@ CurrencyStorage money = Exports.ptr("money") as CurrencyStorage
 Pattern itemBragPattern = Pattern.compile("[A-Fa-f]{4}")
 
 // All textcomponent stuff should be done here.
-Events.subscribe(AsyncPlayerChatEvent.class, EventPriority.HIGHEST).filter(EventFilters.ignoreCancelled()).handler { event ->
+/*Events.subscribe(AsyncPlayerChatEvent.class, EventPriority.HIGHEST).filter(EventFilters.ignoreCancelled()).handler { event ->
     if (event.isCancelled()) return
 
     String message = event.getMessage()
@@ -153,7 +153,7 @@ Events.subscribe(AsyncPlayerChatEvent.class, EventPriority.HIGHEST).filter(Event
         target.spigot().sendMessage(factionRelation.join(nameClickable).join(messageClickable).build())
     }
 
-}
+}*/
 
 static List<String> itemToComponents(ItemStack item) {
     List<String> lore = new ArrayList<>()
