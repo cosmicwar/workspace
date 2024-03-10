@@ -70,7 +70,7 @@ class CombatTag {
 
     static Map<UUID, UUID> taggedPlayers = ExpiringMap.builder().expiration(15, TimeUnit.SECONDS).expirationListener { UUID uuid, UUID npc ->
         def player = Bukkit.getPlayer(uuid)
-        if (player != null) Players.msg(player, "§cYou are no longer in combat.")
+        if (player != null) Players.msg(player, "§c(!) You are no longer in combat.")
 
         def data = combatData.get(uuid)
         if (data != null) data.combatTagExpiration = null
