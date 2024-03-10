@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketContainer
 import com.comphenix.protocol.events.PacketEvent
 import com.comphenix.protocol.wrappers.EnumWrappers
+import com.comphenix.protocol.wrappers.WrappedEnumEntityUseAction
 import com.google.common.collect.Maps
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
@@ -82,8 +83,7 @@ class CombatTag {
         Exports.ptr("combattag:isCombatTagged", { Player player -> return taggedPlayers.containsKey(player.uniqueId)})
 
         GroovyScript.addUnloadHook {
-//            removePackets()
-
+            removePackets()
             combatLoggers.values().each { it.despawn() }
             combatLoggers.clear()
         }
@@ -93,8 +93,7 @@ class CombatTag {
         }
         events()
         schedulers()
-//        addPackets()
-
+        addPackets()
     }
 
     static void events() {
@@ -151,10 +150,10 @@ class CombatTag {
                     return true
                 }
 
-                if (!combatLogNPC.getKilled().get()) {
-//                    long remainingSeconds = TimeUnit.MILLISECONDS.toSeconds((COMBAT_NPC_DESPAWN_TIMER + combatLogNPC.getSpawnTime()) - now)
-//                    combatLogNPC.npcTracker?.chat(["Despawning in: ${remainingSeconds}s"], 1000L)
-                }
+//                if (!combatLogNPC.getKilled().get()) {
+////                    long remainingSeconds = TimeUnit.MILLISECONDS.toSeconds((COMBAT_NPC_DESPAWN_TIMER + combatLogNPC.getSpawnTime()) - now)
+////                    combatLogNPC.npcTracker?.chat(["Despawning in: ${remainingSeconds}s"], 1000L)
+//                }
 
                 return false
             })
@@ -245,7 +244,10 @@ class CombatTag {
                 PacketContainer packet = event.packet
                 switch (packet.type) {
                     case PacketType.Play.Client.USE_ENTITY:
-                        EnumWrappers.EntityUseAction action = packet.getEntityUseActions().read(0)
+
+                        final WrappedEnumEntityUseAction wrappedAction = packet.getEnumEntityUseActions().read(0)
+                        final EnumWrappers.EntityUseAction action = wrappedAction.getAction()
+
                         if (action != EnumWrappers.EntityUseAction.ATTACK) return
 
                         int entityId = packet.getIntegers().read(0)
@@ -263,6 +265,39 @@ class CombatTag {
 
         ProtocolLibrary.getProtocolManager().addPacketListener(packetAdapter)
     }
+
+//    static void addPackets() {
+//        ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(Starlight.plugin, PacketType.Play.Client.USE_ENTITY) {
+//            @Override
+//            void onPacketReceiving(PacketEvent event) {
+//                if (!event.isPlayerTemporary()) {
+//                    Integer entityId = event.getPacket().getIntegers().read(0)
+//
+//                    if (entityId == null) {
+//                        return
+//                    }
+//                    NPCTracker tracker = entities.get(entityId)
+//
+//                    if (tracker == null) {
+//                        return
+//                    }
+//                    Player player = event.getPlayer()
+//                    UUID uuid = player.getUniqueId()
+//
+//                    if (System.currentTimeMillis() - (long) lastUsed.getOrDefault(uuid, 0L) < 200L) {
+//                        return
+//                    }
+//                    lastUsed.put(uuid, System.currentTimeMillis())
+//
+//                    if (tracker.onClick != null) {
+//                        Schedulers.sync().run {
+//                            tracker.onClick.accept(player)
+//                        }
+//                    }
+//                }
+//            }
+//        })
+//    }
 
     static void removePackets() {
         if (packetAdapter == null) return
