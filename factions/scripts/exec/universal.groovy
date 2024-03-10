@@ -75,7 +75,7 @@ Starlight.watch(
         // Profiles \\
         "scripts/shared/core/profile/Profiles.groovy",
 
-        // Scorebard \\
+        // Scoreboard \\
         "scripts/shared/content/scoreboard/tab/TabHandler.groovy",
         "scripts/shared/content/scoreboard/tab/tablist.groovy",
 
