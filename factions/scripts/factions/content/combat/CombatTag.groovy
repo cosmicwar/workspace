@@ -251,6 +251,8 @@ class CombatTag {
                         if (action != EnumWrappers.EntityUseAction.ATTACK) return
 
                         int entityId = packet.getIntegers().read(0)
+                        println(entityId)
+                        println(combatLoggers.values().collect {it.npcTracker.npc.getId().toString()}.join(', '))
                         CombatNPC combatLogNPC = combatLoggers.values().find { it.npcTracker.npc.getId() == entityId }
                         if (combatLogNPC && combatLogNPC.npcTracker.npc.level.getWorld() == player.world) {
                             Schedulers.sync().run {
