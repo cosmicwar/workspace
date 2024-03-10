@@ -43,22 +43,21 @@ Exports.ptr("tablist_colors", ["§a", "§b"])
 Exports.ptr("tablist_header",
         "${ColorUtil.rainbow("-----------------------------------------------------------" as String, ["#0059ff", "#00e5ff", "#0059ff" ] as String[], "§m")}\n" +
                 "\n" +
-                "§7§m----§3§l» §f§lWelcome §b§l%s§f§l! §3§l«§7§m----\n" +
-                "§7§o(You are currently on %s)\n" +
+                "§7§m----§3§l» §f§lᴡᴇʟᴄᴏᴍᴇ §b§l%s§f§l! §3§l«§7§m----\n" +
+                "§7§o(ʏᴏᴜ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ᴏɴ %s)\n" +
                 "\n" +
-                "${ColorUtil.rainbow("LATEST ANNOUNCEMENT", ["#00e5ff", "#4284ff"] as String[], "§l")}\n" +
+                "${ColorUtil.rainbow("ʟᴀᴛᴇꜱᴛ ᴀɴɴᴏᴜɴᴄᴇᴍᴇɴᴛ", ["#00e5ff", "#4284ff"] as String[], "§l")}\n" +
                 "§f%s" +
                 "\n"
 )
 
 Exports.ptr("tablist_footer",
         "\n" +
-                "${ColorUtil.rainbow("PLAYERS", ["#00e5ff", "#4284ff"] as String[], "§l")}\n" +
-                "${ColorUtil.rainbow("Online", ["#00e5ff", "#4284ff"] as String[], "§l")}       ${ColorUtil.rainbow("Global", ["#00e5ff", "#4284ff"] as String[], "§l")}\n" +
+                "${ColorUtil.rainbow("ᴘʟᴀʏᴇʀꜱ", ["#00e5ff", "#4284ff"] as String[], "§l")}\n" +
+                "${ColorUtil.rainbow("ᴏɴʟɪɴᴇ", ["#00e5ff", "#4284ff"] as String[], "§l")}       ${ColorUtil.rainbow("ɢʟᴏʙᴀʟ", ["#00e5ff", "#4284ff"] as String[], "§l")}\n" +
                 "§f%s§7/§f%s         §f%s§7/§f%s\n" +
                 "\n" +
-                "${ColorUtil.rainbow("WEBSITE", ["#00e5ff", "#4284ff"] as String[], "§l")} §fstarcade.org ${ColorUtil.rainbow("DISCORD", ["#00e5ff", "#4284ff"] as String[], "§l")} §fdiscord.gg/starcade\n" +
-                "${ColorUtil.rainbow("STORE", ["#00e5ff", "#4284ff"] as String[], "§l")} §fstore.starcade.org\n" +
+                "${ColorUtil.rainbow("ꜱᴛᴏʀᴇ", ["#00e5ff", "#4284ff"] as String[], "§l")} §fꜱᴛᴏʀᴇ.ꜱᴛᴀʀᴄᴀᴅᴇ.ᴏʀɢ ${ColorUtil.rainbow("ᴅɪꜱᴄᴏʀᴅ", ["#00e5ff", "#4284ff"] as String[], "§l")} §fᴅɪꜱᴄᴏʀᴅ.ɢɢ/ꜱᴛᴀʀᴄᴀᴅᴇ\n" +
 
                 "${ColorUtil.rainbow("-----------------------------------------------------------" as String, [ "#0059ff", "#00e5ff", "#0059ff" ] as String[], "§m")}"
 )
