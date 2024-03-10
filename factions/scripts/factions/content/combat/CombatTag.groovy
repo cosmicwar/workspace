@@ -416,10 +416,11 @@ class CombatNPC {
         if (now - lastHurtTime < 500L) return
         lastHurtTime = now
 
+        npcTracker.npc.indicateDamage(0.5, 0.5)
+
         ClientboundEntityEventPacket packetPlayOutEntityStatus = new ClientboundEntityEventPacket(npcTracker.npc, (byte) 2)
         npcTracker.viewers.each {
             it.playSound(location, Sound.ENTITY_GENERIC_HURT, 1F, 1F)
-            it.damage(0.01)
             PacketUtils.send(it, packetPlayOutEntityStatus)
         }
 
