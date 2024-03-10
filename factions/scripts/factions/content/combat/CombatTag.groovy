@@ -19,6 +19,9 @@ import net.minecraft.nbt.NbtIo
 import net.minecraft.network.protocol.game.ClientboundEntityEventPacket
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
 import net.minecraft.server.MinecraftServer
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.damagesource.DamageSources
+import net.minecraft.world.damagesource.DamageType
 import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.level.Level
@@ -416,8 +419,7 @@ class CombatNPC {
         if (now - lastHurtTime < 500L) return
         lastHurtTime = now
 
-        npcTracker.npc.indicateDamage(0.5, 0.5)
-
+        npcTracker.npc.hurt(npcTracker.npc.damageSources().generic(), 0.01)
         ClientboundEntityEventPacket packetPlayOutEntityStatus = new ClientboundEntityEventPacket(npcTracker.npc, (byte) 2)
         npcTracker.viewers.each {
             it.playSound(location, Sound.ENTITY_GENERIC_HURT, 1F, 1F)
