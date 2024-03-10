@@ -12,6 +12,7 @@ import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.entity.Player
 import org.bukkit.event.EventPriority
+import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
@@ -36,6 +37,7 @@ import scripts.factions.core.faction.data.Member
 import scripts.factions.core.faction.data.Role
 import scripts.factions.core.faction.data.SystemFaction
 import scripts.factions.core.faction.data.random.WarpData
+import scripts.shared.core.ess.Essentials
 import scripts.shared.data.obj.CL
 import scripts.factions.core.faction.data.relation.Relation
 import scripts.factions.core.faction.data.relation.RelationType
@@ -275,6 +277,9 @@ class Factions {
                 return relation.color + "dd"
             }
         }
+/*        Essentials.chatOverwrite = { AsyncPlayerChatEvent event ->
+            event.setCancelled(true)
+        }*/
 
         Schedulers.sync().runLater({
             Bukkit.getWorlds().each { world ->

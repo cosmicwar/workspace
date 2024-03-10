@@ -30,16 +30,15 @@ def hubBoard = new SidebarBuilder("hub_board")
             lines.add("§<#45A0FF>ᴀᴄᴄᴏᴜɴᴛ: §<#09FB29>${player.name}")
 
             LocalDateTime firstPlayed = LocalDateTime.ofInstant(Instant.ofEpochMilli(player.firstPlayed), TimeZone.getDefault().toZoneId())
-            lines.add("§<#45A0FF>ꜰɪʀꜱᴛ ᴊᴏɪɴᴇᴅ: §<#09FB29>${dtf.format(firstPlayed)}")
-            lines.add("")
+            lines.add("§<#45A0FF>  ᴊᴏɪɴᴇᴅ: §<#FFA445>${dtf.format(firstPlayed)}")
 
             def profile = Profiles.getProfile(player.uniqueId)
-            lines.add("§<#45A0FF>ʀᴀɴᴋ: §<#09FB29>${profile.getRank().displayName}")
+            lines.add("§<#45A0FF>  ʀᴀɴᴋ: §<#09FB29>${profile.getRank().displayName}")
 
             lines.add("")
 
             // global player count
-            lines.add("§<#45A0FF>ɢʟᴏʙᴀʟ ᴘʟᴀʏᴇʀꜱ: §<#09FB29>${Bukkit.getOnlinePlayers().size()}§7/§<#FFA445>${NumberUtils.format(BungeeCache.getGlobalPlayerCount())}")
+            lines.add("§<#45A0FF>ᴘʟᴀʏᴇʀꜱ: §<#09FB29>${Bukkit.getOnlinePlayers().size()}§7/§<#FFA445>${NumberUtils.format(BungeeCache.getGlobalPlayerCount())}")
             lines.add("§8§m${StringUtils.repeat('-', 24)}") // spacer
             return lines
         }.priority { return 0 }
