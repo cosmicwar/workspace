@@ -84,7 +84,7 @@ class InfinityMark extends CustomEnchantment {
             Players.playSound(player, Sound.ENTITY_ENDER_DRAGON_GROWL)
 
             Players.msg(target, "")
-            Players.msg(target, ColorUtil.color("§<#ff0000>You have been marked by §7" + player.getName() + " for 15 seconds."))
+            Players.msg(target, ColorUtil.color("   §<#ff0000>You have been marked by §7" + player.getName() + " for 15 seconds."))
             Players.msg(target, "")
 
             Players.playSound(player, Sound.ENTITY_CREEPER_HURT)
