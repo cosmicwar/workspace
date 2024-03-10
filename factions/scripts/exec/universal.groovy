@@ -41,7 +41,7 @@ Starlight.watch(
         "scripts/shared/legacy/dropables.groovy",
         "scripts/shared/legacy/xp.groovy",
         "scripts/shared/legacy/chat.groovy",
-        "scripts/shared/legacy/tablist.groovy",
+//        "scripts/shared/legacy/tablist.groovy",
         "scripts/shared/legacy/playertracker.groovy",
         "scripts/shared/legacy/StaffMode.groovy",
         "scripts/shared/legacy/StaffUtils.groovy",
@@ -74,6 +74,10 @@ Starlight.watch(
 
         // Profiles \\
         "scripts/shared/core/profile/Profiles.groovy",
+
+        // Scorebard \\
+        "scripts/shared/content/scoreboard/tab/TabHandler.groovy",
+        "scripts/shared/content/scoreboard/tab/tablist.groovy",
 
         // Essentials \\
         "scripts/shared/core/ess/Essentials.groovy",
