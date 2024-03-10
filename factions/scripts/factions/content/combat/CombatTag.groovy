@@ -82,7 +82,7 @@ class CombatTag {
         Exports.ptr("combattag:isCombatTagged", { Player player -> return taggedPlayers.containsKey(player.uniqueId)})
 
         GroovyScript.addUnloadHook {
-            removePackets()
+//            removePackets()
 
             combatLoggers.values().each { it.despawn() }
             combatLoggers.clear()
@@ -91,9 +91,10 @@ class CombatTag {
         Bukkit.getOnlinePlayers().each {
             combatData.computeIfAbsent(it.uniqueId, { new CombatData(it) })
         }
-        addPackets()
         events()
         schedulers()
+//        addPackets()
+
     }
 
     static void events() {
@@ -151,8 +152,8 @@ class CombatTag {
                 }
 
                 if (!combatLogNPC.getKilled().get()) {
-                    long remainingSeconds = TimeUnit.MILLISECONDS.toSeconds((COMBAT_NPC_DESPAWN_TIMER + combatLogNPC.getSpawnTime()) - now)
-                    combatLogNPC.npcTracker?.chat(["Despawning in: ${remainingSeconds}s"], 1000L)
+//                    long remainingSeconds = TimeUnit.MILLISECONDS.toSeconds((COMBAT_NPC_DESPAWN_TIMER + combatLogNPC.getSpawnTime()) - now)
+//                    combatLogNPC.npcTracker?.chat(["Despawning in: ${remainingSeconds}s"], 1000L)
                 }
 
                 return false
@@ -207,22 +208,24 @@ class CombatTag {
         def data = combatData.computeIfAbsent(player.uniqueId, { new CombatData(it) })
 
         if (!data.isTagged()) {
-            Players.msg(player, "§cYou are now in combat for §l${duration / 1000 as Integer}§c seconds.")
+            Players.msg(player, "§c(!) You are now in combat for §l${duration / 1000 as Integer}§c seconds.")
         }
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
-        taggedPlayers.put(player.uniqueId, player.uniqueId, 20, TimeUnit.SECONDS)
+        taggedPlayers.put(player.uniqueId, player.uniqueId)
     }
 
     static def tag(Player player, Entity damager, Long duration) {
         def data = combatData.computeIfAbsent(player.uniqueId, { new CombatData(it) })
 
         if (!data.isTagged()) {
-            Players.msg(player, "§cYou are now in combat for §l${duration / 1000 as Integer}§c seconds.")
+            Players.msg(player, "§c(!) You are now in combat for §l${duration / 1000 as Integer}§c seconds.")
         }
 
         data.combatTagExpiration = System.currentTimeMillis() + duration
         data.setLastDamager(damager)
+        taggedPlayers.put(player.uniqueId, player.uniqueId)
+
     }
 
     static CombatNPC spawnCombatLogger(Player player) {
@@ -346,7 +349,7 @@ class CombatNPC {
         npcTracker = NPCRegistry.get().spawn("combatlognpc_${playerId.toString()}", "§cCombatLogger: §f${player.getName()}", location, playerId)
         health = player.getHealth()
 
-        PlayerInventory playerInventory = player.getInventory()
+        def playerInventory = player.getInventory()
         npcTracker.setHand(playerInventory.getItemInMainHand())
         npcTracker.setHelmet(playerInventory.getHelmet())
         npcTracker.setChestplate(playerInventory.getChestplate())
