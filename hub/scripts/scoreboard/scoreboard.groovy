@@ -28,14 +28,10 @@ def hubBoard = new SidebarBuilder("hub_board")
 
             lines.add("§8§m${StringUtils.repeat('-', 24)}") // spacer
             lines.add("§<#45A0FF>ᴀᴄᴄᴏᴜɴᴛ: §<#09FB29>${player.name}")
-
-            LocalDateTime firstPlayed = LocalDateTime.ofInstant(Instant.ofEpochMilli(player.firstPlayed), TimeZone.getDefault().toZoneId())
-            lines.add("§<#45A0FF>ꜰɪʀꜱᴛ ᴊᴏɪɴᴇᴅ: §<#09FB29>${dtf.format(firstPlayed)}")
-            lines.add("")
-
             def profile = Profiles.getProfile(player.uniqueId)
             lines.add("§<#45A0FF>ʀᴀɴᴋ: §<#09FB29>${profile.getRank().displayName}")
-
+            LocalDateTime firstPlayed = LocalDateTime.ofInstant(Instant.ofEpochMilli(player.firstPlayed), TimeZone.getDefault().toZoneId())
+            lines.add("§<#45A0FF>ꜰɪʀꜱᴛ ᴊᴏɪɴᴇᴅ: §<#FFA445>${dtf.format(firstPlayed)}")
             lines.add("")
 
             // global player count
