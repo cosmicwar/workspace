@@ -14,7 +14,6 @@ import org.starcade.starlight.enviorment.GroovyScript
 import org.starcade.starlight.helper.Schedulers
 import org.starcade.starlight.helper.random.RandomSelector
 import org.starcade.starlight.helper.utils.Players
-import scripts.factions.eco.currency.ExpShopItem
 import scripts.factions.eco.loottable.v2.impl.ExpShopReward
 import scripts.shared.core.cfg.utils.SelectionUtils
 import scripts.shared.data.uuid.UUIDDataManager
