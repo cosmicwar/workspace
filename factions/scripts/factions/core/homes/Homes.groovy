@@ -1,4 +1,4 @@
-package scripts.factions.core
+package scripts.factions.core.homes
 
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
