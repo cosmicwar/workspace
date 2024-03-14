@@ -66,6 +66,7 @@ Starlight.watch(
 
         // Core Functionality \\
         "~/core/faction/Factions.groovy",
+        "~/core/homes/Homes.groovy",
 
 
         // Features \\
