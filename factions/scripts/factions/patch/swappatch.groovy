@@ -3,7 +3,7 @@ package scripts.factions.patch
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import org.bukkit.Material
-import org.bukkit.entity.PlayerProtocol.subscribe(PacketType.Play.Client.WINDOW_CLICK).handler({
+//import org.bukkit.entity.PlayerProtocol.subscribe(PacketType.Play.Client.WINDOW_CLICK).handler({
 //    if (it.playerTemporary) return
 //
 //    Player player = it.player
