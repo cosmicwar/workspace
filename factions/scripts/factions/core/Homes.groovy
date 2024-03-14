@@ -15,6 +15,7 @@ import scripts.shared.core.ess.tp.TeleportHandler
 import scripts.factions.core.faction.Factions
 import scripts.factions.core.faction.data.Faction
 import scripts.factions.core.faction.data.relation.RelationType
+import scripts.shared.core.profile.Profiles
 import scripts.shared.data.string.StringDataManager
 import scripts.shared.data.obj.Position
 import scripts.shared.legacy.utils.FastItemUtils
@@ -29,29 +30,29 @@ class Homes {
 //    ConcurrentHashMap<UUID, List<Home>> playerHomes = new ConcurrentHashMap<>()
 
     Homes() {
-        GroovyScript.addUnloadHook {
-            StringDataManager.getByClass(Home).saveAll(false)
-        }
+//        GroovyScript.addUnloadHook {
+//            StringDataManager.getByClass(Home).saveAll(false)
+//        }
 
-        StringDataManager.register("ess_homes", Home)
-
-        Schedulers.sync().runLater({
-            getAllHomes().forEach { home ->
-                if (home == null) return
-
-                def loc = home.position
-                if (loc == null || home.playerId == null) {
-                    StringDataManager.removeOne(home.id, Home)
-                }
-
-                if (playerHomes.containsKey(home.playerId)) playerHomes.get(home.playerId).add(home)
-                else {
-                    def list = new ArrayList<Home>()
-                    list.add(home)
-                    playerHomes.put(home.playerId, list)
-                }
-            }
-        }, 1L)
+//        StringDataManager.register("ess_homes", Home)
+//
+//        Schedulers.sync().runLater({
+//            getAllHomes().forEach { home ->
+//                if (home == null) return
+//
+//                def loc = home.position
+//                if (loc == null || home.playerId == null) {
+//                    StringDataManager.removeOne(home.id, Home)
+//                }
+//
+//                if (Profiles.getHomes(player)playerHomes.containsKey(home.playerId)) playerHomes.get(home.playerId).add(home)
+//                else {
+//                    def list = new ArrayList<Home>()
+//                    list.add(home)
+//                    playerHomes.put(home.playerId, list)
+//                }
+//            }
+//        }, 1L)
 
         commands()
     }
@@ -119,18 +120,21 @@ class Homes {
             def home = new Home(player, "${player.getUniqueId()}_${name}_${new Date(System.currentTimeMillis()).toString()}")
             home.displayName = name
             home.position = Position.of(player.location)
-            if (playerHomes.containsKey(home.playerId)) {
-                playerHomes.get(home.playerId).add(home)
+            if (Profiles.getHomes(player).contains(home.playerId)) {
+                def homes = Profiles.getHomes(player)
+                homes.add(home)
+                Profiles.updateHomes(player, homes)
                 StringDataManager.getData(home.displayName, Home, true)
             }
             else {
                 def list = new ArrayList<Home>()
                 list.add(home)
-                playerHomes.put(home.playerId, list)
+                def homes = Profiles.getHomes(player)
+                homes.add(home)
+                Profiles.updateHomes(player, homes)
                 StringDataManager.getData(home.displayName, Home, true)
             }
 
-            home.queueSave()
             player.sendMessage("§7Home '§e${home.displayName}§7' created.")
         }.register("sethome")
 
@@ -147,22 +151,24 @@ class Homes {
                 return
             }
             StringDataManager.getByClass(Home).delete(home.id)
-            getHomes(player).remove(getHome(player, home.displayName))
+
+            def homes = getHomes(player)
+            homes.remove(getHome(player, home.displayName))
+            Profiles.updateHomes(player, homes.toSet())
             player.sendMessage("§7Home '§e${home.displayName}§7' deleted.")
-            home.queueSave()
         }.register("delhome", "deletehome")
     }
 
-    Home getHome(Player player, String name) {
+    static Home getHome(Player player, String name) {
         if (name == null) return null
-        for (Home home : playerHomes.get(player.getUniqueId())) {
+        for (Home home : Profiles.getHomes(player)) {
             if (home.displayName.trim().toLowerCase() == name.trim().toLowerCase()) return home
         }
         return null
     }
 
-    List<Home> getHomes(Player player) {
-        return playerHomes.get(player.getUniqueId()) == null ? new ArrayList<Home>() : playerHomes.get(player.getUniqueId())
+    static List<Home> getHomes(Player player) {
+        return Profiles.getHomes(player).toList()
     }
 
     private static NamespacedKey homeKey = new NamespacedKey(Starlight.plugin, "home")
