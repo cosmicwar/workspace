@@ -168,7 +168,7 @@ class Homes {
     }
 
     static List<Home> getHomes(Player player) {
-        return Profiles.getHomes(player).toList()
+        return Profiles.getHomes(player)?.toList() ?: []
     }
 
     private static NamespacedKey homeKey = new NamespacedKey(Starlight.plugin, "home")
