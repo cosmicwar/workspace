@@ -44,7 +44,6 @@ execute {
 //    }
 
     loadPlugin("scproxy")
-    loadPlugin("TCPShield-2.7.0")
 
     loadFromConfig("configs/proxy/starcade.toml", "plugins/starcade.toml")
     loadFromConfig("configs/proxy/icons", "icons")
