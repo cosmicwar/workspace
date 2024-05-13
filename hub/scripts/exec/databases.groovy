@@ -12,16 +12,16 @@ import scripts.shared3.Redis
 Exports.ptr("mysql_creds", [
         [
                 "name": "default",
-                "url": "jdbc:mariadb://172.93.103.228:3306/starcade",
+                "url": "jdbc:mariadb://127.0.0.1:3306/starcade",
                 "username": "starcade",
-                "password": "rgSxzPVOjdYFLBVMPmrF5oeq1",
+                "password": "eQ8fZtyIp3uN6FAZ0P87JW3BVbx5AEHU",
                 "aliases": []
         ],
         [
                 "name": "global",
-                "url": "jdbc:mariadb://172.93.103.228:3306/global",
+                "url": "jdbc:mariadb://127.0.0.1:3306/global",
                 "username": "global",
-                "password": "rgSxzPVOjdYFLBVMPmrF5oeq1",
+                "password": "eQ8fZtyIp3uN6FAZ0P87JW3BVbx5AEHU",
                 "aliases": []
         ]
 ])
