@@ -14,6 +14,7 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.spigotmc.AsyncCatcher
+import scripts.shared.legacy.utils.IntegerUtils
 import scripts.shared.legacy.utils.PacketUtils
 import scripts.shared.legacy.utils.StringUtils
 import scripts.shared.utils.preprocessors.VersionProcessor

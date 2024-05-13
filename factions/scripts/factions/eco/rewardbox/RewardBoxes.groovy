@@ -122,7 +122,7 @@ class RewardBoxes {
 
     }
 
-    static def reloadConfig() {
+    static def DreloadConfig() {
         config = DBConfigUtil.createConfig("reward_boxes", "§3Reward-Boxes", [], Material.BEACON)
 
         config.queueSave()
