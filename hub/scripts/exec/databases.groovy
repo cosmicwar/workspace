@@ -26,9 +26,11 @@ Exports.ptr("mysql_creds", [
         ]
 ])
 
-Redis.register("local", new HelperRedis(RedisCredentials.of("172.93.103.228", 6391, "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB")))
-Redis.register("global", new HelperRedis(RedisCredentials.of("172.93.103.228", 6391, "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB")))
+Redis.register("local", new HelperRedis(RedisCredentials.of("172.93.103.228", 6391, "Fd12Ez7TS5bVeL2xDsAiWyH2JPdZUSGO7KVYi9hQJVoLe03j5HQSZhSrG3/XczxMOCmgHFKUdkxvsi4m")))
+Redis.register("global", new HelperRedis(RedisCredentials.of("172.93.103.228", 6391, "Fd12Ez7TS5bVeL2xDsAiWyH2JPdZUSGO7KVYi9hQJVoLe03j5HQSZhSrG3/XczxMOCmgHFKUdkxvsi4m")))
 
-Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("172.93.103.228", 27037, "admin", "starcade", "DiIqy0ygmj4B9JrO4DNjknQmV")), "starcade")
-Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("172.93.103.228", 27037, "admin", "starcade", "DiIqy0ygmj4B9JrO4DNjknQmV")), "starcade")
+Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("172.93.103.228", 27335, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
+Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("172.93.103.228", 27335, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
+
+
 
