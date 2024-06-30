@@ -84,7 +84,7 @@ import java.util.concurrent.TimeUnit
 import java.util.stream.Collectors
 
 // Enchant Proccing - Enchant Priority: ex priority 1 will execute with all priority 1 enchants before priority 2 enchants or vice versa
-@CompileStatic(TypeCheckingMode.SKIP)
+
 class Enchantments {
 
     static String enchantPrefix = ColorUtil.color("§<#D639E0>§lᴇɴᴄʜᴀɴᴛꜱ §8»")
