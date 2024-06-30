@@ -26,8 +26,8 @@ Exports.ptr("mysql_creds", [
         ]
 ])
 
-Redis.register("local", new HelperRedis(RedisCredentials.of("127.0.0.1", 6391)))
-Redis.register("global", new HelperRedis(RedisCredentials.of("127.0.0.1", 6391)))
+Redis.register("local", new HelperRedis(RedisCredentials.of("127.0.0.1", 6379)))
+Redis.register("global", new HelperRedis(RedisCredentials.of("127.0.0.1", 6379)))
 
 Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("172.93.103.228", 27017, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
 Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("172.93.103.228", 27017, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
