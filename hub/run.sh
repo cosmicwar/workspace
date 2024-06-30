@@ -1,7 +1,7 @@
 #!/bin/bash
 while true
 do
-java -jar ../shared/jars/factionsbootstrap.jar hub
+java -jar ../../shared/jars/factionsbootstrap.jar hub
 echo "If you want to completely stop the server process now, press Ctrl+C before
 the time is up!"
 echo "Rebooting in:"
