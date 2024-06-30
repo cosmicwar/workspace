@@ -218,7 +218,6 @@ class SelectorGUI extends Gui {
             }
             items.add(builder.build({
                 if (server != null) {
-                    BroadcastUtils.broadcast(server.address)
                     ServerUtils.sendToServer(player, server.address)
                 } else if (isNetwork) {
                     List<CachedServer> hubs = ServerCache.servers.values().stream().filter { server1 -> server1.name.startsWith("${id}_hub") }.collect(Collectors.toList())
