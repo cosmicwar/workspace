@@ -35,7 +35,7 @@ class Globals {
     // suggestion channel id
 
     // mongo
-    static String MONGO_HOST = "172.93.103.228"
+    static String MONGO_HOST = "104.243.38.125"
     static String MONGO_DATABASE = "admin"
     static String MONGO_USERNAME = "starcade"
     static String MONGO_PASSWORD = "DiIqy0ygmj4B9JrO4DNjknQmV"
@@ -49,7 +49,7 @@ class Globals {
     static String INVITERS = "inviters"
 
     // redis
-    static String REDIS_HOST = "172.93.103.228"
+    static String REDIS_HOST = "104.243.38.125"
     static String REDIS_PASSWORD = "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB"
     static int REDIS_PORT = 6391
 
