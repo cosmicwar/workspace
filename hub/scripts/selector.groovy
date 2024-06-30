@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
+import scripts.shared.legacy.utils.BroadcastUtils
 import scripts.shared.legacy.utils.FastItemUtils
 import scripts.shared.systems.*
 import scripts.shared.utils.MenuDecorator
@@ -217,6 +218,7 @@ class SelectorGUI extends Gui {
             }
             items.add(builder.build({
                 if (server != null) {
+                    BroadcastUtils.broadcast(server.address)
                     ServerUtils.sendToServer(player, server.address)
                 } else if (isNetwork) {
                     List<CachedServer> hubs = ServerCache.servers.values().stream().filter { server1 -> server1.name.startsWith("${id}_hub") }.collect(Collectors.toList())
