@@ -11,6 +11,6 @@ Redis.register("local", new HelperRedis(RedisCredentials.of("127.0.0.1", 6379, "
 Redis.register("global", new HelperRedis(RedisCredentials.of("127.0.0.1", 6379, "Hpkfp2jkn4+yKLi501GU5TY4UGEcVV7mobOKFAz32oSGKSos6FymAPF29Cn8+roRZc9bCMJCuFQLKDu4")))
 
 //left same
-Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("104.243.38.125", 27335, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
-Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("104.243.38.125", 27335, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
+Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("192.168.142.128", 27335, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
+Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("192.168.142.128", 27335, "admin", "starcade", "gAWbxWHHenIFWfBcpzLuLB33KhdyVfDO")), "starcade")
 
