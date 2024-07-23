@@ -9,8 +9,8 @@ setVersion("v1_20_R1")
 setWorkspaceName("factions")
 
 //TODO change Xmx to 64G for prod, changed for local hosting
-// xms starts at 25G instead of 20G
-addArgs("-Xms20G", "-Xmx64G", "-DPaper.ignoreWorldDataVersion=true", "--add-modules=jdk.incubator.vector")
+// xms starts at 25G instead of 16G
+addArgs("-Xms16G", "-Xmx64G", "-DPaper.ignoreWorldDataVersion=true", "--add-modules=jdk.incubator.vector")
 
 addProgramArgs("--nogui")
 
