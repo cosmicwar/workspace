@@ -8,8 +8,8 @@ import static scripts.execute.ArkRepo.*
 setVersion("v1_20_R1")
 setWorkspaceName("factions")
 
-//TODO: change Xmx back to 64G, set to 25G for local use
-addArgs("-Xms25G", "-Xmx25G", "-DPaper.ignoreWorldDataVersion=true", "--add-modules=jdk.incubator.vector")
+
+addArgs("-Xms25G", /*"-Xmx64G", */"-DPaper.ignoreWorldDataVersion=true", "--add-modules=jdk.incubator.vector")
 
 addProgramArgs("--nogui")
 
