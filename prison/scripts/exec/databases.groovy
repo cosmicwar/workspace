@@ -12,23 +12,23 @@ import scripts.shared3.Redis
 Exports.ptr("mysql_creds", [
         [
                 "name": "default",
-                "url": "jdbc:mariadb://192.168.142.128:3306/starcade",
+                "url": "jdbc:mariadb://127.0.0.1:3306/starcade",
                 "username": "starcade",
                 "password": "rgSxzPVOjdYFLBVMPmrF5oeq1",
                 "aliases": []
         ],
         [
                 "name": "global",
-                "url": "jdbc:mariadb://192.168.142.128:3306/global",
+                "url": "jdbc:mariadb://127.0.0.1:3306/global",
                 "username": "global",
                 "password": "rgSxzPVOjdYFLBVMPmrF5oeq1",
                 "aliases": []
         ]
 ])
 
-Redis.register("local", new HelperRedis(RedisCredentials.of("192.168.142.128", 6391, "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB")))
-Redis.register("global", new HelperRedis(RedisCredentials.of("192.168.142.128", 6391, "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB")))
+Redis.register("local", new HelperRedis(RedisCredentials.of("127.0.0.1", 6391, "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB")))
+Redis.register("global", new HelperRedis(RedisCredentials.of("127.0.0.1", 6391, "gsO3jbDE68Y8nfPXZ508Jjr7fiDI7exZttjNTmp59K1ynJhhgB")))
 
-Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("192.168.142.128", 27037, "admin", "starcade", "DiIqy0ygmj4B9JrO4DNjknQmV")), "starcade")
-Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("192.168.142.128", 27037, "admin", "starcade", "DiIqy0ygmj4B9JrO4DNjknQmV")), "starcade")
+Mongo.register("local", new HelperMongo(MongoDatabaseCredentials.of("127.0.0.1", 27037, "admin", "starcade", "DiIqy0ygmj4B9JrO4DNjknQmV")), "starcade")
+Mongo.register("global", new HelperMongo(MongoDatabaseCredentials.of("127.0.0.1", 27037, "admin", "starcade", "DiIqy0ygmj4B9JrO4DNjknQmV")), "starcade")
 
