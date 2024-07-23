@@ -9,7 +9,7 @@ setVersion("v1_20_R1")
 setWorkspaceName("factions")
 
 
-addArgs("-Xms25G", /*"-Xmx64G", */"-DPaper.ignoreWorldDataVersion=true", "--add-modules=jdk.incubator.vector")
+addArgs("-Xms25G", "-Xmx64G", "-UseCompressedOops", "-DPaper.ignoreWorldDataVersion=true", "--add-modules=jdk.incubator.vector")
 
 addProgramArgs("--nogui")
 
