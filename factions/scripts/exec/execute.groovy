@@ -9,7 +9,7 @@ println("${getPrefix()} : Starting Starcade - ${Temple.temple}")
 
 addArgs("-XX:+UseG1GC", "-XX:+ParallelRefProcEnabled", "-XX:MaxGCPauseMillis=200", "-XX:+UnlockExperimentalVMOptions", "-XX:+UnlockDiagnosticVMOptions", "-XX:+DisableExplicitGC", "-XX:+AlwaysPreTouch")
 addArgs("-XX:+UseStringDeduplication", "-XX:+UseFastUnorderedTimeStamps", "-XX:+UseLoopPredicate", "-XX:+RangeCheckElimination", "-XX:+EliminateLocks", "-XX:+DoEscapeAnalysis", "-XX:+UseCodeCacheFlushing")
-addArgs("-XX:+SegmentedCodeCache", "-XX:+UseFastJNIAccessors", "-XX:+OptimizeStringConcat", /*"-XX:+UseCompressedOops",*/ "-XX:+UseThreadPriorities", "-XX:+OmitStackTraceInFastThrow", "-XX:+TrustFinalNonStaticFields")
+addArgs("-XX:+SegmentedCodeCache", "-XX:+UseFastJNIAccessors", "-XX:+OptimizeStringConcat", "-XX:+UseCompressedOops", "-XX:+UseThreadPriorities", "-XX:+OmitStackTraceInFastThrow", "-XX:+TrustFinalNonStaticFields")
 addArgs("-XX:+UseInlineCaches", "-XX:+RewriteBytecodes", "-XX:+RewriteFrequentPairs", "-XX:+UseNUMA", "-XX:-DontCompileHugeMethods", "-XX:+UseFPUForSpilling", "-XX:+UseFastStosb")
 addArgs("-XX:+UseNewLongLShift", "-XX:+UseVectorCmov", "-XX:+UseXMMForArrayCopy", "-Dfile.encoding=UTF-8", "-Dterminal.jline=false", "-Dterminal.ansi=true"/*, "--add-modules", "jdk.incubator.vector"*/)
 addArgs("-XX:G1NewSizePercent=40", "-XX:G1MaxNewSizePercent=50", "-XX:G1HeapRegionSize=16M", "-XX:G1ReservePercent=15", "-XX:G1HeapWastePercent=5", "-XX:G1MixedGCCountTarget=4", "-XX:InitiatingHeapOccupancyPercent=20")
